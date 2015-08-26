@@ -23,6 +23,8 @@
 		501558C21B86F2910002254D /* GSNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 501558C01B86F2910002254D /* GSNotification.m */; };
 		5061DE251B8471DB007D9F24 /* GSEventPayload.h in Headers */ = {isa = PBXBuildFile; fileRef = 5061DE231B8471DB007D9F24 /* GSEventPayload.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5061DE261B8471DB007D9F24 /* GSEventPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = 5061DE241B8471DB007D9F24 /* GSEventPayload.m */; };
+		507931D91B8DA1990080C894 /* Masonry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 507931D21B8DA0580080C894 /* Masonry.framework */; };
+		507931DA1B8DA1AA0080C894 /* Masonry.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 507931D21B8DA0580080C894 /* Masonry.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5097B5CD1B8C0BBB00A72721 /* GRNotificationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5097B5CC1B8C0BBB00A72721 /* GRNotificationModel.m */; };
 		5097B5D11B8C0BC600A72721 /* GRViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5097B5D01B8C0BC600A72721 /* GRViewModel.m */; };
 		5097B5DC1B8D29F400A72721 /* GSCacheManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 5097B5DA1B8D29F400A72721 /* GSCacheManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -48,8 +50,6 @@
 		50E4B5BA1B8306040029264A /* NSString+GSUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 50E4B5B81B8306040029264A /* NSString+GSUtilities.m */; };
 		50E9F8701B832BF70007212E /* GSNetworkManagerHelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = 50E9F86E1B832BF70007212E /* GSNetworkManagerHelpers.h */; };
 		50E9F8711B832BF70007212E /* GSNetworkManagerHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 50E9F86F1B832BF70007212E /* GSNetworkManagerHelpers.m */; };
-		50ED2AD41B89984400DFF146 /* Masonry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50ED2ACF1B89983C00DFF146 /* Masonry.framework */; };
-		50ED2AD51B89984A00DFF146 /* Masonry.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 50ED2ACF1B89983C00DFF146 /* Masonry.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		50ED2AD91B8B106F00DFF146 /* GRProfileModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 50ED2AD81B8B106F00DFF146 /* GRProfileModel.m */; };
 		50ED2ADD1B8B135200DFF146 /* GRProfileHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 50ED2ADC1B8B135200DFF146 /* GRProfileHeaderCell.m */; };
 		50F081871B82ED6500366161 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 50F081861B82ED6500366161 /* main.m */; };
@@ -75,6 +75,27 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		507931D11B8DA0580080C894 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 507931CC1B8DA0570080C894 /* Masonry.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3AED05B71AD59FD40053CC65;
+			remoteInfo = "Masonry iOS";
+		};
+		507931D31B8DA0580080C894 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 507931CC1B8DA0570080C894 /* Masonry.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3AED06271AD5A1400053CC65;
+			remoteInfo = "Masonry OSX";
+		};
+		507931D51B8DA0720080C894 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 507931CC1B8DA0570080C894 /* Masonry.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 3AED05B61AD59FD40053CC65;
+			remoteInfo = "Masonry iOS";
+		};
 		50E4B5961B82F6D60029264A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 50F0817A1B82ED6500366161 /* Project object */;
@@ -96,27 +117,6 @@
 			remoteGlobalIDString = 50E4B5891B82F6D60029264A;
 			remoteInfo = GroveSupport;
 		};
-		50ED2ACE1B89983C00DFF146 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 50ED2AC91B89983C00DFF146 /* Masonry.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 3AED05B71AD59FD40053CC65;
-			remoteInfo = "Masonry iOS";
-		};
-		50ED2AD01B89983C00DFF146 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 50ED2AC91B89983C00DFF146 /* Masonry.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 3AED06271AD5A1400053CC65;
-			remoteInfo = "Masonry OSX";
-		};
-		50ED2AD21B89984000DFF146 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 50ED2AC91B89983C00DFF146 /* Masonry.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 3AED05B61AD59FD40053CC65;
-			remoteInfo = "Masonry iOS";
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -126,7 +126,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				50ED2AD51B89984A00DFF146 /* Masonry.framework in Embed Frameworks */,
+				507931DA1B8DA1AA0080C894 /* Masonry.framework in Embed Frameworks */,
 				50E4B5A21B82F6D60029264A /* GroveSupport.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -156,6 +156,7 @@
 		501558C81B8823B60002254D /* GSUserInternal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GSUserInternal.h; sourceTree = "<group>"; };
 		5061DE231B8471DB007D9F24 /* GSEventPayload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSEventPayload.h; sourceTree = "<group>"; };
 		5061DE241B8471DB007D9F24 /* GSEventPayload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSEventPayload.m; sourceTree = "<group>"; };
+		507931CC1B8DA0570080C894 /* Masonry.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Masonry.xcodeproj; path = ../Masonry/Masonry.xcodeproj; sourceTree = "<group>"; };
 		5097B5CB1B8C0BBB00A72721 /* GRNotificationModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRNotificationModel.h; sourceTree = "<group>"; };
 		5097B5CC1B8C0BBB00A72721 /* GRNotificationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRNotificationModel.m; sourceTree = "<group>"; };
 		5097B5CF1B8C0BC600A72721 /* GRViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRViewModel.h; sourceTree = "<group>"; };
@@ -189,7 +190,6 @@
 		50E9F86E1B832BF70007212E /* GSNetworkManagerHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSNetworkManagerHelpers.h; sourceTree = "<group>"; };
 		50E9F86F1B832BF70007212E /* GSNetworkManagerHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSNetworkManagerHelpers.m; sourceTree = "<group>"; };
 		50ED2AC71B898D2600DFF146 /* GSActorInternal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GSActorInternal.h; sourceTree = "<group>"; };
-		50ED2AC91B89983C00DFF146 /* Masonry.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Masonry.xcodeproj; path = ../Masonry/Masonry.xcodeproj; sourceTree = "<group>"; };
 		50ED2AD71B8B106F00DFF146 /* GRProfileModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRProfileModel.h; sourceTree = "<group>"; };
 		50ED2AD81B8B106F00DFF146 /* GRProfileModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRProfileModel.m; sourceTree = "<group>"; };
 		50ED2ADB1B8B135200DFF146 /* GRProfileHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRProfileHeaderCell.h; sourceTree = "<group>"; };
@@ -254,7 +254,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				50ED2AD41B89984400DFF146 /* Masonry.framework in Frameworks */,
+				507931D91B8DA1990080C894 /* Masonry.framework in Frameworks */,
 				50E4B5A11B82F6D60029264A /* GroveSupport.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -280,6 +280,15 @@
 				50E4B5B01B82FABA0029264A /* GSNetworkManager.m */,
 			);
 			name = Private;
+			sourceTree = "<group>";
+		};
+		507931CD1B8DA0570080C894 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				507931D21B8DA0580080C894 /* Masonry.framework */,
+				507931D41B8DA0580080C894 /* Masonry.framework */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		5097B5D81B8D28A400A72721 /* Caching */ = {
@@ -377,19 +386,10 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		50ED2ACA1B89983C00DFF146 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				50ED2ACF1B89983C00DFF146 /* Masonry.framework */,
-				50ED2AD11B89983C00DFF146 /* Masonry.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		50F081791B82ED6500366161 = {
 			isa = PBXGroup;
 			children = (
-				50ED2AC91B89983C00DFF146 /* Masonry.xcodeproj */,
+				507931CC1B8DA0570080C894 /* Masonry.xcodeproj */,
 				50F081841B82ED6500366161 /* Grove */,
 				50E4B58B1B82F6D60029264A /* GroveSupport */,
 				50E4B59A1B82F6D60029264A /* GroveSupportTests */,
@@ -582,7 +582,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				50ED2AD31B89984000DFF146 /* PBXTargetDependency */,
+				507931D61B8DA0720080C894 /* PBXTargetDependency */,
 				50E4B5A01B82F6D60029264A /* PBXTargetDependency */,
 			);
 			name = Grove;
@@ -625,8 +625,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 50ED2ACA1B89983C00DFF146 /* Products */;
-					ProjectRef = 50ED2AC91B89983C00DFF146 /* Masonry.xcodeproj */;
+					ProductGroup = 507931CD1B8DA0570080C894 /* Products */;
+					ProjectRef = 507931CC1B8DA0570080C894 /* Masonry.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -639,18 +639,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		50ED2ACF1B89983C00DFF146 /* Masonry.framework */ = {
+		507931D21B8DA0580080C894 /* Masonry.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = Masonry.framework;
-			remoteRef = 50ED2ACE1B89983C00DFF146 /* PBXContainerItemProxy */;
+			remoteRef = 507931D11B8DA0580080C894 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		50ED2AD11B89983C00DFF146 /* Masonry.framework */ = {
+		507931D41B8DA0580080C894 /* Masonry.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = Masonry.framework;
-			remoteRef = 50ED2AD01B89983C00DFF146 /* PBXContainerItemProxy */;
+			remoteRef = 507931D31B8DA0580080C894 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -746,6 +746,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		507931D61B8DA0720080C894 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Masonry iOS";
+			targetProxy = 507931D51B8DA0720080C894 /* PBXContainerItemProxy */;
+		};
 		50E4B5971B82F6D60029264A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 50E4B5891B82F6D60029264A /* GroveSupport */;
@@ -760,11 +765,6 @@
 			isa = PBXTargetDependency;
 			target = 50E4B5891B82F6D60029264A /* GroveSupport */;
 			targetProxy = 50E4B59F1B82F6D60029264A /* PBXContainerItemProxy */;
-		};
-		50ED2AD31B89984000DFF146 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "Masonry iOS";
-			targetProxy = 50ED2AD21B89984000DFF146 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -940,6 +940,7 @@
 		50F0819A1B82ED6500366161 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -959,6 +960,7 @@
 		50F0819B1B82ED6500366161 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				FRAMEWORK_SEARCH_PATHS = (

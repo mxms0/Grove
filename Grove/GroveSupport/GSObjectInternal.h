@@ -25,7 +25,7 @@
 
 #define GSURLAssign(dictionary, key, obj) \
 	do { \
-		if (dictionary[key] != [NSNull null]) { \
+		if (dictionary[key] && dictionary[key] != [NSNull null]) { \
 			obj = [[NSURL alloc] initWithString:dictionary[key]]; \
 		} \
 	} while (0);

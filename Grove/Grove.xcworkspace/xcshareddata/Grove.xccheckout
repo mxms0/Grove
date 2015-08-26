@@ -10,6 +10,8 @@
 	<string>Grove</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
+		<key>62838D759CA9762401C2933F72BB0D5B126BC51E</key>
+		<string>https://github.com/Maximus-/Grove.git</string>
 		<key>6BCCBF281293A12D48E7AC5FF019B7E7CECC04EE</key>
 		<string>https://github.com/Maximus-/SB2.git</string>
 		<key>6FC4832245A6A8E50F2A782F20A8B58A46BD1FEB</key>
@@ -21,19 +23,21 @@
 	<string>Grove/Grove.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>6BCCBF281293A12D48E7AC5FF019B7E7CECC04EE</key>
+		<key>62838D759CA9762401C2933F72BB0D5B126BC51E</key>
 		<string>../..</string>
+		<key>6BCCBF281293A12D48E7AC5FF019B7E7CECC04EE</key>
+		<string>../../../SB2</string>
 		<key>6FC4832245A6A8E50F2A782F20A8B58A46BD1FEB</key>
 		<string>../../../Dependencies/Masonry</string>
 		<key>C27CF185E1D0B89C2ACF7DA94EB2E474B8D87131</key>
 		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/Maximus-/SB2.git</string>
+	<string>https://github.com/Maximus-/Grove.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>6BCCBF281293A12D48E7AC5FF019B7E7CECC04EE</string>
+	<string>62838D759CA9762401C2933F72BB0D5B126BC51E</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
@@ -43,6 +47,14 @@
 			<string>C27CF185E1D0B89C2ACF7DA94EB2E474B8D87131</string>
 			<key>IDESourceControlWCCName</key>
 			<string></string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>62838D759CA9762401C2933F72BB0D5B126BC51E</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Grove</string>
 		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
