@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>1A789350-B93C-4046-90B2-580BFB2924A4</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Grove</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>6BCCBF281293A12D48E7AC5FF019B7E7CECC04EE</key>
+		<string>https://github.com/Maximus-/SB2.git</string>
+		<key>6FC4832245A6A8E50F2A782F20A8B58A46BD1FEB</key>
+		<string>https://github.com/SnapKit/Masonry.git</string>
+		<key>C27CF185E1D0B89C2ACF7DA94EB2E474B8D87131</key>
+		<string>https://github.com/rpi-mobile/RPIMobile-iOS.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Grove/Grove.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>6BCCBF281293A12D48E7AC5FF019B7E7CECC04EE</key>
+		<string>../..</string>
+		<key>6FC4832245A6A8E50F2A782F20A8B58A46BD1FEB</key>
+		<string>../../../Dependencies/Masonry</string>
+		<key>C27CF185E1D0B89C2ACF7DA94EB2E474B8D87131</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/Maximus-/SB2.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>6BCCBF281293A12D48E7AC5FF019B7E7CECC04EE</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>C27CF185E1D0B89C2ACF7DA94EB2E474B8D87131</string>
+			<key>IDESourceControlWCCName</key>
+			<string></string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>6FC4832245A6A8E50F2A782F20A8B58A46BD1FEB</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Masonry</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>6BCCBF281293A12D48E7AC5FF019B7E7CECC04EE</string>
+			<key>IDESourceControlWCCName</key>
+			<string>SB2</string>
+		</dict>
+	</array>
+</dict>
+</plist>

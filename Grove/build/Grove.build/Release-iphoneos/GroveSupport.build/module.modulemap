@@ -1,0 +1,6 @@
+framework module GroveSupport {
+  umbrella header "GroveSupport.h"
+
+  export *
+  module * { export * }
+}

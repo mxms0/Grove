@@ -1,0 +1,33 @@
+{
+  'version': 0,
+  'case-sensitive': 'false',
+  'roots': [
+    {
+      'type': 'directory',
+      'name': "/Users/max/Desktop/sb/SB2/Grove/build/Release-iphoneos/GroveSupport.framework/Headers",
+      'contents': [
+        {
+          'type': 'file',
+          'name': "GroveSupport-Swift.h",
+          'external-contents': "/Users/max/Desktop/sb/SB2/Grove/build/Release-iphoneos/GroveSupport.framework/Headers/GroveSupport-Swift.h"
+        },
+        {
+          'type': 'file',
+          'name': "GroveSupport.h",
+          'external-contents': "/Users/max/Desktop/sb/SB2/Grove/GroveSupport/GroveSupport.h"
+        }
+      ]
+    },
+    {
+      'type': 'directory',
+      'name': "/Users/max/Desktop/sb/SB2/Grove/build/Release-iphoneos/GroveSupport.framework/Modules",
+      'contents': [
+        {
+          'type': 'file',
+          'name': "module.modulemap",
+          'external-contents': "/Users/max/Desktop/sb/SB2/Grove/build/Grove.build/Release-iphoneos/GroveSupport.build/module.modulemap"
+        }
+      ]
+    }
+  ]
+}
