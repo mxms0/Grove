@@ -17,16 +17,19 @@
 	if ((self = [super initWithDictionary:dictionary])) {
 		GSAssign(dictionary, @"push_id", _pushIdentifier);
 		GSAssign(dictionary, @"size", _size);
+		GSAssign(dictionary, @"description", _descriptionMessage);
+		GSAssign(dictionary, @"ref", _ref);
+		GSAssign(dictionary, @"ref_type", _refType);
+		GSAssign(dictionary, @"master_branch", _masterBranch);
+		GSAssign(dictionary, @"pusher_type", _pusherType);
+		
+		
 		GSObjectAssign(dictionary, @"comment", _comment, GSComment);
 		GSObjectAssign(dictionary, @"issue", _issue, GSIssue);
 		
-		NSString *ref = dictionary[@"ref"];
-		if (ref && (NSNull *)ref != [NSNull null]) {
-			if ([ref hasPrefix:@"refs/heads/"])
-				_branch = [ref substringFromIndex:[@"refs/heads/" length]];
-			else
-				_branch = ref;
-		}
+		NSString *action = nil;
+		GSAssign(dictionary, @"action", action);
+		_action = [self actionForString:action];
 		
 		NSMutableArray *commitsSerialized = [NSMutableArray array];
 		
@@ -42,6 +45,29 @@
 	}
 	
 	return self;
+}
+
+- (GSEventAction)actionForString:(NSString *)actionString {
+	NSDictionary *const actionMapping = @{
+										  @"started" : @(GSEventActionStarted),
+										  @"created": @(GSEventActionCreated),
+										  @"create": @(GSEventActionCreated),
+										  @"updated": @(GSEventActionUpdated),
+										  @"update": @(GSEventActionUpdated),
+										  @"edited": @(GSEventActionEdited),
+										  @"opened": @(GSEventActionOpened),
+										  @"reopened": @(GSEventActionReopened),
+										  @"assigned":@(GSEventActionAssigned),
+										  @"unassigned": @(GSEventActionUnassigned),
+										  @"labeled": @(GSEventActionLabeled),
+										  @"unlabeled": @(GSEventActionUnlabeled),
+										  @"published": @(GSEventActionPublished),
+										  @"added": @(GSEventActionAdded),
+										  @"removed": @(GSEventActionRemoved),
+										  @"synchronize": @(GSEventActionSynchronized),
+										  @"synchronized": @(GSEventActionSynchronized),
+										  };
+	return actionMapping[actionString] ? (GSEventAction)[actionMapping[actionString] intValue] : GSEventActionNone;
 }
 
 @end

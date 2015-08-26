@@ -19,6 +19,7 @@ static NSString *const GSClientSecret = @"192812c39ecc20317489a9b8c3d62989aa7e28
 #import "GSNotificationInternal.h"
 #import "GSRepositoryInternal.h"
 #import "GSActorInternal.h"
+#import "GSIssueInternal.h"
 #import "GSCommentInternal.h"
 
 #endif

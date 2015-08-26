@@ -13,6 +13,7 @@
 
 @interface GSComment ()
 @property (nonatomic, readonly) NSURL *pullRequestAPIURL;
+@property (nonatomic, readonly) NSURL *issueAPIURL;
 @end
 
 #endif

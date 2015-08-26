@@ -16,7 +16,7 @@
 		return nil;
 	}
 	if ((self = [super init])) {
-		GSAssign(dictionary, @"id", self.identifier);
+		GSAssign(dictionary, @"id", _identifier);
 		GSAssign(dictionary, @"url", _directAPIURL);
 	}
 	return self;
@@ -34,7 +34,7 @@
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
 	if ((self = [super init])) {
-		GSDecodeAssign(aDecoder, @"id", self.identifier);
+		GSDecodeAssign(aDecoder, @"id", _identifier);
 	}
 	return self;
 }

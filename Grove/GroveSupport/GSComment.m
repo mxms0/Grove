@@ -24,6 +24,7 @@
 		GSAssign(dictionary, @"body", _body);
 		GSURLAssign(dictionary, @"html_url", _browserURL);
 		GSURLAssign(dictionary, @"pull_request_url", _pullRequestAPIURL);
+		GSURLAssign(dictionary, @"issue_url", _issueAPIURL);
 		
 		GSObjectAssign(dictionary, @"user", _user, GSUser);
 		

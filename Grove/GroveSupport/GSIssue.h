@@ -15,8 +15,14 @@
 @property (nonatomic, readonly) NSString *title;
 @property (nonatomic, readonly) NSString *body;
 @property (nonatomic, readonly) NSArray *comments;
-@property (nonatomic, readonly) BOOL state;
+@property (nonatomic, readonly) int state;
+@property (nonatomic, readonly, getter=isLocked) BOOL locked;
 @property (nonatomic, readonly) NSURL *comments_url;
-@property (nonatomic, readonly) NSInteger *number;
+@property (nonatomic, readonly) NSString *milestone;
+@property (nonatomic, readonly) NSDate *createdDate;
+@property (nonatomic, readonly) NSDate *updatedDate;
+@property (nonatomic, readonly) NSDate *closedDate;
+@property (nonatomic, readonly) NSNumber *number;
+@property (nonatomic, readonly) NSArray *labels;
 
 @end

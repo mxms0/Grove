@@ -157,6 +157,7 @@
 		5061DE231B8471DB007D9F24 /* GSEventPayload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSEventPayload.h; sourceTree = "<group>"; };
 		5061DE241B8471DB007D9F24 /* GSEventPayload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSEventPayload.m; sourceTree = "<group>"; };
 		507931CC1B8DA0570080C894 /* Masonry.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Masonry.xcodeproj; path = ../Masonry/Masonry.xcodeproj; sourceTree = "<group>"; };
+		507931DC1B8DA5400080C894 /* GSIssueInternal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GSIssueInternal.h; sourceTree = "<group>"; };
 		5097B5CB1B8C0BBB00A72721 /* GRNotificationModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRNotificationModel.h; sourceTree = "<group>"; };
 		5097B5CC1B8C0BBB00A72721 /* GRNotificationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRNotificationModel.m; sourceTree = "<group>"; };
 		5097B5CF1B8C0BC600A72721 /* GRViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRViewModel.h; sourceTree = "<group>"; };
@@ -318,6 +319,7 @@
 				50ED2AC71B898D2600DFF146 /* GSActorInternal.h */,
 				50133F041B841470004B5BB8 /* GSActor.h */,
 				50133F051B841470004B5BB8 /* GSActor.m */,
+				507931DC1B8DA5400080C894 /* GSIssueInternal.h */,
 				84A8D1081B8D6F0C00B6B4FB /* GSIssue.h */,
 				84A8D1091B8D6F0C00B6B4FB /* GSIssue.m */,
 				501558C41B86FE8A0002254D /* GSRepositoryInternal.h */,
