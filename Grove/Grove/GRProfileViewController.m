@@ -8,7 +8,7 @@
 
 #import "GRProfileViewController.h"
 #import "GRProfileModel.h"
-#import "GRProfileHeaderCell.h"
+#import "GRProfileHeaderView.h"
 #import "GRSessionManager.h"
 
 @implementation GRProfileViewController {
@@ -20,6 +20,7 @@
 	if ((self = [super init])) {
         self.view.backgroundColor = [UIColor blackColor];
 		model = [[GRProfileModel alloc] init];
+		[model setDelegate:self];
 		tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
 		[tableView setDelegate:self];
 		[tableView setDataSource:self];
@@ -29,6 +30,11 @@
 		}];
     }
     return self;
+}
+
+- (void)reloadData {
+	[tableView reloadData];
+	[(GRProfileHeaderView *)[tableView headerViewForSection:0] configureWithUser:[model activeUser]];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)_tableView {
@@ -43,15 +49,29 @@
 	return [model cellHeightForRowAtIndexPath:indexPath];
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+	if (section == 0) {
+		GRProfileHeaderView *header = [[GRProfileHeaderView alloc] init];
+		[header configureWithUser:[model activeUser]];
+		return header;
+	}
+	return nil;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+	if (section == 0)
+		return [model heightForProfileHeader];
+	return 0;
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
+	[view setNeedsDisplay];
+}
+
 - (UITableViewCell *)tableView:(UITableView *)_tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	NSString *reuseIdentifier = @"stupidCell";
-	BOOL isProfileCell = NO;
-	Class tableCellClass = [UITableViewCell class];
 	switch (indexPath.section) {
 		case 0:
-			reuseIdentifier = @"profileHeader";
-			tableCellClass = [GRProfileHeaderCell class];
-			isProfileCell = YES;
 			break;
 		case 1:
 			break;
@@ -62,15 +82,8 @@
 	}
 	UITableViewCell *cell = [_tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
 	if (!cell) {
-		cell = [[tableCellClass alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
+		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
 	}
-	
-	if (isProfileCell) {
-		GRApplicationUser *user = [[GRSessionManager sharedInstance] currentUser];
-		[(GRProfileHeaderCell *)cell configureWithUser:user];
-	}
-	
-	
 
 	return cell;
 }

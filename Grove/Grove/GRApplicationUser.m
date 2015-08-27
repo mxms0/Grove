@@ -9,6 +9,7 @@
 #import "GRApplicationUser.h"
 #import "GSObject.h"
 #import "GroveSupportInternal.h"
+#import "UIImage+GRExtensions.h"
 
 @implementation GRApplicationUser
 
@@ -21,6 +22,10 @@
 
 - (void)encodeWithCoder:(NSCoder *)coder {
 	[coder encodeObject:_user forKey:@"users"];
+}
+
+- (void)prepareUnprocessedProfileImage:(UIImage *)image {
+	self.profilePicture = [image imageByResizingToSize:CGSizeMake(200, 200) roundingCornerRadius:7];
 }
 
 @end

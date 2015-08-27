@@ -7,7 +7,8 @@
 //
 
 #import "GRViewController.h"
+#import "GRViewModel.h"
 
-@interface GRProfileViewController : GRViewController <UITableViewDataSource, UITableViewDelegate>
+@interface GRProfileViewController : GRViewController <UITableViewDataSource, UITableViewDelegate, GRViewModelDelegate>
 
 @end

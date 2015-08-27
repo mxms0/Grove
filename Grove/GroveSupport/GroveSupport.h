@@ -24,6 +24,7 @@ FOUNDATION_EXPORT const unsigned char GroveSupportVersionString[];
 #import "GSNotification.h"
 #import "GSComment.h"
 #import "GSOrganization.h"
+#import "GSUtilities.h"
 
 // In this header, you should import all the public headers of your framework using statements like #import <GroveSupport/PublicHeader.h>
 

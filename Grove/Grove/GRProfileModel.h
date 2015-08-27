@@ -9,8 +9,11 @@
 #import <Foundation/Foundation.h>
 #import "GRViewModel.h"
 
+@class GRApplicationUser;
 @interface GRProfileModel : GRViewModel
 - (NSInteger)numberOfSections;
 - (NSInteger)numberOfRowsInSection:(NSInteger)section;
 - (CGFloat)cellHeightForRowAtIndexPath:(NSIndexPath *)indexPath;
+- (GRApplicationUser *)activeUser;
+- (CGFloat)heightForProfileHeader;
 @end

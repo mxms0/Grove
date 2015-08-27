@@ -139,6 +139,8 @@
 }
 
 - (NSAttributedString *)messageFromeEvent {
+	return nil;
+#warning ROCKY THIS IS INCOMPLETE PLS MAKE STABLE 
     NSAttributedString *message = [[NSAttributedString alloc] initWithString:@""];
     
     UIColor *blue = [UIColor colorWithRed:0.2627 green:0.4784 blue:0.7451 alpha:1.0];

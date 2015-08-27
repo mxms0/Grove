@@ -12,5 +12,6 @@
 
 @interface GRApplicationUser : NSObject <NSCoding>
 @property (nonatomic, strong) GSUser *user;
-
+@property (nonatomic, strong) UIImage *profilePicture;
+- (void)prepareUnprocessedProfileImage:(UIImage *)image;
 @end

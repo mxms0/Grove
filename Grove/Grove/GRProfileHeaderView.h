@@ -1,5 +1,5 @@
 //
-//  GRProfileHeaderCell.h
+//  GRProfileHeaderView.h
 //  Grove
 //
 //  Created by Max Shavrick on 8/24/15.
@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @class GRApplicationUser;
-@interface GRProfileHeaderCell : UITableViewCell
+@interface GRProfileHeaderView : UIView
 - (void)configureWithUser:(GRApplicationUser *)user;
 @end

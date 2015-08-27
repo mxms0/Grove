@@ -40,23 +40,28 @@
 }
 
 - (NSURL *)_workingDirectoryForToken:(NSString *)token {
-	NSURL *directory = nil;
+	NSString *lookup = @"defaultPath";
 	if (token) {
+		lookup = token;
+	}
+
+	NSString *extension = nil;
+	
+	@synchronized(tokenDirectoryMap) {
+		extension = tokenDirectoryMap[lookup];
+	}
+	
+	if (!extension) {
+		extension = [[self _createWorkingDirectoryForToken:lookup] lastPathComponent];
 		@synchronized(tokenDirectoryMap) {
-			directory = [NSURL URLWithString:tokenDirectoryMap[token]];
+			tokenDirectoryMap[lookup] = extension;
 		}
 		
-		if (!directory) {
-			directory = [self _createWorkingDirectoryForToken:token];
-		}
+		[[NSUserDefaults standardUserDefaults] setObject:tokenDirectoryMap forKey:@"tmpDirectoryMap"];
+		[[NSUserDefaults standardUserDefaults] synchronize];
 	}
-	else {
-		directory = [NSURL URLWithString:tokenDirectoryMap[@"defaultPath"]];
-		if (!directory) {
-			directory = [self _createWorkingDirectoryForToken:@"defaultPath"];
-		}
-	}
-	return directory;
+
+	return [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingPathComponent:extension]];;
 }
 
 - (NSURL *)_createWorkingDirectoryForToken:(NSString *)token {
@@ -66,13 +71,6 @@
 	
 	NSString *finalPath = [NSString stringWithUTF8String:pathRes];
 	NSURL *finalPathURL = [NSURL fileURLWithPath:finalPath];
-	
-	@synchronized(tokenDirectoryMap) {
-		tokenDirectoryMap[token] = [finalPathURL absoluteString];
-	}
-	
-	[[NSUserDefaults standardUserDefaults] setObject:tokenDirectoryMap forKey:@"tmpDirectoryMap"];
-	[[NSUserDefaults standardUserDefaults] synchronize];
 	
 	return finalPathURL;
 }
@@ -91,8 +89,10 @@
 }
 
 - (BOOL)_moveFileFromPath:(NSURL *)path toPath:(NSURL *)newPath {
+	[[NSFileManager defaultManager] removeItemAtURL:newPath error:nil];
 	NSError *error = nil;
 	if (![[NSFileManager defaultManager] moveItemAtURL:path toURL:newPath error:&error]) {
+		NSLog(@"ERROR. %@", error);
 		GSAssert();
 	}
 	return YES;
