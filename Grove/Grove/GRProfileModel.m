@@ -48,7 +48,7 @@
 	int rowCount = 0;
 	switch (section) {
 		case 0:
-			rowCount = 1;
+			rowCount = 0;
 			break;
 		case 1:
 			rowCount = 1;
@@ -61,6 +61,26 @@
 			break;
 	}
 	return rowCount;
+}
+
+- (NSString *)titleForSection:(NSInteger)section {
+    NSString *ret = @"undef";
+    switch (section) {
+        case 0:
+            break;
+        case 1:
+            ret = @"repositories";
+            break;
+        case 2:
+            ret = @"contributions";
+            break;
+        case 3:
+            ret = @"activity";
+            break;
+        default:
+            break;
+    }
+    return ret;
 }
 
 - (CGFloat)heightForProfileHeader {

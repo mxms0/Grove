@@ -49,6 +49,10 @@
 	return [model cellHeightForRowAtIndexPath:indexPath];
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    return [model titleForSection:section];
+}
+
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
 	if (section == 0) {
 		GRProfileHeaderView *header = [[GRProfileHeaderView alloc] init];

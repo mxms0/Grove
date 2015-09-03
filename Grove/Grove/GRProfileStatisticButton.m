@@ -27,7 +27,7 @@
 	text = [[UILabel alloc] init];
 	subText = [[UILabel alloc] init];
 
-	[text setFont:[UIFont systemFontOfSize:20]];
+	[text setFont:[UIFont boldSystemFontOfSize:20]];
 	[text setTextAlignment:NSTextAlignmentCenter];
 	[text setMinimumScaleFactor:0.5];
 	
