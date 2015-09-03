@@ -127,11 +127,11 @@
 
 #pragma mark Starring
 
-- (void)starRepository:(GSRepository *__nonnull)repo forUser:(GSUser *__nonnull)user completionHandler:(void (^__nonnull)(NSError *__nullable error))handler {
+- (void)starRepository:(GSRepository *__nonnull)repo forUser:(GSUser *__nonnull)user completionHandler:(void (^__nonnull)(BOOL success, NSError *__nullable error))handler {
 	// PUT
 	GSAssert();
 }
-- (void)unstarRepository:(GSRepository *__nonnull)repo forUser:(GSUser *__nonnull)user completionHandler:(void (^__nonnull)(NSError *__nullable error))handler {
+- (void)unstarRepository:(GSRepository *__nonnull)repo forUser:(GSUser *__nonnull)user completionHandler:(void (^__nonnull)(BOOL success, NSError *__nullable error))handler {
 	// DELETE
 	GSAssert();
 }
@@ -160,8 +160,26 @@
 	GSAssert();
 }
 
-- (void)collaboratorsForRepositoryName:(NSString *__nonnull)repoName owner:(NSString *__nonnull)owner completionHandler:(void (^__nonnull)(NSArray *__nullable collabs, NSError *__nullable error))error {
+- (void)collaboratorsForRepositoryNamed:(NSString *__nonnull)repoName owner:(NSString *__nonnull)owner completionHandler:(void (^__nonnull)(NSArray *__nullable collabs, NSError *__nullable error))error {
 	GSAssert();
+}
+
+#pragma mark Gists
+
+- (void)commentsForGist:(__nonnull id)gist completionHandler:(void (^__nonnull)(NSArray *__nullable comments, NSError *__nullable))handler {
+    GSAssert();
+}
+
+- (void)commentOnGist:(__nonnull id)gist withMessage:(NSString *__nonnull)message completionHandler:(void (^__nonnull)(__nullable id comment, NSError *__nullable error))handler {
+    GSAssert();
+}
+
+- (void)editComent:(__nonnull id)comment gist:(__nonnull id)gist newMessage:(NSString *__nonnull)message completionHandler:(void (^__nonnull)(__nullable id comment, NSError *__nullable error))handler {
+    GSAssert();
+}
+
+- (void)deleteComment:(__nonnull id)comment gist:(__nonnull id)gist completionHandler:(void (^__nonnull)(BOOL success, NSError *__nullable error))handler {
+    GSAssert();
 }
 
 @end

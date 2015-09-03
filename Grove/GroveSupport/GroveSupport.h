@@ -29,8 +29,7 @@ FOUNDATION_EXPORT const unsigned char GroveSupportVersionString[];
 // In this header, you should import all the public headers of your framework using statements like #import <GroveSupport/PublicHeader.h>
 
 static NSString *const GSDomain = @"com.RickSupport.morty";
-static NSString *const GSErrorDomain = @"go away";
-// Perhaps move these to a server, should never ship with these tokens
+static NSString *const GSErrorDomain = @"MortiestMorty";
 
 void _GSAssert(BOOL cond, NSString *fmt, ...);
 #define GSAssert() _GSAssert(NO, @"(%s) in [%s:%d]", __PRETTY_FUNCTION__, __FILE__, __LINE__)
