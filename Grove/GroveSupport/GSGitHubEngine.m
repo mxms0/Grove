@@ -30,7 +30,7 @@
 	return self;
 }
 
-- (void)authenticateUserWithUsername:(NSString *__nonnull)username password:(NSString *__nonnull)password completionHandler:(void (^ __nullable)(GSUser *__nullable, NSError *__nullable))handler {
+- (void)authenticateUserWithUsername:(NSString *__nonnull)username password:(NSString *__nonnull)password completionHandler:(void (^__nullable)(GSUser *__nullable, NSError *__nullable))handler {
 	
 	GSUser *_user = nil;
 	

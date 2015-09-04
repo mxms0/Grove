@@ -33,3 +33,5 @@ static NSString *const GSErrorDomain = @"MortiestMorty";
 
 void _GSAssert(BOOL cond, NSString *fmt, ...);
 #define GSAssert() _GSAssert(NO, @"(%s) in [%s:%d]", __PRETTY_FUNCTION__, __FILE__, __LINE__)
+
+typedef NSObject<NSCoding> GSSerializable;

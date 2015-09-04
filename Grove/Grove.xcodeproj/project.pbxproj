@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		50019B321B9A21DC004EDC8A /* GSURLRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 50019B301B9A21DC004EDC8A /* GSURLRequest.h */; };
+		50019B331B9A21DC004EDC8A /* GSURLRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 50019B311B9A21DC004EDC8A /* GSURLRequest.m */; };
 		50133F021B8413F7004B5BB8 /* GSEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 50133F001B8413F7004B5BB8 /* GSEvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		50133F031B8413F7004B5BB8 /* GSEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 50133F011B8413F7004B5BB8 /* GSEvent.m */; };
 		50133F061B841470004B5BB8 /* GSActor.h in Headers */ = {isa = PBXBuildFile; fileRef = 50133F041B841470004B5BB8 /* GSActor.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -137,6 +139,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		50019B301B9A21DC004EDC8A /* GSURLRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSURLRequest.h; sourceTree = "<group>"; };
+		50019B311B9A21DC004EDC8A /* GSURLRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSURLRequest.m; sourceTree = "<group>"; };
 		50133F001B8413F7004B5BB8 /* GSEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSEvent.h; sourceTree = "<group>"; };
 		50133F011B8413F7004B5BB8 /* GSEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSEvent.m; sourceTree = "<group>"; };
 		50133F041B841470004B5BB8 /* GSActor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSActor.h; sourceTree = "<group>"; };
@@ -344,6 +348,8 @@
 		50A974111B831456009CD3E4 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				50019B301B9A21DC004EDC8A /* GSURLRequest.h */,
+				50019B311B9A21DC004EDC8A /* GSURLRequest.m */,
 				5097B5E01B8D2D9800A72721 /* GSUtilities.h */,
 				5097B5DF1B8D2D9800A72721 /* GSUtilities.m */,
 				50E9F86E1B832BF70007212E /* GSNetworkManagerHelpers.h */,
@@ -526,6 +532,7 @@
 				84A8D10A1B8D6F0C00B6B4FB /* GSIssue.h in Headers */,
 				5097B5F11B8D95C100A72721 /* GSOrganization.h in Headers */,
 				50E4B58F1B82F6D60029264A /* GroveSupport.h in Headers */,
+				50019B321B9A21DC004EDC8A /* GSURLRequest.h in Headers */,
 				50133F061B841470004B5BB8 /* GSActor.h in Headers */,
 				50E4B5AD1B82F8E50029264A /* GSGitHubEngine.h in Headers */,
 				5097B5EC1B8D91C200A72721 /* GSComment.h in Headers */,
@@ -704,6 +711,7 @@
 				5097B5ED1B8D91C200A72721 /* GSComment.m in Sources */,
 				50133F0B1B841496004B5BB8 /* GSRepository.m in Sources */,
 				5097B5E11B8D2D9800A72721 /* GSUtilities.m in Sources */,
+				50019B331B9A21DC004EDC8A /* GSURLRequest.m in Sources */,
 				501558C21B86F2910002254D /* GSNotification.m in Sources */,
 				50133F071B841470004B5BB8 /* GSActor.m in Sources */,
 				50E4B5BA1B8306040029264A /* NSString+GSUtilities.m in Sources */,
