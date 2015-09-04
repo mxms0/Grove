@@ -24,7 +24,7 @@
 	return _instance;
 }
 
-- (void)requestOAuth2TokenWithUsername:(NSString *__nonnull)username password:(NSString *__nonnull)password handler:(void (^ __nullable)(NSString *__nullable token, NSError *__nullable error))handler {
+- (void)requestOAuth2TokenWithUsername:(NSString *)username password:(NSString *)password handler:(void (^)(NSString *token, NSError *error))handler {
 	GSURLRequest *request = [[GSURLRequest alloc] initWithURL:[NSURL URLWithString:@"https://api.github.com/authorizations"]];
 	
 	NSString *authenticationInformation = [NSString stringWithFormat:@"%@:%@", username, password];
@@ -90,8 +90,8 @@
 }
 
 
-- (void)sendDataRequest:(NSURLRequest *__nonnull)request completionHandler:(void (^ __nullable)(GSSerializable *response, NSError *error))handler {
-	NSURLSessionDataTask *task = [[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *__nullable data, NSURLResponse *__nullable response, NSError *__nullable error) {
+- (void)sendDataRequest:(NSURLRequest *)request completionHandler:(void (^)(GSSerializable *response, NSError *error))handler {
+	NSURLSessionDataTask *task = [[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
 		
 		NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response; // put safety checks here. albeit unlikely
 
@@ -145,7 +145,7 @@
 	}];
 }
 
-- (void)requestUserInformationForToken:(NSString *__nonnull)token completionHandler:(void (^__nonnull)(NSDictionary *response, NSError *error))handler {
+- (void)requestUserInformationForToken:(NSString *)token completionHandler:(void (^)(NSDictionary *response, NSError *error))handler {
 	GSURLRequest *request = [[GSURLRequest alloc] initWithURL:GSAPIURLForEndpoint(GSAPIEndpointUser)];
     [request addAuthToken:token];
 	
@@ -158,7 +158,7 @@
 	}];
 }
 
-- (void)requestUserInformationForUsername:(NSString *__nonnull)username token:(NSString *)token completionHandler:(void (^__nonnull)(NSDictionary *__nullable response, NSError *__nullable error))handler {
+- (void)requestUserInformationForUsername:(NSString *)username token:(NSString *)token completionHandler:(void (^)(NSDictionary *response, NSError *error))handler {
 	NSURL *requestURL = [GSAPIURLForEndpoint(GSAPIEndpointUsers) URLByAppendingPathComponent:username];
 	GSURLRequest *request = [[GSURLRequest alloc] initWithURL:requestURL];
 	if (token)
