@@ -15,6 +15,5 @@
 
 - (NSInteger)numberOfSections;
 - (NSInteger)numberOfRowsInSection:(NSInteger)section;
-- (GSEvent *)eventForIndexPath:(NSIndexPath *)indexPath;
 - (GREventCellModel *)eventCellModelForIndexPath:(NSIndexPath *)indexPath;
 @end
