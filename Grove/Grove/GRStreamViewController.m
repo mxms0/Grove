@@ -63,7 +63,7 @@ static NSString *reuseIdentifier = @"reuseIdentifier";
     if (!cell) {
         cell = [[GRStreamEventCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
     }
-    [cell configureWithEvent:[model eventForIndexPath:indexPath]];
+    [cell configureWithEventModel:[model eventForIndexPath:indexPath]];
     return cell;
 }
 
