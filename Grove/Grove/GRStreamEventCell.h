@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class GSEvent;
+@class GSEvent, GREventCellModel;
 @interface GRStreamEventCell : UITableViewCell
-- (void)configureWithEvent:(GSEvent *)event;
+- (void)configureWithEventModel:(GREventCellModel *)event;
 @end

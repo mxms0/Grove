@@ -58,7 +58,7 @@
 							   @"StatusEvent"				:@(GSEventTypeStatus),
 							   @"TeamAddEvent"				:@(GSEventTypeTeamAdd),
 							   @"WatchEvent"				:@(GSEventTypeWatch)
-							   };
+							};
 
 	return mapping[string] ? [mapping[string] intValue] : GSEventTypeUnknown;
 }
@@ -67,7 +67,7 @@
 #if DEBUG
 	return [NSString stringWithFormat:@"<%@: %p; id = %@;>", NSStringFromClass([self class]), self, self.identifier];
 #else
-	
+	return [super description];
 #endif
 }
 
