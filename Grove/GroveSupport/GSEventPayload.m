@@ -49,24 +49,24 @@
 
 - (GSEventAction)actionForString:(NSString *)actionString {
 	NSDictionary *const actionMapping = @{
-										  @"started" : @(GSEventActionStarted),
-										  @"created": @(GSEventActionCreated),
-										  @"create": @(GSEventActionCreated),
-										  @"updated": @(GSEventActionUpdated),
-										  @"update": @(GSEventActionUpdated),
-										  @"edited": @(GSEventActionEdited),
-										  @"opened": @(GSEventActionOpened),
-										  @"reopened": @(GSEventActionReopened),
-										  @"assigned":@(GSEventActionAssigned),
-										  @"unassigned": @(GSEventActionUnassigned),
-										  @"labeled": @(GSEventActionLabeled),
-										  @"unlabeled": @(GSEventActionUnlabeled),
-										  @"published": @(GSEventActionPublished),
-										  @"added": @(GSEventActionAdded),
-										  @"removed": @(GSEventActionRemoved),
-										  @"synchronize": @(GSEventActionSynchronized),
-										  @"synchronized": @(GSEventActionSynchronized),
-										  };
+										  @"started"		: @(GSEventActionStarted),
+										  @"created"		: @(GSEventActionCreated),
+										  @"create"			: @(GSEventActionCreated),
+										  @"updated"		: @(GSEventActionUpdated),
+										  @"update"			: @(GSEventActionUpdated),
+										  @"edited"			: @(GSEventActionEdited),
+										  @"opened"			: @(GSEventActionOpened),
+										  @"reopened"		: @(GSEventActionReopened),
+										  @"assigned"		: @(GSEventActionAssigned),
+										  @"unassigned"		: @(GSEventActionUnassigned),
+										  @"labeled"		: @(GSEventActionLabeled),
+										  @"unlabeled"		: @(GSEventActionUnlabeled),
+										  @"published"		: @(GSEventActionPublished),
+										  @"added"			: @(GSEventActionAdded),
+										  @"removed"		: @(GSEventActionRemoved),
+										  @"synchronize"	: @(GSEventActionSynchronized),
+										  @"synchronized"	: @(GSEventActionSynchronized),
+										};
 	return actionMapping[actionString] ? (GSEventAction)[actionMapping[actionString] intValue] : GSEventActionNone;
 }
 

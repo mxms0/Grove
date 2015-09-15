@@ -35,7 +35,7 @@
 }
 
 - (NSString *)titleForSection:(NSInteger)section {
-    return nil;
+	return nil;
 }
 
 @end

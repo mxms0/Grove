@@ -75,11 +75,11 @@
 }
 
 - (UIImage *)imageIcon {
-	UIImage *image = nil;
+	NSString *imageName = nil;
 	
 	switch (self.event.type) {
 		case GSEventTypeCreate:
-			image = [UIImage imageNamed:@"Create"];
+			imageName = @"Create";
 			break;
 		case GSEventTypeFork:
 			break;
@@ -88,7 +88,7 @@
 		case GSEventTypeCommitComment:
 			break;
 		case GSEventTypePush:
-			image = [UIImage imageNamed:@"Push"];
+			imageName = @"Push";
 			break;
 		case GSEventTypeUnknown:
 			break;
@@ -97,7 +97,7 @@
 			break;
 	}
 	
-	return image;
+	return [UIImage imageNamed:imageName];
 }
 
 
