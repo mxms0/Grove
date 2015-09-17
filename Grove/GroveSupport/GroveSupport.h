@@ -14,17 +14,17 @@ FOUNDATION_EXPORT double GroveSupportVersionNumber;
 //! Project version string for GroveSupport.
 FOUNDATION_EXPORT const unsigned char GroveSupportVersionString[];
 
-#import "GSUser.h"
-#import "GSGitHubEngine.h"
-#import "GSActor.h"
-#import "GSRepository.h"
-#import "GSEvent.h"
-#import "GSCommit.h"
-#import "GSCacheManager.h"
-#import "GSNotification.h"
-#import "GSComment.h"
-#import "GSOrganization.h"
-#import "GSUtilities.h"
+#import <GroveSupport/GSUser.h>
+#import <GroveSupport/GSGitHubEngine.h>
+#import <GroveSupport/GSActor.h>
+#import <GroveSupport/GSRepository.h>
+#import <GroveSupport/GSEvent.h>
+#import <GroveSupport/GSCommit.h>
+#import <GroveSupport/GSCacheManager.h>
+#import <GroveSupport/GSNotification.h>
+#import <GroveSupport/GSComment.h>
+#import <GroveSupport/GSOrganization.h>
+#import <GroveSupport/GSUtilities.h>
 
 // In this header, you should import all the public headers of your framework using statements like #import <GroveSupport/PublicHeader.h>
 

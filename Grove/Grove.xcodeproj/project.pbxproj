@@ -23,6 +23,9 @@
 		501558B51B8553D70002254D /* GRApplicationUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 501558B41B8553D70002254D /* GRApplicationUser.m */; };
 		501558C11B86F2910002254D /* GSNotification.h in Headers */ = {isa = PBXBuildFile; fileRef = 501558BF1B86F2910002254D /* GSNotification.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		501558C21B86F2910002254D /* GSNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 501558C01B86F2910002254D /* GSNotification.m */; };
+		501C042E1BAB78B400DC66C8 /* GSGist.m in Sources */ = {isa = PBXBuildFile; fileRef = 501C042B1BAB78B400DC66C8 /* GSGist.m */; };
+		501C042F1BAB78B400DC66C8 /* GSGistInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = 501C042C1BAB78B400DC66C8 /* GSGistInternal.h */; };
+		501C04301BAB78B400DC66C8 /* GSGist.h in Headers */ = {isa = PBXBuildFile; fileRef = 501C042D1BAB78B400DC66C8 /* GSGist.h */; };
 		50504D9A1BA263D800B87C5F /* GREventCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 50504D991BA263D800B87C5F /* GREventCellModel.m */; };
 		5061DE251B8471DB007D9F24 /* GSEventPayload.h in Headers */ = {isa = PBXBuildFile; fileRef = 5061DE231B8471DB007D9F24 /* GSEventPayload.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5061DE261B8471DB007D9F24 /* GSEventPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = 5061DE241B8471DB007D9F24 /* GSEventPayload.m */; };
@@ -162,6 +165,9 @@
 		501558C41B86FE8A0002254D /* GSRepositoryInternal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GSRepositoryInternal.h; sourceTree = "<group>"; };
 		501558C71B8728D80002254D /* GSNotificationInternal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GSNotificationInternal.h; sourceTree = "<group>"; };
 		501558C81B8823B60002254D /* GSUserInternal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GSUserInternal.h; sourceTree = "<group>"; };
+		501C042B1BAB78B400DC66C8 /* GSGist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSGist.m; sourceTree = "<group>"; };
+		501C042C1BAB78B400DC66C8 /* GSGistInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSGistInternal.h; sourceTree = "<group>"; };
+		501C042D1BAB78B400DC66C8 /* GSGist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSGist.h; sourceTree = "<group>"; };
 		50504D981BA263D800B87C5F /* GREventCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GREventCellModel.h; sourceTree = "<group>"; };
 		50504D991BA263D800B87C5F /* GREventCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GREventCellModel.m; sourceTree = "<group>"; };
 		5061DE231B8471DB007D9F24 /* GSEventPayload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSEventPayload.h; sourceTree = "<group>"; };
@@ -318,6 +324,9 @@
 		5097B5E81B8D821500A72721 /* Data Structures */ = {
 			isa = PBXGroup;
 			children = (
+				501C042C1BAB78B400DC66C8 /* GSGistInternal.h */,
+				501C042D1BAB78B400DC66C8 /* GSGist.h */,
+				501C042B1BAB78B400DC66C8 /* GSGist.m */,
 				5097B5EF1B8D95C100A72721 /* GSOrganization.h */,
 				5097B5F01B8D95C100A72721 /* GSOrganization.m */,
 				501558C81B8823B60002254D /* GSUserInternal.h */,
@@ -536,8 +545,10 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				501C042F1BAB78B400DC66C8 /* GSGistInternal.h in Headers */,
 				50133F0A1B841496004B5BB8 /* GSRepository.h in Headers */,
 				50E4B5B11B82FABA0029264A /* GSNetworkManager.h in Headers */,
+				501C04301BAB78B400DC66C8 /* GSGist.h in Headers */,
 				84A8D10A1B8D6F0C00B6B4FB /* GSIssue.h in Headers */,
 				5097B5F11B8D95C100A72721 /* GSOrganization.h in Headers */,
 				50E4B58F1B82F6D60029264A /* GroveSupport.h in Headers */,
@@ -717,6 +728,7 @@
 				50E9F8711B832BF70007212E /* GSNetworkManagerHelpers.m in Sources */,
 				50E4B5B21B82FABA0029264A /* GSNetworkManager.m in Sources */,
 				5097B5F21B8D95C100A72721 /* GSOrganization.m in Sources */,
+				501C042E1BAB78B400DC66C8 /* GSGist.m in Sources */,
 				50E4B5B61B8303710029264A /* GSUser.m in Sources */,
 				5097B5ED1B8D91C200A72721 /* GSComment.m in Sources */,
 				50133F0B1B841496004B5BB8 /* GSRepository.m in Sources */,
