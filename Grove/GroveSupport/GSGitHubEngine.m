@@ -166,11 +166,20 @@
 
 #pragma mark Gists
 
-- (void)commentsForGist:(__nonnull id)gist completionHandler:(void (^__nonnull)(NSArray *__nullable comments, NSError *__nullable))handler {
+- (void)gistsForUser:(GSUser *)user completionHandler:(void (^__nonnull)(NSArray *__nullable gists, NSError *__nullable))handler {
+	if (user.token) {
+		
+	}
+	else {
+		
+	}
+}
+
+- (void)commentsForGist:(GSGist *__nonnull)gist completionHandler:(void (^__nonnull)(NSArray *__nullable comments, NSError *__nullable))handler {
     GSAssert();
 }
 
-- (void)commentOnGist:(__nonnull id)gist withMessage:(NSString *__nonnull)message completionHandler:(void (^__nonnull)(__nullable id comment, NSError *__nullable error))handler {
+- (void)commentOnGist:(GSGist *__nonnull)gist withMessage:(NSString *__nonnull)message attachments:(NSArray *__nullable)attachments completionHandler:(void (^__nonnull)(__nullable id comment, NSError *__nullable error))handler {
     GSAssert();
 }
 

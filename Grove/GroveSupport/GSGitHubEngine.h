@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class GSUser, GSEvent, GSRepository;
+@class GSUser, GSEvent, GSRepository, GSGist;
 
 @interface GSGitHubEngine : NSObject
 + (nonnull instancetype)sharedInstance;
@@ -39,8 +39,9 @@
 - (void)repositoriesStarredByUser:(GSUser *__nonnull)user completionHandler:(void (^__nonnull)(NSArray *__nullable repos, NSError *__nullable error))handler;
 
 // Gists
-- (void)commentsForGist:(__nonnull id)gist completionHandler:(void (^__nonnull)(NSArray *__nullable comments, NSError *__nullable))handler;
-- (void)commentOnGist:(__nonnull id)gist withMessage:(NSString *__nonnull)message completionHandler:(void (^__nonnull)(__nullable id comment, NSError *__nullable error))handler;
+- (void)gistsForUser:(GSUser *__nonnull)user completionHandler:(void (^__nonnull)(NSArray *__nullable gists, NSError *__nullable))handler;
+- (void)commentsForGist:(GSGist *__nonnull)gist completionHandler:(void (^__nonnull)(NSArray *__nullable comments, NSError *__nullable))handler;
+- (void)commentOnGist:(GSGist *__nonnull)gist withMessage:(NSString *__nonnull)message attachments:(NSArray *__nullable)attachments completionHandler:(void (^__nonnull)(__nullable id comment, NSError *__nullable error))handler;
 - (void)editComent:(__nonnull id)comment gist:(__nonnull id)gist newMessage:(NSString *__nonnull)message completionHandler:(void (^__nonnull)(__nullable id comment, NSError *__nullable error))handler;
 - (void)deleteComment:(__nonnull id)comment gist:(__nonnull id)gist completionHandler:(void (^__nonnull)(BOOL success, NSError *__nullable error))handler;
 @end
