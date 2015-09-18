@@ -13,8 +13,11 @@
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary {
 	if ((self = [super initWithDictionary:dictionary])) {
-		GSAssign(dictionary, @"public", _publiclyAccessible);
+		NSString *_publiclyAccessibleFlag = nil;
+		GSAssign(dictionary, @"public", _publiclyAccessibleFlag);
 		GSAssign(dictionary, @"description", _stringDescription);
+		
+		_publiclyAccessible = [_publiclyAccessibleFlag boolValue];
 	}
 	return self;
 }
