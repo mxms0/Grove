@@ -13,6 +13,7 @@
 
 @implementation GRProfileModel {
 	GRApplicationUser *currentUser;
+	NSArray *repositories;
 }
 
 - (instancetype)init {
@@ -29,11 +30,25 @@
 }
 
 - (void)requestNewData {
+	[[GSGitHubEngine sharedInstance] repositoriesForUser:currentUser.user completionHandler:^(NSArray * __nullable repos, NSError * __nullable error) {
+		if (!error) {
+			repositories = repos;
+			dispatch_async(dispatch_get_main_queue(), ^	{
+			});
+		}
+	}];
 //
 //	[[GSGitHubEngine sharedInstance] userForUsername:appUser.user.username completionHandler:^(GSUser *user, NSError *error) {
 		// reload data here
 		// use If-Modified-Since ETAG to request profile picture, that way we dont waste resources
 //	}];
+}
+
+- (GSRepository *)repositoryForIndex:(NSUInteger)index {
+	if (index >= [repositories count])
+		return [repositories objectAtIndex:index];
+	else
+		return nil;
 }
 
 - (GRApplicationUser *)activeUser {

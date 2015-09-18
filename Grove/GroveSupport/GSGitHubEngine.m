@@ -166,6 +166,15 @@
 
 #pragma mark Gists
 
+- (void)gistsForUser:(GSUser *)user completionHandler:(void (^__nonnull)(NSArray *__nullable gists, NSError *__nullable))handler {
+	if (user.token) {
+		
+	}
+	else {
+		
+	}
+}
+
 - (void)commentsForGist:(GSGist *__nonnull)gist completionHandler:(void (^__nonnull)(NSArray *__nullable comments, NSError *__nullable))handler {
     GSAssert();
 }

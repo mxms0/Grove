@@ -39,6 +39,7 @@
 - (void)repositoriesStarredByUser:(GSUser *__nonnull)user completionHandler:(void (^__nonnull)(NSArray *__nullable repos, NSError *__nullable error))handler;
 
 // Gists
+- (void)gistsForUser:(GSUser *__nonnull)user completionHandler:(void (^__nonnull)(NSArray *__nullable gists, NSError *__nullable))handler;
 - (void)commentsForGist:(GSGist *__nonnull)gist completionHandler:(void (^__nonnull)(NSArray *__nullable comments, NSError *__nullable))handler;
 - (void)commentOnGist:(GSGist *__nonnull)gist withMessage:(NSString *__nonnull)message attachments:(NSArray *__nullable)attachments completionHandler:(void (^__nonnull)(__nullable id comment, NSError *__nullable error))handler;
 - (void)editComent:(__nonnull id)comment gist:(__nonnull id)gist newMessage:(NSString *__nonnull)message completionHandler:(void (^__nonnull)(__nullable id comment, NSError *__nullable error))handler;
