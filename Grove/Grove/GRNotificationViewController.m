@@ -16,10 +16,14 @@
 
 		NSMutableString *string = [[NSMutableString alloc] init];
 		[string appendString:@"/*"];
+		[string appendString:@"\t dsfdsfds\r\n "];
+		[string appendString:@"\t fdsfdsfds\r\n"];
+		[string appendString:@"//fdsf dsfsdfsd\r\n\r\n"];
+		[string appendString:@"*/"];
 		for(int i = 0; i < 500; i++) {
 			[string appendString:@"// fffd testing\r\nnot testing "];
 		}
-		[string appendString:@"*/"];
+
 		[textView setText:string];
 		[textView setSyntaxLanguage:GRSyntaxLanguageObjectiveC];
 		NSLog(@"dfds %@", textView);
