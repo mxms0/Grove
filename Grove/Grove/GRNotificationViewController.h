@@ -7,7 +7,10 @@
 //
 
 #import "GRViewController.h"
+#import "GRSyntaxHighlightedTextView.h"
 
-@interface GRNotificationViewController : GRViewController
+@interface GRNotificationViewController : GRViewController {
+	GRSyntaxHighlightedTextView *textView;
+}
 
 @end

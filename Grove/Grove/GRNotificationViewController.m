@@ -12,15 +12,26 @@
 
 - (instancetype)init {
 	if ((self = [super init])) {
-        self.view.backgroundColor = [UIColor orangeColor];
-		UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc] init];
-		[indicator startAnimating];
-		[self.view addSubview:indicator];
-		[indicator makeConstraints:^(MASConstraintMaker *make) {
-			make.center.equalTo(indicator.superview);
-		}];
+		textView = [[GRSyntaxHighlightedTextView alloc] initWithFrame:CGRectZero textContainer:nil];
+
+		NSMutableString *string = [[NSMutableString alloc] init];
+		for(int i = 0; i < 500; i++) {
+			[string appendString:@"// fffd testing\r\nnot testing"];
+		}
+		[textView setText:string];
+		[textView setSyntaxLanguage:GRSyntaxLanguageObjectiveC];
+		NSLog(@"dfds %@", textView);
     }
     return self;
+}
+
+- (void)viewDidLoad {
+	[super viewDidLoad];
+	self.view.backgroundColor = [UIColor orangeColor];
+	[self.view addSubview:textView];
+	[textView setFrame:CGRectMake(0, 44, 320, 568)];
+	[textView asynchronouslyHighlightSyntax];
+	NSLog(@"Fff %@", textView);
 }
 
 @end

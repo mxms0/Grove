@@ -30,13 +30,13 @@
 }
 
 - (void)requestNewData {
-	[[GSGitHubEngine sharedInstance] repositoriesForUser:currentUser.user completionHandler:^(NSArray * __nullable repos, NSError * __nullable error) {
-		if (!error) {
-			repositories = repos;
-			dispatch_async(dispatch_get_main_queue(), ^	{
-			});
-		}
-	}];
+//	[[GSGitHubEngine sharedInstance] repositoriesForUser:currentUser.user completionHandler:^(NSArray * __nullable repos, NSError * __nullable error) {
+//		if (!error) {
+//			repositories = repos;
+//			dispatch_async(dispatch_get_main_queue(), ^	{
+//			});
+//		}
+//	}];
 //
 //	[[GSGitHubEngine sharedInstance] userForUsername:appUser.user.username completionHandler:^(GSUser *user, NSError *error) {
 		// reload data here

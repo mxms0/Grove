@@ -10,7 +10,9 @@
 #import "GSEvent.h"
 #import "NSAttributedString+GRExtensions.h"
 
-@implementation GREventCellModel
+@implementation GREventCellModel {
+	NSAttributedString *attributedMessage;
+}
 
 - (nonnull instancetype)initWithEvent:(GSEvent *__nonnull)event {
 	if ((self = [super init])) {
@@ -20,7 +22,15 @@
 }
 
 - (NSAttributedString *)eventString {
-	return nil;
+	@synchronized(self) {
+		if (!attributedMessage) {
+			attributedMessage = [self _generatedEventString];
+		}
+	}
+	return attributedMessage;
+}
+
+- (NSAttributedString *)_generatedEventString {
 	NSAttributedString *message = [[NSAttributedString alloc] initWithString:@""];
 	
 	UIColor *blue = [UIColor colorWithRed:0.2627 green:0.4784 blue:0.7451 alpha:1.0];
@@ -29,53 +39,43 @@
 	NSLog(@"fdsds %@:%@", self.event.actor.username, self.event);
 	
 	NSAttributedString *actorString = [[NSAttributedString alloc] initWithString:self.event.actor.username attributes:@{NSForegroundColorAttributeName:blue, NSFontAttributeName:boldFont}];
-	NSAttributedString *branch = nil;
-	NSAttributedString *a = nil;
-	NSAttributedString *b = nil;
-	NSAttributedString *c = nil;
 	
 	switch (self.event.type) {
-		case GSEventTypeCreate:
-			if (!self.event.payload.branch) {
-				// created new repo
-				branch = [[NSAttributedString alloc] initWithString:self.event.repository.name attributes:@{NSForegroundColorAttributeName: blue, NSFontAttributeName: boldFont}];
-				a = [[NSAttributedString alloc] initWithString:@" created repository " attributes:@{NSFontAttributeName:regularFont}];
-				message = [NSAttributedString attributedStringWithAttributedStrings:@[actorString, a, branch]];
-			}
-			else {
-				branch = [[NSAttributedString alloc] initWithString:self.event.payload.branch attributes:@{NSForegroundColorAttributeName:blue, NSFontAttributeName:boldFont}];
-				a = [[NSAttributedString alloc] initWithString:@" created branch " attributes:@{NSFontAttributeName:regularFont}];
-				message = [NSAttributedString attributedStringWithAttributedStrings:@[actorString, a, branch]];
-			}
-			break;
-		case GSEventTypeFork:
-			break;
-		case GSEventTypeWatch:
-			break;
 		case GSEventTypeCommitComment:
-			branch = [[NSAttributedString alloc] initWithString:self.event.repository.name attributes:@{NSForegroundColorAttributeName:blue, NSFontAttributeName:boldFont}];
-			c = [[NSAttributedString alloc] initWithString:self.event.repository.name attributes:@{NSForegroundColorAttributeName:blue, NSFontAttributeName:boldFont}];
-			a = [[NSAttributedString alloc] initWithString:@" commented on commit " attributes:@{NSFontAttributeName:regularFont}];
-			b = [[NSAttributedString alloc] initWithString:@" in " attributes:@{NSFontAttributeName:regularFont}];
-			message = [NSAttributedString attributedStringWithAttributedStrings:@[actorString, a, branch]];
-			break;
+		case GSEventTypeCreate:
+		case GSEventTypeDelete:
+		case GSEventTypeDeployment:
+		case GSEventTypeDeploymentStatus:
+		case GSEventTypeDownload:
+		case GSEventTypeFollow:
+		case GSEventTypeFork:
+		case GSEventTypeForkApply:
+		case GSEventTypeGistEvent:
+		case GSEventTypeGollumEvent:
+		case GSEventTypeIssueComment:
+		case GSEventTypeIssues:
+		case GSEventTypeMember:
+		case GSEventTypeMembership:
+		case GSEventTypePageBuild:
+		case GSEventTypePublic:
+		case GSEventTypePullRequest:
+		case GSEventTypePullRequestReviewComment:
 		case GSEventTypePush:
-			branch = [[NSAttributedString alloc] initWithString:self.event.payload.branch attributes:@{NSForegroundColorAttributeName:blue, NSFontAttributeName:boldFont}];
-			a = [[NSAttributedString alloc] initWithString:@" pushed to " attributes:@{NSFontAttributeName:regularFont}];
-			message = [NSAttributedString attributedStringWithAttributedStrings:@[actorString, a, branch]];
-			break;
+		case GSEventTypeRelease:
+		case GSEventTypeRepository:
+		case GSEventTypeStatus:
+		case GSEventTypeTeamAdd:
+		case GSEventTypeWatch:
 		case GSEventTypeUnknown:
-			break;
-			
-		default:
-			break;
+			break;	
 	}
-	
 	return message;
 }
 
 - (UIImage *)imageIcon {
 	NSString *imageName = nil;
+
+
 	
 	switch (self.event.type) {
 		case GSEventTypeCreate:
