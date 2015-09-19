@@ -15,9 +15,11 @@
 		textView = [[GRSyntaxHighlightedTextView alloc] initWithFrame:CGRectZero textContainer:nil];
 
 		NSMutableString *string = [[NSMutableString alloc] init];
+		[string appendString:@"/*"];
 		for(int i = 0; i < 500; i++) {
-			[string appendString:@"// fffd testing\r\nnot testing"];
+			[string appendString:@"// fffd testing\r\nnot testing "];
 		}
+		[string appendString:@"*/"];
 		[textView setText:string];
 		[textView setSyntaxLanguage:GRSyntaxLanguageObjectiveC];
 		NSLog(@"dfds %@", textView);

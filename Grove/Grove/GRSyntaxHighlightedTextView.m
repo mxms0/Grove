@@ -51,6 +51,41 @@
 		
 		formattingRange = [self attributeRangeBeginningWithString:@"//" endingWithCharacterSet:[NSCharacterSet newlineCharacterSet] queryRange:NSMakeRange(location, stringLength - location)];
 	}
+	
+	formattingRange = [self attributeRangeBeginningWithString:@"/*" endingWithString:@"*/" queryRange:NSMakeRange(0, stringLength)];
+	NSLog(@"fds %@", NSStringFromRange(formattingRange));
+	location = 0;
+	
+	while (formattingRange.location != NSNotFound) {
+		[attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor greenColor] range:formattingRange];
+		
+		dispatch_async(dispatch_get_main_queue(), ^ {
+			self.attributedText = attributedString;
+			[self setNeedsDisplay];
+		});
+		
+		location = formattingRange.location + formattingRange.length + 2; // length of //
+		
+		formattingRange = [self attributeRangeBeginningWithString:@"/*" endingWithString:@"*/" queryRange:NSMakeRange(location, stringLength - location)];
+	}
+	
+}
+
+- (NSRange)attributeRangeBeginningWithString:(NSString *)string endingWithString:(NSString *)endString queryRange:(NSRange)inRange {
+	// this second one iss a little smarter
+	// doesn't check for things inside of the found range, that way /*/ doesn't return /* as the entire range
+	// still needs work, not entirely accurate
+	NSRange beginningRange = [self.text rangeOfString:string options:0 range:inRange];
+	if (beginningRange.location == NSNotFound) {
+		return beginningRange;
+	}
+	NSRange endRange = [self.text rangeOfString:endString options:0 range:NSMakeRange(beginningRange.location + beginningRange.length, [self.text length] - (beginningRange.location + beginningRange.length))];
+	NSLog(@"%@:%@", NSStringFromRange(beginningRange), NSStringFromRange(endRange));
+	if (beginningRange.location == NSNotFound || endRange.location == NSNotFound) {
+		return NSMakeRange(NSNotFound, 0);
+	}
+	
+	return NSMakeRange(beginningRange.location, endRange.location - beginningRange.location);
 }
 
 - (NSRange)attributeRangeBeginningWithString:(NSString *)string endingWithCharacterSet:(NSCharacterSet *)endSet queryRange:(NSRange)inRange {
