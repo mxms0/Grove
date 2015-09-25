@@ -10,5 +10,8 @@
 #import "GSActor.h"
 
 @interface GSOrganization : GSActor
+@property (nonatomic, strong) NSString *login;
+@property (nonatomic, strong) NSNumber *orgId;
+@property (nonatomic, strong) NSString *orgDescription;
 
 @end
