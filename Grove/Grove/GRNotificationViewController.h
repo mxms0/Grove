@@ -9,8 +9,9 @@
 #import "GRViewController.h"
 #import "GRSyntaxHighlightedTextView.h"
 
-@interface GRNotificationViewController : GRViewController {
-	GRSyntaxHighlightedTextView *textView;
+@interface GRNotificationViewController : GRViewController <UITableViewDataSource, UITableViewDelegate> {
+	UITableView *tableView;
+	NSArray *notifications;
 }
 
 @end

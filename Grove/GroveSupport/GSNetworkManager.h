@@ -16,4 +16,9 @@
 - (void)requestUserInformationForToken:(NSString *__nonnull)token completionHandler:(void (^__nonnull)(NSDictionary *__nullable response, NSError *__nullable error))handler;
 - (void)requestUserInformationForUsername:(NSString *__nonnull)username token:(NSString *__nullable)token completionHandler:(void (^__nonnull)(NSDictionary *__nullable response, NSError *__nullable error))handler;
 - (void)downloadResourceFromURL:(NSURL *__nonnull)url token:(NSString *__nullable)token completionHandler:(void (^__nonnull)(NSURL *__nullable filePath, NSError *__nullable error))handler;
+
+- (void)requestUserNotificationsWithToken:(NSString *__nonnull)token completionHandler:(void (^__nonnull)(NSArray *__nullable notifications, NSError *__nullable error))handler;
+
+// not sure if i like exposing endpoints outside of the network manager. this is an idea for now.
+- (void)requestAPIEndpoint:(GSAPIEndpoint)endp token:(NSString *__nullable)token completionHandler:(void (^__nonnull)(GSSerializable *__nullable s, NSError *__nullable error))handler;
 @end

@@ -17,8 +17,6 @@
 		GSObjectAssign(dictionary, @"actor", _actor, GSActor);
 		GSObjectAssign(dictionary, @"repo", _repository, GSRepository);
 		GSObjectAssign(dictionary, @"payload", _payload, GSEventPayload);
-        
-        //NSLog(@"Dictionary: %@", dictionary);
 		
 		_createdDate = [self dateFromISO8601String:dictionary[@"created_at"]];
 		_publicallyAvailable = [dictionary[@"public"] boolValue];

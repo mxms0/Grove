@@ -31,16 +31,21 @@
 }
 
 - (NSAttributedString *)_generatedEventString {
-	NSAttributedString *message = [[NSAttributedString alloc] initWithString:@""];
 	
 	UIColor *blue = [UIColor colorWithRed:0.2627 green:0.4784 blue:0.7451 alpha:1.0];
 	UIFont *boldFont = [UIFont boldSystemFontOfSize:18];
 	UIFont *regularFont = [UIFont systemFontOfSize:18];
-	NSLog(@"fdsds %@:%@", self.event.actor.username, self.event);
 	
-	NSAttributedString *actorString = [[NSAttributedString alloc] initWithString:self.event.actor.username attributes:@{NSForegroundColorAttributeName:blue, NSFontAttributeName:boldFont}];
+	NSMutableArray *components = [[NSMutableArray alloc] init];
 	
 	switch (self.event.type) {
+		case GSEventTypeFork: {
+			NSAttributedString *user = [[NSAttributedString alloc] initWithString:self.event.actor.username attributes:@{NSFontAttributeName : regularFont}];
+			NSAttributedString *message = [[NSAttributedString alloc] initWithString:@" forked " attributes:@{NSFontAttributeName : regularFont}];
+			//			NSAttributedString *cp1 = [[[NSAttributedString alloc] initWithString:<#(NSString *)#> attributes:<#(NSDictionary *)#>]]
+			[components addObjectsFromArray:@[user, message]];
+			break;
+		}
 		case GSEventTypeCommitComment:
 		case GSEventTypeCreate:
 		case GSEventTypeDelete:
@@ -48,7 +53,6 @@
 		case GSEventTypeDeploymentStatus:
 		case GSEventTypeDownload:
 		case GSEventTypeFollow:
-		case GSEventTypeFork:
 		case GSEventTypeForkApply:
 		case GSEventTypeGistEvent:
 		case GSEventTypeGollumEvent:
@@ -65,17 +69,25 @@
 		case GSEventTypeRepository:
 		case GSEventTypeStatus:
 		case GSEventTypeTeamAdd:
-		case GSEventTypeWatch:
+		case GSEventTypeWatch: {
+			// watch = star, cool
+			// https://developer.github.com/changes/2012-9-5-watcher-api/
+			NSAttributedString *user = [[NSAttributedString alloc] initWithString:self.event.actor.username attributes:@{NSFontAttributeName : regularFont}];
+			NSAttributedString *message = [[NSAttributedString alloc] initWithString:@" starred " attributes:@{NSFontAttributeName : regularFont}];
+			
+			[components addObjectsFromArray:@[user, message]];
+		}
 		case GSEventTypeUnknown:
-			break;	
+			break;
 	}
-	return message;
+	
+	NSAttributedString *string = [NSAttributedString attributedStringWithAttributedStrings:components];
+	
+	return string;
 }
 
 - (UIImage *)imageIcon {
 	NSString *imageName = nil;
-
-
 	
 	switch (self.event.type) {
 		case GSEventTypeCreate:
@@ -96,7 +108,7 @@
 		default:
 			break;
 	}
-	
+	if (!imageName) return nil;
 	return [UIImage imageNamed:imageName];
 }
 

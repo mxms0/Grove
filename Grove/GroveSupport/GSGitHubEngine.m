@@ -84,7 +84,6 @@
 				if (![eventPacket isKindOfClass:[NSDictionary class]]) {
 					GSAssert();
 				}
-			
 				GSEvent *event = [[GSEvent alloc] initWithDictionary:eventPacket];
 				[serializedEvents addObject:event];
 			}
@@ -122,6 +121,28 @@
 		}
 		GSUser *user = [[GSUser alloc] initWithDictionary:dictionary];
 		handler(user, nil);
+	}];
+}
+
+- (void)notificationsForUser:(GSUser *__nonnull)user completionHandler:(void (^__nonnull)(NSArray *__nullable notifications, NSError *__nullable error))handler {
+	if (!user.token) {
+		GSAssert();
+	}
+	[[GSNetworkManager sharedInstance] requestUserNotificationsWithToken:user.token completionHandler:^(NSArray *__nullable notifs, NSError *__nullable error) {
+		
+		if (error) {
+			handler(nil, error);
+			return;
+		}
+		
+		NSMutableArray *ret = [[NSMutableArray alloc] init];
+		
+		for (NSDictionary *dict in notifs) {
+			GSNotification *notification = [[GSNotification alloc] initWithDictionary:dict];
+			[ret addObject:notification];
+		}
+		
+		handler(ret, nil);
 	}];
 }
 
