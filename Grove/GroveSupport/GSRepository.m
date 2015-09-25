@@ -13,25 +13,16 @@
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary {
 	if ((self = [super initWithDictionary:dictionary])) {
-		GSURLAssign(dictionary, @"url", _browserURL);
 		
-		NSString *temporaryName = nil;
-		GSAssign(dictionary, @"name", temporaryName);
-		NSRange range = [temporaryName rangeOfString:@"/"];
-		if (range.location != NSNotFound && range.location != 0) {
-			NSString *user = [temporaryName substringToIndex:range.location];
-			NSString *repoName = [temporaryName substringFromIndex:range.location + 1];
-
-			_name = repoName;
-			_owner = user;
-		}
-		else {
-			_name = temporaryName;
-			_owner = temporaryName;
-			GSAssert();
-		}
+		GSObjectAssign(dictionary, @"owner", _owner, GSUser);
+		GSURLAssign(dictionary, @"url", _browserURL);
+		GSAssign(dictionary, @"name", _name);
 	}
 	return self;
+}
+
+- (NSString *)pathString {
+	return [NSString stringWithFormat:@"%@/%@", _owner.username, _name];
 }
 
 @end

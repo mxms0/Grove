@@ -10,7 +10,9 @@
 #import "GSEvent.h"
 #import "NSAttributedString+GRExtensions.h"
 
-@implementation GREventCellModel
+@implementation GREventCellModel {
+	NSAttributedString *attributedMessage;
+}
 
 - (nonnull instancetype)initWithEvent:(GSEvent *__nonnull)event {
 	if ((self = [super init])) {
@@ -20,58 +22,68 @@
 }
 
 - (NSAttributedString *)eventString {
-	return nil;
-	NSAttributedString *message = [[NSAttributedString alloc] initWithString:@""];
+	@synchronized(self) {
+		if (!attributedMessage) {
+			attributedMessage = [self _generatedEventString];
+		}
+	}
+	return attributedMessage;
+}
+
+- (NSAttributedString *)_generatedEventString {
 	
 	UIColor *blue = [UIColor colorWithRed:0.2627 green:0.4784 blue:0.7451 alpha:1.0];
 	UIFont *boldFont = [UIFont boldSystemFontOfSize:18];
 	UIFont *regularFont = [UIFont systemFontOfSize:18];
-	NSLog(@"fdsds %@:%@", self.event.actor.username, self.event);
 	
-	NSAttributedString *actorString = [[NSAttributedString alloc] initWithString:self.event.actor.username attributes:@{NSForegroundColorAttributeName:blue, NSFontAttributeName:boldFont}];
-	NSAttributedString *branch = nil;
-	NSAttributedString *a = nil;
-	NSAttributedString *b = nil;
-	NSAttributedString *c = nil;
+	NSMutableArray *components = [[NSMutableArray alloc] init];
 	
 	switch (self.event.type) {
-		case GSEventTypeCreate:
-			if (!self.event.payload.branch) {
-				// created new repo
-				branch = [[NSAttributedString alloc] initWithString:self.event.repository.name attributes:@{NSForegroundColorAttributeName: blue, NSFontAttributeName: boldFont}];
-				a = [[NSAttributedString alloc] initWithString:@" created repository " attributes:@{NSFontAttributeName:regularFont}];
-				message = [NSAttributedString attributedStringWithAttributedStrings:@[actorString, a, branch]];
-			}
-			else {
-				branch = [[NSAttributedString alloc] initWithString:self.event.payload.branch attributes:@{NSForegroundColorAttributeName:blue, NSFontAttributeName:boldFont}];
-				a = [[NSAttributedString alloc] initWithString:@" created branch " attributes:@{NSFontAttributeName:regularFont}];
-				message = [NSAttributedString attributedStringWithAttributedStrings:@[actorString, a, branch]];
-			}
+		case GSEventTypeFork: {
+			NSAttributedString *user = [[NSAttributedString alloc] initWithString:self.event.actor.username attributes:@{NSFontAttributeName : regularFont}];
+			NSAttributedString *message = [[NSAttributedString alloc] initWithString:@" forked " attributes:@{NSFontAttributeName : regularFont}];
+			//			NSAttributedString *cp1 = [[[NSAttributedString alloc] initWithString:<#(NSString *)#> attributes:<#(NSDictionary *)#>]]
+			[components addObjectsFromArray:@[user, message]];
 			break;
-		case GSEventTypeFork:
-			break;
-		case GSEventTypeWatch:
-			break;
+		}
 		case GSEventTypeCommitComment:
-			branch = [[NSAttributedString alloc] initWithString:self.event.repository.name attributes:@{NSForegroundColorAttributeName:blue, NSFontAttributeName:boldFont}];
-			c = [[NSAttributedString alloc] initWithString:self.event.repository.name attributes:@{NSForegroundColorAttributeName:blue, NSFontAttributeName:boldFont}];
-			a = [[NSAttributedString alloc] initWithString:@" commented on commit " attributes:@{NSFontAttributeName:regularFont}];
-			b = [[NSAttributedString alloc] initWithString:@" in " attributes:@{NSFontAttributeName:regularFont}];
-			message = [NSAttributedString attributedStringWithAttributedStrings:@[actorString, a, branch]];
-			break;
+		case GSEventTypeCreate:
+		case GSEventTypeDelete:
+		case GSEventTypeDeployment:
+		case GSEventTypeDeploymentStatus:
+		case GSEventTypeDownload:
+		case GSEventTypeFollow:
+		case GSEventTypeForkApply:
+		case GSEventTypeGistEvent:
+		case GSEventTypeGollumEvent:
+		case GSEventTypeIssueComment:
+		case GSEventTypeIssues:
+		case GSEventTypeMember:
+		case GSEventTypeMembership:
+		case GSEventTypePageBuild:
+		case GSEventTypePublic:
+		case GSEventTypePullRequest:
+		case GSEventTypePullRequestReviewComment:
 		case GSEventTypePush:
-			branch = [[NSAttributedString alloc] initWithString:self.event.payload.branch attributes:@{NSForegroundColorAttributeName:blue, NSFontAttributeName:boldFont}];
-			a = [[NSAttributedString alloc] initWithString:@" pushed to " attributes:@{NSFontAttributeName:regularFont}];
-			message = [NSAttributedString attributedStringWithAttributedStrings:@[actorString, a, branch]];
-			break;
-		case GSEventTypeUnknown:
-			break;
+		case GSEventTypeRelease:
+		case GSEventTypeRepository:
+		case GSEventTypeStatus:
+		case GSEventTypeTeamAdd:
+		case GSEventTypeWatch: {
+			// watch = star, cool
+			// https://developer.github.com/changes/2012-9-5-watcher-api/
+			NSAttributedString *user = [[NSAttributedString alloc] initWithString:self.event.actor.username attributes:@{NSFontAttributeName : regularFont}];
+			NSAttributedString *message = [[NSAttributedString alloc] initWithString:@" starred " attributes:@{NSFontAttributeName : regularFont}];
 			
-		default:
+			[components addObjectsFromArray:@[user, message]];
+		}
+		case GSEventTypeUnknown:
 			break;
 	}
 	
-	return message;
+	NSAttributedString *string = [NSAttributedString attributedStringWithAttributedStrings:components];
+	
+	return string;
 }
 
 - (UIImage *)imageIcon {
@@ -96,7 +108,7 @@
 		default:
 			break;
 	}
-	
+	if (!imageName) return nil;
 	return [UIImage imageNamed:imageName];
 }
 

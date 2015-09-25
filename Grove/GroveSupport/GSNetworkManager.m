@@ -189,4 +189,32 @@
 	[task resume];
 }
 
+- (void)requestUserNotificationsWithToken:(NSString *__nonnull)token completionHandler:(void (^__nonnull)(NSArray *__nullable notifications, NSError *__nullable error))handler {
+	GSURLRequest *request = [[GSURLRequest alloc] initWithURL:GSAPIURLForEndpoint(GSAPIEndpointNotifications)];
+	
+	if (token) {
+		[request addAuthToken:token];
+	}
+	
+	[self sendDataRequest:request completionHandler:^(GSSerializable *response, NSError *error) {
+		if ([response isKindOfClass:[NSArray class]]) {
+			handler((NSArray *)response, error);
+		}
+		else {
+			GSAssert();
+		}
+	}];
+}
+
+- (void)requestAPIEndpoint:(GSAPIEndpoint)endp token:(NSString *__nullable)token completionHandler:(void (^__nonnull)(GSSerializable *__nullable s, NSError *__nullable error))handler {
+	GSURLRequest *request = [[GSURLRequest alloc] initWithURL:GSAPIURLForEndpoint(endp)];
+	if (token) {
+		[request addAuthToken:token];;
+	}
+	
+	[self sendDataRequest:request completionHandler:^(GSSerializable *response, NSError *error) {
+		handler(response, error);
+	}];
+}
+
 @end
