@@ -26,7 +26,7 @@
     GSEncode(coder, @"description", _orgDescription);
 }
 
-- (instancetype)initWithCor:(NSCoder *)coder {
+- (instancetype)initWithCoder:(NSCoder *)coder {
     if ((self = [super initWithCoder:coder])) {
         GSDecodeAssign(coder, @"login", _login);
         GSDecodeAssign(coder, @"id", _orgId);
