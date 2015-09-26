@@ -25,7 +25,7 @@
 
 - (instancetype)init {
 	if ((self = [super init])) {
-		[self setBackgroundColor:[UIColor greenColor]];
+		[self setBackgroundColor:GSRandomUIColor()];
 		profileImageView = [[UIImageView alloc] init];
 		[profileImageView setBackgroundColor:[UIColor greenColor]];
 		[self addSubview:profileImageView];

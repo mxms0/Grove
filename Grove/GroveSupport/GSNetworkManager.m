@@ -117,7 +117,13 @@
 				handler(responsePacket, nil);
 				break;
 			}
+			case 401: {
+				NSError *error = [NSError errorWithDomain:GSDomain code:401 userInfo:@{NSLocalizedDescriptionKey: @"Not Authorized"}];
+				handler(nil, error);
+				break;
+			}
 			default:
+				NSLog(@"HTTP Code %ld", [httpResponse statusCode]);
                 GSAssert();
 				handler(nil, error);
 				break;
