@@ -1,9 +1,9 @@
 //
 //  GRNotificationTableViewCell.m
-//  
+//  Grove
 //
 //  Created by Max Shavrick on 9/26/15.
-//
+//  Copyright (c) 2015 Milo. All rights reserved.
 //
 
 #import "GRNotificationTableViewCell.h"
@@ -11,13 +11,21 @@
 @implementation GRNotificationTableViewCell
 
 static CGFloat GRNotificationTableViewCellPadding = 20.0f;
+static CGFloat GRNotificationTableViewCellCornerRadius = 4.0f;
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
 	if ((self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])) {
+		
+		boundingLayer = [CAShapeLayer layer];
+		boundingLayer.shouldRasterize = YES;
+		
 		[self setBackgroundColor:[UIColor clearColor]];
 		[[self contentView] setBackgroundColor:[UIColor whiteColor]];
 		self.separatorInset = UIEdgeInsetsMake(0, 20.0f, 0, 20.0f);
 		self.selectionStyle = UITableViewCellSelectionStyleNone;
+		
+		[[[self contentView] layer] setBorderColor:GRColorFromRGB(0xd8d8d8).CGColor];
+		[[[self contentView] layer] setBorderWidth:0.8f];
 	}
 	return self;
 }
@@ -30,7 +38,6 @@ static CGFloat GRNotificationTableViewCellPadding = 20.0f;
 - (void)setPosition:(GRNotificationTableViewCellPosition)position {
 	
 	if (position == GRNotificationTableViewCellMiddle) {
-		NSLog(@"middle");
 		self.contentView.layer.mask = nil;
 		return;
 	}
@@ -38,21 +45,18 @@ static CGFloat GRNotificationTableViewCellPadding = 20.0f;
 	UIRectCorner corners = 0;
 	
 	if (position & GRNotificationTableViewCellTop) {
-		NSLog(@"top");
 		corners |= UIRectCornerTopLeft;
 		corners |= UIRectCornerTopRight;
 	}
 	
 	if (position & GRNotificationTableViewCellBottom) {
-		NSLog(@"bottom");
 		corners |= UIRectCornerBottomLeft;
 		corners |= UIRectCornerBottomRight;
 	}
 	
-	CGSize cornerSize = CGSizeMake(10.0, 10.0);
+	CGSize cornerSize = CGSizeMake(GRNotificationTableViewCellCornerRadius, GRNotificationTableViewCellCornerRadius);
 	UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:adjustedFrame byRoundingCorners:corners cornerRadii:cornerSize];
 	
-	boundingLayer = [CAShapeLayer layer];
 	boundingLayer.frame = adjustedFrame;
 	boundingLayer.path = maskPath.CGPath;
 	
@@ -62,6 +66,8 @@ static CGFloat GRNotificationTableViewCellPadding = 20.0f;
 - (void)layoutSubviews {
 	[super layoutSubviews];
 	[self.contentView setFrame:CGRectMake(20, self.contentView.frame.origin.y, self.contentView.frame.size.width - 40, self.contentView.frame.size.height)];
+	
+	[self.textLabel setFrame:CGRectMake(10, self.textLabel.frame.origin.y, self.contentView.frame.size.width - 20, self.textLabel.frame.size.height)];
 	
 	boundingLayer.frame = adjustedFrame;
 }

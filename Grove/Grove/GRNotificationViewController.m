@@ -10,6 +10,7 @@
 #import <GroveSupport/GroveSupport.h>
 #import "GRSessionManager.h"
 #import "GRNotificationTableViewCell.h"
+#import "GRNotificationHeaderTableViewCell.h"
 
 @implementation GRNotificationViewController
 
@@ -18,7 +19,7 @@
 		tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
 		[tableView setDelegate:self];
 		[tableView setDataSource:self];
-		[tableView setSeparatorInset:UIEdgeInsetsMake(0, 20.0f, 0, 20.0f)];
+		[tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
 		
 		GRApplicationUser *user = [[GRSessionManager sharedInstance] currentUser];
 
@@ -53,13 +54,14 @@
 	}
 	
 	notifications = repositoryNotificationMap;
-	
-	NSLog(@"fds %@", repositoryNotificationMap);
-
 }
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
+	
+	[self.view setBackgroundColor:[UIColor whiteColor]];
+	[tableView setBackgroundColor:[UIColor whiteColor]];
+	
 	[self.view addSubview:tableView];
 	[tableView setFrame:self.view.bounds];
 }
@@ -69,14 +71,37 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	return [[notifications objectForKey:[notifications allKeys][section]] count];
+	return [[notifications objectForKey:[notifications allKeys][section]] count] + 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)_tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-	GRNotificationTableViewCell *cell = (GRNotificationTableViewCell *)[_tableView dequeueReusableCellWithIdentifier:@"notifCell"];
+	static NSString *reuseIdentifier = @"notificationCell";
+	static NSString *headerReuseIdentifier = @"notificationHeaderCell";
+	
+	NSString *activeIdentifier = reuseIdentifier;
+	
+	if (indexPath.row == 0) {
+		activeIdentifier = headerReuseIdentifier;
+	}
+	
+	GRNotificationTableViewCell *cell = (GRNotificationTableViewCell *)[_tableView dequeueReusableCellWithIdentifier:activeIdentifier];
 
 	if (!cell) {
-		cell = [[GRNotificationTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"notifCell"];
+		Class cellClass = [GRNotificationTableViewCell class];
+		
+		if (indexPath.row == 0) {
+			cellClass = [GRNotificationHeaderTableViewCell class];
+		}
+		cell = [[cellClass alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:activeIdentifier];
+	}
+	
+	if (indexPath.row == 0) {
+		cell.textLabel.text = [[notifications allKeys] objectAtIndex:indexPath.section];
+	}
+	else {
+		GSNotification *notification = [[notifications objectForKey:[[notifications allKeys] objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row - 1];
+		NSLog(@"notification %@", notification);
+		cell.textLabel.text = [notification title];
 	}
 	
 	[cell setNeedsLayout];
@@ -86,13 +111,12 @@
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(GRNotificationTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
 	GRNotificationTableViewCellPosition position = GRNotificationTableViewCellMiddle;
-	NSLog(@"hi");
 	
 	if (indexPath.row == 0) {
 		position |= GRNotificationTableViewCellTop;
 	}
 	
-	if (indexPath.row + 1 == [[notifications objectForKey:[notifications allKeys][indexPath.section]] count]) {
+	if (indexPath.row == [[notifications objectForKey:[notifications allKeys][indexPath.section]] count]) {
 		position |= GRNotificationTableViewCellBottom;
 	}
 	
