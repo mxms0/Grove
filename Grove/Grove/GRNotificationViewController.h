@@ -11,7 +11,7 @@
 
 @interface GRNotificationViewController : GRViewController <UITableViewDataSource, UITableViewDelegate> {
 	UITableView *tableView;
-	NSArray *notifications;
+	NSDictionary *notifications;
 }
 
 @end

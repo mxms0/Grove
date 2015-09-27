@@ -14,7 +14,6 @@
 @property (nonatomic, readonly) NSString *name;
 @property (nonatomic, assign, getter=isPrivate) BOOL private;
 @property (nonatomic, readonly) NSURL *browserURL;
-@property (nonatomic, readonly) NSString *stringDescription;
 @property (nonatomic, readonly) BOOL fork;
 @property (nonatomic, readonly, getter=pathString) NSString *pathString;
 

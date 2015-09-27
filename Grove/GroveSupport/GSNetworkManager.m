@@ -117,7 +117,13 @@
 				handler(responsePacket, nil);
 				break;
 			}
+			case 401: {
+				NSError *error = [NSError errorWithDomain:GSDomain code:401 userInfo:@{NSLocalizedDescriptionKey: @"Not Authorized"}];
+				handler(nil, error);
+				break;
+			}
 			default:
+				NSLog(@"HTTP Code %ld", (long)[httpResponse statusCode]);
                 GSAssert();
 				handler(nil, error);
 				break;
@@ -133,12 +139,16 @@
 	GSURLRequest *req = [[GSURLRequest alloc] initWithURL:properURL];
     [req addAuthToken:token];
 	[self sendDataRequest:req completionHandler:^(id dictionary, NSError *error) {
+		if (error) {
+			handler(nil, error);
+			return;
+		}
+		
         if ([dictionary isKindOfClass:[NSArray class]]) {
-            handler(dictionary, error);
+            handler(dictionary, nil);
         }
         else {
-            // pass correct error message on
-#warning Pass correct error message, or consider ignoring this requirement and having the githubengine actually know about type correspondance
+			GSAssert();
             handler(nil, nil);
         }
 

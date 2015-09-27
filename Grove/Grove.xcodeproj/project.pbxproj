@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		500001591BB73411001564E7 /* GRNotificationHeaderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 500001581BB73411001564E7 /* GRNotificationHeaderTableViewCell.m */; };
 		50019B321B9A21DC004EDC8A /* GSURLRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 50019B301B9A21DC004EDC8A /* GSURLRequest.h */; };
 		50019B331B9A21DC004EDC8A /* GSURLRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 50019B311B9A21DC004EDC8A /* GSURLRequest.m */; };
+		5009A34C1BB6751600DE19DF /* GRNotificationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5009A34B1BB6751600DE19DF /* GRNotificationTableViewCell.m */; };
 		50133F021B8413F7004B5BB8 /* GSEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 50133F001B8413F7004B5BB8 /* GSEvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		50133F031B8413F7004B5BB8 /* GSEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 50133F011B8413F7004B5BB8 /* GSEvent.m */; };
 		50133F061B841470004B5BB8 /* GSActor.h in Headers */ = {isa = PBXBuildFile; fileRef = 50133F041B841470004B5BB8 /* GSActor.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -145,8 +147,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		500001571BB73411001564E7 /* GRNotificationHeaderTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRNotificationHeaderTableViewCell.h; sourceTree = "<group>"; };
+		500001581BB73411001564E7 /* GRNotificationHeaderTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRNotificationHeaderTableViewCell.m; sourceTree = "<group>"; };
 		50019B301B9A21DC004EDC8A /* GSURLRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSURLRequest.h; sourceTree = "<group>"; };
 		50019B311B9A21DC004EDC8A /* GSURLRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSURLRequest.m; sourceTree = "<group>"; };
+		5009A34A1BB6751600DE19DF /* GRNotificationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRNotificationTableViewCell.h; sourceTree = "<group>"; };
+		5009A34B1BB6751600DE19DF /* GRNotificationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRNotificationTableViewCell.m; sourceTree = "<group>"; };
 		50133F001B8413F7004B5BB8 /* GSEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSEvent.h; sourceTree = "<group>"; };
 		50133F011B8413F7004B5BB8 /* GSEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSEvent.m; sourceTree = "<group>"; };
 		50133F041B841470004B5BB8 /* GSActor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSActor.h; sourceTree = "<group>"; };
@@ -527,6 +533,10 @@
 		84F524EC1B8325E50077A06C /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				500001571BB73411001564E7 /* GRNotificationHeaderTableViewCell.h */,
+				500001581BB73411001564E7 /* GRNotificationHeaderTableViewCell.m */,
+				5009A34A1BB6751600DE19DF /* GRNotificationTableViewCell.h */,
+				5009A34B1BB6751600DE19DF /* GRNotificationTableViewCell.m */,
 				503C595C1BAD17EE003CB50E /* GRSyntaxHighlightedTextView.h */,
 				503C595D1BAD17EE003CB50E /* GRSyntaxHighlightedTextView.m */,
 				50F0819F1B82EF0B00366161 /* GRNavigationBar.h */,
@@ -778,6 +788,7 @@
 				50504D9A1BA263D800B87C5F /* GREventCellModel.m in Sources */,
 				849FF2121B884DC20077DE06 /* UITabBar+GRExtension.m in Sources */,
 				84F524F51B8326E40077A06C /* GRProfileViewController.m in Sources */,
+				500001591BB73411001564E7 /* GRNotificationHeaderTableViewCell.m in Sources */,
 				849872FE1B85A42100D1C6FD /* NSAttributedString+GRExtensions.m in Sources */,
 				84F524FA1B832A7E0077A06C /* GRStreamEventCell.m in Sources */,
 				84A8D0FD1B8D262900B6B4FB /* GREventIssueViewController.m in Sources */,
@@ -785,6 +796,7 @@
 				50F081871B82ED6500366161 /* main.m in Sources */,
 				501558B51B8553D70002254D /* GRApplicationUser.m in Sources */,
 				50ED2ADD1B8B135200DFF146 /* GRProfileHeaderView.m in Sources */,
+				5009A34C1BB6751600DE19DF /* GRNotificationTableViewCell.m in Sources */,
 				84F524EF1B83269E0077A06C /* GRStreamViewController.m in Sources */,
 				507931EC1B8EE28C0080C894 /* GRProfileStatisticButton.m in Sources */,
 				5097B5D11B8C0BC600A72721 /* GRViewModel.m in Sources */,
@@ -1025,6 +1037,7 @@
 				INFOPLIST_FILE = Grove/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_CFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rickandmorty.www.rickand.com.Grove;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -1049,6 +1062,7 @@
 				INFOPLIST_FILE = Grove/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_CFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rickandmorty.www.rickand.com.Grove;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

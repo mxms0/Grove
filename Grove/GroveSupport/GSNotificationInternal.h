@@ -13,6 +13,7 @@
 
 @interface GSNotification ()
 @property (nonatomic, strong) NSURL *subscriptionAPIURL;
+@property (nonatomic, strong) NSURL *latestCommentAPIURL;
 @end
 
 #endif
