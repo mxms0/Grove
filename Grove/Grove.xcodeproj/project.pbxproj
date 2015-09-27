@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		500001591BB73411001564E7 /* GRNotificationHeaderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 500001581BB73411001564E7 /* GRNotificationHeaderTableViewCell.m */; };
+		5000015D1BB778A0001564E7 /* GRRepositoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5000015C1BB778A0001564E7 /* GRRepositoryViewController.m */; };
 		50019B321B9A21DC004EDC8A /* GSURLRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 50019B301B9A21DC004EDC8A /* GSURLRequest.h */; };
 		50019B331B9A21DC004EDC8A /* GSURLRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 50019B311B9A21DC004EDC8A /* GSURLRequest.m */; };
 		5009A34C1BB6751600DE19DF /* GRNotificationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5009A34B1BB6751600DE19DF /* GRNotificationTableViewCell.m */; };
@@ -149,6 +150,8 @@
 /* Begin PBXFileReference section */
 		500001571BB73411001564E7 /* GRNotificationHeaderTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRNotificationHeaderTableViewCell.h; sourceTree = "<group>"; };
 		500001581BB73411001564E7 /* GRNotificationHeaderTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRNotificationHeaderTableViewCell.m; sourceTree = "<group>"; };
+		5000015B1BB778A0001564E7 /* GRRepositoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRRepositoryViewController.h; sourceTree = "<group>"; };
+		5000015C1BB778A0001564E7 /* GRRepositoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRRepositoryViewController.m; sourceTree = "<group>"; };
 		50019B301B9A21DC004EDC8A /* GSURLRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSURLRequest.h; sourceTree = "<group>"; };
 		50019B311B9A21DC004EDC8A /* GSURLRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSURLRequest.m; sourceTree = "<group>"; };
 		5009A34A1BB6751600DE19DF /* GRNotificationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRNotificationTableViewCell.h; sourceTree = "<group>"; };
@@ -510,6 +513,8 @@
 		84F524EB1B8325D80077A06C /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				5000015B1BB778A0001564E7 /* GRRepositoryViewController.h */,
+				5000015C1BB778A0001564E7 /* GRRepositoryViewController.m */,
 				50F0818B1B82ED6500366161 /* GRViewController.h */,
 				50F0818C1B82ED6500366161 /* GRViewController.m */,
 				84F524ED1B83269E0077A06C /* GRStreamViewController.h */,
@@ -793,6 +798,7 @@
 				84F524FA1B832A7E0077A06C /* GRStreamEventCell.m in Sources */,
 				84A8D0FD1B8D262900B6B4FB /* GREventIssueViewController.m in Sources */,
 				507931E91B8EC4730080C894 /* UIImage+GRExtensions.m in Sources */,
+				5000015D1BB778A0001564E7 /* GRRepositoryViewController.m in Sources */,
 				50F081871B82ED6500366161 /* main.m in Sources */,
 				501558B51B8553D70002254D /* GRApplicationUser.m in Sources */,
 				50ED2ADD1B8B135200DFF146 /* GRProfileHeaderView.m in Sources */,

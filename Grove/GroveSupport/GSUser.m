@@ -11,8 +11,32 @@
 
 @implementation GSUser
 
+static NSMutableDictionary *cachedUsers = nil;
+
++ (GSUser *)cachedUserWithUsername:(NSString *)username {
+	static dispatch_once_t token;
+	
+	dispatch_once(&token, ^ {
+		cachedUsers = [[NSMutableDictionary alloc] init];
+	});
+	
+	GSUser *user = nil;
+	@synchronized(cachedUsers) {
+		user = cachedUsers[username];
+	}
+	
+	return user;
+}
+
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary {
 	if ((self = [super initWithDictionary:dictionary])) {
+		
+		GSUser *cachedSelf = [GSUser cachedUserWithUsername:self.username];
+		if (cachedSelf) {
+			NSLog(@"GSUser cached. Reusing.");
+			return cachedSelf;
+		}
+		
 		GSAssign(dictionary, @"name", _fullName);
 		GSAssign(dictionary, @"company", _company);
 		GSAssign(dictionary, @"blog", _blog);
@@ -40,6 +64,11 @@
 		GSURLAssign(dictionary, @"repos_url", _repositoriesAPIURL);
 		GSURLAssign(dictionary, @"events_url", _eventsAPIURL);
 		GSURLAssign(dictionary, @"received_events_url", _receivedEventsAPIURL);
+		
+		@synchronized(cachedUsers) {
+			cachedUsers[self.username] = self;
+		}
+		
 	}
 	return self;
 }
