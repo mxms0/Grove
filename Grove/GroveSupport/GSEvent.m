@@ -55,7 +55,7 @@
 							   @"RepositoryEvent"			:@(GSEventTypeRepository),
 							   @"StatusEvent"				:@(GSEventTypeStatus),
 							   @"TeamAddEvent"				:@(GSEventTypeTeamAdd),
-							   @"WatchEvent"				:@(GSEventTypeWatch)
+							   @"WatchEvent"				:@(GSEventTypeStar)
 							};
 
 	return mapping[string] ? [mapping[string] intValue] : GSEventTypeUnknown;

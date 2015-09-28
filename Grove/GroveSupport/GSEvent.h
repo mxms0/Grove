@@ -38,7 +38,7 @@ typedef NS_ENUM(NSInteger, GSEventType) {
 	GSEventTypeRepository,
 	GSEventTypeStatus,
 	GSEventTypeTeamAdd,
-	GSEventTypeWatch,
+	GSEventTypeStar,
 	GSEventTypeUnknown
 };
 

@@ -9,7 +9,7 @@
 #import "GSGitHubEngine.h"
 #import "GSNetworkManager.h"
 #import "GSEvent.h"
-#import "GSUserInternal.h"
+#import "GroveSupportInternal.h"
 
 @implementation GSGitHubEngine
 
@@ -128,6 +128,7 @@
 	if (!user.token) {
 		GSAssert();
 	}
+	NSLog(@"%@", [NSThread callStackSymbols]);
 	[[GSNetworkManager sharedInstance] requestUserNotificationsWithToken:user.token completionHandler:^(NSArray *__nullable notifs, NSError *__nullable error) {
 		
 		if (error) {

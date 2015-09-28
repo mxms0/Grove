@@ -9,7 +9,5 @@
 #import <Foundation/Foundation.h>
 
 @interface GSObject : NSObject <NSCoding>
-@property (nonatomic, readonly, nullable) NSNumber *identifier;
-- (nonnull instancetype)initWithDictionary:(NSDictionary *__nonnull)dictionary;
-- (nullable NSDate *)dateFromISO8601String:(NSString *__nonnull)string;
+
 @end

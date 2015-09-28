@@ -30,7 +30,6 @@ static NSMutableDictionary *cachedUsers = nil;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary {
 	if ((self = [super initWithDictionary:dictionary])) {
-		
 		GSUser *cachedSelf = [GSUser cachedUserWithUsername:self.username];
 		if (cachedSelf) {
 			NSLog(@"GSUser cached. Reusing.");

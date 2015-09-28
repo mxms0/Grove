@@ -1,18 +1,25 @@
 //
-//  GREventViewController.m
+//  GREventViewControllerProxy.m
 //  Grove
 //
 //  Created by Rocco Del Priore on 8/25/15.
 //  Copyright (c) 2015 Milo. All rights reserved.
 //
 
-#import "GREventViewController.h"
+#import "GREventViewControllerProxy.h"
 
 #import "GREventIssueViewController.h"
+#import "GRRepositoryViewController.h"
 
-@implementation GREventViewController
+@implementation GREventViewControllerProxy
 
 - (instancetype)initWithEvent:(GSEvent *)event {
+	// this whole thing is bad practice.
+	// what is happening here Rocky?
+	// Why do we have a view controller that actually isn't anything?
+	// And why subclass it? That'll put us in a loop...
+	// I corrected that issue, this thing should be removed however.
+	// –Max
     switch (event.type) {
         case GSEventTypeCommitComment: {
             break;
@@ -55,11 +62,11 @@
             break;
         }
         case GSEventTypeIssueComment: {
-            self = [[GREventIssueViewController alloc] initWithEvent:event];
+            self = (GREventViewControllerProxy *)[[GREventIssueViewController alloc] initWithEvent:event];
             break;
         }
         case GSEventTypeIssues: {
-            self = [[GREventIssueViewController alloc] initWithEvent:event];
+            self = (GREventViewControllerProxy *)[[GREventIssueViewController alloc] initWithEvent:event];
             break;
         }
         case GSEventTypeMember: {
@@ -106,8 +113,9 @@
             
             break;
         }
-        case GSEventTypeWatch: {
-            
+        case GSEventTypeStar: {
+			self = (GREventViewControllerProxy *)[[GRRepositoryViewController alloc] init];
+			// contributing to murder
             break;
         }
         case GSEventTypeUnknown: {
@@ -116,6 +124,7 @@
         }
         default: {
             self = [super init];
+			NSLog(@"Allocating bad vc. !");
             break;
         }
     }
