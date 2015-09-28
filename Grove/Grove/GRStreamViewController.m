@@ -9,7 +9,7 @@
 #import <Masonry/Masonry.h>
 
 #import "GRStreamViewController.h"
-#import "GREventViewController.h"
+#import "GREventViewControllerProxy.h"
 #import "GREventCellModel.h"
 #import "GRStreamEventCell.h"
 #import "GRStreamModel.h"
@@ -75,7 +75,7 @@ static NSString *reuseIdentifier = @"reuseIdentifier";
 }
 
 - (void)tableView:(UITableView *)aTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    GREventViewController *viewController = [[GREventViewController alloc] initWithEvent:[model eventCellModelForIndexPath:indexPath].event];
+    GREventViewControllerProxy *viewController = [[GREventViewControllerProxy alloc] initWithEvent:[model eventCellModelForIndexPath:indexPath].event];
     [aTableView deselectRowAtIndexPath:indexPath animated:YES];
     [self.navigationController pushViewController:viewController animated:YES];
 }

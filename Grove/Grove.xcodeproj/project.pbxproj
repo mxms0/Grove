@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		500001591BB73411001564E7 /* GRNotificationHeaderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 500001581BB73411001564E7 /* GRNotificationHeaderTableViewCell.m */; };
+		5000015D1BB778A0001564E7 /* GRRepositoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5000015C1BB778A0001564E7 /* GRRepositoryViewController.m */; };
 		50019B321B9A21DC004EDC8A /* GSURLRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 50019B301B9A21DC004EDC8A /* GSURLRequest.h */; };
 		50019B331B9A21DC004EDC8A /* GSURLRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 50019B311B9A21DC004EDC8A /* GSURLRequest.m */; };
 		5009A34C1BB6751600DE19DF /* GRNotificationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5009A34B1BB6751600DE19DF /* GRNotificationTableViewCell.m */; };
@@ -75,7 +76,7 @@
 		849872FE1B85A42100D1C6FD /* NSAttributedString+GRExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 849872FD1B85A42100D1C6FD /* NSAttributedString+GRExtensions.m */; };
 		849FF2121B884DC20077DE06 /* UITabBar+GRExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 849FF2111B884DC20077DE06 /* UITabBar+GRExtension.m */; };
 		849FF21B1B8AD3710077DE06 /* GRTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 849FF21A1B8AD3710077DE06 /* GRTabBarController.m */; };
-		84A8D0FA1B8D239600B6B4FB /* GREventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A8D0F91B8D239600B6B4FB /* GREventViewController.m */; };
+		84A8D0FA1B8D239600B6B4FB /* GREventViewControllerProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A8D0F91B8D239600B6B4FB /* GREventViewControllerProxy.m */; };
 		84A8D0FD1B8D262900B6B4FB /* GREventIssueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A8D0FC1B8D262900B6B4FB /* GREventIssueViewController.m */; };
 		84A8D1001B8D311000B6B4FB /* GRIssueCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A8D0FF1B8D311000B6B4FB /* GRIssueCommentCell.m */; };
 		84A8D10A1B8D6F0C00B6B4FB /* GSIssue.h in Headers */ = {isa = PBXBuildFile; fileRef = 84A8D1081B8D6F0C00B6B4FB /* GSIssue.h */; };
@@ -149,6 +150,8 @@
 /* Begin PBXFileReference section */
 		500001571BB73411001564E7 /* GRNotificationHeaderTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRNotificationHeaderTableViewCell.h; sourceTree = "<group>"; };
 		500001581BB73411001564E7 /* GRNotificationHeaderTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRNotificationHeaderTableViewCell.m; sourceTree = "<group>"; };
+		5000015B1BB778A0001564E7 /* GRRepositoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRRepositoryViewController.h; sourceTree = "<group>"; };
+		5000015C1BB778A0001564E7 /* GRRepositoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRRepositoryViewController.m; sourceTree = "<group>"; };
 		50019B301B9A21DC004EDC8A /* GSURLRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSURLRequest.h; sourceTree = "<group>"; };
 		50019B311B9A21DC004EDC8A /* GSURLRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSURLRequest.m; sourceTree = "<group>"; };
 		5009A34A1BB6751600DE19DF /* GRNotificationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRNotificationTableViewCell.h; sourceTree = "<group>"; };
@@ -248,8 +251,8 @@
 		849FF2111B884DC20077DE06 /* UITabBar+GRExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBar+GRExtension.m"; sourceTree = "<group>"; };
 		849FF2191B8AD3710077DE06 /* GRTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRTabBarController.h; sourceTree = "<group>"; };
 		849FF21A1B8AD3710077DE06 /* GRTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRTabBarController.m; sourceTree = "<group>"; };
-		84A8D0F81B8D239600B6B4FB /* GREventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GREventViewController.h; sourceTree = "<group>"; };
-		84A8D0F91B8D239600B6B4FB /* GREventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GREventViewController.m; sourceTree = "<group>"; };
+		84A8D0F81B8D239600B6B4FB /* GREventViewControllerProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GREventViewControllerProxy.h; sourceTree = "<group>"; };
+		84A8D0F91B8D239600B6B4FB /* GREventViewControllerProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GREventViewControllerProxy.m; sourceTree = "<group>"; };
 		84A8D0FB1B8D262900B6B4FB /* GREventIssueViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GREventIssueViewController.h; sourceTree = "<group>"; };
 		84A8D0FC1B8D262900B6B4FB /* GREventIssueViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GREventIssueViewController.m; sourceTree = "<group>"; };
 		84A8D0FE1B8D311000B6B4FB /* GRIssueCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRIssueCommentCell.h; sourceTree = "<group>"; };
@@ -510,6 +513,8 @@
 		84F524EB1B8325D80077A06C /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				5000015B1BB778A0001564E7 /* GRRepositoryViewController.h */,
+				5000015C1BB778A0001564E7 /* GRRepositoryViewController.m */,
 				50F0818B1B82ED6500366161 /* GRViewController.h */,
 				50F0818C1B82ED6500366161 /* GRViewController.m */,
 				84F524ED1B83269E0077A06C /* GRStreamViewController.h */,
@@ -522,8 +527,8 @@
 				84309A7C1B854A21008EB771 /* GRLoginViewController.m */,
 				849FF2191B8AD3710077DE06 /* GRTabBarController.h */,
 				849FF21A1B8AD3710077DE06 /* GRTabBarController.m */,
-				84A8D0F81B8D239600B6B4FB /* GREventViewController.h */,
-				84A8D0F91B8D239600B6B4FB /* GREventViewController.m */,
+				84A8D0F81B8D239600B6B4FB /* GREventViewControllerProxy.h */,
+				84A8D0F91B8D239600B6B4FB /* GREventViewControllerProxy.m */,
 				84A8D0FB1B8D262900B6B4FB /* GREventIssueViewController.h */,
 				84A8D0FC1B8D262900B6B4FB /* GREventIssueViewController.m */,
 			);
@@ -793,6 +798,7 @@
 				84F524FA1B832A7E0077A06C /* GRStreamEventCell.m in Sources */,
 				84A8D0FD1B8D262900B6B4FB /* GREventIssueViewController.m in Sources */,
 				507931E91B8EC4730080C894 /* UIImage+GRExtensions.m in Sources */,
+				5000015D1BB778A0001564E7 /* GRRepositoryViewController.m in Sources */,
 				50F081871B82ED6500366161 /* main.m in Sources */,
 				501558B51B8553D70002254D /* GRApplicationUser.m in Sources */,
 				50ED2ADD1B8B135200DFF146 /* GRProfileHeaderView.m in Sources */,
@@ -802,7 +808,7 @@
 				5097B5D11B8C0BC600A72721 /* GRViewModel.m in Sources */,
 				503C595E1BAD17EE003CB50E /* GRSyntaxHighlightedTextView.m in Sources */,
 				84309A7D1B854A21008EB771 /* GRLoginViewController.m in Sources */,
-				84A8D0FA1B8D239600B6B4FB /* GREventViewController.m in Sources */,
+				84A8D0FA1B8D239600B6B4FB /* GREventViewControllerProxy.m in Sources */,
 				84A8D1001B8D311000B6B4FB /* GRIssueCommentCell.m in Sources */,
 				5097B5CD1B8C0BBB00A72721 /* GRNotificationModel.m in Sources */,
 			);

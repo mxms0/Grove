@@ -69,13 +69,16 @@
 		case GSEventTypeRepository:
 		case GSEventTypeStatus:
 		case GSEventTypeTeamAdd:
-		case GSEventTypeWatch: {
+			
+			break;
+		case GSEventTypeStar: {
 			// watch = star, cool
 			// https://developer.github.com/changes/2012-9-5-watcher-api/
 			NSAttributedString *user = [[NSAttributedString alloc] initWithString:self.event.actor.username attributes:@{NSFontAttributeName : regularFont}];
 			NSAttributedString *message = [[NSAttributedString alloc] initWithString:@" starred " attributes:@{NSFontAttributeName : regularFont}];
 			
 			[components addObjectsFromArray:@[user, message]];
+			break;
 		}
 		case GSEventTypeUnknown:
 			break;
@@ -95,7 +98,7 @@
 			break;
 		case GSEventTypeFork:
 			break;
-		case GSEventTypeWatch:
+		case GSEventTypeStar:
 			break;
 		case GSEventTypeCommitComment:
 			break;
