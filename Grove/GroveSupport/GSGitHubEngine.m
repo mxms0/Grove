@@ -128,7 +128,7 @@
 	if (!user.token) {
 		GSAssert();
 	}
-	NSLog(@"%@", [NSThread callStackSymbols]);
+
 	[[GSNetworkManager sharedInstance] requestUserNotificationsWithToken:user.token completionHandler:^(NSArray *__nullable notifs, NSError *__nullable error) {
 		
 		if (error) {
