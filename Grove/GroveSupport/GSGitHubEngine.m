@@ -32,6 +32,9 @@
 
 - (void)authenticateUserWithUsername:(NSString *__nonnull)username password:(NSString *__nonnull)password completionHandler:(void (^__nullable)(GSUser *__nullable, NSError *__nullable))handler {
 	
+	// this API is blocking. Not sure if I'm okay with this
+	// since it has an async design
+	
 	GSUser *_user = nil;
 	
 	__block NSError *error = nil;
@@ -128,7 +131,7 @@
 	if (!user.token) {
 		GSAssert();
 	}
-	NSLog(@"%@", [NSThread callStackSymbols]);
+
 	[[GSNetworkManager sharedInstance] requestUserNotificationsWithToken:user.token completionHandler:^(NSArray *__nullable notifs, NSError *__nullable error) {
 		
 		if (error) {

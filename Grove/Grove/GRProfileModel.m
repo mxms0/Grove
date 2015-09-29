@@ -12,22 +12,33 @@
 #import <GroveSupport/GroveSupport.h>
 
 @implementation GRProfileModel {
-	GRApplicationUser *currentUser;
+	GSUser *currentUser;
 	NSArray *repositories;
 }
 
-- (instancetype)init {
+- (instancetype)initWithUser:(GSUser *)user {
 	if ((self = [super init])) {
-		currentUser = [[GRSessionManager sharedInstance] currentUser];
-		[[GSCacheManager sharedInstance] findImageAssetWithURL:[[currentUser user] avatarURL] user:currentUser.user downloadIfNecessary:YES completionHandler:^(UIImage *asset, NSError *error) {
-			[currentUser prepareUnprocessedProfileImage:asset];
-			dispatch_async(dispatch_get_main_queue(), ^ {
-				[self.delegate reloadData];
-			});
+		currentUser = user;
+		
+		[[GSCacheManager sharedInstance] findImageAssetWithURL:[currentUser avatarURL] loggedInUser:user downloadIfNecessary:YES completionHandler:^(UIImage * __nullable image, NSError *__nullable error) {
+			
 		}];
 	}
 	return self;
 }
+
+//- (instancetype)init {
+//	if ((self = [super init])) {
+//		currentUser = [[GRSessionManager sharedInstance] currentUser];
+//		[[GSCacheManager sharedInstance] findImageAssetWithURL:[[currentUser user] avatarURL] user:currentUser.user downloadIfNecessary:YES completionHandler:^(UIImage *asset, NSError *error) {
+//			[currentUser prepareUnprocessedProfileImage:asset];
+//			dispatch_async(dispatch_get_main_queue(), ^ {
+//				[self.delegate reloadData];
+//			});
+//		}];
+//	}
+//	return self;
+//}
 
 - (void)requestNewData {
 //	[[GSGitHubEngine sharedInstance] repositoriesForUser:currentUser.user completionHandler:^(NSArray * __nullable repos, NSError * __nullable error) {
@@ -51,7 +62,7 @@
 		return nil;
 }
 
-- (GRApplicationUser *)activeUser {
+- (GSUser *)activeUser {
 	return currentUser;
 }
 

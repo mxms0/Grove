@@ -80,7 +80,9 @@
 	
 	NSString *activeIdentifier = reuseIdentifier;
 	
-	if (indexPath.row == 0) {
+	BOOL isHeaderCell = (indexPath.row == 0);
+	
+	if (isHeaderCell) {
 		activeIdentifier = headerReuseIdentifier;
 	}
 	
@@ -89,13 +91,13 @@
 	if (!cell) {
 		Class cellClass = [GRNotificationTableViewCell class];
 		
-		if (indexPath.row == 0) {
+		if (isHeaderCell) {
 			cellClass = [GRNotificationHeaderTableViewCell class];
 		}
 		cell = [[cellClass alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:activeIdentifier];
 	}
 	
-	if (indexPath.row == 0) {
+	if (isHeaderCell) {
 		cell.textLabel.text = [[notifications allKeys] objectAtIndex:indexPath.section];
 	}
 	else {

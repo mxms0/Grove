@@ -98,7 +98,7 @@
 	return YES;
 }
 
-- (void)findImageAssetWithURL:(NSURL *)url user:(GSUser *)user downloadIfNecessary:(BOOL)download completionHandler:(void (^)(UIImage *image, NSError *error))handler {
+- (void)findImageAssetWithURL:(NSURL *)url loggedInUser:(GSUser *)user downloadIfNecessary:(BOOL)download completionHandler:(void (^)(UIImage *image, NSError *error))handler {
 	NSURL *directory = [self _workingDirectoryForToken:user.token];
 	NSURL *assetPath = [directory URLByAppendingPathComponent:GSMD5HashFromString([url absoluteString])];
 

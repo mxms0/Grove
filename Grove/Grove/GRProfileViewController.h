@@ -9,6 +9,7 @@
 #import "GRViewController.h"
 #import "GRViewModel.h"
 
+@class GSUser;
 @interface GRProfileViewController : GRViewController <UITableViewDataSource, UITableViewDelegate, GRViewModelDelegate>
-
+@property (nonatomic, weak, setter=setUser:) GSUser *user;
 @end

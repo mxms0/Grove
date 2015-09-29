@@ -19,8 +19,7 @@
 - (instancetype)init {
 	if ((self = [super init])) {
         self.view.backgroundColor = [UIColor blackColor];
-		model = [[GRProfileModel alloc] init];
-		[model setDelegate:self];
+
 		tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
 		[tableView setDelegate:self];
 		[tableView setDataSource:self];
@@ -30,6 +29,11 @@
 		}];
     }
     return self;
+}
+
+- (void)setUser:(GSUser *)user {
+	model = [[GRProfileModel alloc] initWithUser:user];
+	[model setDelegate:self];
 }
 
 - (void)reloadData {
