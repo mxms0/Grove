@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class GRApplicationUser;
+@class GSUser;
 @interface GRProfileHeaderView : UIView
-- (void)configureWithUser:(GRApplicationUser *)user;
+- (void)configureWithUser:(GSUser *)user;
 @end

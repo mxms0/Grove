@@ -31,6 +31,7 @@
 		501C04301BAB78B400DC66C8 /* GSGist.h in Headers */ = {isa = PBXBuildFile; fileRef = 501C042D1BAB78B400DC66C8 /* GSGist.h */; };
 		503C595E1BAD17EE003CB50E /* GRSyntaxHighlightedTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 503C595D1BAD17EE003CB50E /* GRSyntaxHighlightedTextView.m */; };
 		50504D9A1BA263D800B87C5F /* GREventCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 50504D991BA263D800B87C5F /* GREventCellModel.m */; };
+		506005BA1BBB5474000F5AFF /* GRActiveUserProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 506005B91BBB5474000F5AFF /* GRActiveUserProfileViewController.m */; };
 		5061DE251B8471DB007D9F24 /* GSEventPayload.h in Headers */ = {isa = PBXBuildFile; fileRef = 5061DE231B8471DB007D9F24 /* GSEventPayload.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5061DE261B8471DB007D9F24 /* GSEventPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = 5061DE241B8471DB007D9F24 /* GSEventPayload.m */; };
 		507931D91B8DA1990080C894 /* Masonry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 507931D21B8DA0580080C894 /* Masonry.framework */; };
@@ -182,6 +183,8 @@
 		503C595D1BAD17EE003CB50E /* GRSyntaxHighlightedTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRSyntaxHighlightedTextView.m; sourceTree = "<group>"; };
 		50504D981BA263D800B87C5F /* GREventCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GREventCellModel.h; sourceTree = "<group>"; };
 		50504D991BA263D800B87C5F /* GREventCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GREventCellModel.m; sourceTree = "<group>"; };
+		506005B81BBB5474000F5AFF /* GRActiveUserProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRActiveUserProfileViewController.h; sourceTree = "<group>"; };
+		506005B91BBB5474000F5AFF /* GRActiveUserProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRActiveUserProfileViewController.m; sourceTree = "<group>"; };
 		5061DE231B8471DB007D9F24 /* GSEventPayload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSEventPayload.h; sourceTree = "<group>"; };
 		5061DE241B8471DB007D9F24 /* GSEventPayload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSEventPayload.m; sourceTree = "<group>"; };
 		507931CC1B8DA0570080C894 /* Masonry.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Masonry.xcodeproj; path = ../Masonry/Masonry.xcodeproj; sourceTree = "<group>"; };
@@ -513,6 +516,10 @@
 		84F524EB1B8325D80077A06C /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				84F524F31B8326E40077A06C /* GRProfileViewController.h */,
+				84F524F41B8326E40077A06C /* GRProfileViewController.m */,
+				506005B81BBB5474000F5AFF /* GRActiveUserProfileViewController.h */,
+				506005B91BBB5474000F5AFF /* GRActiveUserProfileViewController.m */,
 				5000015B1BB778A0001564E7 /* GRRepositoryViewController.h */,
 				5000015C1BB778A0001564E7 /* GRRepositoryViewController.m */,
 				50F0818B1B82ED6500366161 /* GRViewController.h */,
@@ -521,8 +528,6 @@
 				84F524EE1B83269E0077A06C /* GRStreamViewController.m */,
 				84F524F01B8326D60077A06C /* GRNotificationViewController.h */,
 				84F524F11B8326D60077A06C /* GRNotificationViewController.m */,
-				84F524F31B8326E40077A06C /* GRProfileViewController.h */,
-				84F524F41B8326E40077A06C /* GRProfileViewController.m */,
 				84309A7B1B854A21008EB771 /* GRLoginViewController.h */,
 				84309A7C1B854A21008EB771 /* GRLoginViewController.m */,
 				849FF2191B8AD3710077DE06 /* GRTabBarController.h */,
@@ -790,6 +795,7 @@
 				50F0818A1B82ED6500366161 /* GRAppDelegate.m in Sources */,
 				50ED2AD91B8B106F00DFF146 /* GRProfileModel.m in Sources */,
 				501558AF1B8553020002254D /* GRSessionManager.m in Sources */,
+				506005BA1BBB5474000F5AFF /* GRActiveUserProfileViewController.m in Sources */,
 				50504D9A1BA263D800B87C5F /* GREventCellModel.m in Sources */,
 				849FF2121B884DC20077DE06 /* UITabBar+GRExtension.m in Sources */,
 				84F524F51B8326E40077A06C /* GRProfileViewController.m in Sources */,

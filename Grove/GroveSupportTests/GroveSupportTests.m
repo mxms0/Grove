@@ -41,7 +41,7 @@ static NSString *globalPassword = @"!Rocky&Hugo68";
 			NSLog(@"Events %@", events);
 		}];
 		
-		[[GSCacheManager sharedInstance] findImageAssetWithURL:[NSURL URLWithString:@"https://avatars.githubusercontent.com/u/541239?"] user:user downloadIfNecessary:YES completionHandler:^(UIImage *image, NSError *error) {
+		[[GSCacheManager sharedInstance] findImageAssetWithURL:[NSURL URLWithString:@"https://avatars.githubusercontent.com/u/541239?"] loggedInUser:user downloadIfNecessary:YES completionHandler:^(UIImage *image, NSError *error) {
 			NSLog(@"fds %p:%@", image, error);
 		}];
 	}];

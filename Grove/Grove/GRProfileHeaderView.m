@@ -77,14 +77,14 @@
 	}
 }
 
-- (void)configureWithUser:(GRApplicationUser *)appUser {
-	[usernameLabel setText:[[appUser user] username]];
-	[nameLabel setText:[[appUser user] fullName]];
-	[locationLabel setText:[[appUser user] location]];
-	[profileImageView setImage:appUser.profilePicture];
+- (void)configureWithUser:(GSUser *)user {
+	[usernameLabel setText:[user username]];
+	[nameLabel setText:[user fullName]];
+	[locationLabel setText:[user location]];
+
 	
-	[followingButton setText:[[[appUser user] followingCount] stringValue]];
-	[followersButton setText:[[[appUser user] followersCount] stringValue]];
+	[followingButton setText:[[user followingCount] stringValue]];
+	[followersButton setText:[[user followersCount] stringValue]];
 
 	
 }
