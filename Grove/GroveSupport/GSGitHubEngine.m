@@ -117,6 +117,12 @@
 }
 
 - (void)userForUsername:(NSString *__nonnull)username completionHandler:(void (^__nonnull)(GSUser *__nullable user, NSError *__nullable error))handler {
+	GSUser *cached = [GSUser cachedUserWithUsername:username];
+	if (cached) {
+		handler(cached, nil);
+		return;
+	}
+	
 	[[GSNetworkManager sharedInstance] requestUserInformationForUsername:username token:nil completionHandler:^(NSDictionary *__nullable dictionary, NSError *__nullable error) {
 		if (error) {
 			handler(nil, error);
