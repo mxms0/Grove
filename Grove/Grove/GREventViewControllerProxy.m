@@ -115,6 +115,9 @@
         }
         case GSEventTypeStar: {
 			self = (GREventViewControllerProxy *)[[GRRepositoryViewController alloc] init];
+			GSRepository *repositoryName = [event repository];
+			[(GRRepositoryViewController *)self setRepository:repositoryName];
+			
 			// contributing to murder
             break;
         }

@@ -9,5 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @interface GSObject : NSObject <NSCoding>
-
+@property (nonatomic, strong) NSDate *updatedDate;
+- (void)configureWithDictionary:(NSDictionary *)dictionary;
 @end

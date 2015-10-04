@@ -31,45 +31,53 @@ static NSMutableDictionary *cachedUsers = nil;
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary {
 	if ((self = [super initWithDictionary:dictionary])) {
 		GSUser *cachedSelf = [GSUser cachedUserWithUsername:self.username];
+		// should perhaps move this stage to before calling super init
+		// will be faster, not a priority unless it becomes an issue.
+		// the only reason why it's not is because then i don't have to check the dictionary in two places
+		// for the same key. Incase it changes, etc.
+		// Also will probably make a list of constants for each key defined in the API later.
 		if (cachedSelf) {
 			NSLog(@"GSUser cached. Reusing.");
 			return cachedSelf;
 		}
-		
-		GSAssign(dictionary, @"name", _fullName);
-		GSAssign(dictionary, @"company", _company);
-		GSAssign(dictionary, @"blog", _blog);
-		GSAssign(dictionary, @"location", _location);
-		GSAssign(dictionary, @"email", _email);
-		GSAssign(dictionary, @"hireable", _hireable);
-		GSAssign(dictionary, @"bio", _biography);
-		GSAssign(dictionary, @"public_repos", _publicRepoCount);
-		GSAssign(dictionary, @"public_gists", _publicGistCount);
-		GSAssign(dictionary, @"followers", _followersCount);
-		GSAssign(dictionary, @"following", _followingCount);
-		GSAssign(dictionary, @"private_gists", _privateGistsCount);
-		GSAssign(dictionary, @"total_private_repos", _totalPrivateRepoCount);
-		GSAssign(dictionary, @"owned_private_repos", _ownedPrivateRepoCount);
-		GSAssign(dictionary, @"disk_usage", _diskUsage);
-		GSAssign(dictionary, @"collaborators", _collaboratorCount);
-		
-		GSURLAssign(dictionary, @"html_url", _browserURL);
-		GSURLAssign(dictionary, @"followers_url", _followersAPIURL);
-		GSURLAssign(dictionary, @"following_url", _followingAPIURL);
-		GSURLAssign(dictionary, @"gists_url", _gistsAPIURL);
-		GSURLAssign(dictionary, @"starred_url", _starredAPIURL);
-		GSURLAssign(dictionary, @"subscriptions_url", _subscriptionsAPIURL);
-		GSURLAssign(dictionary, @"organizations_url", _organizationsAPIURL);
-		GSURLAssign(dictionary, @"repos_url", _repositoriesAPIURL);
-		GSURLAssign(dictionary, @"events_url", _eventsAPIURL);
-		GSURLAssign(dictionary, @"received_events_url", _receivedEventsAPIURL);
-		
-		@synchronized(cachedUsers) {
-			cachedUsers[self.username] = self;
-		}
-		
 	}
 	return self;
+}
+
+- (void)configureWithDictionary:(NSDictionary *)dictionary {
+	[super configureWithDictionary:dictionary];
+	
+	GSAssign(dictionary, @"name", _fullName);
+	GSAssign(dictionary, @"company", _company);
+	GSAssign(dictionary, @"blog", _blog);
+	GSAssign(dictionary, @"location", _location);
+	GSAssign(dictionary, @"email", _email);
+	GSAssign(dictionary, @"hireable", _hireable);
+	GSAssign(dictionary, @"bio", _biography);
+	GSAssign(dictionary, @"public_repos", _publicRepoCount);
+	GSAssign(dictionary, @"public_gists", _publicGistCount);
+	GSAssign(dictionary, @"followers", _followersCount);
+	GSAssign(dictionary, @"following", _followingCount);
+	GSAssign(dictionary, @"private_gists", _privateGistsCount);
+	GSAssign(dictionary, @"total_private_repos", _totalPrivateRepoCount);
+	GSAssign(dictionary, @"owned_private_repos", _ownedPrivateRepoCount);
+	GSAssign(dictionary, @"disk_usage", _diskUsage);
+	GSAssign(dictionary, @"collaborators", _collaboratorCount);
+	
+	GSURLAssign(dictionary, @"html_url", _browserURL);
+	GSURLAssign(dictionary, @"followers_url", _followersAPIURL);
+	GSURLAssign(dictionary, @"following_url", _followingAPIURL);
+	GSURLAssign(dictionary, @"gists_url", _gistsAPIURL);
+	GSURLAssign(dictionary, @"starred_url", _starredAPIURL);
+	GSURLAssign(dictionary, @"subscriptions_url", _subscriptionsAPIURL);
+	GSURLAssign(dictionary, @"organizations_url", _organizationsAPIURL);
+	GSURLAssign(dictionary, @"repos_url", _repositoriesAPIURL);
+	GSURLAssign(dictionary, @"events_url", _eventsAPIURL);
+	GSURLAssign(dictionary, @"received_events_url", _receivedEventsAPIURL);
+	
+	@synchronized(cachedUsers) {
+		cachedUsers[self.username] = self;
+	}
 }
 
 - (void)encodeWithCoder:(NSCoder *)coder {
