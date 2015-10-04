@@ -50,6 +50,4 @@ typedef NS_ENUM(NSInteger, GSEventType) {
 @property (nonatomic, readonly) GSEventType type;
 @property (nonatomic, readonly) BOOL publicallyAvailable;
 @property (nonatomic, readonly) GSOrganization *organization;
-
-- (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 @end

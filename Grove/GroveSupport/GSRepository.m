@@ -13,12 +13,16 @@
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary {
 	if ((self = [super initWithDictionary:dictionary])) {
-		
-		GSObjectAssign(dictionary, @"owner", _owner, GSUser);
-		GSURLAssign(dictionary, @"url", _browserURL);
-		GSAssign(dictionary, @"name", _name);
+
 	}
 	return self;
+}
+
+- (void)configureWithDictionary:(NSDictionary *)dictionary {
+	[super configureWithDictionary:dictionary];
+	GSObjectAssign(dictionary, @"owner", _owner, GSUser);
+	GSURLAssign(dictionary, @"html_url", _browserURL);
+	GSAssign(dictionary, @"name", _name);
 }
 
 - (NSString *)pathString {

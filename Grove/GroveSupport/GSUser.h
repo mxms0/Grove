@@ -25,7 +25,6 @@
 @property (nonatomic, nullable, strong) NSNumber *publicRepoCount;
 @property (nonatomic, nullable, strong) NSNumber *publicGistCount;
 @property (nonatomic, nullable, strong) NSDate *createdDate;
-@property (nonatomic, nullable, strong) NSDate *updatedDate;
 @property (nonatomic, nullable, strong) NSNumber *privateGistsCount;
 @property (nonatomic, nullable, strong) NSNumber *totalPrivateRepoCount;
 @property (nonatomic, nullable, strong) NSNumber *ownedPrivateRepoCount;

@@ -8,6 +8,7 @@
 
 #import "GRViewController.h"
 
+@class GSRepository;
 @interface GRRepositoryViewController : GRViewController
-
+- (void)setRepository:(GSRepository *)repository;
 @end

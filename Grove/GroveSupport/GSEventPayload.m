@@ -13,38 +13,34 @@
 
 @implementation GSEventPayload
 
-- (instancetype)initWithDictionary:(NSDictionary *)dictionary {
-	if ((self = [super initWithDictionary:dictionary])) {
-		GSAssign(dictionary, @"push_id", _pushIdentifier);
-		GSAssign(dictionary, @"size", _size);
-		GSAssign(dictionary, @"description", _descriptionMessage);
-		GSAssign(dictionary, @"ref", _ref);
-		GSAssign(dictionary, @"ref_type", _refType);
-		GSAssign(dictionary, @"master_branch", _masterBranch);
-		GSAssign(dictionary, @"pusher_type", _pusherType);
-		
-		
-		GSObjectAssign(dictionary, @"comment", _comment, GSComment);
-		GSObjectAssign(dictionary, @"issue", _issue, GSIssue);
-		
-		NSString *action = nil;
-		GSAssign(dictionary, @"action", action);
-		_action = [self actionForString:action];
-		
-		NSMutableArray *commitsSerialized = [NSMutableArray array];
-		
-		NSArray *commitsUnserialized = dictionary[@"commits"];
-		if ([commitsUnserialized isKindOfClass:[NSArray class]]) {
-			for (NSDictionary *commitPacket in commitsUnserialized) {
-				GSCommit *commit = [[GSCommit alloc] initWithDictionary:commitPacket];
-				[commitsSerialized addObject:commit];
-			}
-		}
-		_commits = commitsSerialized;
-		
-	}
+- (void)configureWithDictionary:(NSDictionary *)dictionary {
+	[super configureWithDictionary:dictionary];
+	GSAssign(dictionary, @"push_id", _pushIdentifier);
+	GSAssign(dictionary, @"size", _size);
+	GSAssign(dictionary, @"description", _descriptionMessage);
+	GSAssign(dictionary, @"ref", _ref);
+	GSAssign(dictionary, @"ref_type", _refType);
+	GSAssign(dictionary, @"master_branch", _masterBranch);
+	GSAssign(dictionary, @"pusher_type", _pusherType);
 	
-	return self;
+	
+	GSObjectAssign(dictionary, @"comment", _comment, GSComment);
+	GSObjectAssign(dictionary, @"issue", _issue, GSIssue);
+	
+	NSString *action = nil;
+	GSAssign(dictionary, @"action", action);
+	_action = [self actionForString:action];
+	
+	NSMutableArray *commitsSerialized = [NSMutableArray array];
+	
+	NSArray *commitsUnserialized = dictionary[@"commits"];
+	if ([commitsUnserialized isKindOfClass:[NSArray class]]) {
+		for (NSDictionary *commitPacket in commitsUnserialized) {
+			GSCommit *commit = [[GSCommit alloc] initWithDictionary:commitPacket];
+			[commitsSerialized addObject:commit];
+		}
+	}
+	_commits = commitsSerialized;
 }
 
 - (GSEventAction)actionForString:(NSString *)actionString {

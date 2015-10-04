@@ -20,6 +20,5 @@
 @property (nonatomic, readonly) GSUser *user;
 @property (nonatomic, readonly) NSString *body;
 @property (nonatomic, readonly) NSDate *createdDate;
-@property (nonatomic, readonly) NSDate *updatedDate;
 @property (nonatomic, readonly) NSURL *browserURL;
 @end

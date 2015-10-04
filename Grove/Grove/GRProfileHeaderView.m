@@ -73,7 +73,7 @@
 	
 	for (int i = 0; i < 3; i++) {
 		GRProfileStatisticButton *button = statsButtons[i];
-		[button setFrame:CGRectMake(i * self.frame.size.width / 3, (profileImageView.frame.size.height + profileImageView.frame.origin.y * 2), floorf(self.frame.size.width/3), 64)];
+		[button setFrame:CGRectMake(floorf(i * self.frame.size.width / 3), (profileImageView.frame.size.height + profileImageView.frame.origin.y * 2), floorf(self.frame.size.width/3), 64)];
 	}
 }
 
@@ -85,8 +85,6 @@
 	
 	[followingButton setText:[[user followingCount] stringValue]];
 	[followersButton setText:[[user followersCount] stringValue]];
-
-	
 }
 
 @end

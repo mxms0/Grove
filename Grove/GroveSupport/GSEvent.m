@@ -12,21 +12,16 @@
 
 @implementation GSEvent
 
-- (instancetype)initWithDictionary:(NSDictionary *)dictionary {
-	if ((self = [super initWithDictionary:dictionary])) {
-		GSObjectAssign(dictionary, @"actor", _actor, GSActor);
-		GSObjectAssign(dictionary, @"repo", _repository, GSRepository);
-		GSObjectAssign(dictionary, @"payload", _payload, GSEventPayload);
-		
-		_createdDate = [self dateFromISO8601String:dictionary[@"created_at"]];
-		_publicallyAvailable = [dictionary[@"public"] boolValue];
-		_type = [self notificationEventTypeFromString:dictionary[@"type"]];
-        
-        
-        if (_type == GSEventTypeIssueComment) {
-        }
-	}
-	return self;
+- (void)configureWithDictionary:(NSDictionary *)dictionary {
+	[super configureWithDictionary:dictionary];
+	GSObjectAssign(dictionary, @"actor", _actor, GSActor);
+	GSObjectAssign(dictionary, @"repo", _repository, GSRepository);
+	GSObjectAssign(dictionary, @"payload", _payload, GSEventPayload);
+	
+	_createdDate = [self dateFromISO8601String:dictionary[@"created_at"]];
+	_publicallyAvailable = [dictionary[@"public"] boolValue];
+	_type = [self notificationEventTypeFromString:dictionary[@"type"]];
+	
 }
 
 - (GSEventType)notificationEventTypeFromString:(NSString *)string {

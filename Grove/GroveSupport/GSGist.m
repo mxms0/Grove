@@ -11,15 +11,12 @@
 
 @implementation GSGist
 
-- (instancetype)initWithDictionary:(NSDictionary *)dictionary {
-	if ((self = [super initWithDictionary:dictionary])) {
-		NSString *_publiclyAccessibleFlag = nil;
-		GSAssign(dictionary, @"public", _publiclyAccessibleFlag);
-		GSAssign(dictionary, @"description", _stringDescription);
-		
-		_publiclyAccessible = [_publiclyAccessibleFlag boolValue];
-	}
-	return self;
+- (void)configureWithDictionary:(NSDictionary *)dictionary {
+	NSString *_publiclyAccessibleFlag = nil;
+	GSAssign(dictionary, @"public", _publiclyAccessibleFlag);
+	GSAssign(dictionary, @"description", _stringDescription);
+	
+	_publiclyAccessible = [_publiclyAccessibleFlag boolValue];
 }
 
 @end

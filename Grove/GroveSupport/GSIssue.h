@@ -20,7 +20,6 @@
 @property (nonatomic, readonly) NSURL *comments_url;
 @property (nonatomic, readonly) NSString *milestone;
 @property (nonatomic, readonly) NSDate *createdDate;
-@property (nonatomic, readonly) NSDate *updatedDate;
 @property (nonatomic, readonly) NSDate *closedDate;
 @property (nonatomic, readonly) NSNumber *number;
 @property (nonatomic, readonly) NSArray *labels;

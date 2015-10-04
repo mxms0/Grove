@@ -13,7 +13,6 @@
 @interface GSNotification : GSObject
 @property (nonatomic, assign) BOOL read;
 @property (nonatomic, copy) NSString *title;
-@property (nonatomic, copy) NSDate *updatedDate;
 @property (nonatomic, copy) NSDate *lastReadDate;
 @property (nonatomic, strong) GSRepository *repository;
 @end

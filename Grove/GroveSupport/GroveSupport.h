@@ -30,6 +30,7 @@ FOUNDATION_EXPORT const unsigned char GroveSupportVersionString[];
 
 static NSString *const GSDomain = @"com.RickSupport.morty";
 static NSString *const GSErrorDomain = @"MortiestMorty";
+static NSString *const GSUpdatedDataKey = @"updatedDate";
 
 void _GSAssert(BOOL cond, NSString *fmt, ...);
 #define GSAssert() _GSAssert(NO, @"(%s) in [%s:%d]", __PRETTY_FUNCTION__, __FILE__, __LINE__)
