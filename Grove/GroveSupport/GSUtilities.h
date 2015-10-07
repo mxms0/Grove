@@ -13,5 +13,6 @@
 
 NSString *GSMD5HashFromString(NSString *string);
 NSString *GSMD5HashFromFile(NSURL *filePath);
+UIColor *GSRandomUIColor();
 
 #endif /* defined(__Grove__GSUtilities__) */

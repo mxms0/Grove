@@ -14,7 +14,7 @@
 #import "GRLoginViewController.h"
 #import "GRStreamViewController.h"
 #import "GRNotificationViewController.h"
-#import "GRProfileViewController.h"
+#import "GRActiveUserProfileViewController.h"
 #import "GRSessionManager.h"
 
 @interface GRAppDelegate ()
@@ -69,7 +69,7 @@
 - (void)presentTabBar {
     GRStreamViewController *streamViewController = [[GRStreamViewController alloc] init];
     GRNotificationViewController *notificationsViewController = [[GRNotificationViewController alloc] init];
-    GRProfileViewController *profileViewController = [[GRProfileViewController alloc] init];
+    GRProfileViewController *profileViewController = [[GRActiveUserProfileViewController alloc] init];
     
     GRNavigationController *streamNavigationController = [[GRNavigationController alloc] initWithNavigationBarClass:[GRNavigationBar class] toolbarClass:[UIToolbar class]];
     GRNavigationController *notificationNavigationController = [[GRNavigationController alloc] initWithNavigationBarClass:[GRNavigationBar class] toolbarClass:[UIToolbar class]];

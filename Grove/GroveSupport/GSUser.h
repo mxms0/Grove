@@ -10,27 +10,27 @@
 #import "GSActor.h"
 
 @interface GSUser : GSActor <NSCoding>
-@property (nonatomic, strong) NSURL *browserURL;
+@property (nonatomic, nullable, strong) NSURL *browserURL;
 @property (nonatomic, assign) int type; // either User or Organization afaik
 @property (nonatomic, assign, getter=isAdmin) BOOL admin;
-@property (nonatomic, strong) NSString *fullName;
-@property (nonatomic, strong) NSString *company;
-@property (nonatomic, strong) NSString *blog;
-@property (nonatomic, strong) NSString *location;
-@property (nonatomic, strong) NSString *email;
-@property (nonatomic, strong) NSString *hireable;
-@property (nonatomic, strong) NSString *biography;
-@property (nonatomic, strong) NSNumber *followersCount;
-@property (nonatomic, strong) NSNumber *followingCount;
-@property (nonatomic, strong) NSNumber *publicRepoCount;
-@property (nonatomic, strong) NSNumber *publicGistCount;
-@property (nonatomic, strong) NSDate *createdDate;
-@property (nonatomic, strong) NSDate *updatedDate;
-@property (nonatomic, strong) NSNumber *privateGistsCount;
-@property (nonatomic, strong) NSNumber *totalPrivateRepoCount;
-@property (nonatomic, strong) NSNumber *ownedPrivateRepoCount;
-@property (nonatomic, strong) NSNumber *diskUsage;
-@property (nonatomic, strong) NSNumber *collaboratorCount;
+@property (nonatomic, nullable, strong) NSString *fullName;
+@property (nonatomic, nullable, strong) NSString *company;
+@property (nonatomic, nullable, strong) NSString *blog;
+@property (nonatomic, nullable, strong) NSString *location;
+@property (nonatomic, nullable, strong) NSString *email;
+@property (nonatomic, nullable, strong) NSString *hireable;
+@property (nonatomic, nullable, strong) NSString *biography;
+@property (nonatomic, nullable, strong) NSNumber *followersCount;
+@property (nonatomic, nullable, strong) NSNumber *followingCount;
+@property (nonatomic, nullable, strong) NSNumber *starredRepositoryCount;
+@property (nonatomic, nullable, strong) NSNumber *publicRepoCount;
+@property (nonatomic, nullable, strong) NSNumber *publicGistCount;
+@property (nonatomic, nullable, strong) NSDate *createdDate;
+@property (nonatomic, nullable, strong) NSNumber *privateGistsCount;
+@property (nonatomic, nullable, strong) NSNumber *totalPrivateRepoCount;
+@property (nonatomic, nullable, strong) NSNumber *ownedPrivateRepoCount;
+@property (nonatomic, nullable, strong) NSNumber *diskUsage;
+@property (nonatomic, nullable, strong) NSNumber *collaboratorCount;
  /* Missing
  "plan": {
   "name": "micro",
@@ -39,4 +39,5 @@
   "private_repos": 5
  }
  */
++ (nullable GSUser *)cachedUserWithUsername:(NSString *__nonnull)username;
 @end

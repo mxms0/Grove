@@ -8,8 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
-#import "GSGitHubEngine.h"
-#import "GSCacheManager.h"
+#import <GroveSupport/GroveSupport.h>
 
 @interface GroveSupportTests : XCTestCase
 
@@ -41,8 +40,13 @@ static NSString *globalPassword = @"!Rocky&Hugo68";
 			NSLog(@"Events %@", events);
 		}];
 		
-		[[GSCacheManager sharedInstance] findImageAssetWithURL:[NSURL URLWithString:@"https://avatars.githubusercontent.com/u/541239?"] user:user downloadIfNecessary:YES completionHandler:^(UIImage *image, NSError *error) {
-			NSLog(@"fds %p:%@", image, error);
+		[[GSCacheManager sharedInstance] findImageAssetWithURL:user.avatarURL loggedInUser:user downloadIfNecessary:YES completionHandler:^(UIImage *image, NSError *error) {
+			NSLog(@"Image %p:%@", image, error);
+		}];
+		
+		
+		[[GSGitHubEngine sharedInstance] repositoriesStarredByUser:user completionHandler:^(NSArray * _Nullable repos, NSError * _Nullable error) {
+			NSLog(@"Starred %@:%@", repos, error);
 		}];
 	}];
 	dispatch_main();

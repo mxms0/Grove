@@ -16,10 +16,15 @@
 		return nil;
 	}
 	if ((self = [super init])) {
-		GSAssign(dictionary, @"id", _identifier);
-		GSAssign(dictionary, @"url", _directAPIURL);
+		[self configureWithDictionary:dictionary];
 	}
 	return self;
+}
+
+- (void)configureWithDictionary:(NSDictionary *)dictionary {
+	GSAssign(dictionary, @"id", _identifier);
+	GSAssign(dictionary, @"url", _directAPIURL);
+	self.updatedDate = [NSDate date];
 }
 
 - (NSDate *)dateFromISO8601String:(NSString *)string {

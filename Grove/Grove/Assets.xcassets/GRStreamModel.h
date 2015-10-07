@@ -9,13 +9,11 @@
 #import <Foundation/Foundation.h>
 #import "GRViewModel.h"
 
-@class GSEvent;
+@class GSEvent, GREventCellModel;
 
 @interface GRStreamModel : GRViewModel
-@property (nonatomic, readonly) NSArray *events;
-
 
 - (NSInteger)numberOfSections;
 - (NSInteger)numberOfRowsInSection:(NSInteger)section;
-- (GSEvent *)eventForIndexPath:(NSIndexPath *)indexPath;
+- (GREventCellModel *)eventCellModelForIndexPath:(NSIndexPath *)indexPath;
 @end

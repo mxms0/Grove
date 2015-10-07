@@ -1,6 +1,6 @@
 //
 //  GSIssue.h
-//  Grove
+//  GroveSupport
 //
 //  Created by Rocco Del Priore on 8/25/15.
 //  Copyright (c) 2015 Milo. All rights reserved.
@@ -20,7 +20,6 @@
 @property (nonatomic, readonly) NSURL *comments_url;
 @property (nonatomic, readonly) NSString *milestone;
 @property (nonatomic, readonly) NSDate *createdDate;
-@property (nonatomic, readonly) NSDate *updatedDate;
 @property (nonatomic, readonly) NSDate *closedDate;
 @property (nonatomic, readonly) NSNumber *number;
 @property (nonatomic, readonly) NSArray *labels;

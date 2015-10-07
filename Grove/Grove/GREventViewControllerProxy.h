@@ -1,5 +1,5 @@
 //
-//  GREventViewController.h
+//  GREventViewControllerProxy.h
 //  Grove
 //
 //  Created by Rocco Del Priore on 8/25/15.
@@ -10,7 +10,7 @@
 
 #import "GSEvent.h"
 
-@interface GREventViewController : GRViewController
+@interface GREventViewControllerProxy : GRViewController
 
 - (instancetype)initWithEvent:(GSEvent *)event;
 

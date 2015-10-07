@@ -9,25 +9,36 @@
 #import "GRStreamModel.h"
 #import "GSGitHubEngine.h"
 #import "GRSessionManager.h"
+#import "GREventCellModel.h"
 
 @interface GRStreamModel ()
-@property (nonatomic) NSArray *events;
+@property (nonatomic, strong) NSArray *eventModels;
 @end
 
 @implementation GRStreamModel
 
 - (instancetype)init {
 	if ((self = [super init])) {
-		self.events = [NSMutableArray array];
+		self.eventModels = [NSMutableArray array];
 	}
 	return self;
 }
 
 - (void)requestNewData {
 	[[GSGitHubEngine sharedInstance] eventsForUser:[[[GRSessionManager sharedInstance] currentUser] user] completionHandler:^(NSArray *events, NSError * error) {
-		self.events = events;
-		[self.delegate reloadData];
+		[self handleNewleyArrivedEvents:events];
 	}];
+}
+
+- (void)handleNewleyArrivedEvents:(NSArray *)events {
+	NSMutableArray *eventModels = [[NSMutableArray alloc] init];
+	for (GSEvent *evt in events) {
+		GREventCellModel *model = [[GREventCellModel alloc] initWithEvent:evt];
+		[eventModels addObject:model];
+	}
+	
+	self.eventModels = eventModels;
+	[self.delegate reloadData];
 }
 
 - (NSInteger)numberOfSections {
@@ -35,12 +46,19 @@
 }
 
 - (NSInteger)numberOfRowsInSection:(NSInteger)section {
-	return self.events.count;
+	return self.eventModels.count;
+}
+
+- (GREventCellModel *)eventCellModelForIndexPath:(NSIndexPath *)indexPath {
+	if (indexPath.row < self.eventModels.count) {
+		return self.eventModels[indexPath.row];
+	}
+	return nil;
 }
 
 - (GSEvent *)eventForIndexPath:(NSIndexPath *)indexPath {
-	if (indexPath.row < self.events.count) {
-		return self.events[indexPath.row];
+	if (indexPath.row < self.eventModels.count) {
+		return self.eventModels[indexPath.row];
 	}
 	return nil;
 }

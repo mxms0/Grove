@@ -1,5 +1,5 @@
 //
-//  GSUtilities.c
+//  GSUtilities.m
 //  GroveSupport
 //
 //  Created by Max Shavrick on 8/25/15.
@@ -31,7 +31,7 @@ NSString *GSMD5HashFromString(NSString *string) {
 	
 	CC_MD5_CTX md5;
 	CC_MD5_Init(&md5);
-
+	
 	CC_MD5_Update(&md5, [string UTF8String], (CC_LONG)[string length]);
 	
 	unsigned char digest[CC_MD5_DIGEST_LENGTH];
@@ -40,7 +40,7 @@ NSString *GSMD5HashFromString(NSString *string) {
 	NSMutableString *output;
 	output = [NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH * 2];
 	for (int i = 0; i < CC_MD5_DIGEST_LENGTH; i++) {
-		[output appendFormat: @"%02x", digest[i]];
+		[output appendFormat:@"%02x", digest[i]];
 	}
 	return output;
 }
@@ -68,8 +68,18 @@ NSString *GSMD5HashFromFile(NSURL *filePath) {
 	
 	NSMutableString *output;
 	output = [NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH * 2];
+	
 	for (int i = 0; i < CC_MD5_DIGEST_LENGTH; i++) {
-		[output appendFormat: @"%02x", digest[i]];
+		[output appendFormat:@"%02x", digest[i]];
 	}
+	
 	return output;
+}
+
+UIColor *GSRandomUIColor() {
+	CGFloat hue = (arc4random() % 256 / 256.0);
+	CGFloat saturation = (arc4random() % 128 / 256.0) + 0.5;
+	CGFloat brightness = (arc4random() % 128 / 256.0) + 0.5;
+	UIColor *color = [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:1];
+	return color;
 }

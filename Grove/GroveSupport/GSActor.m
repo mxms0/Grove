@@ -11,15 +11,12 @@
 
 @implementation GSActor
 
-- (instancetype)initWithDictionary:(NSDictionary *)dictionary {
-	if ((self = [super initWithDictionary:dictionary])) {
-		GSAssign(dictionary, @"login", _username);
-		GSAssign(dictionary, @"gravatar_id", _gravatarIdentifier);
-		
-		GSURLAssign(dictionary, @"url", _directURL);
-		GSURLAssign(dictionary, @"avatar_url", _avatarURL);
-	}
-	return self;
+- (void)configureWithDictionary:(NSDictionary *)dictionary {
+	[super configureWithDictionary:dictionary];
+	GSAssign(dictionary, @"login", _username);
+	GSAssign(dictionary, @"gravatar_id", _gravatarIdentifier);
+	
+	GSURLAssign(dictionary, @"avatar_url", _avatarURL);
 }
 
 - (instancetype)initWithCoder:(NSCoder *)coder {

@@ -1,6 +1,6 @@
 //
 //  GSNetworkManagerHelpers.m
-//  Grove
+//  GroveSupport
 //
 //  Created by Max Shavrick on 8/18/15.
 //  Copyright (c) 2015 Milo. All rights reserved.
@@ -36,46 +36,19 @@ NSString *GSHTTPVerbStringForVerb(GSAPIHTTPVerb verb) {
 	return ret;
 }
 
-NSURL *GSAPIURLForEndpoint(GSAPIEndpoint endp) {
-	NSString *pathExtension = nil;
-	switch (endp) {
-		case GSAPIEndpointGists:
-			pathExtension = @"gists";
-			break;
-		case GSAPIEndpointIssues:
-			pathExtension = @"issues";
-			break;
-		case GSAPIEndpointNetworks:
-			pathExtension = @"networks";
-			break;
-		case GSAPIEndpointNotifications:
-			pathExtension = @"notifications";
-			break;
-		case GSAPIEndpointOrganizations:
-			pathExtension = @"orgs";
-			break;
-		case GSAPIEndpointRepos:
-			pathExtension = @"repos";
-			break;
-		case GSAPIEndpointTeams:
-			pathExtension = @"teams";
-			break;
-		case GSAPIEndpointUser:
-			pathExtension = @"user";
-			break;
-		case GSAPIEndpointUsers:
-			pathExtension = @"users";
-			break;
-		case GSAPIEndpointAuthorizations:
-			pathExtension = @"authorizations";
-			break;
-		case GSAPIEndpointFeeds:
-			pathExtension = @"feeds";
-			break;
-		default:
-			GSAssert();
-			pathExtension = @"unknown";
-			break;
+NSURL *GSAPIURLComplex(NSString *endp, NSString *arg1, NSString *arg2) {
+	NSURL *base = GSAPIURLForEndpoint(endp);
+
+	if (arg1) {
+		base = [base URLByAppendingPathComponent:arg1];
+		if (arg2) {
+			base = [base URLByAppendingPathComponent:arg2];
+		}
 	}
-	return [NSURL URLWithString:[GSAPIHostURL stringByAppendingPathComponent:pathExtension]];
+	
+	return base;
+}
+
+NSURL *GSAPIURLForEndpoint(NSString *endp) {
+	return [NSURL URLWithString:[GSAPIHostURL stringByAppendingPathComponent:endp]];
 }

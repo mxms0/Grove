@@ -16,4 +16,5 @@
 @property (nonatomic) id<GRViewModelDelegate> delegate;
 - (NSInteger)numberOfSections;
 - (NSInteger)numberOfRowsInSection:(NSInteger)section;
+- (NSString *)titleForSection:(NSInteger)section;
 @end

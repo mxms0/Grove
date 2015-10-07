@@ -11,13 +11,17 @@
 
 @implementation GSNotification
 
-- (instancetype)initWithDictionary:(NSDictionary *)dictionary {
-	if ((self = [super initWithDictionary:dictionary])) {
-		GSObjectAssign(dictionary, @"repository", _repository, GSRepository);
-		
-		GSURLAssign(dictionary, @"subscription_url", _subscriptionAPIURL);
-	}
-	return self;
+- (void)configureWithDictionary:(NSDictionary *)dictionary {
+	[super configureWithDictionary:dictionary];
+	
+	GSObjectAssign(dictionary, @"repository", _repository, GSRepository);
+	
+	GSURLAssign(dictionary, @"subscription_url", _subscriptionAPIURL);
+	
+	NSDictionary *subjectPacket = nil;
+	GSAssign(dictionary, @"subject", subjectPacket);
+	
+	GSAssign(subjectPacket, @"title", _title);
 }
 
 @end

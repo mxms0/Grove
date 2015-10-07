@@ -1,6 +1,6 @@
 //
 //  GSObjectInternal.h
-//  Grove
+//  GroveSupport
 //
 //  Created by Max Shavrick on 8/25/15.
 //  Copyright (c) 2015 Milo. All rights reserved.
@@ -43,8 +43,10 @@
 // perhaps create one of these for dates too. that seeems to cover most of the possibilities.
 
 @interface GSObject ()
-@property (nonatomic, readonly) NSURL *directAPIURL;
-
+@property (nonatomic, nullable, readonly) NSURL *directAPIURL;
+@property (nonatomic, nullable, readonly) NSNumber *identifier;
+- (nonnull instancetype)initWithDictionary:(NSDictionary *__nonnull)dictionary;
+- (nullable NSDate *)dateFromISO8601String:(NSString *__nonnull)string;
 @end
 
 #endif
