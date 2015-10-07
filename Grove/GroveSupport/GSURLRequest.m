@@ -11,6 +11,7 @@
 @implementation GSURLRequest
 
 - (void)addAuthToken:(NSString *)token {
+	if (!token) return;
     [self setValue:[NSString stringWithFormat:@"token %@", token] forHTTPHeaderField:@"Authorization"];
 }
 

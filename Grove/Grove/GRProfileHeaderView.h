@@ -10,5 +10,5 @@
 
 @class GSUser;
 @interface GRProfileHeaderView : UIView
-- (void)configureWithUser:(GSUser *)user;
+@property (nonatomic, weak, setter=setUser:) GSUser *user;
 @end

@@ -70,6 +70,7 @@
 		self.currentUser = _users[0];
 		// bad hack for now
 	}
+	// ASK GSGitHubEngine for new data on these now.
 }
 
 @end

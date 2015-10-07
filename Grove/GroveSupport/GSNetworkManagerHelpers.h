@@ -9,20 +9,20 @@
 #import <Foundation/Foundation.h>
 
 static NSString *const GSAPIHostURL = @"https://api.github.com/";
-
-typedef NS_ENUM(NSInteger, GSAPIEndpoint) {
-	GSAPIEndpointRepos,
-	GSAPIEndpointUsers,
-	GSAPIEndpointOrganizations,
-	GSAPIEndpointNetworks,
-	GSAPIEndpointUser,
-	GSAPIEndpointTeams,
-	GSAPIEndpointNotifications,
-	GSAPIEndpointIssues,
-	GSAPIEndpointGists,
-	GSAPIEndpointAuthorizations,
-	GSAPIEndpointFeeds
-};
+// 1st order components
+static NSString *const GSAPIEndpointRepos = @"repos";
+static NSString *const GSAPIEndpointUsers = @"users";
+static NSString *const GSAPIEndpointOrganizations = @"orgs";
+static NSString *const GSAPIEndpointNetworks = @"networks";
+static NSString *const GSAPIEndpointUser = @"user";
+static NSString *const GSAPIEndpointTeams = @"teams";
+static NSString *const GSAPIEndpointNotifications = @"notifications";
+static NSString *const GSAPIEndpointIssues = @"issues";
+static NSString *const GSAPIEndpointGists = @"gists";
+static NSString *const GSAPIEndpointAuthorizations = @"authorizations";
+static NSString *const GSAPIEndpointFeeds = @"feeds";
+// second order components
+static NSString *const GSAPIComponentStarred = @"starred";
 
 typedef NS_ENUM(NSInteger, GSAPIHTTPVerb) {
 	GSAPIHTTPVerbHead,
@@ -34,5 +34,5 @@ typedef NS_ENUM(NSInteger, GSAPIHTTPVerb) {
 };
 
 NSString *GSHTTPVerbStringForVerb(GSAPIHTTPVerb verb);
-
-NSURL *GSAPIURLForEndpoint(GSAPIEndpoint endp);
+NSURL *GSAPIURLComplex(NSString *endp, NSString *arg1, NSString *arg2);
+NSURL *GSAPIURLForEndpoint(NSString *endp);
