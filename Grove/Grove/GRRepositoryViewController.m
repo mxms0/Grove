@@ -12,6 +12,14 @@
 
 @implementation GRRepositoryViewController {
 	GSRepository *repository;
+	UITableView *tableView;
+}
+
+- (instancetype)init {
+	if ((self = [super init])) {
+		tableView = [[UITableView alloc] init];
+	}
+	return self;
 }
 
 - (void)setRepository:(GSRepository *)newRepository {
@@ -29,6 +37,8 @@
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	[self.view setBackgroundColor:[UIColor greenColor]];
+	[self.view addSubview:tableView];
+	[tableView setFrame:self.view.bounds];
 }
 
 @end
