@@ -40,6 +40,10 @@ static NSMutableDictionary *cachedUsers = nil;
 			NSLog(@"GSUser cached. Reusing.");
 			return cachedSelf;
 		}
+		
+		@synchronized(cachedUsers) {
+			cachedUsers[self.username] = self;
+		}
 	}
 	return self;
 }
@@ -74,10 +78,6 @@ static NSMutableDictionary *cachedUsers = nil;
 	GSURLAssign(dictionary, @"repos_url", _repositoriesAPIURL);
 	GSURLAssign(dictionary, @"events_url", _eventsAPIURL);
 	GSURLAssign(dictionary, @"received_events_url", _receivedEventsAPIURL);
-	
-	@synchronized(cachedUsers) {
-		cachedUsers[self.username] = self;
-	}
 }
 
 - (void)encodeWithCoder:(NSCoder *)coder {
