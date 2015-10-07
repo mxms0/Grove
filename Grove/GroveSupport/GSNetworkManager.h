@@ -21,7 +21,6 @@
 - (void)downloadResourceFromURL:(NSURL *__nonnull)url token:(NSString *__nullable)token completionHandler:(void (^__nonnull)(NSURL *__nullable filePath, NSError *__nullable error))handler;
 
 - (void)requestUserNotificationsWithToken:(NSString *__nonnull)token completionHandler:(void (^__nonnull)(NSArray *__nullable notifications, NSError *__nullable error))handler;
-- (void)requestStarredRepositoriesForUsername:(NSString *__nonnull)user token:(NSString *__nullable)token completionHandler:(void (^__nonnull)(NSArray *__nullable repos, NSError *__nullable error))handler;
 
 - (void)sendRequest:(GSURLRequest *__nonnull)request completionHandler:(void (^__nonnull)(GSSerializable *__nullable serializeable, NSError *__nullable error))handler;
 

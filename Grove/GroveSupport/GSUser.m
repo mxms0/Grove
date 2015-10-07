@@ -99,6 +99,7 @@ static NSMutableDictionary *cachedUsers = nil;
 	GSEncode(coder, @"owned_private_repos", _ownedPrivateRepoCount);
 	GSEncode(coder, @"disk_usage", _diskUsage);
 	GSEncode(coder, @"collaborators", _collaboratorCount);
+	GSEncode(coder, @"starredRepositoryCount", _starredRepositoryCount);
 	
 	GSEncode(coder, @"html_url", _browserURL);
 	GSEncode(coder, @"followers_url", _followersAPIURL);
@@ -131,6 +132,7 @@ static NSMutableDictionary *cachedUsers = nil;
 		GSDecodeAssign(coder, @"owned_private_repos", _ownedPrivateRepoCount);
 		GSDecodeAssign(coder, @"disk_usage", _diskUsage);
 		GSDecodeAssign(coder, @"collaborators", _collaboratorCount);
+		GSDecodeAssign(coder, @"starredRepositoryCount", _starredRepositoryCount);
 		
 		GSDecodeAssign(coder, @"html_url", _browserURL);
 		GSDecodeAssign(coder, @"followers_url", _followersAPIURL);

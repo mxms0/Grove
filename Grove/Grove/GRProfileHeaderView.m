@@ -81,7 +81,6 @@
 
 - (void)setUser:(GSUser *)user {
 	_user = user;
-	NSLog(@"set user %@:%@", [NSThread callStackSymbols], user);
 	[usernameLabel setText:[user username]];
 	[nameLabel setText:[user fullName]];
 	[locationLabel setText:[user location]];
