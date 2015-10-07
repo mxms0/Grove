@@ -13,6 +13,7 @@
 
 - (void)configureWithDictionary:(NSDictionary *)dictionary {
 	[super configureWithDictionary:dictionary];
+	
 	GSObjectAssign(dictionary, @"repository", _repository, GSRepository);
 	
 	GSURLAssign(dictionary, @"subscription_url", _subscriptionAPIURL);

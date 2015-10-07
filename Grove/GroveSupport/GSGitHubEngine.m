@@ -10,6 +10,9 @@
 #import "GSNetworkManager.h"
 #import "GSEvent.h"
 #import "GroveSupportInternal.h"
+#import "GSURLRequest.h"
+
+static NSString *const GSAPIURLComponentStarred = @"starred";
 
 @implementation GSGitHubEngine
 
@@ -25,7 +28,7 @@
 
 - (instancetype)init {
 	if ((self = [super init])) {
-
+		
 	}
 	return self;
 }
@@ -76,6 +79,27 @@
 	_user = [[GSUser alloc] initWithDictionary:userData];
 	[_user setToken:token];
 	
+	wait = dispatch_semaphore_create(0);
+	
+	__block NSArray *starredRepoData = nil;
+	
+	[self repositoriesStarredByUser:_user completionHandler:^(NSArray *repos, NSError *errorParam) {
+		error = errorParam;
+		starredRepoData = repos;
+		
+		dispatch_semaphore_signal(wait);
+		
+	}];
+	
+	dispatch_semaphore_wait(wait, DISPATCH_TIME_FOREVER);
+	
+	if (error) {
+		handler(nil, error);
+		return;
+	}
+	
+	[_user setStarredRepositoryCount:@([starredRepoData count])];
+	NSLog(@"FDfdddd %@:%@", _user, _user.starredRepositoryCount);
 	handler(_user, nil);
 }
 
@@ -90,7 +114,7 @@
 				GSEvent *event = [[GSEvent alloc] initWithDictionary:eventPacket];
 				[serializedEvents addObject:event];
 			}
-		
+			
 			handler(serializedEvents, error);
 		}
 		else {
@@ -128,8 +152,19 @@
 			handler(nil, error);
 			return;
 		}
+		
 		GSUser *user = [[GSUser alloc] initWithDictionary:dictionary];
-		handler(user, nil);
+		
+		[self repositoriesStarredByUser:user completionHandler:^(NSArray * _Nullable repos, NSError * _Nullable error) {
+			if (error) {
+				handler(nil, error);
+				return;
+			}
+			
+			[user setStarredRepositoryCount:@([repos count])];
+			NSLog(@"USER FOUD BEING USED %@", user);
+			handler(user, nil);
+		}];
 	}];
 }
 
@@ -137,7 +172,7 @@
 	if (!user.token) {
 		GSAssert();
 	}
-
+	
 	[[GSNetworkManager sharedInstance] requestUserNotificationsWithToken:user.token completionHandler:^(NSArray *__nullable notifs, NSError *__nullable error) {
 		
 		if (error) {
@@ -168,13 +203,33 @@
 }
 
 - (void)repositoriesStarredByUser:(GSUser *__nonnull)user completionHandler:(void (^__nonnull)(NSArray *__nullable repos, NSError *__nullable error))handler {
-	if (user.token) {
-		// use /user/starred
+	NSURL *destination = GSAPIURLComplex(GSAPIEndpointUsers, user.username, GSAPIComponentStarred);
+	
+#if PREFER_GIVEN_API_URLS
+	if (user.starredAPIURL) {
+		destination = user.starredAPIURL;
 	}
-	else {
-		// use users/{user.username}/starred
-	}
-	GSAssert();
+#endif
+	
+	
+	GSURLRequest *request = [[GSURLRequest alloc] initWithURL:destination];
+	[request addAuthToken:user.token];
+	
+	[[GSNetworkManager sharedInstance] sendRequest:request completionHandler:^(GSSerializable *serializeable, NSError *error) {
+		if (error) {
+			handler(nil, error);
+			return;
+		}
+		if ([serializeable isKindOfClass:[NSArray class]]) {
+			NSMutableArray *ret = [[NSMutableArray alloc] init];
+			for (NSDictionary *dict in (NSArray *)serializeable) {
+				GSRepository *repo = [[GSRepository alloc] initWithDictionary:dict];
+				[ret addObject:repo];
+			}
+			
+			handler((NSArray *)ret, nil);
+		}
+	}];
 }
 
 #pragma mark Repositories
@@ -207,19 +262,19 @@
 }
 
 - (void)commentsForGist:(GSGist *__nonnull)gist completionHandler:(void (^__nonnull)(NSArray *__nullable comments, NSError *__nullable))handler {
-    GSAssert();
+	GSAssert();
 }
 
 - (void)commentOnGist:(GSGist *__nonnull)gist withMessage:(NSString *__nonnull)message attachments:(NSArray *__nullable)attachments completionHandler:(void (^__nonnull)(__nullable id comment, NSError *__nullable error))handler {
-    GSAssert();
+	GSAssert();
 }
 
 - (void)editComent:(__nonnull id)comment gist:(__nonnull id)gist newMessage:(NSString *__nonnull)message completionHandler:(void (^__nonnull)(__nullable id comment, NSError *__nullable error))handler {
-    GSAssert();
+	GSAssert();
 }
 
 - (void)deleteComment:(__nonnull id)comment gist:(__nonnull id)gist completionHandler:(void (^__nonnull)(BOOL success, NSError *__nullable error))handler {
-    GSAssert();
+	GSAssert();
 }
 
 @end

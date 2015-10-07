@@ -25,4 +25,8 @@ static NSString *const GSClientSecret = @"192812c39ecc20317489a9b8c3d62989aa7e28
 #import "GSCommentInternal.h"
 #import "GSGistInternal.h"
 
+#define PREFER_GIVEN_API_URLS 0
+// fallback, if API didn't give us URL for some data, form it ourself
+// versus always forming it ourself.
+
 #endif

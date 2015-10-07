@@ -11,4 +11,5 @@
 @interface GSObject : NSObject <NSCoding>
 @property (nonatomic, strong) NSDate *updatedDate;
 - (void)configureWithDictionary:(NSDictionary *)dictionary;
+- (void)update;
 @end

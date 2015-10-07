@@ -102,7 +102,6 @@
 	}
 	else {
 		GSNotification *notification = [[notifications objectForKey:[[notifications allKeys] objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row - 1];
-		NSLog(@"notification %@", notification);
 		cell.textLabel.text = [notification title];
 	}
 	

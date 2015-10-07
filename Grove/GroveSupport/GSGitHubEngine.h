@@ -17,7 +17,6 @@
 - (void)userForUsername:(NSString *__nonnull)username completionHandler:(void (^__nonnull)(GSUser *__nullable user, NSError *__nullable error))handler;
 
 - (void)notificationsForUser:(GSUser *__nonnull)user completionHandler:(void (^__nonnull)(NSArray *__nullable notifications, NSError *__nullable error))handler;
-
 // Users
 //- (void)emailsForUser:(GSUser *__nonnull)user completionHandler:(void (^__nonnull)(NSArray *__nullable emails, NSError *__nullable error))handler;
 // emails have 3 fields, address, verified, and primary. hmm...

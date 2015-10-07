@@ -10,6 +10,7 @@
 #import "GRProfileModel.h"
 #import "GRProfileHeaderView.h"
 #import "GRSessionManager.h"
+#import <GroveSupport/GSGitHubEngine.h>
 
 @implementation GRProfileViewController {
 	GRProfileModel *model;
@@ -38,7 +39,7 @@
 
 - (void)reloadData {
 	[tableView reloadData];
-	[(GRProfileHeaderView *)[tableView headerViewForSection:0] configureWithUser:[model activeUser]];
+	[(GRProfileHeaderView *)[tableView headerViewForSection:0] setUser:[model activeUser]];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)_tableView {
@@ -60,7 +61,7 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
 	if (section == 0) {
 		GRProfileHeaderView *header = [[GRProfileHeaderView alloc] init];
-		[header configureWithUser:[model activeUser]];
+		[header setUser:[model activeUser]];
 		return header;
 	}
 	return nil;

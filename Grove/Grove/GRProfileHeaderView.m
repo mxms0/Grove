@@ -75,14 +75,17 @@
 		GRProfileStatisticButton *button = statsButtons[i];
 		[button setFrame:CGRectMake(floorf(i * self.frame.size.width / 3), (profileImageView.frame.size.height + profileImageView.frame.origin.y * 2), floorf(self.frame.size.width/3), 64)];
 	}
+	
+	[self setUser:self.user];
 }
 
-- (void)configureWithUser:(GSUser *)user {
+- (void)setUser:(GSUser *)user {
+	_user = user;
 	[usernameLabel setText:[user username]];
 	[nameLabel setText:[user fullName]];
 	[locationLabel setText:[user location]];
 
-	
+	[starredButton setText:[[user starredRepositoryCount] stringValue]];
 	[followingButton setText:[[user followingCount] stringValue]];
 	[followersButton setText:[[user followersCount] stringValue]];
 }

@@ -22,6 +22,7 @@
 @property (nonatomic, nullable, strong) NSString *biography;
 @property (nonatomic, nullable, strong) NSNumber *followersCount;
 @property (nonatomic, nullable, strong) NSNumber *followingCount;
+@property (nonatomic, nullable, strong) NSNumber *starredRepositoryCount;
 @property (nonatomic, nullable, strong) NSNumber *publicRepoCount;
 @property (nonatomic, nullable, strong) NSNumber *publicGistCount;
 @property (nonatomic, nullable, strong) NSDate *createdDate;
