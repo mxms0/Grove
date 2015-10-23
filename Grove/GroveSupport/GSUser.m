@@ -148,4 +148,13 @@ static NSMutableDictionary *cachedUsers = nil;
 	return self;
 }
 
+- (void)update {
+	[super update];
+	// request info through GSGitHubEngine somehow.
+	// the conflict here seems to be that some issues and repo info are private
+	// and can only be accessed with an api token
+	// :/ not sure how to deal with this exactly.
+	[self configureWithDictionary:nil];
+}
+
 @end

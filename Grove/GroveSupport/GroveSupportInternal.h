@@ -23,6 +23,7 @@ static NSString *const GSClientSecret = @"192812c39ecc20317489a9b8c3d62989aa7e28
 #import "GSActorInternal.h"
 #import "GSIssueInternal.h"
 #import "GSCommentInternal.h"
+#import "GSNetworkManager.h"
 #import "GSGistInternal.h"
 
 #define PREFER_GIVEN_API_URLS 0

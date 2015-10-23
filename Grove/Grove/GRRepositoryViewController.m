@@ -28,6 +28,7 @@
 	}
 	repository = newRepository;
 	[repository addObserver:self forKeyPath:GSUpdatedDataKey options:0 context:NULL];
+	[repository update];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
