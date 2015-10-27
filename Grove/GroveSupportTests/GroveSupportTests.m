@@ -36,6 +36,8 @@ static NSString *globalPassword = @"!Rocky&Hugo68";
 			NSLog(@"error occured. %@", error);
 		}
 		
+		[[GSGitHubEngine sharedInstance] setActiveUser:user];
+		
 		[[GSGitHubEngine sharedInstance] eventsForUser:user completionHandler:^(id __nullable events, NSError * __nullable error) {
 			NSLog(@"Events %@", events);
 		}];

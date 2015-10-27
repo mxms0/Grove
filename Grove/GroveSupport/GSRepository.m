@@ -23,9 +23,18 @@
 	GSObjectAssign(dictionary, @"owner", _owner, GSUser);
 	GSURLAssign(dictionary, @"html_url", _browserURL);
 	GSAssign(dictionary, @"name", _name);
+	// API is inconsistent here
+	// sometimes "name" represents User/RepoName
+	// sometimes "name" just represents RepoName
+	if ([_name containsString:@"/"]) {
+		
+	}
 }
 
 - (NSString *)pathString {
+#if API_TRUST_LEVEL >= 1
+	// return name retrieved from github
+#endif
 	return [NSString stringWithFormat:@"%@/%@", _owner.username, _name];
 }
 

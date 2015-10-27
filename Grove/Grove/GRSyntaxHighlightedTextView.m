@@ -31,7 +31,7 @@
 
 - (void)_asyncSyntaxHighlight_objc_live:(BOOL)live {
 
-	NSString *base = (self.text ?: self.attributedText.string);
+	NSString *base = (self.text ? self.text : self.attributedText.string);
 	NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:base];
 	NSUInteger stringLength = [self.text length];
 	

@@ -11,6 +11,7 @@
 @class GSUser, GSEvent, GSRepository, GSGist;
 
 @interface GSGitHubEngine : NSObject
+@property (nonatomic, strong, nullable) GSUser *activeUser;
 + (nonnull instancetype)sharedInstance;
 - (void)authenticateUserWithUsername:(NSString *__nonnull)username password:(NSString *__nonnull)password completionHandler:(void (^ __nullable)(GSUser *__nullable user, NSError *__nullable error))handler;
 - (void)eventsForUser:(GSUser *__nonnull)user completionHandler:(void (^__nonnull)(NSArray *__nullable events, NSError *__nullable error))handler;
@@ -35,8 +36,8 @@
 - (void)collaboratorsForRepositoryNamed:(NSString *__nonnull)repoName owner:(NSString *__nonnull)owner completionHandler:(void (^__nonnull)(NSArray *__nullable collabs, NSError *__nullable error))error;
 
 // Starring
-- (void)starRepository:(GSRepository *__nonnull)repo forUser:(GSUser *__nonnull)user completionHandler:(void (^__nonnull)(BOOL success, NSError *__nullable error))handler;
-- (void)unstarRepository:(GSRepository *__nonnull)repo forUser:(GSUser *__nonnull)user completionHandler:(void (^__nonnull)(BOOL success, NSError *__nullable error))handler;
+- (void)starRepository:(GSRepository *__nonnull)repo completionHandler:(void (^__nonnull)(BOOL success, NSError *__nullable error))handler;
+- (void)unstarRepository:(GSRepository *__nonnull)repo completionHandler:(void (^__nonnull)(BOOL success, NSError *__nullable error))handler;
 - (void)repositoriesStarredByUser:(GSUser *__nonnull)user completionHandler:(void (^__nonnull)(NSArray *__nullable repos, NSError *__nullable error))handler;
 
 // Gists

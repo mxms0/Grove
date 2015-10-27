@@ -99,7 +99,7 @@ static NSString *const GSAPIURLComponentStarred = @"starred";
 	}
 	
 	[_user setStarredRepositoryCount:@([starredRepoData count])];
-	NSLog(@"FDfdddd %@:%@", _user, _user.starredRepositoryCount);
+
 	handler(_user, nil);
 }
 
@@ -193,11 +193,11 @@ static NSString *const GSAPIURLComponentStarred = @"starred";
 
 #pragma mark Starring
 
-- (void)starRepository:(GSRepository *__nonnull)repo forUser:(GSUser *__nonnull)user completionHandler:(void (^__nonnull)(BOOL success, NSError *__nullable error))handler {
+- (void)starRepository:(GSRepository *__nonnull)repo completionHandler:(void (^__nonnull)(BOOL success, NSError *__nullable error))handler {
 	// PUT
 	GSAssert();
 }
-- (void)unstarRepository:(GSRepository *__nonnull)repo forUser:(GSUser *__nonnull)user completionHandler:(void (^__nonnull)(BOOL success, NSError *__nullable error))handler {
+- (void)unstarRepository:(GSRepository *__nonnull)repo completionHandler:(void (^__nonnull)(BOOL success, NSError *__nullable error))handler {
 	// DELETE
 	GSAssert();
 }
@@ -205,12 +205,11 @@ static NSString *const GSAPIURLComponentStarred = @"starred";
 - (void)repositoriesStarredByUser:(GSUser *__nonnull)user completionHandler:(void (^__nonnull)(NSArray *__nullable repos, NSError *__nullable error))handler {
 	NSURL *destination = GSAPIURLComplex(GSAPIEndpointUsers, user.username, GSAPIComponentStarred);
 	
-#if PREFER_GIVEN_API_URLS
+#if API_TRUST_LEVEL >= 3
 	if (user.starredAPIURL) {
 		destination = user.starredAPIURL;
 	}
 #endif
-	
 	
 	GSURLRequest *request = [[GSURLRequest alloc] initWithURL:destination];
 	[request addAuthToken:user.token];
@@ -265,15 +264,15 @@ static NSString *const GSAPIURLComponentStarred = @"starred";
 	GSAssert();
 }
 
-- (void)commentOnGist:(GSGist *__nonnull)gist withMessage:(NSString *__nonnull)message attachments:(NSArray *__nullable)attachments completionHandler:(void (^__nonnull)(__nullable id comment, NSError *__nullable error))handler {
+- (void)commentOnGist:(GSGist *__nonnull)gist withMessage:(NSString *__nonnull)message attachments:(NSArray<id> *__nullable)attachments completionHandler:(void (^__nonnull)(__nullable id comment, NSError *__nullable error))handler {
 	GSAssert();
 }
 
-- (void)editComent:(__nonnull id)comment gist:(__nonnull id)gist newMessage:(NSString *__nonnull)message completionHandler:(void (^__nonnull)(__nullable id comment, NSError *__nullable error))handler {
+- (void)editComent:(__nonnull id)comment gist:(GSGist *__nonnull)gist newMessage:(NSString *__nonnull)message completionHandler:(void (^__nonnull)(__nullable id comment, NSError *__nullable error))handler {
 	GSAssert();
 }
 
-- (void)deleteComment:(__nonnull id)comment gist:(__nonnull id)gist completionHandler:(void (^__nonnull)(BOOL success, NSError *__nullable error))handler {
+- (void)deleteComment:(__nonnull id)comment gist:(GSGist *__nonnull)gist completionHandler:(void (^__nonnull)(BOOL success, NSError *__nullable error))handler {
 	GSAssert();
 }
 
