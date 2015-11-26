@@ -154,7 +154,18 @@ static NSMutableDictionary *cachedUsers = nil;
 	// the conflict here seems to be that some issues and repo info are private
 	// and can only be accessed with an api token
 	// :/ not sure how to deal with this exactly.
-	[self configureWithDictionary:nil];
+	
+	[[GSGitHubEngine sharedInstance] _userForUsername:self.username token:nil completionHandler:^(NSDictionary *__nullable user, NSError *__nullable error) {
+		if (!error) {
+			NSLog(@"new update data %@", user);
+			[self configureWithDictionary:user];
+		}
+		else {
+			// neeed someo way to report to the user that there was an issue
+			GSAssert();
+			NSLog(@"Error %@", error);
+		}
+	}];
 }
 
 @end

@@ -140,6 +140,18 @@ static NSString *const GSAPIURLComponentStarred = @"starred";
 	}];
 }
 
+- (void)_userForUsername:(NSString *__nonnull)username token:(NSString *)_token completionHandler:(void (^__nonnull)(NSDictionary *__nullable user, NSError *__nullable error))handler {
+	
+	NSString *token = _token ? _token : [self.activeUser token];
+	
+	[[GSNetworkManager sharedInstance] requestUserInformationForUsername:username token:token completionHandler:^(NSDictionary * _Nullable response, NSError * _Nullable error) {
+		
+		handler(response, error);
+		
+	}];
+	
+}
+
 - (void)userForUsername:(NSString *__nonnull)username completionHandler:(void (^__nonnull)(GSUser *__nullable user, NSError *__nullable error))handler {
 	GSUser *cached = [GSUser cachedUserWithUsername:username];
 	if (cached) {
@@ -147,12 +159,11 @@ static NSString *const GSAPIURLComponentStarred = @"starred";
 		return;
 	}
 	
-	[[GSNetworkManager sharedInstance] requestUserInformationForUsername:username token:nil completionHandler:^(NSDictionary *__nullable dictionary, NSError *__nullable error) {
+	[self _userForUsername:username token:nil completionHandler:^(NSDictionary * _Nullable dictionary, NSError * _Nullable error) {
 		if (error) {
 			handler(nil, error);
 			return;
 		}
-		
 		GSUser *user = [[GSUser alloc] initWithDictionary:dictionary];
 		
 		[self repositoriesStarredByUser:user completionHandler:^(NSArray * _Nullable repos, NSError * _Nullable error) {
@@ -205,7 +216,7 @@ static NSString *const GSAPIURLComponentStarred = @"starred";
 - (void)repositoriesStarredByUser:(GSUser *__nonnull)user completionHandler:(void (^__nonnull)(NSArray *__nullable repos, NSError *__nullable error))handler {
 	NSURL *destination = GSAPIURLComplex(GSAPIEndpointUsers, user.username, GSAPIComponentStarred);
 	
-#if API_TRUST_LEVEL >= 3
+#if API_TRUST_LEVEL >= API_TRUST_LEVEL_AVERAGE
 	if (user.starredAPIURL) {
 		destination = user.starredAPIURL;
 	}

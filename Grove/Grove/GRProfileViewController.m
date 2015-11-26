@@ -11,6 +11,7 @@
 #import "GRProfileHeaderView.h"
 #import "GRSessionManager.h"
 #import <GroveSupport/GSGitHubEngine.h>
+#import <GroveSupport/GroveSupport.h>
 
 @implementation GRProfileViewController {
 	GRProfileModel *model;
@@ -32,8 +33,19 @@
     return self;
 }
 
-- (void)setUser:(GSUser *)user {
-	model = [[GRProfileModel alloc] initWithUser:user];
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
+	NSLog(@"user has new data %@:%@:%@", object, keyPath, change);
+}
+
+- (void)setUser:(GSUser *)newUser {
+	if (self.user) {
+		[self.user removeObserver:self forKeyPath:GSUpdatedDataKey];
+	}
+	_user = newUser;
+	[self.user addObserver:self forKeyPath:GSUpdatedDataKey options:0 context:NULL];
+	[self.user update];
+	
+	model = [[GRProfileModel alloc] initWithUser:self.user];
 	[model setDelegate:self];
 }
 

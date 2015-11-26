@@ -20,6 +20,8 @@
 	if ((self = [super init])) {
 		currentUser = user;
 		
+		NSLog(@"fds %@", user);
+		
 		[[GSCacheManager sharedInstance] findImageAssetWithURL:[currentUser avatarURL] loggedInUser:user downloadIfNecessary:YES completionHandler:^(UIImage * __nullable image, NSError *__nullable error) {
 			[self.delegate reloadData];
 		}];
