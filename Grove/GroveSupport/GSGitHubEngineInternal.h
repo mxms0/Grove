@@ -14,8 +14,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface GSGitHubEngine ()
-- (void)_userForUsername:(NSString *)username token:(NSString *__nullable)_token completionHandler:(void (^)(NSDictionary *__nullable user, NSError *__nullable error))handler;
-- (void)_dirtyRequestWithDirectAPIURL:(NSURL *)url completionHandler:(void (^)(NSDictionary *__nullable ret, NSError *__nullable error))handler;
+
+- (void)_dirtyRequestWithObject:(GSObject *)obj completionHandler:(void (^)(NSDictionary *__nullable ret, NSError *__nullable error))handler;
 
 @end
 

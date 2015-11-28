@@ -105,7 +105,7 @@ NS_ASSUME_NONNULL_BEGIN
 	handler(_user, nil);
 }
 
-- (void)eventsForUser:(GSUser *)user completionHandler:(void (^)(NSArray *events, NSError *error))handler {
+- (void)eventsForUser:(GSUser *)user completionHandler:(void (^)(NSArray *__nullable events, NSError *__nullable error))handler {
 	[[GSNetworkManager sharedInstance] requestEventsForUser:user.username token:user.token completionHandler:^(id events, NSError *error) {
 		if ([events isKindOfClass:[NSArray class]]) {
 			NSMutableArray *serializedEvents = [[NSMutableArray alloc] init];
@@ -142,18 +142,6 @@ NS_ASSUME_NONNULL_BEGIN
 	}];
 }
 
-- (void)_userForUsername:(NSString *)username token:(NSString *__nullable)_token completionHandler:(void (^)(NSDictionary *__nullable user, NSError *__nullable error))handler {
-	
-	NSString *token = _token ? _token : [self.activeUser token];
-	
-	[[GSNetworkManager sharedInstance] requestUserInformationForUsername:username token:token completionHandler:^(NSDictionary * _Nullable response, NSError * _Nullable error) {
-		
-		handler(response, error);
-		
-	}];
-	
-}
-
 - (void)userForUsername:(NSString *)username completionHandler:(void (^)(GSUser *__nullable user, NSError *__nullable error))handler {
 	GSUser *cached = [GSUser cachedUserWithUsername:username];
 	if (cached) {
@@ -161,11 +149,12 @@ NS_ASSUME_NONNULL_BEGIN
 		return;
 	}
 	
-	[self _userForUsername:username token:nil completionHandler:^(NSDictionary * _Nullable dictionary, NSError * _Nullable error) {
+	[[GSNetworkManager sharedInstance] requestUserInformationForUsername:username token:nil completionHandler:^(NSDictionary *__nullable dictionary, NSError *__nullable error) {
 		if (error) {
 			handler(nil, error);
 			return;
 		}
+		
 		GSUser *user = [[GSUser alloc] initWithDictionary:dictionary];
 		
 		[self repositoriesStarredByUser:user completionHandler:^(NSArray * _Nullable repos, NSError * _Nullable error) {
@@ -204,17 +193,19 @@ NS_ASSUME_NONNULL_BEGIN
 	}];
 }
 
-- (void)_dirtyRequestWithDirectAPIURL:(NSURL *)url completionHandler:(void (^)(NSDictionary *__nullable ret, NSError *__nullable error))handler {
-	if (!url) {
+- (void)_dirtyRequestWithObject:(GSObject *)obj completionHandler:(void (^)(NSDictionary *__nullable ret, NSError *__nullable error))handler {
+	if (!obj || !obj.directAPIURL) {
 		GSAssert();
 		return;
 	}
 	
-	GSURLRequest *request = [[GSURLRequest alloc] initWithURL:url];
+	GSURLRequest *request = [[GSURLRequest alloc] initWithURL:obj.directAPIURL];
 	[request addAuthToken:self.activeUser.token];
+	[request addValue:GSRFC2616DTimestampFromDate(obj.updatedDate) forHTTPHeaderField:@"If-Modified-Since"];
+	// this may or may not work, but it's worth a shot. :- )
 	
 	[[GSNetworkManager sharedInstance] sendRequest:request completionHandler:^(GSSerializable * _Nullable serializeable, NSError * _Nullable error) {
-		if (error) {
+		if (error || !serializeable) {
 			handler(nil, error);
 			return;
 		}

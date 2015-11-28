@@ -59,7 +59,7 @@
 
 - (void)update {
 	if (self.directAPIURL) {
-		[[GSGitHubEngine sharedInstance] _dirtyRequestWithDirectAPIURL:self.directAPIURL completionHandler:^(NSDictionary *ret, NSError *error) {
+		[[GSGitHubEngine sharedInstance] _dirtyRequestWithObject:self completionHandler:^(NSDictionary *ret, NSError *error) {
 			NSLog(@"New data %@", ret);
 			if (!error) {
 				[self configureWithDictionary:ret];
