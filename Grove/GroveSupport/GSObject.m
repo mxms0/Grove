@@ -22,8 +22,17 @@
 }
 
 - (void)configureWithDictionary:(NSDictionary *)dictionary {
+	/*
+	 Consider the implications of this:
+	 Whenever configuring, will always report updated date
+	 Even if the data is the same
+	 Shouldn't be an issue, the user can just post it back to the UI no issue
+	 But should it be significant not to notify user if no data has changed?
+	 Tried a hash, but -hash isn't good enough, gonna need an MD5
+	 Which could be slow and costly.
+	 */
 	GSAssign(dictionary, @"id", _identifier);
-	GSAssign(dictionary, @"url", _directAPIURL);
+	GSURLAssign(dictionary, @"url", _directAPIURL);
 	self.updatedDate = [NSDate date];
 }
 
@@ -35,17 +44,31 @@
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
 	GSEncode(aCoder, @"id", self.identifier);
+	GSEncode(aCoder, @"url", self.directAPIURL);
+	GSEncode(aCoder, @"updatedDate", self.updatedDate);
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
 	if ((self = [super init])) {
 		GSDecodeAssign(aDecoder, @"id", _identifier);
+		GSDecodeAssign(aDecoder, @"url", _directAPIURL);
+		GSDecodeAssign(aDecoder, @"updatedDate", self.updatedDate);
 	}
 	return self;
 }
 
 - (void)update {
-	
+	if (self.directAPIURL) {
+		[[GSGitHubEngine sharedInstance] _dirtyRequestWithDirectAPIURL:self.directAPIURL completionHandler:^(NSDictionary *ret, NSError *error) {
+			NSLog(@"New data %@", ret);
+			if (!error) {
+				[self configureWithDictionary:ret];
+			}
+		}];
+	}
+	else {
+		GSAssert();
+	}
 }
 
 @end

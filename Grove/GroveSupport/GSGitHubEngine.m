@@ -14,6 +14,8 @@
 
 static NSString *const GSAPIURLComponentStarred = @"starred";
 
+NS_ASSUME_NONNULL_BEGIN
+
 @implementation GSGitHubEngine
 
 + (instancetype)sharedInstance {
@@ -33,7 +35,7 @@ static NSString *const GSAPIURLComponentStarred = @"starred";
 	return self;
 }
 
-- (void)authenticateUserWithUsername:(NSString *__nonnull)username password:(NSString *__nonnull)password completionHandler:(void (^__nullable)(GSUser *__nullable, NSError *__nullable))handler {
+- (void)authenticateUserWithUsername:(NSString *)username password:(NSString *)password completionHandler:(void (^__nullable)(GSUser *__nullable, NSError *__nullable))handler {
 	
 	// this API is blocking. Not sure if I'm okay with this
 	// since it has an async design
@@ -128,7 +130,7 @@ static NSString *const GSAPIURLComponentStarred = @"starred";
 	}];
 }
 
-- (void)userInformationWithToken:(NSString *__nonnull)token completionHandler:(void (^__nonnull)(id __nullable information, NSError *__nullable error))handler {
+- (void)userInformationWithToken:(NSString *)token completionHandler:(void (^)(id __nullable information, NSError *__nullable error))handler {
 	[[GSNetworkManager sharedInstance] requestUserInformationForToken:token completionHandler:^(id info, NSError *error) {
 		if ([info isKindOfClass:[NSDictionary class]]) {
 			handler(info, NULL);
@@ -140,7 +142,7 @@ static NSString *const GSAPIURLComponentStarred = @"starred";
 	}];
 }
 
-- (void)_userForUsername:(NSString *__nonnull)username token:(NSString *)_token completionHandler:(void (^__nonnull)(NSDictionary *__nullable user, NSError *__nullable error))handler {
+- (void)_userForUsername:(NSString *)username token:(NSString *__nullable)_token completionHandler:(void (^)(NSDictionary *__nullable user, NSError *__nullable error))handler {
 	
 	NSString *token = _token ? _token : [self.activeUser token];
 	
@@ -152,7 +154,7 @@ static NSString *const GSAPIURLComponentStarred = @"starred";
 	
 }
 
-- (void)userForUsername:(NSString *__nonnull)username completionHandler:(void (^__nonnull)(GSUser *__nullable user, NSError *__nullable error))handler {
+- (void)userForUsername:(NSString *)username completionHandler:(void (^)(GSUser *__nullable user, NSError *__nullable error))handler {
 	GSUser *cached = [GSUser cachedUserWithUsername:username];
 	if (cached) {
 		handler(cached, nil);
@@ -179,7 +181,7 @@ static NSString *const GSAPIURLComponentStarred = @"starred";
 	}];
 }
 
-- (void)notificationsForUser:(GSUser *__nonnull)user completionHandler:(void (^__nonnull)(NSArray *__nullable notifications, NSError *__nullable error))handler {
+- (void)notificationsForUser:(GSUser *)user completionHandler:(void (^)(NSArray *__nullable notifications, NSError *__nullable error))handler {
 	if (!user.token) {
 		GSAssert();
 	}
@@ -202,18 +204,43 @@ static NSString *const GSAPIURLComponentStarred = @"starred";
 	}];
 }
 
+- (void)_dirtyRequestWithDirectAPIURL:(NSURL *)url completionHandler:(void (^)(NSDictionary *__nullable ret, NSError *__nullable error))handler {
+	if (!url) {
+		GSAssert();
+		return;
+	}
+	
+	GSURLRequest *request = [[GSURLRequest alloc] initWithURL:url];
+	[request addAuthToken:self.activeUser.token];
+	
+	[[GSNetworkManager sharedInstance] sendRequest:request completionHandler:^(GSSerializable * _Nullable serializeable, NSError * _Nullable error) {
+		if (error) {
+			handler(nil, error);
+			return;
+		}
+		
+		if ([serializeable isKindOfClass:[NSDictionary class]]) {
+			handler((NSDictionary *)serializeable, nil);
+		}
+		else {
+			GSAssert();
+		}
+	}];
+}
+
 #pragma mark Starring
 
-- (void)starRepository:(GSRepository *__nonnull)repo completionHandler:(void (^__nonnull)(BOOL success, NSError *__nullable error))handler {
+- (void)starRepository:(GSRepository *)repo completionHandler:(void (^)(BOOL success, NSError *__nullable error))handler {
 	// PUT
 	GSAssert();
 }
-- (void)unstarRepository:(GSRepository *__nonnull)repo completionHandler:(void (^__nonnull)(BOOL success, NSError *__nullable error))handler {
+
+- (void)unstarRepository:(GSRepository *)repo completionHandler:(void (^)(BOOL success, NSError *__nullable error))handler {
 	// DELETE
 	GSAssert();
 }
 
-- (void)repositoriesStarredByUser:(GSUser *__nonnull)user completionHandler:(void (^__nonnull)(NSArray *__nullable repos, NSError *__nullable error))handler {
+- (void)repositoriesStarredByUser:(GSUser *)user completionHandler:(void (^)(NSArray *__nullable repos, NSError *__nullable error))handler {
 	NSURL *destination = GSAPIURLComplex(GSAPIEndpointUsers, user.username, GSAPIComponentStarred);
 	
 #if API_TRUST_LEVEL >= API_TRUST_LEVEL_AVERAGE
@@ -244,25 +271,25 @@ static NSString *const GSAPIURLComponentStarred = @"starred";
 
 #pragma mark Repositories
 
-- (void)repositoriesForUser:(GSUser *__nonnull)user completionHandler:(void (^)(NSArray *__nullable repos, NSError *__nullable error))handler {
+- (void)repositoriesForUser:(GSUser *)user completionHandler:(void (^)(NSArray *__nullable repos, NSError *__nullable error))handler {
 	GSAssert();
 }
 
-- (void)repositoriesForUsername:(NSString *__nonnull)username completionHandler:(void (^)(NSArray *__nullable repos, NSError *__nullable error))handler {
+- (void)repositoriesForUsername:(NSString *)username completionHandler:(void (^)(NSArray *__nullable repos, NSError *__nullable error))handler {
 	GSAssert();
 }
 
-- (void)collaboratorsForRepository:(GSRepository *__nonnull)repo completionHandler:(void (^__nonnull)(NSArray *__nullable collabs, NSError *__nullable error))error {
+- (void)collaboratorsForRepository:(GSRepository *)repo completionHandler:(void (^)(NSArray *__nullable collabs, NSError *__nullable error))error {
 	GSAssert();
 }
 
-- (void)collaboratorsForRepositoryNamed:(NSString *__nonnull)repoName owner:(NSString *__nonnull)owner completionHandler:(void (^__nonnull)(NSArray *__nullable collabs, NSError *__nullable error))error {
+- (void)collaboratorsForRepositoryNamed:(NSString *)repoName owner:(NSString *)owner completionHandler:(void (^)(NSArray *__nullable collabs, NSError *__nullable error))error {
 	GSAssert();
 }
 
 #pragma mark Gists
 
-- (void)gistsForUser:(GSUser *)user completionHandler:(void (^__nonnull)(NSArray *__nullable gists, NSError *__nullable))handler {
+- (void)gistsForUser:(GSUser *)user completionHandler:(void (^)(NSArray *__nullable gists, NSError *__nullable))handler {
 	if (user.token) {
 		
 	}
@@ -271,20 +298,22 @@ static NSString *const GSAPIURLComponentStarred = @"starred";
 	}
 }
 
-- (void)commentsForGist:(GSGist *__nonnull)gist completionHandler:(void (^__nonnull)(NSArray *__nullable comments, NSError *__nullable))handler {
+- (void)commentsForGist:(GSGist *)gist completionHandler:(void (^)(NSArray *__nullable comments, NSError *__nullable))handler {
 	GSAssert();
 }
 
-- (void)commentOnGist:(GSGist *__nonnull)gist withMessage:(NSString *__nonnull)message attachments:(NSArray<id> *__nullable)attachments completionHandler:(void (^__nonnull)(__nullable id comment, NSError *__nullable error))handler {
+- (void)commentOnGist:(GSGist *)gist withMessage:(NSString *)message attachments:(NSArray<id> *__nullable)attachments completionHandler:(void (^)(__nullable id comment, NSError *__nullable error))handler {
 	GSAssert();
 }
 
-- (void)editComent:(__nonnull id)comment gist:(GSGist *__nonnull)gist newMessage:(NSString *__nonnull)message completionHandler:(void (^__nonnull)(__nullable id comment, NSError *__nullable error))handler {
+- (void)editComent:(id)comment gist:(GSGist *)gist newMessage:(NSString *)message completionHandler:(void (^)(__nullable id comment, NSError *__nullable error))handler {
 	GSAssert();
 }
 
-- (void)deleteComment:(__nonnull id)comment gist:(GSGist *__nonnull)gist completionHandler:(void (^__nonnull)(BOOL success, NSError *__nullable error))handler {
+- (void)deleteComment:(id)comment gist:(GSGist *)gist completionHandler:(void (^)(BOOL success, NSError *__nullable error))handler {
 	GSAssert();
 }
 
 @end
+
+NS_ASSUME_NONNULL_END

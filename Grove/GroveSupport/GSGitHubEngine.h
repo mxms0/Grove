@@ -10,14 +10,16 @@
 
 @class GSUser, GSEvent, GSRepository, GSGist;
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface GSGitHubEngine : NSObject
 @property (nonatomic, strong, nullable) GSUser *activeUser;
-+ (nonnull instancetype)sharedInstance;
-- (void)authenticateUserWithUsername:(NSString *__nonnull)username password:(NSString *__nonnull)password completionHandler:(void (^ __nullable)(GSUser *__nullable user, NSError *__nullable error))handler;
-- (void)eventsForUser:(GSUser *__nonnull)user completionHandler:(void (^__nonnull)(NSArray *__nullable events, NSError *__nullable error))handler;
-- (void)userForUsername:(NSString *__nonnull)username completionHandler:(void (^__nonnull)(GSUser *__nullable user, NSError *__nullable error))handler;
++ (instancetype)sharedInstance;
+- (void)authenticateUserWithUsername:(NSString *)username password:(NSString *)password completionHandler:(void (^ __nullable)(GSUser *__nullable user, NSError *__nullable error))handler;
+- (void)eventsForUser:(GSUser *)user completionHandler:(void (^)(NSArray *__nullable events, NSError *__nullable error))handler;
+- (void)userForUsername:(NSString *)username completionHandler:(void (^)(GSUser *__nullable user, NSError *__nullable error))handler;
 
-- (void)notificationsForUser:(GSUser *__nonnull)user completionHandler:(void (^__nonnull)(NSArray *__nullable notifications, NSError *__nullable error))handler;
+- (void)notificationsForUser:(GSUser *)user completionHandler:(void (^)(NSArray *__nullable notifications, NSError *__nullable error))handler;
 // Users
 //- (void)emailsForUser:(GSUser *__nonnull)user completionHandler:(void (^__nonnull)(NSArray *__nullable emails, NSError *__nullable error))handler;
 // emails have 3 fields, address, verified, and primary. hmm...
@@ -30,20 +32,22 @@
 //- (void)unfollowUser:(GSUser *__nonnull)user fromUser:(GSUser *__nonnull)us completionHandler:(void (^__nonnull)(BOOL success, NSError *__nullable error))handler;
 
 // Repositories
-- (void)repositoriesForUser:(GSUser *__nonnull)user completionHandler:(void (^__nonnull)(NSArray *__nullable repos, NSError *__nullable error))handler;
-- (void)repositoriesForUsername:(NSString *__nonnull)username completionHandler:(void (^__nonnull)(NSArray *__nullable repos, NSError *__nullable error))handler;
-- (void)collaboratorsForRepository:(GSRepository *__nonnull)repo completionHandler:(void (^__nonnull)(NSArray *__nullable collabs, NSError *__nullable error))error;
-- (void)collaboratorsForRepositoryNamed:(NSString *__nonnull)repoName owner:(NSString *__nonnull)owner completionHandler:(void (^__nonnull)(NSArray *__nullable collabs, NSError *__nullable error))error;
+- (void)repositoriesForUser:(GSUser *)user completionHandler:(void (^)(NSArray *__nullable repos, NSError *__nullable error))handler;
+- (void)repositoriesForUsername:(NSString *)username completionHandler:(void (^)(NSArray *__nullable repos, NSError *__nullable error))handler;
+- (void)collaboratorsForRepository:(GSRepository *)repo completionHandler:(void (^)(NSArray *__nullable collabs, NSError *__nullable error))error;
+- (void)collaboratorsForRepositoryNamed:(NSString *)repoName owner:(NSString *)owner completionHandler:(void (^)(NSArray *__nullable collabs, NSError *__nullable error))error;
 
 // Starring
-- (void)starRepository:(GSRepository *__nonnull)repo completionHandler:(void (^__nonnull)(BOOL success, NSError *__nullable error))handler;
-- (void)unstarRepository:(GSRepository *__nonnull)repo completionHandler:(void (^__nonnull)(BOOL success, NSError *__nullable error))handler;
-- (void)repositoriesStarredByUser:(GSUser *__nonnull)user completionHandler:(void (^__nonnull)(NSArray *__nullable repos, NSError *__nullable error))handler;
+- (void)starRepository:(GSRepository *)repo completionHandler:(void (^)(BOOL success, NSError *__nullable error))handler;
+- (void)unstarRepository:(GSRepository *)repo completionHandler:(void (^)(BOOL success, NSError *__nullable error))handler;
+- (void)repositoriesStarredByUser:(GSUser *)user completionHandler:(void (^)(NSArray *__nullable repos, NSError *__nullable error))handler;
 
 // Gists
-- (void)gistsForUser:(GSUser *__nonnull)user completionHandler:(void (^__nonnull)(NSArray *__nullable gists, NSError *__nullable))handler;
-- (void)commentsForGist:(GSGist *__nonnull)gist completionHandler:(void (^__nonnull)(NSArray *__nullable comments, NSError *__nullable))handler;
-- (void)commentOnGist:(GSGist *__nonnull)gist withMessage:(NSString *__nonnull)message attachments:(NSArray *__nullable)attachments completionHandler:(void (^__nonnull)(__nullable id comment, NSError *__nullable error))handler;
-- (void)editComent:(__nonnull id)comment gist:(__nonnull id)gist newMessage:(NSString *__nonnull)message completionHandler:(void (^__nonnull)(__nullable id comment, NSError *__nullable error))handler;
-- (void)deleteComment:(__nonnull id)comment gist:(__nonnull id)gist completionHandler:(void (^__nonnull)(BOOL success, NSError *__nullable error))handler;
+- (void)gistsForUser:(GSUser *)user completionHandler:(void (^)(NSArray *__nullable gists, NSError *__nullable))handler;
+- (void)commentsForGist:(GSGist *)gist completionHandler:(void (^)(NSArray *__nullable comments, NSError *__nullable))handler;
+- (void)commentOnGist:(GSGist *)gist withMessage:(NSString *)message attachments:(NSArray *__nullable)attachments completionHandler:(void (^)(__nullable id comment, NSError *__nullable error))handler;
+- (void)editComent:(id)comment gist:(id)gist newMessage:(NSString *)message completionHandler:(void (^)(__nullable id comment, NSError *__nullable error))handler;
+- (void)deleteComment:(id)comment gist:(id)gist completionHandler:(void (^)(BOOL success, NSError *__nullable error))handler;
 @end
+
+NS_ASSUME_NONNULL_END

@@ -155,17 +155,17 @@ static NSMutableDictionary *cachedUsers = nil;
 	// and can only be accessed with an api token
 	// :/ not sure how to deal with this exactly.
 	
-	[[GSGitHubEngine sharedInstance] _userForUsername:self.username token:nil completionHandler:^(NSDictionary *__nullable user, NSError *__nullable error) {
-		if (!error) {
-			NSLog(@"new update data %@", user);
-			[self configureWithDictionary:user];
-		}
-		else {
-			// neeed someo way to report to the user that there was an issue
-			GSAssert();
-			NSLog(@"Error %@", error);
-		}
-	}];
+//	[[GSGitHubEngine sharedInstance] _userForUsername:self.username token:nil completionHandler:^(NSDictionary *__nullable user, NSError *__nullable error) {
+//		if (!error) {
+//			NSLog(@"new update data %@", user);
+//			[self configureWithDictionary:user];
+//		}
+//		else {
+//			NSLog(@"Error %@", error);
+//			// neeed someo way to report to the user that there was an issue
+//			GSAssert();
+//		}
+//	}];
 }
 
 @end

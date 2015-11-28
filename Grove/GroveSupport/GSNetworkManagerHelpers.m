@@ -30,6 +30,7 @@ NSString *GSHTTPVerbStringForVerb(GSAPIHTTPVerb verb) {
 			ret = @"DELETE";
 			break;
 		default:
+			GSAssert();
 			ret = @"UNKNOWN";
 			break;
 	}
