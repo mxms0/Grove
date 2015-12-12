@@ -32,8 +32,8 @@
 
 - (NSAttributedString *)_generatedEventString {
 	
-	UIColor *blue = [UIColor colorWithRed:0.2627 green:0.4784 blue:0.7451 alpha:1.0];
-	UIFont *boldFont = [UIFont boldSystemFontOfSize:18];
+//	UIColor *blue = [UIColor colorWithRed:0.2627 green:0.4784 blue:0.7451 alpha:1.0];
+//	UIFont *boldFont = [UIFont boldSystemFontOfSize:18];
 	UIFont *regularFont = [UIFont systemFontOfSize:18];
 	
 	NSMutableArray *components = [[NSMutableArray alloc] init];
@@ -47,8 +47,23 @@
 			break;
 		}
 		case GSEventTypeCommitComment:
-		case GSEventTypeCreate:
-		case GSEventTypeDelete:
+		case GSEventTypeCreate:{
+		
+			break;
+		}
+		case GSEventTypeDelete: {
+			NSLog(@"%@:%@:%@", self.event.actor.username, self.event.payload.branch, self.event.repository.pathString);
+			NSAttributedString *user = [[NSAttributedString alloc] initWithString:self.event.actor.username attributes:nil];
+			NSAttributedString *msg = [[NSAttributedString alloc] initWithString:@" deleted " attributes:nil];
+			NSAttributedString *target1 = [[NSAttributedString alloc] initWithString:self.event.payload.branch attributes:nil];
+			NSAttributedString *thing = [[NSAttributedString alloc] initWithString:@" at " attributes:nil];
+			NSAttributedString *target2 = [[NSAttributedString alloc] initWithString:self.event.repository.pathString attributes:nil];
+			
+			[components addObjectsFromArray:@[user, msg, target1, thing, target2]];
+
+			
+			break;
+		}
 		case GSEventTypeDeployment:
 		case GSEventTypeDeploymentStatus:
 		case GSEventTypeDownload:

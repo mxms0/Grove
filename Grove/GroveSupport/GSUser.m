@@ -148,24 +148,41 @@ static NSMutableDictionary *cachedUsers = nil;
 	return self;
 }
 
-- (void)update {
-	[super update];
-	// request info through GSGitHubEngine somehow.
-	// the conflict here seems to be that some issues and repo info are private
-	// and can only be accessed with an api token
-	// :/ not sure how to deal with this exactly.
-	
-//	[[GSGitHubEngine sharedInstance] _userForUsername:self.username token:nil completionHandler:^(NSDictionary *__nullable user, NSError *__nullable error) {
-//		if (!error) {
-//			NSLog(@"new update data %@", user);
-//			[self configureWithDictionary:user];
-//		}
-//		else {
-//			NSLog(@"Error %@", error);
-//			// neeed someo way to report to the user that there was an issue
-//			GSAssert();
-//		}
-//	}];
+- (void)updateWithCompletionHandler:(void (^)(NSError *error))handler  {
+	[super updateWithCompletionHandler:^ (NSError *error) {
+		if (error.code == (INT_MAX - 15)) {
+			// normal method didn't work.
+			// We can gather user information with eitehr
+			// 1) API Token
+			// 2) Username
+			if (self.username) {
+				[[GSGitHubEngine sharedInstance] _userInformationForUsername:self.username completionHandler:^(NSDictionary *info, NSError *error) {
+					if (error) {
+						if (handler)
+							handler(error);
+					}
+					else {
+						[self configureWithDictionary:info];
+						if (handler)
+							handler(nil);
+					}
+				}];
+				
+			}
+			else if (self.token) {
+				GSAssert();
+			}
+			else {
+				GSAssert();
+				// got nothin'
+				// forward error up i guess
+				if (handler)
+					handler(error);
+			}
+		}
+		if (handler)
+			handler(nil);
+	}];
 }
 
 @end

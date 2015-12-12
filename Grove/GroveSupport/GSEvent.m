@@ -14,6 +14,8 @@
 
 - (void)configureWithDictionary:(NSDictionary *)dictionary {
 	[super configureWithDictionary:dictionary];
+	
+	NSLog(@"Fds %@", dictionary);
 	GSObjectAssign(dictionary, @"actor", _actor, GSActor);
 	GSObjectAssign(dictionary, @"repo", _repository, GSRepository);
 	GSObjectAssign(dictionary, @"payload", _payload, GSEventPayload);

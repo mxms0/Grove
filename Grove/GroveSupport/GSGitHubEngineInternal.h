@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface GSGitHubEngine ()
 
 - (void)_dirtyRequestWithObject:(GSObject *)obj completionHandler:(void (^)(NSDictionary *__nullable ret, NSError *__nullable error))handler;
-
+- (void)_userInformationForUsername:(NSString *)username completionHandler:(void (^)(NSDictionary *__nullable info, NSError *__nullable error))handler;
 @end
 
 NS_ASSUME_NONNULL_END

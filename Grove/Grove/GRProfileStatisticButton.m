@@ -49,13 +49,6 @@
 	return self;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame {
-	if ((self = [super initWithFrame:frame])) {
-		[self _commonInit];
-	}
-	return self;
-}
-
 - (void)layoutSubviews {
 	[super layoutSubviews];
 	CGFloat divisionFactor = 0.60;

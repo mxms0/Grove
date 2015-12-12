@@ -11,5 +11,7 @@
 @interface GSObject : NSObject <NSCoding>
 @property (nonatomic, strong) NSDate *updatedDate;
 - (void)configureWithDictionary:(NSDictionary *)dictionary;
-- (void)update;
+- (void)update; // Asynchronous
+- (BOOL)updateSynchronouslyWithError:(NSError *__autoreleasing *)error;
+- (void)updateWithCompletionHandler:(void (^)(NSError *error))handler; // Asynchronous
 @end

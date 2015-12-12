@@ -142,6 +142,18 @@ NS_ASSUME_NONNULL_BEGIN
 	}];
 }
 
+- (void)_userInformationForUsername:(NSString *)username completionHandler:(void (^)(NSDictionary *__nullable info, NSError *__nullable error))handler {
+	[[GSNetworkManager sharedInstance] requestUserInformationForUsername:username token:nil completionHandler:^(NSDictionary *__nullable response, NSError * _Nullable error) {
+		if (error) {
+			handler(nil, error);
+			return;
+		}
+		
+		handler(response, nil);
+	}];
+}
+
+
 - (void)userForUsername:(NSString *)username completionHandler:(void (^)(GSUser *__nullable user, NSError *__nullable error))handler {
 	GSUser *cached = [GSUser cachedUserWithUsername:username];
 	if (cached) {
@@ -149,13 +161,8 @@ NS_ASSUME_NONNULL_BEGIN
 		return;
 	}
 	
-	[[GSNetworkManager sharedInstance] requestUserInformationForUsername:username token:nil completionHandler:^(NSDictionary *__nullable dictionary, NSError *__nullable error) {
-		if (error) {
-			handler(nil, error);
-			return;
-		}
-		
-		GSUser *user = [[GSUser alloc] initWithDictionary:dictionary];
+	[self _userInformationForUsername:username completionHandler:^(NSDictionary * _Nullable info, NSError * _Nullable error) {
+		GSUser *user = [[GSUser alloc] initWithDictionary:info];
 		
 		[self repositoriesStarredByUser:user completionHandler:^(NSArray * _Nullable repos, NSError * _Nullable error) {
 			if (error) {

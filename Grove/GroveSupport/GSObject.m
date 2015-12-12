@@ -57,17 +57,43 @@
 	return self;
 }
 
+- (BOOL)updateSynchronouslyWithError:(NSError *__autoreleasing *)error; {
+	dispatch_semaphore_t wait = dispatch_semaphore_create(0);
+	__block NSError *lError = nil;
+	[self updateWithCompletionHandler:^(NSError *error) {
+		dispatch_semaphore_signal(wait);
+		lError = error;
+	}];
+	
+	dispatch_semaphore_wait(wait, DISPATCH_TIME_FOREVER);
+	
+	if (error) {
+		*error = lError;
+	}
+	return (!!error);
+}
+
 - (void)update {
+	[self updateWithCompletionHandler:nil];
+}
+
+- (void)updateWithCompletionHandler:(void (^)(NSError *error))handler {
 	if (self.directAPIURL) {
 		[[GSGitHubEngine sharedInstance] _dirtyRequestWithObject:self completionHandler:^(NSDictionary *ret, NSError *error) {
-			NSLog(@"New data %@", ret);
 			if (!error) {
 				[self configureWithDictionary:ret];
 			}
+			else {
+				NSLog(@"error %@", error);
+				GSAssert();
+			}
+			if (handler)
+				handler(error);
 		}];
 	}
 	else {
-		GSAssert();
+		if (handler)
+			handler([NSError errorWithDomain:GSErrorDomain code:(INT_MAX - 15) userInfo:@{NSLocalizedDescriptionKey: @"Couldn't send proper request."}]);
 	}
 }
 

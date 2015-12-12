@@ -21,20 +21,44 @@
 - (void)configureWithDictionary:(NSDictionary *)dictionary {
 	[super configureWithDictionary:dictionary];
 	GSObjectAssign(dictionary, @"owner", _owner, GSUser);
-	GSURLAssign(dictionary, @"html_url", _browserURL);
+	
 	GSAssign(dictionary, @"name", _name);
+	
 	// API is inconsistent here
 	// sometimes "name" represents User/RepoName
 	// sometimes "name" just represents RepoName
-	if ([_name containsString:@"/"]) {
-		
+	
+	
+	
+	NSRange inconsistencyFix = [_name rangeOfString:@"/"];
+	
+	if (!_owner) {
+		if (inconsistencyFix.location != NSNotFound) {
+			NSString *username = [_name substringToIndex:inconsistencyFix.location];
+			// may have to be an organization in the future, BEWARE MAX
+			GSUser *user = [[GSUser alloc] initWithDictionary:@{@"login": username }];
+			[user updateSynchronouslyWithError:nil];
+			_owner = user;
+		}
+		else {
+			NSLog(@"Repo with no owner???");
+			GSAssert();
+		}
 	}
+							  
+	if (inconsistencyFix.location != NSNotFound) {
+		_name = [_name substringFromIndex:inconsistencyFix.location + 1];
+	}
+							  
+	GSURLAssign(dictionary, @"html_url", _browserURL);
+
 }
 
 - (NSString *)pathString {
 #if API_TRUST_LEVEL >= 1
 	// return name retrieved from github
 #endif
+	NSLog(@"pathString %@:%@", _owner, _owner.username);
 	return [NSString stringWithFormat:@"%@/%@", _owner.username, _name];
 }
 

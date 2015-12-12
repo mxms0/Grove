@@ -15,6 +15,7 @@
 
 - (void)configureWithDictionary:(NSDictionary *)dictionary {
 	[super configureWithDictionary:dictionary];
+
 	GSAssign(dictionary, @"push_id", _pushIdentifier);
 	GSAssign(dictionary, @"size", _size);
 	GSAssign(dictionary, @"description", _descriptionMessage);
@@ -22,6 +23,13 @@
 	GSAssign(dictionary, @"ref_type", _refType);
 	GSAssign(dictionary, @"master_branch", _masterBranch);
 	GSAssign(dictionary, @"pusher_type", _pusherType);
+	
+	if ([_refType isEqualToString:@"branch"]) {
+		_branch = _ref;
+	}
+	else {
+		//GSAssert();
+	}
 	
 	
 	GSObjectAssign(dictionary, @"comment", _comment, GSComment);

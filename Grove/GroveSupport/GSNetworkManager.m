@@ -122,7 +122,17 @@
 				handler(responsePacket, nil);
 				break;
 			}
+			case 304: {
+#if DEBUG
+				NSLog(@"Not modified for req %@", request);
+#endif
+				handler(nil, nil);
+				break;
+			}
 			case 401: {
+#if DEBUG
+				NSLog(@"Not authorized %@:%@:%@", data, response, request);
+#endif
 				NSError *error = [NSError errorWithDomain:GSDomain code:401 userInfo:@{NSLocalizedDescriptionKey: @"Not Authorized"}];
 				handler(nil, error);
 				break;
