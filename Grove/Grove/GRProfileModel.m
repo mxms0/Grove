@@ -20,28 +20,19 @@
 	if ((self = [super init])) {
 		currentUser = user;
 		
-		NSLog(@"fds %@", user);
-		
-		[[GSCacheManager sharedInstance] findImageAssetWithURL:[currentUser avatarURL] loggedInUser:user downloadIfNecessary:YES completionHandler:^(UIImage * __nullable image, NSError *__nullable error) {
-			[self.delegate reloadData];
+		[[GSCacheManager sharedInstance] findImageAssetWithURL:[currentUser avatarURL] loggedInUser:currentUser downloadIfNecessary:YES completionHandler:^(UIImage * __nullable image, NSError *__nullable error) {
+			if (image) {
+				GRApplicationUser *appUser = [[GRSessionManager sharedInstance] currentUser];
+				[appUser prepareUnprocessedProfileImage:image];
+				_profileImage = [appUser profilePicture];
+				dispatch_async(dispatch_get_main_queue(), ^ {
+					[self.delegate reloadData];
+				});
+			}
 		}];
-
 	}
 	return self;
 }
-
-//- (instancetype)init {
-//	if ((self = [super init])) {
-//		currentUser = [[GRSessionManager sharedInstance] currentUser];
-//		[[GSCacheManager sharedInstance] findImageAssetWithURL:[[currentUser user] avatarURL] user:currentUser.user downloadIfNecessary:YES completionHandler:^(UIImage *asset, NSError *error) {
-//			[currentUser prepareUnprocessedProfileImage:asset];
-//			dispatch_async(dispatch_get_main_queue(), ^ {
-//				[self.delegate reloadData];
-//			});
-//		}];
-//	}
-//	return self;
-//}
 
 - (void)requestNewData {
 //	[[GSGitHubEngine sharedInstance] repositoriesForUser:currentUser.user completionHandler:^(NSArray * __nullable repos, NSError * __nullable error) {

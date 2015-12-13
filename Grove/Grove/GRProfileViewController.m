@@ -29,6 +29,7 @@
 		[tableView makeConstraints:^(MASConstraintMaker *make) {
 			make.edges.equalTo(self.view);
 		}];
+		tableView.backgroundColor = [UIColor colorWithRed:241/255.0 green:245/255.0 blue:243/255.0 alpha:1];
     }
     return self;
 }
@@ -74,6 +75,7 @@
 	if (section == 0) {
 		GRProfileHeaderView *header = [[GRProfileHeaderView alloc] init];
 		[header setUser:[model activeUser]];
+		[header setProfileImage:[model profileImage]];
 		return header;
 	}
 	return nil;

@@ -11,10 +11,12 @@
 
 @class GRApplicationUser, GSUser;
 @interface GRProfileModel : GRViewModel
+@property (nonatomic, strong, readonly) UIImage *profileImage;
 - (instancetype)initWithUser:(GSUser *)user;
 - (NSInteger)numberOfSections;
 - (NSInteger)numberOfRowsInSection:(NSInteger)section;
 - (CGFloat)cellHeightForRowAtIndexPath:(NSIndexPath *)indexPath;
 - (GSUser *)activeUser;
 - (CGFloat)heightForProfileHeader;
+- (void)retrieveProfilePictureWithHandler:(void (^)(UIImage *profileImage, NSError *error))handler;
 @end

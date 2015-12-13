@@ -33,7 +33,9 @@
 	 */
 	GSAssign(dictionary, @"id", _identifier);
 	GSURLAssign(dictionary, @"url", _directAPIURL);
-	self.updatedDate = [NSDate date];
+	@synchronized(self) {
+		self.updatedDate = [NSDate date];
+	}
 }
 
 - (NSDate *)dateFromISO8601String:(NSString *)string {
