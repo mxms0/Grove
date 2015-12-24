@@ -40,10 +40,10 @@
 
 - (void)setUser:(GSUser *)newUser {
 	if (self.user) {
-		[self.user removeObserver:self forKeyPath:GSUpdatedDataKey];
+		[self.user removeObserver:self forKeyPath:GSUpdatedDateKey];
 	}
 	_user = newUser;
-	[self.user addObserver:self forKeyPath:GSUpdatedDataKey options:0 context:NULL];
+	[self.user addObserver:self forKeyPath:GSUpdatedDateKey options:0 context:NULL];
 	[self.user update];
 	
 	model = [[GRProfileModel alloc] initWithUser:self.user];

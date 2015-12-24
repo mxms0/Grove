@@ -86,8 +86,8 @@
     
     [timeLabel setText:[event dateStringFromEvent]];
     [titleLabel setAttributedText:[event eventString]];
-    [repoLabel setText:eventModel.event.repository.name];
-    [imageView setImage:[event imageIcon]];
+//	[repoLabel setText:eventModel.event.repository.name];
+//	[imageView setImage:[event imageIcon]];
 }
 
 @end

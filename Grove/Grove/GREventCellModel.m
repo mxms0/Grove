@@ -38,12 +38,15 @@
 	
 	NSMutableArray *components = [[NSMutableArray alloc] init];
 	
+	// clean up this mess, soon.
+	// getting all the logic down and finding out what data gets used is fine for now
+	
 	switch (self.event.type) {
 		case GSEventTypeFork: {
 			NSAttributedString *user = [[NSAttributedString alloc] initWithString:self.event.actor.username attributes:@{NSFontAttributeName : regularFont}];
 			NSAttributedString *message = [[NSAttributedString alloc] initWithString:@" forked " attributes:@{NSFontAttributeName : regularFont}];
-			//			NSAttributedString *cp1 = [[[NSAttributedString alloc] initWithString:<#(NSString *)#> attributes:<#(NSDictionary *)#>]]
-			[components addObjectsFromArray:@[user, message]];
+			NSAttributedString *cp1 = [[NSAttributedString alloc] initWithString:self.event.repository.pathString attributes:@{NSFontAttributeName: regularFont}];
+			[components addObjectsFromArray:@[user, message, cp1]];
 			break;
 		}
 		case GSEventTypeCommitComment:
@@ -91,8 +94,8 @@
 			// https://developer.github.com/changes/2012-9-5-watcher-api/
 			NSAttributedString *user = [[NSAttributedString alloc] initWithString:self.event.actor.username attributes:@{NSFontAttributeName : regularFont}];
 			NSAttributedString *message = [[NSAttributedString alloc] initWithString:@" starred " attributes:@{NSFontAttributeName : regularFont}];
-			
-			[components addObjectsFromArray:@[user, message]];
+			NSAttributedString *repository = [[NSAttributedString alloc] initWithString:self.event.repository.pathString attributes:@{NSFontAttributeName: regularFont}];
+			[components addObjectsFromArray:@[user, message, repository]];
 			break;
 		}
 		case GSEventTypeUnknown:

@@ -10,7 +10,7 @@
 
 @implementation GRNotificationTableViewCell
 
-static CGFloat GRNotificationTableViewCellPadding = 15.0f;
+static CGFloat GRNotificationTableViewCellPadding = 10.0f;
 static CGFloat GRNotificationTableViewCellCornerRadius = 4.0f;
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {

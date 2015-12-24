@@ -11,7 +11,7 @@
 
 #define GSAssign(dictionary, key, obj) \
 	do { \
-		if ([dictionary[key] description] && dictionary[key] != [NSNull null]) { \
+		if (dictionary[key] && dictionary[key] != [NSNull null]) { \
 			obj = dictionary[key]; \
 		} \
 	} while (0);

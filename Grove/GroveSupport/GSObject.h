@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface GSObject : NSObject <NSCoding>
-@property (nonatomic, strong) NSDate *updatedDate;
+@property (atomic, strong) NSDate *updatedDate;
 - (void)configureWithDictionary:(NSDictionary *)dictionary;
 - (void)update; // Asynchronous
 - (BOOL)updateSynchronouslyWithError:(NSError *__autoreleasing *)error;

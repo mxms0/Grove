@@ -102,7 +102,6 @@
             break;
         }
         case GSEventTypeRepository: {
-            
             break;
         }
         case GSEventTypeStatus: {

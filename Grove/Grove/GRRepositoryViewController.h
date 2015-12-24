@@ -10,5 +10,5 @@
 
 @class GSRepository;
 @interface GRRepositoryViewController : GRViewController
-- (void)setRepository:(GSRepository *)repository;
+@property (nonatomic, weak) GSRepository *repository;
 @end
