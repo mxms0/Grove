@@ -11,8 +11,9 @@
 
 @implementation GSActor
 
-- (void)configureWithDictionary:(NSDictionary *)dictionary {
-	[super configureWithDictionary:dictionary];
+- (void)_configureWithDictionary:(NSDictionary *)dictionary {
+	[super _configureWithDictionary:dictionary];
+	
 	GSAssign(dictionary, @"login", _username);
 	GSAssign(dictionary, @"gravatar_id", _gravatarIdentifier);
 	

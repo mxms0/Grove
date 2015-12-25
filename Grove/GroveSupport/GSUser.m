@@ -48,8 +48,8 @@ static NSMutableDictionary *cachedUsers = nil;
 	return self;
 }
 
-- (void)configureWithDictionary:(NSDictionary *)dictionary {
-	[super configureWithDictionary:dictionary];
+- (void)_configureWithDictionary:(NSDictionary *)dictionary {
+	[super _configureWithDictionary:dictionary];
 	
 	GSAssign(dictionary, @"name", _fullName);
 	GSAssign(dictionary, @"company", _company);
@@ -99,6 +99,7 @@ static NSMutableDictionary *cachedUsers = nil;
 	GSEncode(coder, @"owned_private_repos", _ownedPrivateRepoCount);
 	GSEncode(coder, @"disk_usage", _diskUsage);
 	GSEncode(coder, @"collaborators", _collaboratorCount);
+	GSEncode(coder, @"starredRepositoryCount", _starredRepositoryCount);
 	
 	GSEncode(coder, @"html_url", _browserURL);
 	GSEncode(coder, @"followers_url", _followersAPIURL);
@@ -131,6 +132,7 @@ static NSMutableDictionary *cachedUsers = nil;
 		GSDecodeAssign(coder, @"owned_private_repos", _ownedPrivateRepoCount);
 		GSDecodeAssign(coder, @"disk_usage", _diskUsage);
 		GSDecodeAssign(coder, @"collaborators", _collaboratorCount);
+		GSDecodeAssign(coder, @"starredRepositoryCount", _starredRepositoryCount);
 		
 		GSDecodeAssign(coder, @"html_url", _browserURL);
 		GSDecodeAssign(coder, @"followers_url", _followersAPIURL);
@@ -144,6 +146,43 @@ static NSMutableDictionary *cachedUsers = nil;
 		GSDecodeAssign(coder, @"received_events_url", _receivedEventsAPIURL);
 	}
 	return self;
+}
+
+- (void)updateWithCompletionHandler:(void (^)(NSError *error))handler  {
+	[super updateWithCompletionHandler:^ (NSError *error) {
+		if (error.code == (INT_MAX - 15)) {
+			// normal method didn't work.
+			// We can gather user information with eitehr
+			// 1) API Token
+			// 2) Username
+			if (self.username) {
+				[[GSGitHubEngine sharedInstance] _userInformationForUsername:self.username completionHandler:^(NSDictionary *info, NSError *error) {
+					if (error) {
+						if (handler)
+							handler(error);
+					}
+					else {
+						[self configureWithDictionary:info];
+						if (handler)
+							handler(nil);
+					}
+				}];
+				
+			}
+			else if (self.token) {
+				GSAssert();
+			}
+			else {
+				GSAssert();
+				// got nothin'
+				// forward error up i guess
+				if (handler)
+					handler(error);
+			}
+		}
+		if (handler)
+			handler(nil);
+	}];
 }
 
 @end

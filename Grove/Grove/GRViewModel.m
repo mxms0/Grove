@@ -13,7 +13,6 @@
 - (instancetype)init {
 	if ((self = [super init])) {
 		[self populateCachedData];
-		[self requestNewData];
 	}
 	return self;
 }

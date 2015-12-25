@@ -34,10 +34,12 @@
 		506005BA1BBB5474000F5AFF /* GRActiveUserProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 506005B91BBB5474000F5AFF /* GRActiveUserProfileViewController.m */; };
 		5061DE251B8471DB007D9F24 /* GSEventPayload.h in Headers */ = {isa = PBXBuildFile; fileRef = 5061DE231B8471DB007D9F24 /* GSEventPayload.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5061DE261B8471DB007D9F24 /* GSEventPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = 5061DE241B8471DB007D9F24 /* GSEventPayload.m */; };
+		5070ECB61C2BC2F90021093F /* GRRepositoryHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5070ECB51C2BC2F90021093F /* GRRepositoryHeaderView.m */; };
 		507931D91B8DA1990080C894 /* Masonry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 507931D21B8DA0580080C894 /* Masonry.framework */; };
 		507931DA1B8DA1AA0080C894 /* Masonry.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 507931D21B8DA0580080C894 /* Masonry.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		507931E91B8EC4730080C894 /* UIImage+GRExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 507931E81B8EC4730080C894 /* UIImage+GRExtensions.m */; };
 		507931EC1B8EE28C0080C894 /* GRProfileStatisticButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 507931EB1B8EE28C0080C894 /* GRProfileStatisticButton.m */; };
+		50803EFE1C06AE2B00D3A284 /* GSGitHubEngineInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = 50803EFD1C06AE2B00D3A284 /* GSGitHubEngineInternal.h */; };
 		5084207C1BA893C700BD9630 /* Grove.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5084207E1BA893C700BD9630 /* Grove.strings */; };
 		5097B5CD1B8C0BBB00A72721 /* GRNotificationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5097B5CC1B8C0BBB00A72721 /* GRNotificationModel.m */; };
 		5097B5D11B8C0BC600A72721 /* GRViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5097B5D01B8C0BC600A72721 /* GRViewModel.m */; };
@@ -187,12 +189,15 @@
 		506005B91BBB5474000F5AFF /* GRActiveUserProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRActiveUserProfileViewController.m; sourceTree = "<group>"; };
 		5061DE231B8471DB007D9F24 /* GSEventPayload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSEventPayload.h; sourceTree = "<group>"; };
 		5061DE241B8471DB007D9F24 /* GSEventPayload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSEventPayload.m; sourceTree = "<group>"; };
+		5070ECB41C2BC2F90021093F /* GRRepositoryHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRRepositoryHeaderView.h; sourceTree = "<group>"; };
+		5070ECB51C2BC2F90021093F /* GRRepositoryHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRRepositoryHeaderView.m; sourceTree = "<group>"; };
 		507931CC1B8DA0570080C894 /* Masonry.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Masonry.xcodeproj; path = ../Masonry/Masonry.xcodeproj; sourceTree = "<group>"; };
 		507931DC1B8DA5400080C894 /* GSIssueInternal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GSIssueInternal.h; sourceTree = "<group>"; };
 		507931E71B8EC4730080C894 /* UIImage+GRExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+GRExtensions.h"; sourceTree = "<group>"; };
 		507931E81B8EC4730080C894 /* UIImage+GRExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+GRExtensions.m"; sourceTree = "<group>"; };
 		507931EA1B8EE28C0080C894 /* GRProfileStatisticButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRProfileStatisticButton.h; sourceTree = "<group>"; };
 		507931EB1B8EE28C0080C894 /* GRProfileStatisticButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRProfileStatisticButton.m; sourceTree = "<group>"; };
+		50803EFD1C06AE2B00D3A284 /* GSGitHubEngineInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSGitHubEngineInternal.h; sourceTree = "<group>"; };
 		5084207D1BA893C700BD9630 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Grove.strings; sourceTree = "<group>"; };
 		5084207F1BA893CE00BD9630 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Grove.strings; sourceTree = "<group>"; };
 		5097B5CB1B8C0BBB00A72721 /* GRNotificationModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRNotificationModel.h; sourceTree = "<group>"; };
@@ -303,6 +308,7 @@
 		501558C51B8725D80002254D /* Public */ = {
 			isa = PBXGroup;
 			children = (
+				50803EFD1C06AE2B00D3A284 /* GSGitHubEngineInternal.h */,
 				50E4B5AB1B82F8E50029264A /* GSGitHubEngine.h */,
 				50E4B5AC1B82F8E50029264A /* GSGitHubEngine.m */,
 			);
@@ -559,6 +565,8 @@
 				84A8D0FF1B8D311000B6B4FB /* GRIssueCommentCell.m */,
 				507931EA1B8EE28C0080C894 /* GRProfileStatisticButton.h */,
 				507931EB1B8EE28C0080C894 /* GRProfileStatisticButton.m */,
+				5070ECB41C2BC2F90021093F /* GRRepositoryHeaderView.h */,
+				5070ECB51C2BC2F90021093F /* GRRepositoryHeaderView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -574,6 +582,7 @@
 				50133F0A1B841496004B5BB8 /* GSRepository.h in Headers */,
 				50E4B5B11B82FABA0029264A /* GSNetworkManager.h in Headers */,
 				501C04301BAB78B400DC66C8 /* GSGist.h in Headers */,
+				50803EFE1C06AE2B00D3A284 /* GSGitHubEngineInternal.h in Headers */,
 				84A8D10A1B8D6F0C00B6B4FB /* GSIssue.h in Headers */,
 				5097B5F11B8D95C100A72721 /* GSOrganization.h in Headers */,
 				50E4B58F1B82F6D60029264A /* GroveSupport.h in Headers */,
@@ -661,7 +670,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = GR;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = Milo;
 				TargetAttributes = {
 					50E4B5891B82F6D60029264A = {
@@ -802,6 +811,7 @@
 				500001591BB73411001564E7 /* GRNotificationHeaderTableViewCell.m in Sources */,
 				849872FE1B85A42100D1C6FD /* NSAttributedString+GRExtensions.m in Sources */,
 				84F524FA1B832A7E0077A06C /* GRStreamEventCell.m in Sources */,
+				5070ECB61C2BC2F90021093F /* GRRepositoryHeaderView.m in Sources */,
 				84A8D0FD1B8D262900B6B4FB /* GREventIssueViewController.m in Sources */,
 				507931E91B8EC4730080C894 /* UIImage+GRExtensions.m in Sources */,
 				5000015D1BB778A0001564E7 /* GRRepositoryViewController.m in Sources */,
@@ -881,6 +891,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.rickandmorty.www.rickand.com.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
@@ -907,6 +918,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.rickandmorty.www.rickand.com.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
@@ -932,6 +944,7 @@
 				INFOPLIST_FILE = GroveSupportTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.rickandmorty.www.rickand.com.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Grove.app/Grove";
 			};
@@ -947,6 +960,7 @@
 				INFOPLIST_FILE = GroveSupportTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.rickandmorty.www.rickand.com.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Grove.app/Grove";
 			};

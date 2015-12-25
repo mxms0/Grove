@@ -11,6 +11,7 @@
 #import "GRProfileHeaderView.h"
 #import "GRSessionManager.h"
 #import <GroveSupport/GSGitHubEngine.h>
+#import <GroveSupport/GroveSupport.h>
 
 @implementation GRProfileViewController {
 	GRProfileModel *model;
@@ -28,18 +29,30 @@
 		[tableView makeConstraints:^(MASConstraintMaker *make) {
 			make.edges.equalTo(self.view);
 		}];
+		tableView.backgroundColor = [UIColor colorWithRed:241/255.0 green:245/255.0 blue:243/255.0 alpha:1];
     }
     return self;
 }
 
-- (void)setUser:(GSUser *)user {
-	model = [[GRProfileModel alloc] initWithUser:user];
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
+	NSLog(@"user has new data %@:%@:%@", object, keyPath, change);
+}
+
+- (void)setUser:(GSUser *)newUser {
+	if (self.user) {
+		[self.user removeObserver:self forKeyPath:GSUpdatedDateKey];
+	}
+	_user = newUser;
+	[self.user addObserver:self forKeyPath:GSUpdatedDateKey options:0 context:NULL];
+	[self.user update];
+	
+	model = [[GRProfileModel alloc] initWithUser:self.user];
 	[model setDelegate:self];
 }
 
 - (void)reloadData {
 	[tableView reloadData];
-	[(GRProfileHeaderView *)[tableView headerViewForSection:0] setUser:[model activeUser]];
+	[(GRProfileHeaderView *)[tableView headerViewForSection:0] setUser:[model visibleUser]];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)_tableView {
@@ -61,7 +74,8 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
 	if (section == 0) {
 		GRProfileHeaderView *header = [[GRProfileHeaderView alloc] init];
-		[header setUser:[model activeUser]];
+		[header setUser:[model visibleUser]];
+		[header setProfileImage:[model profileImage]];
 		return header;
 	}
 	return nil;
@@ -79,11 +93,17 @@
 
 - (UITableViewCell *)tableView:(UITableView *)_tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	NSString *reuseIdentifier = @"stupidCell";
+	NSString *textContent = nil;
 	switch (indexPath.section) {
 		case 0:
 			break;
-		case 1:
+		case 1: {
+			reuseIdentifier = @"repositoryCell";
+			GSRepository *repo = [model repositoryForIndex:indexPath.row];
+			textContent = repo.name;
+			NSLog(@"%@:%@", model, repo);
 			break;
+		}
 		case 2:
 			break;
 		default:
@@ -93,7 +113,7 @@
 	if (!cell) {
 		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
 	}
-
+	cell.textLabel.text = textContent;
 	return cell;
 }
 

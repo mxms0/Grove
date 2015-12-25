@@ -11,14 +11,14 @@
 
 #define GSAssign(dictionary, key, obj) \
 	do { \
-		if (dictionary[key] != [NSNull null]) { \
+		if (dictionary[key] && dictionary[key] != [NSNull null]) { \
 			obj = dictionary[key]; \
 		} \
 	} while (0);
 
 #define GSObjectAssign(dictionary, key, obj, cls) \
 	do { \
-		if (dictionary[key] != [NSNull null]) { \
+		if (dictionary[key] && dictionary[key] != [NSNull null]) { \
 			obj = [[cls alloc] initWithDictionary:dictionary[key]]; \
 		} \
 	} while (0);
@@ -47,6 +47,7 @@
 @property (nonatomic, nullable, readonly) NSNumber *identifier;
 - (nonnull instancetype)initWithDictionary:(NSDictionary *__nonnull)dictionary;
 - (nullable NSDate *)dateFromISO8601String:(NSString *__nonnull)string;
+- (void)_configureWithDictionary:(NSDictionary *)dictionary;
 @end
 
 #endif

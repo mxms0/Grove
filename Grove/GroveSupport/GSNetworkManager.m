@@ -99,11 +99,11 @@
 	NSURLSessionDataTask *task = [[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
 		
 		NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response; // put safety checks here. albeit unlikely
-
 		switch ([httpResponse statusCode]) {
 			case 200: {
 				NSError *serializationError = nil;
 				NSDictionary *response = [NSJSONSerialization JSONObjectWithData:data options:(NSJSONReadingOptions)0 error:&serializationError];
+				
 				if (response) {
 					handler(response, nil);
 				}
@@ -122,7 +122,17 @@
 				handler(responsePacket, nil);
 				break;
 			}
+			case 304: {
+#if DEBUG
+				NSLog(@"Not modified for req %@", request);
+#endif
+				handler(nil, nil);
+				break;
+			}
 			case 401: {
+#if DEBUG
+				NSLog(@"Not authorized %@:%@:%@", data, response, request);
+#endif
 				NSError *error = [NSError errorWithDomain:GSDomain code:401 userInfo:@{NSLocalizedDescriptionKey: @"Not Authorized"}];
 				handler(nil, error);
 				break;
@@ -176,20 +186,33 @@
 - (void)requestUserInformationForUsername:(NSString *)username token:(NSString *)token completionHandler:(void (^)(NSDictionary *response, NSError *error))handler {
 	NSURL *requestURL = [GSAPIURLForEndpoint(GSAPIEndpointUsers) URLByAppendingPathComponent:username];
 	GSURLRequest *request = [[GSURLRequest alloc] initWithURL:requestURL];
-	if (token)
-        [request addAuthToken:token];
+
+	[request addAuthToken:token];
 	
 	[self sendDataRequest:request completionHandler:^(id ret, NSError *error) {
 		if (error) {
 			handler(nil, error);
-			return;
 		}
-		handler(ret, nil);
+		else {
+			handler(ret, nil);
+		}
 	}];
 }
 
-- (void)getRepositories:(NSString *)token handler:(void (^)(NSArray *repos, NSError *error))handler {
-//	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:@"https://api.github.com/user/repos"]];
+- (void)requestRepositoriesForUsername:(NSString *)username token:(NSString *__nullable)token completionHandler:(void (^)(NSArray *__nullable repos, NSError *__nullable error))handler {
+	
+	NSURL *requestURL = GSAPIURLComplex(GSAPIEndpointUsers, username, GSAPIEndpointRepos);
+	GSURLRequest *request = [[GSURLRequest alloc] initWithURL:requestURL];
+	[request addAuthToken:token];
+	
+	[self sendDataRequest:request completionHandler:^(GSSerializable *response, NSError *error) {
+		if (error) {
+			handler(nil, error);
+		}
+		else {
+			handler((NSArray *)response, nil);
+		}
+	}];
 }
 
 - (void)downloadResourceFromURL:(NSURL *)url token:(NSString *)token completionHandler:(void (^)(NSURL *filePath, NSError *error))handler {

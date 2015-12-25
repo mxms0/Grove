@@ -46,7 +46,10 @@
             break;
         }
         case GSEventTypeFork: {
-            
+			self = (GREventViewControllerProxy *)[[GRRepositoryViewController alloc] init];
+			GSRepository *repository = [[event payload] forkee];
+			[(GRRepositoryViewController *)self setRepository:repository];
+			
             break;
         }
         case GSEventTypeForkApply: {
@@ -102,7 +105,6 @@
             break;
         }
         case GSEventTypeRepository: {
-            
             break;
         }
         case GSEventTypeStatus: {
@@ -115,8 +117,8 @@
         }
         case GSEventTypeStar: {
 			self = (GREventViewControllerProxy *)[[GRRepositoryViewController alloc] init];
-			GSRepository *repositoryName = [event repository];
-			[(GRRepositoryViewController *)self setRepository:repositoryName];
+			GSRepository *repository = [event repository];
+			[(GRRepositoryViewController *)self setRepository:repository];
 			
 			// contributing to murder
             break;

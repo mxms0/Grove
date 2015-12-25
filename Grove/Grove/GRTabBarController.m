@@ -27,7 +27,7 @@ static float animationDuration = 0.4f;
         backButton = [[UIButton alloc] initWithFrame:CGRectZero];
         
         //Attributes
-        [backButton setBackgroundColor:[UIColor colorWithRed:0.2627 green:0.4784 blue:0.7451 alpha:1.0]];
+        [backButton setBackgroundColor:[UIColor colorWithRed:50/255.0 green:60/255.0 blue:61/255.0 alpha:1.0]];
         [backButton setTitle:@"Back" forState:UIControlStateNormal];
         [backButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [backButton addTarget:self action:@selector(popViewcontroller) forControlEvents:UIControlEventTouchUpInside];

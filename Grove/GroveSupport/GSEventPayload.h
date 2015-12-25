@@ -46,4 +46,5 @@ typedef NS_ENUM(NSInteger, GSEventAction) {
 @property (nonatomic, readonly) NSString *descriptionMessage;
 @property (nonatomic, readonly) GSComment *comment;
 @property (nonatomic, readonly) GSIssue *issue;
+@property (nonatomic, readonly) GSRepository *forkee;
 @end

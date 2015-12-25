@@ -18,28 +18,21 @@ static BOOL addedShadowLayer = NO;
         if (!addedShadowLayer) {
 			
 			CALayer *fillLayer = [CALayer layer];
-			[fillLayer setBackgroundColor:[UIColor colorWithRed:.1 green:.1 blue:.1 alpha:.05].CGColor];
+			[fillLayer setBackgroundColor:[UIColor colorWithRed:1 green:1 blue:1 alpha:1.0].CGColor];
 			[fillLayer setFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
 			[self.layer addSublayer:fillLayer];
 			
             CAGradientLayer *gradient = [CAGradientLayer layer];
             gradient.frame = self.bounds;
-            gradient.colors = @[(id)[UIColor colorWithWhite:1 alpha:1].CGColor, (id)[UIColor colorWithWhite:1 alpha:.1].CGColor, (id)[[UIColor colorWithWhite:1 alpha:0] CGColor],  (id)[[UIColor whiteColor] CGColor], (id)[[UIColor whiteColor] CGColor]];
-			gradient.locations = @[@(0), @(.1), @(.35), @(.8), @(1)];
-			
-			gradient.opacity = .8;
+			gradient.colors = @[(id)[UIColor colorWithWhite:1 alpha:1].CGColor, (id)[UIColor colorWithRed:254/255.0 green:254/255.0 blue:254/255.0 alpha:1].CGColor];
+			gradient.locations = @[@(0), @(.86)];
 			
             [self.layer addSublayer:gradient];
 			
-			CALayer *borderLayer = [CALayer layer];
-			[borderLayer setBackgroundColor:[UIColor colorWithWhite:.2 alpha:.4].CGColor];
-			[borderLayer setFrame:CGRectMake(0, 0, self.frame.size.width, 1)];
-			[self.layer addSublayer:borderLayer];
-			
 			for (int i = 1; i < 3; i++) {
 				CALayer *divider1 = [CALayer layer];
-				[divider1 setBackgroundColor:[UIColor lightGrayColor].CGColor];
-				[divider1 setFrame:CGRectMake(i * floorf(self.frame.size.width/3), 10, 1, self.frame.size.height - 10*2)];
+				[divider1 setBackgroundColor:[UIColor colorWithWhite:.95 alpha:1].CGColor];
+				[divider1 setFrame:CGRectMake(i * floorf(self.frame.size.width/3), 0, 1, self.frame.size.height)];
 				[self.layer addSublayer:divider1];
 			}
 			

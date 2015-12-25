@@ -10,7 +10,7 @@
 
 @implementation GRNotificationTableViewCell
 
-static CGFloat GRNotificationTableViewCellPadding = 15.0f;
+static CGFloat GRNotificationTableViewCellPadding = 10.0f;
 static CGFloat GRNotificationTableViewCellCornerRadius = 4.0f;
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
@@ -67,7 +67,7 @@ static CGFloat GRNotificationTableViewCellCornerRadius = 4.0f;
 
 - (void)layoutSubviews {
 	[super layoutSubviews];
-	[self.contentView setFrame:CGRectMake(20, self.contentView.frame.origin.y, self.contentView.frame.size.width - 40, self.contentView.frame.size.height)];
+	[self.contentView setFrame:CGRectMake(10, self.contentView.frame.origin.y, self.contentView.frame.size.width - 20, self.contentView.frame.size.height)];
 	
 	[self.textLabel setFrame:CGRectMake(10, self.textLabel.frame.origin.y, self.contentView.frame.size.width - 20, self.textLabel.frame.size.height)];
 	

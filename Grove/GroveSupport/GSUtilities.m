@@ -76,10 +76,21 @@ NSString *GSMD5HashFromFile(NSURL *filePath) {
 	return output;
 }
 
+NSString *GSRFC2616DTimestampFromDate(NSDate *date) {
+	// super useful: http://tools.ietf.org/html/rfc2616#section-14.25
+	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+	[formatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
+	[formatter setDateFormat:@"EEE',' dd' 'MMM' 'yyyy HH':'mm':'ss zzz"];
+	
+	return [formatter stringFromDate:date];
+}
+
 UIColor *GSRandomUIColor() {
 	CGFloat hue = (arc4random() % 256 / 256.0);
 	CGFloat saturation = (arc4random() % 128 / 256.0) + 0.5;
 	CGFloat brightness = (arc4random() % 128 / 256.0) + 0.5;
-	UIColor *color = [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:1];
+	CGFloat alpha = ((arc4random() % 128) / 256.0) + 0.5;
+	
+	UIColor *color = [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:alpha];
 	return color;
 }

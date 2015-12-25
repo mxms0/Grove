@@ -27,7 +27,7 @@
 	text = [[UILabel alloc] init];
 	subText = [[UILabel alloc] init];
 
-	[text setFont:[UIFont boldSystemFontOfSize:20]];
+	[text setFont:[UIFont boldSystemFontOfSize:24]];
 	[text setTextAlignment:NSTextAlignmentCenter];
 	[text setMinimumScaleFactor:0.5];
 	
@@ -35,8 +35,8 @@
 	[subText setFont:[UIFont systemFontOfSize:14]];
 	[subText setMinimumScaleFactor:0.8];
 	
-	[text setBackgroundColor:GSRandomUIColor()];
-	[subText setBackgroundColor:GSRandomUIColor()];
+	[text setBackgroundColor:[UIColor clearColor]];
+	[subText setBackgroundColor:[UIColor clearColor]];
 	
 	[self addSubview:text];
 	[self addSubview:subText];
@@ -49,17 +49,16 @@
 	return self;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame {
-	if ((self = [super initWithFrame:frame])) {
-		[self _commonInit];
-	}
-	return self;
+- (void)drawRect:(CGRect)rect {
+	[super drawRect:rect];
+	[[UIColor colorWithWhite:.9 alpha:1] set];
+	UIRectFill(CGRectMake(0, 0, (self.frame.size.width - 0), 1));
 }
 
 - (void)layoutSubviews {
 	[super layoutSubviews];
 	CGFloat divisionFactor = 0.60;
-	[text setFrame:CGRectMake(0, 0, self.frame.size.width, floorf(divisionFactor * self.frame.size.height))];
+	[text setFrame:CGRectMake(0, 5, self.frame.size.width, floorf(divisionFactor * self.frame.size.height))];
 	[subText setFrame:CGRectMake(0, floorf(divisionFactor * self.frame.size.height), self.frame.size.width, self.frame.size.height - (floorf(divisionFactor * self.frame.size.height)))];
 }
 

@@ -11,4 +11,5 @@
 @class GSUser;
 @interface GRProfileHeaderView : UIView
 @property (nonatomic, weak, setter=setUser:) GSUser *user;
+@property (nonatomic, weak, setter=setProfileImage:) UIImage *profileImage;
 @end

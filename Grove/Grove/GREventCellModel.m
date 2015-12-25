@@ -32,23 +32,39 @@
 
 - (NSAttributedString *)_generatedEventString {
 	
-	UIColor *blue = [UIColor colorWithRed:0.2627 green:0.4784 blue:0.7451 alpha:1.0];
-	UIFont *boldFont = [UIFont boldSystemFontOfSize:18];
+//	UIColor *blue = [UIColor colorWithRed:0.2627 green:0.4784 blue:0.7451 alpha:1.0];
+//	UIFont *boldFont = [UIFont boldSystemFontOfSize:18];
 	UIFont *regularFont = [UIFont systemFontOfSize:18];
 	
 	NSMutableArray *components = [[NSMutableArray alloc] init];
+	
+	// clean up this mess, soon.
+	// getting all the logic down and finding out what data gets used is fine for now
 	
 	switch (self.event.type) {
 		case GSEventTypeFork: {
 			NSAttributedString *user = [[NSAttributedString alloc] initWithString:self.event.actor.username attributes:@{NSFontAttributeName : regularFont}];
 			NSAttributedString *message = [[NSAttributedString alloc] initWithString:@" forked " attributes:@{NSFontAttributeName : regularFont}];
-			//			NSAttributedString *cp1 = [[[NSAttributedString alloc] initWithString:<#(NSString *)#> attributes:<#(NSDictionary *)#>]]
-			[components addObjectsFromArray:@[user, message]];
+			NSAttributedString *cp1 = [[NSAttributedString alloc] initWithString:self.event.repository.pathString attributes:@{NSFontAttributeName: regularFont}];
+			[components addObjectsFromArray:@[user, message, cp1]];
 			break;
 		}
 		case GSEventTypeCommitComment:
-		case GSEventTypeCreate:
-		case GSEventTypeDelete:
+		case GSEventTypeCreate:{
+		
+			break;
+		}
+		case GSEventTypeDelete: {
+			NSAttributedString *user = [[NSAttributedString alloc] initWithString:self.event.actor.username attributes:nil];
+			NSAttributedString *msg = [[NSAttributedString alloc] initWithString:@" deleted " attributes:nil];
+			NSAttributedString *target1 = [[NSAttributedString alloc] initWithString:self.event.payload.branch attributes:nil];
+			NSAttributedString *thing = [[NSAttributedString alloc] initWithString:@" at " attributes:nil];
+			NSAttributedString *target2 = [[NSAttributedString alloc] initWithString:self.event.repository.pathString attributes:nil];
+			
+			[components addObjectsFromArray:@[user, msg, target1, thing, target2]];
+			
+			break;
+		}
 		case GSEventTypeDeployment:
 		case GSEventTypeDeploymentStatus:
 		case GSEventTypeDownload:
@@ -64,7 +80,13 @@
 		case GSEventTypePublic:
 		case GSEventTypePullRequest:
 		case GSEventTypePullRequestReviewComment:
-		case GSEventTypePush:
+			break;
+		case GSEventTypePush: {
+			NSAttributedString *user = [[NSAttributedString alloc] initWithString:self.event.actor.username attributes:@{NSFontAttributeName: regularFont}];
+			NSAttributedString *verb = [[NSAttributedString alloc] initWithString:@" pushed to " attributes:@{NSFontAttributeName: regularFont}];
+			NSAttributedString *branch = [[NSAttributedString alloc] initWithString:self.event.payload.ref attributes:@{NSFontAttributeName : regularFont}];
+			[components addObjectsFromArray:@[user, verb, branch]];
+		}
 		case GSEventTypeRelease:
 		case GSEventTypeRepository:
 		case GSEventTypeStatus:
@@ -76,8 +98,8 @@
 			// https://developer.github.com/changes/2012-9-5-watcher-api/
 			NSAttributedString *user = [[NSAttributedString alloc] initWithString:self.event.actor.username attributes:@{NSFontAttributeName : regularFont}];
 			NSAttributedString *message = [[NSAttributedString alloc] initWithString:@" starred " attributes:@{NSFontAttributeName : regularFont}];
-			
-			[components addObjectsFromArray:@[user, message]];
+			NSAttributedString *repository = [[NSAttributedString alloc] initWithString:self.event.repository.pathString attributes:@{NSFontAttributeName: regularFont}];
+			[components addObjectsFromArray:@[user, message, repository]];
 			break;
 		}
 		case GSEventTypeUnknown:

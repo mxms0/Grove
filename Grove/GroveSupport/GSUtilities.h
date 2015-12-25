@@ -13,6 +13,7 @@
 
 NSString *GSMD5HashFromString(NSString *string);
 NSString *GSMD5HashFromFile(NSURL *filePath);
+NSString *GSRFC2616DTimestampFromDate(NSDate *date);
 UIColor *GSRandomUIColor();
 
 #endif /* defined(__Grove__GSUtilities__) */

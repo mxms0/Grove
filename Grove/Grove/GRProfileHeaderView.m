@@ -12,6 +12,8 @@
 #import "GRProfileStatisticButton.h"
 #import <GroveSupport/GroveSupport.h>
 
+#define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
+
 @implementation GRProfileHeaderView {
 	UIImageView *profileImageView;
 	UILabel *nameLabel;
@@ -25,9 +27,9 @@
 
 - (instancetype)init {
 	if ((self = [super init])) {
-		[self setBackgroundColor:GSRandomUIColor()];
+		[self setBackgroundColor:UIColorFromRGB(0xFFFFFF)];
 		profileImageView = [[UIImageView alloc] init];
-		[profileImageView setBackgroundColor:[UIColor greenColor]];
+		[profileImageView setBackgroundColor:[UIColor whiteColor]];
 		[self addSubview:profileImageView];
 		
 		usernameLabel = [[UILabel alloc] init];
@@ -53,9 +55,10 @@
 		
 		NSArray *statsButtons = @[followersButton, starredButton, followingButton];
 		
+		
 		for (int i = 0; i < 3; i++) {
 			GRProfileStatisticButton *button = statsButtons[i];
-			[button setBackgroundColor:GSRandomUIColor()];
+			[button setBackgroundColor:[UIColor whiteColor]];
 			[self addSubview:button];
 		}
 	}
@@ -81,7 +84,6 @@
 
 - (void)setUser:(GSUser *)user {
 	_user = user;
-	NSLog(@"set user %@:%@", [NSThread callStackSymbols], user);
 	[usernameLabel setText:[user username]];
 	[nameLabel setText:[user fullName]];
 	[locationLabel setText:[user location]];
@@ -89,6 +91,11 @@
 	[starredButton setText:[[user starredRepositoryCount] stringValue]];
 	[followingButton setText:[[user followingCount] stringValue]];
 	[followersButton setText:[[user followersCount] stringValue]];
+}
+
+- (void)setProfileImage:(UIImage *)profileImage {
+	_profileImage = profileImage;
+	[profileImageView setImage:profileImage];
 }
 
 @end

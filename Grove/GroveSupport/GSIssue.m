@@ -11,8 +11,9 @@
 
 @implementation GSIssue
 
-- (void)configureWithDictionary:(NSDictionary *)dictionary {
-	[super configureWithDictionary:dictionary];
+- (void)_configureWithDictionary:(NSDictionary *)dictionary {
+	[super _configureWithDictionary:dictionary];
+	
 	GSAssign(dictionary, @"title", _title);
 	GSAssign(dictionary, @"body", _body);
 	//        GSAssign(dictionary, @"state", _state);
