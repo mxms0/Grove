@@ -186,15 +186,32 @@
 - (void)requestUserInformationForUsername:(NSString *)username token:(NSString *)token completionHandler:(void (^)(NSDictionary *response, NSError *error))handler {
 	NSURL *requestURL = [GSAPIURLForEndpoint(GSAPIEndpointUsers) URLByAppendingPathComponent:username];
 	GSURLRequest *request = [[GSURLRequest alloc] initWithURL:requestURL];
-	if (token)
-        [request addAuthToken:token];
+
+	[request addAuthToken:token];
 	
 	[self sendDataRequest:request completionHandler:^(id ret, NSError *error) {
 		if (error) {
 			handler(nil, error);
-			return;
 		}
-		handler(ret, nil);
+		else {
+			handler(ret, nil);
+		}
+	}];
+}
+
+- (void)requestRepositoriesForUsername:(NSString *)username token:(NSString *__nullable)token completionHandler:(void (^)(NSArray *__nullable repos, NSError *__nullable error))handler {
+	
+	NSURL *requestURL = GSAPIURLComplex(GSAPIEndpointUsers, username, GSAPIEndpointRepos);
+	GSURLRequest *request = [[GSURLRequest alloc] initWithURL:requestURL];
+	[request addAuthToken:token];
+	
+	[self sendDataRequest:request completionHandler:^(GSSerializable *response, NSError *error) {
+		if (error) {
+			handler(nil, error);
+		}
+		else {
+			handler((NSArray *)response, nil);
+		}
 	}];
 }
 

@@ -11,8 +11,9 @@
 
 @implementation GSCommit
 
-- (void)configureWithDictionary:(NSDictionary *)dictionary {
-	[super configureWithDictionary:dictionary];
+- (void)_configureWithDictionary:(NSDictionary *)dictionary {
+	[super _configureWithDictionary:dictionary];
+	
 	GSAssign(dictionary, @"sha", _shaHash);
 	GSAssign(dictionary, @"message", _message);
 	

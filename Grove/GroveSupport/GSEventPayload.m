@@ -13,9 +13,9 @@
 
 @implementation GSEventPayload
 
-- (void)configureWithDictionary:(NSDictionary *)dictionary {
-	[super configureWithDictionary:dictionary];
-
+- (void)_configureWithDictionary:(NSDictionary *)dictionary {
+	[super _configureWithDictionary:dictionary];
+	
 	GSAssign(dictionary, @"push_id", _pushIdentifier);
 	GSAssign(dictionary, @"size", _size);
 	GSAssign(dictionary, @"description", _descriptionMessage);
@@ -34,6 +34,8 @@
 	
 	GSObjectAssign(dictionary, @"comment", _comment, GSComment);
 	GSObjectAssign(dictionary, @"issue", _issue, GSIssue);
+	
+	GSObjectAssign(dictionary, @"forkee", _forkee, GSRepository);
 	
 	NSString *action = nil;
 	GSAssign(dictionary, @"action", action);

@@ -55,7 +55,6 @@
 			break;
 		}
 		case GSEventTypeDelete: {
-			NSLog(@"%@:%@:%@", self.event.actor.username, self.event.payload.branch, self.event.repository.pathString);
 			NSAttributedString *user = [[NSAttributedString alloc] initWithString:self.event.actor.username attributes:nil];
 			NSAttributedString *msg = [[NSAttributedString alloc] initWithString:@" deleted " attributes:nil];
 			NSAttributedString *target1 = [[NSAttributedString alloc] initWithString:self.event.payload.branch attributes:nil];
@@ -63,7 +62,6 @@
 			NSAttributedString *target2 = [[NSAttributedString alloc] initWithString:self.event.repository.pathString attributes:nil];
 			
 			[components addObjectsFromArray:@[user, msg, target1, thing, target2]];
-
 			
 			break;
 		}
@@ -82,7 +80,13 @@
 		case GSEventTypePublic:
 		case GSEventTypePullRequest:
 		case GSEventTypePullRequestReviewComment:
-		case GSEventTypePush:
+			break;
+		case GSEventTypePush: {
+			NSAttributedString *user = [[NSAttributedString alloc] initWithString:self.event.actor.username attributes:@{NSFontAttributeName: regularFont}];
+			NSAttributedString *verb = [[NSAttributedString alloc] initWithString:@" pushed to " attributes:@{NSFontAttributeName: regularFont}];
+			NSAttributedString *branch = [[NSAttributedString alloc] initWithString:self.event.payload.ref attributes:@{NSFontAttributeName : regularFont}];
+			[components addObjectsFromArray:@[user, verb, branch]];
+		}
 		case GSEventTypeRelease:
 		case GSEventTypeRepository:
 		case GSEventTypeStatus:

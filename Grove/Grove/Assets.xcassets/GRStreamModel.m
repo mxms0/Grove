@@ -20,6 +20,7 @@
 - (instancetype)init {
 	if ((self = [super init])) {
 		self.eventModels = [NSMutableArray array];
+		[self requestNewData];
 	}
 	return self;
 }

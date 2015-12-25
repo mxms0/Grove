@@ -47,6 +47,7 @@
 @property (nonatomic, nullable, readonly) NSNumber *identifier;
 - (nonnull instancetype)initWithDictionary:(NSDictionary *__nonnull)dictionary;
 - (nullable NSDate *)dateFromISO8601String:(NSString *__nonnull)string;
+- (void)_configureWithDictionary:(NSDictionary *)dictionary;
 @end
 
 #endif

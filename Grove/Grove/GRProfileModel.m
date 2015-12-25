@@ -12,19 +12,22 @@
 #import <GroveSupport/GroveSupport.h>
 
 @implementation GRProfileModel {
-	GSUser *currentUser;
-	NSArray *repositories;
+	GSUser *visibleUser;
+	__block NSArray *repositories;
 }
 
 - (instancetype)initWithUser:(GSUser *)user {
 	if ((self = [super init])) {
-		currentUser = user;
+		visibleUser = user;
 		
-		[[GSCacheManager sharedInstance] findImageAssetWithURL:[currentUser avatarURL] loggedInUser:currentUser downloadIfNecessary:YES completionHandler:^(UIImage * __nullable image, NSError *__nullable error) {
+		[self requestNewData];
+		
+		[[GSCacheManager sharedInstance] findImageAssetWithURL:[visibleUser avatarURL] loggedInUser:nil downloadIfNecessary:YES completionHandler:^(UIImage * __nullable image, NSError *__nullable error) {
 			if (image) {
 				GRApplicationUser *appUser = [[GRSessionManager sharedInstance] currentUser];
 				[appUser prepareUnprocessedProfileImage:image];
 				_profileImage = [appUser profilePicture];
+				
 				dispatch_async(dispatch_get_main_queue(), ^ {
 					[self.delegate reloadData];
 				});
@@ -35,14 +38,29 @@
 }
 
 - (void)requestNewData {
-//	[[GSGitHubEngine sharedInstance] repositoriesForUser:currentUser.user completionHandler:^(NSArray * __nullable repos, NSError * __nullable error) {
-//		if (!error) {
-//			repositories = repos;
-//			dispatch_async(dispatch_get_main_queue(), ^	{
-//			});
-//		}
-//	}];
-//
+	[visibleUser updateWithCompletionHandler:^(NSError *error) {
+		if (error) {
+			_GSAssert(NO, [error localizedDescription]);
+			return;
+		}
+		dispatch_async(dispatch_get_main_queue(), ^ {
+			[self.delegate reloadData];
+		});
+	}];
+	
+	[[GSGitHubEngine sharedInstance] repositoriesForUser:visibleUser completionHandler:^(NSArray *repos, NSError *error) {
+		if (error) {
+			_GSAssert(NO, [error localizedDescription]);
+			return;
+		}
+		repositories = repos;
+		NSLog(@"got REPOS %@", repositories);
+		dispatch_async(dispatch_get_main_queue(), ^ {
+			[self.delegate reloadData];
+		});
+	}];
+	
+
 //	[[GSGitHubEngine sharedInstance] userForUsername:appUser.user.username completionHandler:^(GSUser *user, NSError *error) {
 		// reload data here
 		// use If-Modified-Since ETAG to request profile picture, that way we dont waste resources
@@ -50,14 +68,14 @@
 }
 
 - (GSRepository *)repositoryForIndex:(NSUInteger)index {
-	if (index >= [repositories count])
+	if (index <= [repositories count])
 		return [repositories objectAtIndex:index];
 	else
 		return nil;
 }
 
-- (GSUser *)activeUser {
-	return currentUser;
+- (GSUser *)visibleUser {
+	return visibleUser;
 }
 
 - (NSInteger)numberOfSections {
@@ -65,13 +83,13 @@
 }
 
 - (NSInteger)numberOfRowsInSection:(NSInteger)section {
-	int rowCount = 0;
+	NSInteger rowCount = 0;
 	switch (section) {
 		case 0:
 			rowCount = 0;
 			break;
 		case 1:
-			rowCount = 1;
+			rowCount = [repositories count];
 			break;
 		case 2:
 			rowCount = 3;

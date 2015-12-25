@@ -11,19 +11,24 @@
 #import <Foundation/Foundation.h>
 #import "GSNetworkManagerHelpers.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class GSURLRequest;
 @interface GSNetworkManager : NSObject
-+ (nonnull instancetype)sharedInstance;
-- (void)requestOAuth2TokenWithUsername:(NSString *__nonnull)username password:(NSString *__nonnull)password handler:(void (^ __nullable)(NSString *__nullable token, NSError *__nullable error))handler;
-- (void)requestEventsForUser:(NSString *__nonnull)user token:(NSString *__nonnull)token completionHandler:(void (^__nonnull)(NSArray *__nullable events, NSError *__nullable error))handler;
-- (void)requestUserInformationForToken:(NSString *__nonnull)token completionHandler:(void (^__nonnull)(NSDictionary *__nullable response, NSError *__nullable error))handler;
-- (void)requestUserInformationForUsername:(NSString *__nonnull)username token:(NSString *__nullable)token completionHandler:(void (^__nonnull)(NSDictionary *__nullable response, NSError *__nullable error))handler;
-- (void)downloadResourceFromURL:(NSURL *__nonnull)url token:(NSString *__nullable)token completionHandler:(void (^__nonnull)(NSURL *__nullable filePath, NSError *__nullable error))handler;
++ (instancetype)sharedInstance;
+- (void)requestOAuth2TokenWithUsername:(NSString *)username password:(NSString *)password handler:(void (^ __nullable)(NSString *__nullable token, NSError *__nullable error))handler;
+- (void)requestEventsForUser:(NSString *)user token:(NSString *)token completionHandler:(void (^)(NSArray *__nullable events, NSError *__nullable error))handler;
+- (void)requestUserInformationForToken:(NSString *)token completionHandler:(void (^)(NSDictionary *__nullable response, NSError *__nullable error))handler;
+- (void)requestUserInformationForUsername:(NSString *)username token:(NSString *__nullable)token completionHandler:(void (^)(NSDictionary *__nullable response, NSError *__nullable error))handler;
+- (void)downloadResourceFromURL:(NSURL *)url token:(NSString *__nullable)token completionHandler:(void (^)(NSURL *__nullable filePath, NSError *__nullable error))handler;
 
-- (void)requestUserNotificationsWithToken:(NSString *__nonnull)token completionHandler:(void (^__nonnull)(NSArray *__nullable notifications, NSError *__nullable error))handler;
+- (void)requestUserNotificationsWithToken:(NSString *)token completionHandler:(void (^)(NSArray *__nullable notifications, NSError *__nullable error))handler;
+- (void)requestRepositoriesForUsername:(NSString *)username token:(NSString *__nullable)token completionHandler:(void (^)(NSArray *__nullable repos, NSError *__nullable error))handler;
 
-- (void)sendRequest:(GSURLRequest *__nonnull)request completionHandler:(void (^__nonnull)(GSSerializable *__nullable serializeable, NSError *__nullable error))handler;
+- (void)sendRequest:(GSURLRequest *)request completionHandler:(void (^)(GSSerializable *__nullable serializeable, NSError *__nullable error))handler;
 
 // not sure if i like exposing endpoints outside of the network manager. this is an idea for now.
-- (void)requestAPIEndpoint:(NSString *__nonnull)endp token:(NSString *__nullable)token completionHandler:(void (^__nonnull)(GSSerializable *__nullable s, NSError *__nullable error))handler;
+- (void)requestAPIEndpoint:(NSString *)endp token:(NSString *__nullable)token completionHandler:(void (^)(GSSerializable *__nullable s, NSError *__nullable error))handler;
 @end
+
+NS_ASSUME_NONNULL_END

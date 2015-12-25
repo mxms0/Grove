@@ -11,8 +11,9 @@
 
 @implementation GSGist
 
-- (void)configureWithDictionary:(NSDictionary *)dictionary {
-	[super configureWithDictionary:dictionary];
+- (void)_configureWithDictionary:(NSDictionary *)dictionary {
+	[super _configureWithDictionary:dictionary];
+	
 	NSString *_publiclyAccessibleFlag = nil;
 	GSAssign(dictionary, @"public", _publiclyAccessibleFlag);
 	GSAssign(dictionary, @"description", _stringDescription);

@@ -12,6 +12,17 @@
 #import "GroveSupportInternal.h"
 #import "GSURLRequest.h"
 
+/*
+ Some comments, flow should go like this:
+ Request data from GSNetworkManager, if error, pass error up
+ If no error in GSGitHubEngine, check type, make new error or pass data on
+ Checking should always be:
+ If (!error) {}
+ Else If (!correct type) {}
+ Else { this is success }
+ handler(x,y) where x (xor) y should always be 1 (1 for object, 0 for nil)
+*/
+
 static NSString *const GSAPIURLComponentStarred = @"starred";
 
 NS_ASSUME_NONNULL_BEGIN
@@ -107,7 +118,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)eventsForUser:(GSUser *)user completionHandler:(void (^)(NSArray *__nullable events, NSError *__nullable error))handler {
 	[[GSNetworkManager sharedInstance] requestEventsForUser:user.username token:user.token completionHandler:^(id events, NSError *error) {
-		if ([events isKindOfClass:[NSArray class]]) {
+		if (error) {
+			handler(nil, error);
+		}
+		else if (!events) {
+			GSAssert();
+		}
+		else if (![events isKindOfClass:[NSArray class]]) {
+			handler(nil, [NSError errorWithDomain:GSErrorDomain code:1 userInfo:@{NSLocalizedDescriptionKey: events[@"message"]}]);
+		}
+		else {
 			NSMutableArray *serializedEvents = [[NSMutableArray alloc] init];
 			for (NSDictionary *eventPacket in events) {
 				if (![eventPacket isKindOfClass:[NSDictionary class]]) {
@@ -119,25 +139,24 @@ NS_ASSUME_NONNULL_BEGIN
 			
 			handler(serializedEvents, error);
 		}
-		else {
-			if (events) {
-				handler(nil, [NSError errorWithDomain:GSErrorDomain code:1 userInfo:@{NSLocalizedDescriptionKey: events[@"message"]}]);
-			}
-			else {
-				handler(nil, error);
-			}
-		}
 	}];
 }
 
 - (void)userInformationWithToken:(NSString *)token completionHandler:(void (^)(id __nullable information, NSError *__nullable error))handler {
-	[[GSNetworkManager sharedInstance] requestUserInformationForToken:token completionHandler:^(id info, NSError *error) {
-		if ([info isKindOfClass:[NSDictionary class]]) {
-			handler(info, NULL);
+	[[GSNetworkManager sharedInstance] requestUserInformationForToken:token completionHandler:^(NSDictionary *info, NSError *error) {
+		if (error) {
+			handler(nil, error);
+		}
+		else if (!info) {
+			GSAssert();
+		}
+		else if (![info isKindOfClass:[NSDictionary class]]) {
+			// craft new error here.
+			GSAssert();
+			handler(nil, error);
 		}
 		else {
-			// create NSError here
-			GSAssert();
+			handler(info, nil);
 		}
 	}];
 }
@@ -146,10 +165,16 @@ NS_ASSUME_NONNULL_BEGIN
 	[[GSNetworkManager sharedInstance] requestUserInformationForUsername:username token:nil completionHandler:^(NSDictionary *__nullable response, NSError * _Nullable error) {
 		if (error) {
 			handler(nil, error);
-			return;
 		}
-		
-		handler(response, nil);
+		else if (!response) {
+			GSAssert();
+		}
+		else if (!response || ![response isKindOfClass:[NSDictionary class]]) {
+			GSAssert();
+		}
+		else {
+			handler(response, nil);
+		}
 	}];
 }
 
@@ -186,17 +211,20 @@ NS_ASSUME_NONNULL_BEGIN
 		
 		if (error) {
 			handler(nil, error);
-			return;
 		}
-		
-		NSMutableArray *ret = [[NSMutableArray alloc] init];
-		
-		for (NSDictionary *dict in notifs) {
-			GSNotification *notification = [[GSNotification alloc] initWithDictionary:dict];
-			[ret addObject:notification];
+		else if (!notifs || ![notifs isKindOfClass:[NSArray class]]) {
+			GSAssert();
 		}
+		else {
+			NSMutableArray *ret = [[NSMutableArray alloc] init];
 		
-		handler(ret, nil);
+			for (NSDictionary *dict in notifs) {
+				GSNotification *notification = [[GSNotification alloc] initWithDictionary:dict];
+				[ret addObject:notification];
+			}
+		
+			handler(ret, nil);
+		}
 	}];
 }
 
@@ -212,16 +240,14 @@ NS_ASSUME_NONNULL_BEGIN
 	// this may or may not work, but it's worth a shot. :- )
 	
 	[[GSNetworkManager sharedInstance] sendRequest:request completionHandler:^(GSSerializable * _Nullable serializeable, NSError * _Nullable error) {
-		if (error || !serializeable) {
+		if (error) {
 			handler(nil, error);
-			return;
 		}
-		
-		if ([serializeable isKindOfClass:[NSDictionary class]]) {
-			handler((NSDictionary *)serializeable, nil);
+		else if (!serializeable || ![serializeable isKindOfClass:[NSDictionary class]]) {
+			GSAssert();
 		}
 		else {
-			GSAssert();
+			handler((NSDictionary *)serializeable, nil);
 		}
 	}];
 }
@@ -241,21 +267,17 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)repositoriesStarredByUser:(GSUser *)user completionHandler:(void (^)(NSArray *__nullable repos, NSError *__nullable error))handler {
 	NSURL *destination = GSAPIURLComplex(GSAPIEndpointUsers, user.username, GSAPIComponentStarred);
 	
-#if API_TRUST_LEVEL >= API_TRUST_LEVEL_AVERAGE
-	if (user.starredAPIURL) {
-		destination = user.starredAPIURL;
-	}
-#endif
-	
 	GSURLRequest *request = [[GSURLRequest alloc] initWithURL:destination];
 	[request addAuthToken:user.token];
 	
 	[[GSNetworkManager sharedInstance] sendRequest:request completionHandler:^(GSSerializable *serializeable, NSError *error) {
 		if (error) {
 			handler(nil, error);
-			return;
 		}
-		if ([serializeable isKindOfClass:[NSArray class]]) {
+		else if (!serializeable || ![serializeable isKindOfClass:[NSArray class]]) {
+			GSAssert();
+		}
+		else {
 			NSMutableArray *ret = [[NSMutableArray alloc] init];
 			for (NSDictionary *dict in (NSArray *)serializeable) {
 				GSRepository *repo = [[GSRepository alloc] initWithDictionary:dict];
@@ -269,8 +291,23 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark Repositories
 
-- (void)repositoriesForUser:(GSUser *)user completionHandler:(void (^)(NSArray *__nullable repos, NSError *__nullable error))handler {
-	GSAssert();
+- (void)repositoriesForUser:(GSUser *)user completionHandler:(void (^)(NSArray<GSRepository *> *__nullable repos, NSError *__nullable error))handler {
+	[[GSNetworkManager sharedInstance] requestRepositoriesForUsername:user.username token:_activeUser.token completionHandler:^(NSArray<NSDictionary *>* _Nullable repos, NSError * _Nullable error) {
+		if (error) {
+			handler(nil, error);
+		}
+		else if (!repos || ![repos isKindOfClass:[NSArray class]]) {
+			GSAssert();
+		}
+		else {
+			NSMutableArray *serializedRepos = [[NSMutableArray alloc] init];
+			for (NSDictionary *dict in repos) {
+				GSRepository *repository = [[GSRepository alloc] initWithDictionary:dict];
+				[serializedRepos addObject:repository];
+			}
+			handler(serializedRepos, nil);
+		}
+	}];
 }
 
 - (void)repositoriesForUsername:(NSString *)username completionHandler:(void (^)(NSArray *__nullable repos, NSError *__nullable error))handler {

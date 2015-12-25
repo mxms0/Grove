@@ -18,8 +18,9 @@
 	return self;
 }
 
-- (void)configureWithDictionary:(NSDictionary *)dictionary {
-	[super configureWithDictionary:dictionary];
+- (void)_configureWithDictionary:(NSDictionary *)dictionary {
+	[super _configureWithDictionary:dictionary];
+	
 	GSObjectAssign(dictionary, @"owner", _owner, GSUser);
 	
 	GSAssign(dictionary, @"name", _name);
@@ -27,8 +28,6 @@
 	// API is inconsistent here
 	// sometimes "name" represents User/RepoName
 	// sometimes "name" just represents RepoName
-	
-	
 	
 	NSRange inconsistencyFix = [_name rangeOfString:@"/"];
 	
@@ -51,14 +50,12 @@
 	}
 							  
 	GSURLAssign(dictionary, @"html_url", _browserURL);
-
 }
 
 - (NSString *)pathString {
 #if API_TRUST_LEVEL >= 1
 	// return name retrieved from github
 #endif
-	NSLog(@"pathString %@:%@", _owner, _owner.username);
 	return [NSString stringWithFormat:@"%@/%@", _owner.username, _name];
 }
 

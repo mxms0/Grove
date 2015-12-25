@@ -11,8 +11,9 @@
 
 @implementation GSComment
 
-- (void)configureWithDictionary:(NSDictionary *)dictionary {
-	[super configureWithDictionary:dictionary];
+- (void)_configureWithDictionary:(NSDictionary *)dictionary {
+	[super _configureWithDictionary:dictionary];
+	
 	GSAssign(dictionary, @"diff_hunk", _diffHunk);
 	GSAssign(dictionary, @"path", _path);
 	GSAssign(dictionary, @"position", _position);

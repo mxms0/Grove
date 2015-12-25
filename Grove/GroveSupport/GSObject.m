@@ -22,21 +22,22 @@
 }
 
 - (void)configureWithDictionary:(NSDictionary *)dictionary {
-	/*
-	 Consider the implications of this:
-	 Whenever configuring, will always report updated date
-	 Even if the data is the same
-	 Shouldn't be an issue, the user can just post it back to the UI no issue
-	 But should it be significant not to notify user if no data has changed?
-	 Tried a hash, but -hash isn't good enough, gonna need an MD5
-	 Which could be slow and costly.
-	 */
+#if !DEBUG
+	NSLog(@"[%@] Packet %@", NSStringFromClass([self class]), dictionary);
+#endif
+	
 	GSAssign(dictionary, @"id", _identifier);
 	GSURLAssign(dictionary, @"url", _directAPIURL);
+	
+	[self _configureWithDictionary:dictionary];
 
 	[self willChangeValueForKey:GSUpdatedDateKey];
 	self.updatedDate = [NSDate date];
 	[self didChangeValueForKey:GSUpdatedDateKey];
+}
+
+- (void)_configureWithDictionary:(NSDictionary *)dictionary {
+	
 }
 
 - (NSDate *)dateFromISO8601String:(NSString *)string {

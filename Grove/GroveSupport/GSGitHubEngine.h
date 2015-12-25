@@ -32,7 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
 //- (void)unfollowUser:(GSUser *__nonnull)user fromUser:(GSUser *__nonnull)us completionHandler:(void (^__nonnull)(BOOL success, NSError *__nullable error))handler;
 
 // Repositories
-- (void)repositoriesForUser:(GSUser *)user completionHandler:(void (^)(NSArray *__nullable repos, NSError *__nullable error))handler;
+- (void)repositoriesForUser:(GSUser *)user completionHandler:(void (^)(NSArray<GSRepository *> *__nullable repos, NSError *__nullable error))handler;
 - (void)repositoriesForUsername:(NSString *)username completionHandler:(void (^)(NSArray *__nullable repos, NSError *__nullable error))handler;
 - (void)collaboratorsForRepository:(GSRepository *)repo completionHandler:(void (^)(NSArray *__nullable collabs, NSError *__nullable error))error;
 - (void)collaboratorsForRepositoryNamed:(NSString *)repoName owner:(NSString *)owner completionHandler:(void (^)(NSArray *__nullable collabs, NSError *__nullable error))error;
