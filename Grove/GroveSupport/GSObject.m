@@ -26,9 +26,6 @@
 	NSLog(@"[%@] Packet %@", NSStringFromClass([self class]), dictionary);
 #endif
 	
-	GSAssign(dictionary, @"id", _identifier);
-	GSURLAssign(dictionary, @"url", _directAPIURL);
-	
 	[self _configureWithDictionary:dictionary];
 
 	[self willChangeValueForKey:GSUpdatedDateKey];
@@ -37,7 +34,8 @@
 }
 
 - (void)_configureWithDictionary:(NSDictionary *)dictionary {
-	
+	GSAssign(dictionary, @"id", _identifier);
+	GSURLAssign(dictionary, @"url", _directAPIURL);
 }
 
 - (NSDate *)dateFromISO8601String:(NSString *)string {
@@ -61,7 +59,7 @@
 	return self;
 }
 
-- (BOOL)updateSynchronouslyWithError:(NSError *__autoreleasing *)error; {
+- (BOOL)updateSynchronouslyWithError:(NSError *__autoreleasing __nullable *__nullable)error {
 	dispatch_semaphore_t wait = dispatch_semaphore_create(0);
 	__block NSError *lError = nil;
 	[self updateWithCompletionHandler:^(NSError *error) {
@@ -82,17 +80,27 @@
 }
 
 - (void)updateWithCompletionHandler:(void (^)(NSError *error))handler {
+	if (self.updating) return;
+	
 	if (self.directAPIURL) {
+		self.updating = YES;
 		[[GSGitHubEngine sharedInstance] _dirtyRequestWithObject:self completionHandler:^(NSDictionary *ret, NSError *error) {
-			if (!error) {
-				[self configureWithDictionary:ret];
+			if (error) {
+				_GSAssert(NO, [error description]);
+				if (handler)
+					handler(error);
 			}
-			else {
-				NSLog(@"error %@", error);
+			
+			else if (![ret isKindOfClass:[NSDictionary class]]) {
 				GSAssert();
 			}
-			if (handler)
-				handler(error);
+			
+			else {
+				[self configureWithDictionary:ret];
+				handler(nil);
+			}
+			
+			self.updating = NO;
 		}];
 	}
 	else {

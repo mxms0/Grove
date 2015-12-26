@@ -8,10 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface GSObject : NSObject <NSCoding>
-@property (atomic, strong) NSDate *updatedDate;
+@property (atomic, strong, nullable) NSDate *updatedDate;
 - (void)configureWithDictionary:(NSDictionary *)dictionary;
 - (void)update; // Asynchronous
-- (BOOL)updateSynchronouslyWithError:(NSError *__autoreleasing *)error;
-- (void)updateWithCompletionHandler:(void (^)(NSError *error))handler; // Asynchronous
+- (BOOL)updateSynchronouslyWithError:(NSError *__autoreleasing __nullable *__nullable)error;
+- (void)updateWithCompletionHandler:(void (^__nullable)(NSError *__nullable error))handler; // Asynchronous
 @end
+
+NS_ASSUME_NONNULL_END
