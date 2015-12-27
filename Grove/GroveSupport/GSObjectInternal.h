@@ -40,6 +40,13 @@
 		[coder encodeObject:obj forKey:key]; \
 	} while (0);
 
+#define GSSafeHandlerCall(x, ...) \
+	do { \
+		if (x) {\
+			x(__VA_ARGS__); \
+		}\
+	} while (0);
+
 // perhaps create one of these for dates too. that seeems to cover most of the possibilities.
 
 NS_ASSUME_NONNULL_BEGIN

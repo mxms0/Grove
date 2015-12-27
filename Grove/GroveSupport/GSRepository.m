@@ -44,7 +44,7 @@
 			GSAssert();
 		}
 	}
-							  
+	
 	if (inconsistencyFix.location != NSNotFound) {
 		_name = [_name substringFromIndex:inconsistencyFix.location + 1];
 	}

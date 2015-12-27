@@ -63,7 +63,7 @@
 	return self;
 }
 
-- (BOOL)updateSynchronouslyWithError:(NSError *__autoreleasing __nullable *__nullable)error {
+- (BOOL)updateSynchronouslyWithError:(NSError **)error {
 	dispatch_semaphore_t wait = dispatch_semaphore_create(0);
 	__block NSError *lError = nil;
 	[self updateWithCompletionHandler:^(NSError *error) {
@@ -91,31 +91,25 @@
 		[[GSGitHubEngine sharedInstance] _dirtyRequestWithObject:self completionHandler:^(NSDictionary *ret, NSError *error) {
 			if (error) {
 				_GSAssert(NO, [error description]);
-				if (handler)
-					handler(error);
+				GSSafeHandlerCall(handler, error);
 			}
 			else if (!ret) {
 				[self configureWithDictionary:nil];
-				if (handler) {
-				handler(nil);
-					}
+				GSSafeHandlerCall(handler, nil);
 			}
 			else if (![ret isKindOfClass:[NSDictionary class]]) {
 				GSAssert();
 			}
 			else {
 				[self configureWithDictionary:ret];
-				if (handler) {
-					handler(nil);
-				}
+				GSSafeHandlerCall(handler, nil);
 			}
 			
 			self.updating = NO;
 		}];
 	}
 	else {
-		if (handler)
-			handler([NSError errorWithDomain:GSErrorDomain code:(INT_MAX - 15) userInfo:@{NSLocalizedDescriptionKey: @"Couldn't send proper request."}]);
+		GSSafeHandlerCall(handler, [NSError errorWithDomain:GSErrorDomain code:(INT_MAX - 15) userInfo:@{NSLocalizedDescriptionKey: @"Couldn't send proper request."}]);
 	}
 }
 
