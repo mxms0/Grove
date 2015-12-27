@@ -12,8 +12,8 @@
 #import "GSComment.h"
 
 @interface GSComment ()
-@property (nonatomic, readonly) NSURL *pullRequestAPIURL;
-@property (nonatomic, readonly) NSURL *issueAPIURL;
+@property (nonatomic, nullable, readonly, strong) NSURL *pullRequestAPIURL;
+@property (nonatomic, nullable, readonly, strong) NSURL *issueAPIURL;
 @end
 
 #endif

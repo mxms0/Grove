@@ -57,7 +57,7 @@
 		case GSEventTypeDelete: {
 			NSAttributedString *user = [[NSAttributedString alloc] initWithString:self.event.actor.username attributes:nil];
 			NSAttributedString *msg = [[NSAttributedString alloc] initWithString:@" deleted " attributes:nil];
-			NSAttributedString *target1 = [[NSAttributedString alloc] initWithString:self.event.payload.branch attributes:nil];
+			NSAttributedString *target1 = [[NSAttributedString alloc] initWithString:self.event.branch attributes:nil];
 			NSAttributedString *thing = [[NSAttributedString alloc] initWithString:@" at " attributes:nil];
 			NSAttributedString *target2 = [[NSAttributedString alloc] initWithString:self.event.repository.pathString attributes:nil];
 			
@@ -84,7 +84,7 @@
 		case GSEventTypePush: {
 			NSAttributedString *user = [[NSAttributedString alloc] initWithString:self.event.actor.username attributes:@{NSFontAttributeName: regularFont}];
 			NSAttributedString *verb = [[NSAttributedString alloc] initWithString:@" pushed to " attributes:@{NSFontAttributeName: regularFont}];
-			NSAttributedString *branch = [[NSAttributedString alloc] initWithString:self.event.payload.ref attributes:@{NSFontAttributeName : regularFont}];
+			NSAttributedString *branch = [[NSAttributedString alloc] initWithString:self.event.ref attributes:@{NSFontAttributeName : regularFont}];
 			[components addObjectsFromArray:@[user, verb, branch]];
 		}
 		case GSEventTypeRelease:

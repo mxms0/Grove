@@ -32,8 +32,6 @@
 		503C595E1BAD17EE003CB50E /* GRSyntaxHighlightedTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 503C595D1BAD17EE003CB50E /* GRSyntaxHighlightedTextView.m */; };
 		50504D9A1BA263D800B87C5F /* GREventCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 50504D991BA263D800B87C5F /* GREventCellModel.m */; };
 		506005BA1BBB5474000F5AFF /* GRActiveUserProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 506005B91BBB5474000F5AFF /* GRActiveUserProfileViewController.m */; };
-		5061DE251B8471DB007D9F24 /* GSEventPayload.h in Headers */ = {isa = PBXBuildFile; fileRef = 5061DE231B8471DB007D9F24 /* GSEventPayload.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5061DE261B8471DB007D9F24 /* GSEventPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = 5061DE241B8471DB007D9F24 /* GSEventPayload.m */; };
 		5070ECB61C2BC2F90021093F /* GRRepositoryHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5070ECB51C2BC2F90021093F /* GRRepositoryHeaderView.m */; };
 		507931D91B8DA1990080C894 /* Masonry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 507931D21B8DA0580080C894 /* Masonry.framework */; };
 		507931DA1B8DA1AA0080C894 /* Masonry.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 507931D21B8DA0580080C894 /* Masonry.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -82,7 +80,7 @@
 		84A8D0FA1B8D239600B6B4FB /* GREventViewControllerProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A8D0F91B8D239600B6B4FB /* GREventViewControllerProxy.m */; };
 		84A8D0FD1B8D262900B6B4FB /* GREventIssueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A8D0FC1B8D262900B6B4FB /* GREventIssueViewController.m */; };
 		84A8D1001B8D311000B6B4FB /* GRIssueCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A8D0FF1B8D311000B6B4FB /* GRIssueCommentCell.m */; };
-		84A8D10A1B8D6F0C00B6B4FB /* GSIssue.h in Headers */ = {isa = PBXBuildFile; fileRef = 84A8D1081B8D6F0C00B6B4FB /* GSIssue.h */; };
+		84A8D10A1B8D6F0C00B6B4FB /* GSIssue.h in Headers */ = {isa = PBXBuildFile; fileRef = 84A8D1081B8D6F0C00B6B4FB /* GSIssue.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84A8D10B1B8D6F0C00B6B4FB /* GSIssue.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A8D1091B8D6F0C00B6B4FB /* GSIssue.m */; };
 		84F524EF1B83269E0077A06C /* GRStreamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F524EE1B83269E0077A06C /* GRStreamViewController.m */; };
 		84F524F21B8326D60077A06C /* GRNotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F524F11B8326D60077A06C /* GRNotificationViewController.m */; };
@@ -187,8 +185,6 @@
 		50504D991BA263D800B87C5F /* GREventCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GREventCellModel.m; sourceTree = "<group>"; };
 		506005B81BBB5474000F5AFF /* GRActiveUserProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRActiveUserProfileViewController.h; sourceTree = "<group>"; };
 		506005B91BBB5474000F5AFF /* GRActiveUserProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRActiveUserProfileViewController.m; sourceTree = "<group>"; };
-		5061DE231B8471DB007D9F24 /* GSEventPayload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSEventPayload.h; sourceTree = "<group>"; };
-		5061DE241B8471DB007D9F24 /* GSEventPayload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSEventPayload.m; sourceTree = "<group>"; };
 		5070ECB41C2BC2F90021093F /* GRRepositoryHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRRepositoryHeaderView.h; sourceTree = "<group>"; };
 		5070ECB51C2BC2F90021093F /* GRRepositoryHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRRepositoryHeaderView.m; sourceTree = "<group>"; };
 		507931CC1B8DA0570080C894 /* Masonry.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Masonry.xcodeproj; path = ../Masonry/Masonry.xcodeproj; sourceTree = "<group>"; };
@@ -355,8 +351,6 @@
 				50E4B5B41B8303710029264A /* GSUser.m */,
 				50133F001B8413F7004B5BB8 /* GSEvent.h */,
 				50133F011B8413F7004B5BB8 /* GSEvent.m */,
-				5061DE231B8471DB007D9F24 /* GSEventPayload.h */,
-				5061DE241B8471DB007D9F24 /* GSEventPayload.m */,
 				501558C71B8728D80002254D /* GSNotificationInternal.h */,
 				501558BF1B86F2910002254D /* GSNotification.h */,
 				501558C01B86F2910002254D /* GSNotification.m */,
@@ -592,7 +586,6 @@
 				5097B5EC1B8D91C200A72721 /* GSComment.h in Headers */,
 				501558C11B86F2910002254D /* GSNotification.h in Headers */,
 				50133F021B8413F7004B5BB8 /* GSEvent.h in Headers */,
-				5061DE251B8471DB007D9F24 /* GSEventPayload.h in Headers */,
 				50E9F8701B832BF70007212E /* GSNetworkManagerHelpers.h in Headers */,
 				5097B5E21B8D2D9800A72721 /* GSUtilities.h in Headers */,
 				50133F0E1B84495C004B5BB8 /* GSObject.h in Headers */,
@@ -778,7 +771,6 @@
 				5097B5DD1B8D29F400A72721 /* GSCacheManager.m in Sources */,
 				84A8D10B1B8D6F0C00B6B4FB /* GSIssue.m in Sources */,
 				50133F0F1B84495C004B5BB8 /* GSObject.m in Sources */,
-				5061DE261B8471DB007D9F24 /* GSEventPayload.m in Sources */,
 				50E4B5AE1B82F8E50029264A /* GSGitHubEngine.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

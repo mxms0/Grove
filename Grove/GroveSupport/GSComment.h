@@ -9,16 +9,20 @@
 #import <Foundation/Foundation.h>
 #import "GSObject.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface GSComment : GSObject
-@property (nonatomic, readonly) NSString *diffHunk;
-@property (nonatomic, readonly) NSString *path;
-@property (nonatomic, readonly) NSNumber *position;
-@property (nonatomic, readonly) NSNumber *line;
-@property (nonatomic, readonly) NSNumber *originalPosition;
-@property (nonatomic, readonly) NSString *commitIdentifier;
-@property (nonatomic, readonly) NSString *originalCommitIdentifier;
-@property (nonatomic, readonly) GSUser *user;
-@property (nonatomic, readonly) NSString *body;
-@property (nonatomic, readonly) NSDate *createdDate;
-@property (nonatomic, readonly) NSURL *browserURL;
+@property (nonatomic, readonly, strong) NSString *diffHunk;
+@property (nonatomic, readonly, strong) NSString *path;
+@property (nonatomic, readonly, strong) NSNumber *position;
+@property (nonatomic, readonly, strong) NSNumber *line;
+@property (nonatomic, readonly, strong) NSNumber *originalPosition;
+@property (nonatomic, readonly, strong) NSString *commitIdentifier;
+@property (nonatomic, readonly, strong) NSString *originalCommitIdentifier;
+@property (nonatomic, readonly, strong) GSUser *user;
+@property (nonatomic, readonly, strong) NSString *body;
+@property (nonatomic, readonly, strong) NSDate *createdDate;
+@property (nonatomic, readonly, strong) NSURL *browserURL;
 @end
+
+NS_ASSUME_NONNULL_END

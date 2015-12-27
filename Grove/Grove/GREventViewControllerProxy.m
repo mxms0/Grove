@@ -47,7 +47,7 @@
         }
         case GSEventTypeFork: {
 			self = (GREventViewControllerProxy *)[[GRRepositoryViewController alloc] init];
-			GSRepository *repository = [[event payload] forkee];
+			GSRepository *repository = [event forkee];
 			[(GRRepositoryViewController *)self setRepository:repository];
 			
             break;

@@ -26,7 +26,11 @@
 	NSLog(@"[%@] Packet %@", NSStringFromClass([self class]), dictionary);
 #endif
 	
-	[self _configureWithDictionary:dictionary];
+	if (dictionary) {
+		[self _configureWithDictionary:dictionary];
+	}
+	
+	// Updated date is time of last request, not time of new data.
 
 	[self willChangeValueForKey:GSUpdatedDateKey];
 	self.updatedDate = [NSDate date];
@@ -90,14 +94,20 @@
 				if (handler)
 					handler(error);
 			}
-			
+			else if (!ret) {
+				[self configureWithDictionary:nil];
+				if (handler) {
+				handler(nil);
+					}
+			}
 			else if (![ret isKindOfClass:[NSDictionary class]]) {
 				GSAssert();
 			}
-			
 			else {
 				[self configureWithDictionary:ret];
-				handler(nil);
+				if (handler) {
+					handler(nil);
+				}
 			}
 			
 			self.updating = NO;

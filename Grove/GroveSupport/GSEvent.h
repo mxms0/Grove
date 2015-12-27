@@ -7,11 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+
 #import "GSActor.h"
-#import "GSObject.h"
 #import "GSRepository.h"
-#import "GSEventPayload.h"
 #import "GSOrganization.h"
+#import "GSComment.h"
+#import "GSIssue.h"
 
 typedef NS_ENUM(NSInteger, GSEventType) {
 	GSEventTypeCommitComment,
@@ -42,12 +43,49 @@ typedef NS_ENUM(NSInteger, GSEventType) {
 	GSEventTypeUnknown
 };
 
+typedef NS_ENUM(NSInteger, GSEventAction) {
+	GSEventActionStarted,
+	GSEventActionCreated,
+	GSEventActionUpdated,
+	GSEventActionEdited,
+	GSEventActionOpened,
+	GSEventActionClosed,
+	GSEventActionPublished,
+	GSEventActionReopened,
+	GSEventActionAdded,
+	GSEventActionRemoved,
+	GSEventActionSynchronized,
+	GSEventActionAssigned,
+	GSEventActionUnassigned,
+	GSEventActionLabeled,
+	GSEventActionUnlabeled,
+	GSEventActionNone
+};
+
 @interface GSEvent : GSObject
-@property (nonatomic, readonly) GSActor *actor;
-@property (nonatomic, readonly) GSRepository *repository;
-@property (nonatomic, readonly) NSDate *createdDate;
-@property (nonatomic, readonly) GSEventPayload *payload;
+@property (nonatomic, readonly, strong) GSActor *actor;
+@property (nonatomic, readonly, strong) GSRepository *repository;
+@property (nonatomic, readonly, strong) NSDate *createdDate;
 @property (nonatomic, readonly) GSEventType type;
 @property (nonatomic, readonly) BOOL publicallyAvailable;
-@property (nonatomic, readonly) GSOrganization *organization;
+@property (nonatomic, readonly, strong) GSOrganization *organization;
+@property (nonatomic, readonly) GSEventAction action;
+@property (nonatomic, readonly) NSString *ref;
+@property (nonatomic, readonly) NSString *refType;
+@property (nonatomic, readonly) NSString *masterBranch;
+@property (nonatomic, readonly) NSString *pusherType;
+@property (nonatomic, readonly) NSNumber *pushIdentifier;
+@property (nonatomic, readonly) NSNumber *size;
+@property (nonatomic, readonly) NSNumber *distinctSize;
+@property (nonatomic, readonly) NSString *branch;
+@property (nonatomic, readonly) NSString *head;
+@property (nonatomic, readonly) NSString *previousHead;
+@property (nonatomic, readonly) NSArray  *commits;
+@property (nonatomic, readonly) NSString *commitMessage;
+@property (nonatomic, readonly) NSString *descriptionMessage;
+@property (nonatomic, readonly) GSComment *comment;
+@property (nonatomic, readonly) GSIssue *issue;
+@property (nonatomic, readonly) GSRepository *forkee;
+/* refine these.. */
+/* organization == actor??? */
 @end

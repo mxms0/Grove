@@ -243,7 +243,13 @@ NS_ASSUME_NONNULL_BEGIN
 		if (error) {
 			handler(nil, error);
 		}
-		else if (!serializeable || ![serializeable isKindOfClass:[NSDictionary class]]) {
+		else if (!serializeable) {
+			// This is *likely* because the data hasn't changed
+			// Thanks to If-Modified-Since
+			handler(nil, nil);
+		}
+		else if (![serializeable isKindOfClass:[NSDictionary class]] && ![serializeable isKindOfClass:[NSArray class]]) {
+			NSLog(@"fds %@:%@", serializeable, request);
 			GSAssert();
 		}
 		else {
