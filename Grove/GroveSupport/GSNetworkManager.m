@@ -24,13 +24,16 @@
 	return _instance;
 }
 
-- (void)requestOAuth2TokenWithUsername:(NSString *)username password:(NSString *)password handler:(void (^)(NSString *token, NSError *error))handler {
+- (void)requestOAuth2TokenWithUsername:(NSString *)username password:(NSString *)password twoFactorToken:(NSString *__nullable)twoFa handler:(void (^)(NSString *token, NSError *error))handler {
 	GSURLRequest *request = [[GSURLRequest alloc] initWithURL:[NSURL URLWithString:@"https://api.github.com/authorizations"]];
 	
 	NSString *authenticationInformation = [NSString stringWithFormat:@"%@:%@", username, password];
 	NSString *authValue = [NSString stringWithFormat:@"Basic %@", [authenticationInformation base64Encoded]];
 	
 	[request addValue:authValue forHTTPHeaderField:@"Authorization"];
+	if (twoFa) {
+		[request addValue:twoFa forHTTPHeaderField:@"X-GitHub-OTP"];
+	}
 	[request setHTTPMethod:@"POST"];
 	
 	NSDictionary *body = @{
@@ -133,7 +136,12 @@
 #if DEBUG
 				NSLog(@"Not authorized %@:%@:%@", data, response, request);
 #endif
-				NSError *error = [NSError errorWithDomain:GSDomain code:401 userInfo:@{NSLocalizedDescriptionKey: @"Not Authorized"}];
+				NSMutableDictionary *errorInfo = [@{NSLocalizedDescriptionKey: @"Not Authorized."} mutableCopy];
+				NSString *authEtc = [[httpResponse allHeaderFields] objectForKey:@"X-GitHub-OTP"]; // Make const for this
+				if (authEtc) {
+					[errorInfo setObject:authEtc forKey:GSAuthCriteria];
+				}
+				NSError *error = [NSError errorWithDomain:GSErrorDomain code:401 userInfo:errorInfo];
 				handler(nil, error);
 				break;
 			}

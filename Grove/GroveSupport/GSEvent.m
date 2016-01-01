@@ -14,6 +14,10 @@
 - (void)_configureWithDictionary:(NSDictionary *)dictionary {
 	[super _configureWithDictionary:dictionary];
 	
+#if DEBUG
+	NSLog(@"Event information %@", dictionary);
+#endif
+	
 	GSObjectAssign(dictionary, @"actor", _actor, GSActor);
 	GSObjectAssign(dictionary, @"repo", _repository, GSRepository);
 	
@@ -27,20 +31,17 @@
 	NSDictionary *payload = nil;
 	GSAssign(dictionary, @"payload", payload);
 	
+	NSString *refTypeString = nil;
+	
 	GSAssign(payload, @"push_id", _pushIdentifier);
 	GSAssign(payload, @"size", _size);
 	GSAssign(payload, @"description", _descriptionMessage);
 	GSAssign(payload, @"ref", _ref);
-	GSAssign(payload, @"ref_type", _refType);
+	GSAssign(payload, @"ref_type", refTypeString);
 	GSAssign(payload, @"master_branch", _masterBranch);
 	GSAssign(payload, @"pusher_type", _pusherType);
 	
-	if ([_refType isEqualToString:@"branch"]) {
-		_branch = _ref;
-	}
-	else {
-		//GSAssert();
-	}
+	_refType = [self refTypeForString:refTypeString];
 	
 	GSObjectAssign(payload, @"comment", _comment, GSComment);
 	GSObjectAssign(payload, @"issue", _issue, GSIssue);
@@ -64,6 +65,16 @@
 
 }
 
+- (GSEventRefType)refTypeForString:(NSString *)refs {
+	NSDictionary *const refMapping = @{
+									   @"branch":		@(GSEventRefTypeBranch),
+									   @"repository":	@(GSEventRefTypeRepository),
+									   @"tag":			@(GSEventRefTypeTag)
+									   };
+	return refMapping[refs] ? (GSEventRefType)[refMapping[refs] integerValue] : GSEventRefTypeUnknown;
+	
+}
+
 - (GSEventAction)actionForString:(NSString *)actionString {
 	NSDictionary *const actionMapping = @{
 										  @"started"		: @(GSEventActionStarted),
@@ -84,7 +95,7 @@
 										  @"synchronize"	: @(GSEventActionSynchronized),
 										  @"synchronized"	: @(GSEventActionSynchronized),
 										  };
-	return actionMapping[actionString] ? (GSEventAction)[actionMapping[actionString] intValue] : GSEventActionNone;
+	return actionMapping[actionString] ? (GSEventAction)[actionMapping[actionString] integerValue] : GSEventActionNone;
 }
 
 - (GSEventType)notificationEventTypeFromString:(NSString *)string {
@@ -119,12 +130,41 @@
 	return mapping[string] ? [mapping[string] intValue] : GSEventTypeUnknown;
 }
 
-- (NSString *)description {
 #if DEBUG
-	return [NSString stringWithFormat:@"<%@: %p; id = %@;>", NSStringFromClass([self class]), self, self.identifier];
-#else
-	return [super description];
+- (NSString *)stringForEventType:(GSEventType)type {
+	NSDictionary *const mapping = @{
+									@"CommitCommentEvent"		:@(GSEventTypeCommitComment),
+									@"CreateEvent"				:@(GSEventTypeCreate),
+									@"DeleteEvent"				:@(GSEventTypeDelete),
+									@"DeploymentEvent"			:@(GSEventTypeDeployment),
+									@"DeploymentStatusEvent"		:@(GSEventTypeDeploymentStatus),
+									@"DownloadEvent"				:@(GSEventTypeDownload),
+									@"FollowEvent"				:@(GSEventTypeFollow),
+									@"ForkEvent"					:@(GSEventTypeFork),
+									@"ForkApplyEvent"			:@(GSEventTypeForkApply),
+									@"GistEvent"					:@(GSEventTypeGistEvent),
+									@"GollumEvent"				:@(GSEventTypeGollumEvent),
+									@"IssueCommentEvent"			:@(GSEventTypeIssueComment),
+									@"IssuesEvent"				:@(GSEventTypeIssues),
+									@"MemberEvent"				:@(GSEventTypeMember),
+									@"MembershipEvent"			:@(GSEventTypeMembership),
+									@"PageBuildEvent"			:@(GSEventTypePageBuild),
+									@"PublicEvent"				:@(GSEventTypePublic),
+									@"PullRequestEvent"			:@(GSEventTypePullRequest),
+									@"PullRequestReviewCommentEvent":@(GSEventTypePullRequestReviewComment),
+									@"PushEvent"					:@(GSEventTypePush),
+									@"ReleaseEvent"				:@(GSEventTypeRelease),
+									@"RepositoryEvent"			:@(GSEventTypeRepository),
+									@"StatusEvent"				:@(GSEventTypeStatus),
+									@"TeamAddEvent"				:@(GSEventTypeTeamAdd),
+									@"WatchEvent"				:@(GSEventTypeStar)
+									};
+	return [[mapping allKeysForObject:@(type)] firstObject];
+}
 #endif
+
+- (NSString *)description {
+	return [NSString stringWithFormat:@"<%@: %p; id = %@; type = %@;>", NSStringFromClass([self class]), self, self.identifier, [self stringForEventType:self.type]];
 }
 
 @end

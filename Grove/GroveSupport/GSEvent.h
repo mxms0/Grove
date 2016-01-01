@@ -15,6 +15,7 @@
 #import "GSIssue.h"
 
 typedef NS_ENUM(NSInteger, GSEventType) {
+	GSEventTypeUnknown,
 	GSEventTypeCommitComment,
 	GSEventTypeCreate,
 	GSEventTypeDelete,
@@ -40,10 +41,10 @@ typedef NS_ENUM(NSInteger, GSEventType) {
 	GSEventTypeStatus,
 	GSEventTypeTeamAdd,
 	GSEventTypeStar,
-	GSEventTypeUnknown
 };
 
 typedef NS_ENUM(NSInteger, GSEventAction) {
+	GSEventActionUnknown
 	GSEventActionStarted,
 	GSEventActionCreated,
 	GSEventActionUpdated,
@@ -62,6 +63,13 @@ typedef NS_ENUM(NSInteger, GSEventAction) {
 	GSEventActionNone
 };
 
+typedef NS_ENUM(NSInteger, GSEventRefType) {
+	GSEventRefTypeUnknown,
+	GSEventRefTypeRepository,
+	GSEventRefTypeBranch,
+	GSEventRefTypeTag,
+};
+
 @interface GSEvent : GSObject
 @property (nonatomic, readonly, strong) GSActor *actor;
 @property (nonatomic, readonly, strong) GSRepository *repository;
@@ -71,7 +79,7 @@ typedef NS_ENUM(NSInteger, GSEventAction) {
 @property (nonatomic, readonly, strong) GSOrganization *organization;
 @property (nonatomic, readonly) GSEventAction action;
 @property (nonatomic, readonly) NSString *ref;
-@property (nonatomic, readonly) NSString *refType;
+@property (nonatomic, readonly) GSEventRefType refType;
 @property (nonatomic, readonly) NSString *masterBranch;
 @property (nonatomic, readonly) NSString *pusherType;
 @property (nonatomic, readonly) NSNumber *pushIdentifier;

@@ -12,10 +12,17 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef NS_ENUM(NSInteger, GSTwoFactorAuthMethod) {
+	GSTwoFactorAuthMethodUnknown,
+	GSTwoFactorAuthMethodApp,
+	GSTwoFactorAuthMethodSMS,
+};
+
 @interface GSGitHubEngine : NSObject
 @property (nonatomic, strong, nullable) GSUser *activeUser;
 + (instancetype)sharedInstance;
-- (void)authenticateUserWithUsername:(NSString *)username password:(NSString *)password completionHandler:(void (^ __nullable)(GSUser *__nullable user, NSError *__nullable error))handler;
+- (void)authenticateUserWithUsername:(NSString *)username password:(NSString *)password completionHandler:(void (^__nullable)(GSUser *__nullable, NSError *__nullable))handler;
+- (void)authenticateUserWithUsername:(NSString *)username password:(NSString *)password twoFactorToken:(NSString *__nullable)twoFa completionHandler:(void (^ __nullable)(GSUser *__nullable user, NSError *__nullable error))handler;
 - (void)eventsForUser:(GSUser *)user completionHandler:(void (^)(NSArray *__nullable events, NSError *__nullable error))handler;
 - (void)userForUsername:(NSString *)username completionHandler:(void (^)(GSUser *__nullable user, NSError *__nullable error))handler;
 

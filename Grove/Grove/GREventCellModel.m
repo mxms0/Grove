@@ -31,7 +31,7 @@
 }
 
 - (NSAttributedString *)_generatedEventString {
-	
+	NSLog(@"Generating String for event %@", self.event);
 //	UIColor *blue = [UIColor colorWithRed:0.2627 green:0.4784 blue:0.7451 alpha:1.0];
 //	UIFont *boldFont = [UIFont boldSystemFontOfSize:18];
 	UIFont *regularFont = [UIFont systemFontOfSize:18];
@@ -51,15 +51,51 @@
 		}
 		case GSEventTypeCommitComment:
 		case GSEventTypeCreate:{
-		
+			NSAttributedString *user = [[NSAttributedString alloc] initWithString:self.event.actor.username attributes:nil];
+			NSAttributedString *verb = nil;
+			NSAttributedString *subject = nil;
+			// Could be created repository, unsure what other "created" events there are.
+			
+			switch ([self.event refType]) {
+				case GSEventRefTypeBranch:
+					verb = [[NSAttributedString alloc] initWithString:@" created branch " attributes:nil];
+					subject = [[NSAttributedString alloc] initWithString:self.event.ref attributes:nil];
+					break;
+				case GSEventRefTypeRepository:
+					verb = [[NSAttributedString alloc] initWithString:@" created repository " attributes:nil];
+					subject = [[NSAttributedString alloc] initWithString:self.event.repository.pathString attributes:nil];
+					break;
+				case GSEventRefTypeTag:
+				case GSEventRefTypeUnknown:
+				default:
+					GSAssert();
+					break;
+			}
+			
+			[components addObjectsFromArray:@[user, verb, subject]];
+
 			break;
 		}
 		case GSEventTypeDelete: {
 			NSAttributedString *user = [[NSAttributedString alloc] initWithString:self.event.actor.username attributes:nil];
 			NSAttributedString *msg = [[NSAttributedString alloc] initWithString:@" deleted " attributes:nil];
-			NSAttributedString *target1 = [[NSAttributedString alloc] initWithString:self.event.branch attributes:nil];
+			NSAttributedString *target1 = nil;
 			NSAttributedString *thing = [[NSAttributedString alloc] initWithString:@" at " attributes:nil];
-			NSAttributedString *target2 = [[NSAttributedString alloc] initWithString:self.event.repository.pathString attributes:nil];
+			NSAttributedString *target2 = nil;
+			
+			switch ([[self event] refType]) {
+				case GSEventRefTypeBranch:
+					target1 = [[NSAttributedString alloc] initWithString:self.event.ref attributes:nil];
+					target2 = [[NSAttributedString alloc] initWithString:self.event.repository.pathString attributes:nil];
+					break;
+				case GSEventRefTypeTag:
+				case GSEventRefTypeRepository:
+					// Inconsistent with the API. "The object that was deleted. Can be "branch" or "tag"."
+				case GSEventRefTypeUnknown:
+				default:
+					GSAssert();
+					break;
+			}
 			
 			[components addObjectsFromArray:@[user, msg, target1, thing, target2]];
 			

@@ -102,6 +102,13 @@
 			}
 			
 			else {
+				NSDictionary *errorInfo = [error userInfo];
+				if (errorInfo[GSRequires2FAErrorKey]) {
+					
+				}
+				if (error.code == 401) {
+					
+				}
 				_GSAssert(NO, @"%@", error);
 			}
 		}];

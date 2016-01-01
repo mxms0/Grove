@@ -24,11 +24,12 @@
 		GRApplicationUser *user = [[GRSessionManager sharedInstance] currentUser];
 
 		__weak id weakSelf = self;
+		__weak UITableView *weakTableView = tableView;
 		[[GSGitHubEngine sharedInstance] notificationsForUser:user.user completionHandler:^(NSArray *__nullable notifs, NSError *__nullable error) {
 			
 			[weakSelf sortNewNotifications:notifs];
 			
-			[tableView reloadData];
+			[weakTableView reloadData];
 		}];
 		
     }

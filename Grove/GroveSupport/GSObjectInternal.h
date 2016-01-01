@@ -42,9 +42,9 @@
 
 #define GSSafeHandlerCall(x, ...) \
 	do { \
-		if (x) {\
+		if ((x)) { \
 			x(__VA_ARGS__); \
-		}\
+		} \
 	} while (0);
 
 // perhaps create one of these for dates too. that seeems to cover most of the possibilities.

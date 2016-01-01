@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class GSURLRequest;
 @interface GSNetworkManager : NSObject
 + (instancetype)sharedInstance;
-- (void)requestOAuth2TokenWithUsername:(NSString *)username password:(NSString *)password handler:(void (^ __nullable)(NSString *__nullable token, NSError *__nullable error))handler;
+- (void)requestOAuth2TokenWithUsername:(NSString *)username password:(NSString *)password twoFactorToken:(NSString *__nullable)twoFa handler:(void (^)(NSString *token, NSError *error))handler;
 - (void)requestEventsForUser:(NSString *)user token:(NSString *)token completionHandler:(void (^)(NSArray *__nullable events, NSError *__nullable error))handler;
 - (void)requestUserInformationForToken:(NSString *)token completionHandler:(void (^)(NSDictionary *__nullable response, NSError *__nullable error))handler;
 - (void)requestUserInformationForUsername:(NSString *)username token:(NSString *__nullable)token completionHandler:(void (^)(NSDictionary *__nullable response, NSError *__nullable error))handler;

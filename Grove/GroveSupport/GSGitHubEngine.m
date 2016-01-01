@@ -24,6 +24,10 @@
 */
 
 static NSString *const GSAPIURLComponentStarred = @"starred";
+NSString *const GSDomain = @"com.RickSupport.morty";
+NSString *const GSErrorDomain = @"MortiestMorty";
+NSString *const GSUpdatedDateKey = @"updatedDate";
+NSString *const GSRequires2FAErrorKey = @"requires2FA";
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -47,6 +51,10 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (void)authenticateUserWithUsername:(NSString *)username password:(NSString *)password completionHandler:(void (^__nullable)(GSUser *__nullable, NSError *__nullable))handler {
+	[self authenticateUserWithUsername:username password:password twoFactorToken:nil completionHandler:handler];
+}
+
+- (void)authenticateUserWithUsername:(NSString *)username password:(NSString *)password twoFactorToken:(NSString *__nullable)twoFa completionHandler:(void (^ __nullable)(GSUser *__nullable user, NSError *__nullable error))handler {
 	
 	// this API is blocking. Not sure if I'm okay with this
 	// since it has an async design
@@ -59,7 +67,7 @@ NS_ASSUME_NONNULL_BEGIN
 	
 	dispatch_semaphore_t wait = dispatch_semaphore_create(0);
 	
-	[[GSNetworkManager sharedInstance] requestOAuth2TokenWithUsername:username password:password handler:^(NSString * __nullable tokenParam, NSError * __nullable errorParam) {
+	[[GSNetworkManager sharedInstance] requestOAuth2TokenWithUsername:username password:password twoFactorToken:twoFa handler:^(NSString * __nullable tokenParam, NSError * __nullable errorParam) {
 		token = tokenParam;
 		error = errorParam;
 		
@@ -69,6 +77,29 @@ NS_ASSUME_NONNULL_BEGIN
 	dispatch_semaphore_wait(wait, DISPATCH_TIME_FOREVER);
 	
 	if (error) {
+		NSString *authAttempt = [[error userInfo] objectForKey:GSAuthCriteria];
+		if (authAttempt) {
+			BOOL required = NO;
+			GSTwoFactorAuthMethod method = GSTwoFactorAuthMethodUnknown;
+			NSArray *words = [authAttempt componentsSeparatedByString:@" "];
+			for (NSString *word in words) {
+				if ([word hasPrefix:@"required"]) {
+					required = YES;
+					continue;
+				}
+				else if ([word hasPrefix:@"app"]) {
+					method = GSTwoFactorAuthMethodApp;
+					continue;
+				}
+				else if ([word hasPrefix:@"sms"]) {
+					method = GSTwoFactorAuthMethodSMS;
+					continue;
+				}
+			}
+		}
+		NSError *newError = [NSError errorWithDomain:GSErrorDomain code:GSErrorReasonTwoFactorAuthRequired userInfo:@{
+																												
+																												}];
 		handler(nil, error);
 		return;
 	}
