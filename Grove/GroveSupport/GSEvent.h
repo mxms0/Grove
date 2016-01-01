@@ -44,7 +44,7 @@ typedef NS_ENUM(NSInteger, GSEventType) {
 };
 
 typedef NS_ENUM(NSInteger, GSEventAction) {
-	GSEventActionUnknown
+	GSEventActionUnknown,
 	GSEventActionStarted,
 	GSEventActionCreated,
 	GSEventActionUpdated,

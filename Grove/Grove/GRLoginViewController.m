@@ -104,10 +104,7 @@
 			else {
 				NSDictionary *errorInfo = [error userInfo];
 				if (errorInfo[GSRequires2FAErrorKey]) {
-					
-				}
-				if (error.code == 401) {
-					
+					NSLog(@"REQUIRE OAUTH TYPE %@", errorInfo[GSAuthCriteria]);
 				}
 				_GSAssert(NO, @"%@", error);
 			}

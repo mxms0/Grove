@@ -28,6 +28,7 @@ NSString *const GSDomain = @"com.RickSupport.morty";
 NSString *const GSErrorDomain = @"MortiestMorty";
 NSString *const GSUpdatedDateKey = @"updatedDate";
 NSString *const GSRequires2FAErrorKey = @"requires2FA";
+NSString *const GSAuthCriteria = @"authCriteria";
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -96,10 +97,13 @@ NS_ASSUME_NONNULL_BEGIN
 					continue;
 				}
 			}
+			NSDictionary *newInfo = @{
+									  GSRequires2FAErrorKey:	@(YES), // assumption
+									  GSAuthCriteria:			@(method)
+									  };
+			error = [NSError errorWithDomain:GSErrorDomain code:GSErrorReasonTwoFactorAuthRequired userInfo:newInfo];
 		}
-		NSError *newError = [NSError errorWithDomain:GSErrorDomain code:GSErrorReasonTwoFactorAuthRequired userInfo:@{
-																												
-																												}];
+		
 		handler(nil, error);
 		return;
 	}

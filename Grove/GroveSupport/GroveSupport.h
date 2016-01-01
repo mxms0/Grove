@@ -32,6 +32,7 @@ extern NSString *const GSDomain;
 extern NSString *const GSErrorDomain;
 extern NSString *const GSUpdatedDateKey;
 extern NSString *const GSRequires2FAErrorKey;
+extern NSString *const GSAuthCriteria;
 
 typedef NS_ENUM(NSInteger, GSErrorReason) {
 	GSErrorReasonUnknown,
