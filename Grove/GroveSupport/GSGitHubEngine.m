@@ -23,13 +23,6 @@
  handler(x,y) where x (xor) y should always be 1 (1 for object, 0 for nil)
 */
 
-static NSString *const GSAPIURLComponentStarred = @"starred";
-NSString *const GSDomain = @"com.RickSupport.morty";
-NSString *const GSErrorDomain = @"MortiestMorty";
-NSString *const GSUpdatedDateKey = @"updatedDate";
-NSString *const GSRequires2FAErrorKey = @"requires2FA";
-NSString *const GSAuthCriteria = @"authCriteria";
-
 NS_ASSUME_NONNULL_BEGIN
 
 @implementation GSGitHubEngine
@@ -270,9 +263,8 @@ NS_ASSUME_NONNULL_BEGIN
 	}
 	
 	GSURLRequest *request = [[GSURLRequest alloc] initWithURL:obj.directAPIURL];
-	[request addAuthToken:self.activeUser.token];
-	[request addValue:GSRFC2616DTimestampFromDate(obj.updatedDate) forHTTPHeaderField:@"If-Modified-Since"];
-	// this may or may not work, but it's worth a shot. :- )
+	[request setAuthToken:self.activeUser.token];
+	[request setLastModifiedDate:obj.updatedDate];
 	
 	[[GSNetworkManager sharedInstance] sendRequest:request completionHandler:^(GSSerializable * _Nullable serializeable, NSError * _Nullable error) {
 		if (error) {
@@ -309,7 +301,7 @@ NS_ASSUME_NONNULL_BEGIN
 	NSURL *destination = GSAPIURLComplex(GSAPIEndpointUsers, user.username, GSAPIComponentStarred);
 	
 	GSURLRequest *request = [[GSURLRequest alloc] initWithURL:destination];
-	[request addAuthToken:user.token];
+	[request setAuthToken:user.token];
 	
 	[[GSNetworkManager sharedInstance] sendRequest:request completionHandler:^(GSSerializable *serializeable, NSError *error) {
 		if (error) {
@@ -393,3 +385,9 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 NS_ASSUME_NONNULL_END
+
+NSString *const GSDomain = @"com.RickSupport.morty";
+NSString *const GSErrorDomain = @"MortiestMorty";
+NSString *const GSUpdatedDateKey = @"updatedDate";
+NSString *const GSRequires2FAErrorKey = @"requires2FA";
+NSString *const GSAuthCriteria = @"authCriteria";

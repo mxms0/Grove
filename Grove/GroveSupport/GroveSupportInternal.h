@@ -9,12 +9,10 @@
 #ifndef GroveSupport_GroveSupportInternal_h
 #define GroveSupport_GroveSupportInternal_h
 
-static NSString *const GSClientIdentifier = @"1e27f6fb656a735a3a9c";
-static NSString *const GSClientSecret = @"192812c39ecc20317489a9b8c3d62989aa7e287f";
-
 // Perhaps move these to a server, should never ship with these tokens
 
 #import "GroveSupport.h"
+#import "GroveSupportInternalStrings.h"
 #import "GSGitHubEngineInternal.h"
 #import "GSObjectInternal.h"
 #import "GSUserInternal.h"

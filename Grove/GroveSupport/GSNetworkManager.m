@@ -31,9 +31,8 @@
 	NSString *authValue = [NSString stringWithFormat:@"Basic %@", [authenticationInformation base64Encoded]];
 	
 	[request addValue:authValue forHTTPHeaderField:@"Authorization"];
-	if (twoFa) {
-		[request addValue:twoFa forHTTPHeaderField:@"X-GitHub-OTP"];
-	}
+	[request setTwoFactorAuthToken:twoFa];
+
 	[request setHTTPMethod:@"POST"];
 	
 	NSDictionary *body = @{
@@ -59,10 +58,10 @@
 								   @"write:public_key",
 								   @"admin:public_key"
 								   ],
-						   @"note": @"hihihihi",
+						   @"note": @"g",
 						   @"client_id": GSClientIdentifier,
 						   @"client_secret": GSClientSecret,
-						   @"fingerprint": [[NSUUID UUID] UUIDString]
+						   @"fingerprint": [[NSUUID UUID] UUIDString] // make this symbolic
 						   };
 	
 	NSError *serializationError = nil;
@@ -84,7 +83,7 @@
 			token = response[@"token"];
 		}
 		else {
-            GSAssert();
+			GSAssert();
 			// grab error message and pass it on
 		}
 		// check this with properties attached i.e. hash and last8 chars
@@ -137,7 +136,7 @@
 				NSLog(@"Not authorized %@:%@:%@", data, response, request);
 #endif
 				NSMutableDictionary *errorInfo = [@{NSLocalizedDescriptionKey: @"Not Authorized."} mutableCopy];
-				NSString *authEtc = [[httpResponse allHeaderFields] objectForKey:@"X-GitHub-OTP"]; // Make const for this
+				NSString *authEtc = [[httpResponse allHeaderFields] objectForKey:GSHTTPTwoFactorAuthHeaderKey];
 				if (authEtc) {
 					[errorInfo setObject:authEtc forKey:GSAuthCriteria];
 				}
@@ -147,7 +146,7 @@
 			}
 			default:
 				NSLog(@"HTTP Code %ld", (long)[httpResponse statusCode]);
-                GSAssert();
+				GSAssert();
 				handler(nil, error);
 				break;
 		}
@@ -160,42 +159,42 @@
 	NSURL *properURL = [GSAPIURLForEndpoint(GSAPIEndpointUsers) URLByAppendingPathComponent:[NSString stringWithFormat:@"%@/received_events", user]];
 	
 	GSURLRequest *req = [[GSURLRequest alloc] initWithURL:properURL];
-    [req addAuthToken:token];
+	[req setAuthToken:token];
 	[self sendDataRequest:req completionHandler:^(id dictionary, NSError *error) {
 		if (error) {
 			handler(nil, error);
 			return;
 		}
 		
-        if ([dictionary isKindOfClass:[NSArray class]]) {
-            handler(dictionary, nil);
-        }
-        else {
+		if ([dictionary isKindOfClass:[NSArray class]]) {
+			handler(dictionary, nil);
+		}
+		else {
 			GSAssert();
-            handler(nil, nil);
-        }
-
+			handler(nil, nil);
+		}
+		
 	}];
 }
 
 - (void)requestUserInformationForToken:(NSString *)token completionHandler:(void (^)(NSDictionary *response, NSError *error))handler {
 	GSURLRequest *request = [[GSURLRequest alloc] initWithURL:GSAPIURLForEndpoint(GSAPIEndpointUser)];
-    [request addAuthToken:token];
+	[request setAuthToken:token];
 	
 	[self sendDataRequest:request completionHandler:^(id response, NSError *error) {
 		if (error || !response) {
 			handler(nil, error);
 			return;
 		}
-        handler(response, error);
+		handler(response, error);
 	}];
 }
 
 - (void)requestUserInformationForUsername:(NSString *)username token:(NSString *)token completionHandler:(void (^)(NSDictionary *response, NSError *error))handler {
 	NSURL *requestURL = [GSAPIURLForEndpoint(GSAPIEndpointUsers) URLByAppendingPathComponent:username];
 	GSURLRequest *request = [[GSURLRequest alloc] initWithURL:requestURL];
-
-	[request addAuthToken:token];
+	
+	[request setAuthToken:token];
 	
 	[self sendDataRequest:request completionHandler:^(id ret, NSError *error) {
 		if (error) {
@@ -211,7 +210,7 @@
 	
 	NSURL *requestURL = GSAPIURLComplex(GSAPIEndpointUsers, username, GSAPIEndpointRepos);
 	GSURLRequest *request = [[GSURLRequest alloc] initWithURL:requestURL];
-	[request addAuthToken:token];
+	[request setAuthToken:token];
 	
 	[self sendDataRequest:request completionHandler:^(GSSerializable *response, NSError *error) {
 		if (error) {
@@ -225,22 +224,19 @@
 
 - (void)downloadResourceFromURL:(NSURL *)url token:(NSString *)token completionHandler:(void (^)(NSURL *filePath, NSError *error))handler {
 	GSURLRequest *request = [[GSURLRequest alloc] initWithURL:url];
-	if (token) {
-        [request addAuthToken:token];
-	}
+	[request setAuthToken:token];
 	
 	NSURLSessionDownloadTask *task = [[NSURLSession sharedSession] downloadTaskWithRequest:request completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error) {
 		handler(location, error);
 	}];
+	
 	[task resume];
 }
 
 - (void)requestUserNotificationsWithToken:(NSString *__nonnull)token completionHandler:(void (^__nonnull)(NSArray *__nullable notifications, NSError *__nullable error))handler {
 	GSURLRequest *request = [[GSURLRequest alloc] initWithURL:GSAPIURLForEndpoint(GSAPIEndpointNotifications)];
 	
-	if (token) {
-		[request addAuthToken:token];
-	}
+	[request setAuthToken:token];
 	
 	[self sendDataRequest:request completionHandler:^(GSSerializable *response, NSError *error) {
 		if ([response isKindOfClass:[NSArray class]]) {
@@ -254,9 +250,7 @@
 
 - (void)requestAPIEndpoint:(NSString *)endp token:(NSString *__nullable)token completionHandler:(void (^__nonnull)(GSSerializable *__nullable s, NSError *__nullable error))handler {
 	GSURLRequest *request = [[GSURLRequest alloc] initWithURL:GSAPIURLForEndpoint(endp)];
-	if (token) {
-		[request addAuthToken:token];;
-	}
+	[request setAuthToken:token];
 	
 	[self sendDataRequest:request completionHandler:^(GSSerializable *response, NSError *error) {
 		handler(response, error);

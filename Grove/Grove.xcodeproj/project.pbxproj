@@ -49,6 +49,8 @@
 		5097B5ED1B8D91C200A72721 /* GSComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 5097B5EB1B8D91C200A72721 /* GSComment.m */; };
 		5097B5F11B8D95C100A72721 /* GSOrganization.h in Headers */ = {isa = PBXBuildFile; fileRef = 5097B5EF1B8D95C100A72721 /* GSOrganization.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5097B5F21B8D95C100A72721 /* GSOrganization.m in Sources */ = {isa = PBXBuildFile; fileRef = 5097B5F01B8D95C100A72721 /* GSOrganization.m */; };
+		50AB97A71C373B3100FBD254 /* GroveSupportStrings.h in Headers */ = {isa = PBXBuildFile; fileRef = 50AB97A61C373B3100FBD254 /* GroveSupportStrings.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		50AB97A91C373BA600FBD254 /* GroveSupportInternalStrings.h in Headers */ = {isa = PBXBuildFile; fileRef = 50AB97A81C373BA600FBD254 /* GroveSupportInternalStrings.h */; };
 		50E4B58F1B82F6D60029264A /* GroveSupport.h in Headers */ = {isa = PBXBuildFile; fileRef = 50E4B58E1B82F6D60029264A /* GroveSupport.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		50E4B5951B82F6D60029264A /* GroveSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50E4B58A1B82F6D60029264A /* GroveSupport.framework */; };
 		50E4B59E1B82F6D60029264A /* GroveSupportTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 50E4B59D1B82F6D60029264A /* GroveSupportTests.m */; };
@@ -211,6 +213,8 @@
 		5097B5EE1B8D92DC00A72721 /* GSCommentInternal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GSCommentInternal.h; sourceTree = "<group>"; };
 		5097B5EF1B8D95C100A72721 /* GSOrganization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSOrganization.h; sourceTree = "<group>"; };
 		5097B5F01B8D95C100A72721 /* GSOrganization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSOrganization.m; sourceTree = "<group>"; };
+		50AB97A61C373B3100FBD254 /* GroveSupportStrings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroveSupportStrings.h; sourceTree = "<group>"; };
+		50AB97A81C373BA600FBD254 /* GroveSupportInternalStrings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroveSupportInternalStrings.h; sourceTree = "<group>"; };
 		50E4B58A1B82F6D60029264A /* GroveSupport.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GroveSupport.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		50E4B58D1B82F6D60029264A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		50E4B58E1B82F6D60029264A /* GroveSupport.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GroveSupport.h; sourceTree = "<group>"; };
@@ -393,6 +397,8 @@
 		50E4B58B1B82F6D60029264A /* GroveSupport */ = {
 			isa = PBXGroup;
 			children = (
+				50AB97A61C373B3100FBD254 /* GroveSupportStrings.h */,
+				50AB97A81C373BA600FBD254 /* GroveSupportInternalStrings.h */,
 				5097B5E31B8D55B800A72721 /* GroveSupportInternal.h */,
 				50E4B58E1B82F6D60029264A /* GroveSupport.h */,
 				5097B5D81B8D28A400A72721 /* Caching */,
@@ -581,12 +587,14 @@
 				5097B5F11B8D95C100A72721 /* GSOrganization.h in Headers */,
 				50E4B58F1B82F6D60029264A /* GroveSupport.h in Headers */,
 				50019B321B9A21DC004EDC8A /* GSURLRequest.h in Headers */,
+				50AB97A71C373B3100FBD254 /* GroveSupportStrings.h in Headers */,
 				50133F061B841470004B5BB8 /* GSActor.h in Headers */,
 				50E4B5AD1B82F8E50029264A /* GSGitHubEngine.h in Headers */,
 				5097B5EC1B8D91C200A72721 /* GSComment.h in Headers */,
 				501558C11B86F2910002254D /* GSNotification.h in Headers */,
 				50133F021B8413F7004B5BB8 /* GSEvent.h in Headers */,
 				50E9F8701B832BF70007212E /* GSNetworkManagerHelpers.h in Headers */,
+				50AB97A91C373BA600FBD254 /* GroveSupportInternalStrings.h in Headers */,
 				5097B5E21B8D2D9800A72721 /* GSUtilities.h in Headers */,
 				50133F0E1B84495C004B5BB8 /* GSObject.h in Headers */,
 				50E4B5B91B8306040029264A /* NSString+GSUtilities.h in Headers */,

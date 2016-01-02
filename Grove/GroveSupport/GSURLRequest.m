@@ -10,9 +10,20 @@
 
 @implementation GSURLRequest
 
-- (void)addAuthToken:(NSString *)token {
+- (void)setAuthToken:(NSString *__nullable)token {
 	if (!token) return;
-    [self setValue:[NSString stringWithFormat:@"token %@", token] forHTTPHeaderField:@"Authorization"];
+    [self setValue:[NSString stringWithFormat:@"token %@", token] forHTTPHeaderField:GSHTTPAuthorizationHeaderKey];
+}
+
+- (void)setTwoFactorAuthToken:(NSString *__nullable)token {
+	if (!token || [token isEqualToString:@""]) return;
+	[self setValue:token forHTTPHeaderField:GSHTTPTwoFactorAuthHeaderKey];
+}
+
+- (void)setLastModifiedDate:(NSDate *__nullable)date {
+	if (!date) return;
+	[self addValue:GSRFC2616DTimestampFromDate(date) forHTTPHeaderField:GSHTTPIfModifiedSinceEtagHeaderKey];
+	// this may or may not work, but it's worth a shot. :- )
 }
 
 @end
