@@ -36,6 +36,11 @@ static BOOL addedShadowLayer = NO;
 				[self.layer addSublayer:divider1];
 			}
 			
+			CALayer *borderLayer = [CALayer layer];
+			[borderLayer setFrame:CGRectMake(0, 0, self.frame.size.width, .5)];
+			[borderLayer setBackgroundColor:[UIColor colorWithRed:215/255.0 green:215/255.0 blue:215/255.0 alpha:1.0].CGColor];
+			[self.layer addSublayer:borderLayer];
+			
 			// I will come up with a much better way to do this or your money back – max
 			
 			addedShadowLayer = YES;

@@ -11,7 +11,7 @@
 
 #import <GroveSupport/GroveSupport.h>
 
-static CGFloat GRHeaderSizeRatio = .13f;
+static CGFloat GRHeaderSizeRatio = .10f;
 
 @implementation GRRepositoryViewController {
 	GRRepositoryHeaderView *header;
@@ -45,7 +45,6 @@ static CGFloat GRHeaderSizeRatio = .13f;
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
-	[self.view setBackgroundColor:[UIColor greenColor]];
 
 	for (UIView *v in @[header]) {
 		[self.view addSubview:v];

@@ -9,12 +9,38 @@
 #import <Foundation/Foundation.h>
 #import "GSObject.h"
 
+typedef NS_OPTIONS(NSInteger, GSRepositoryPermissions) {
+	GSRepositoryPermissionsNone = 0,
+	GSRepositoryPermissionsPush = 1 << 0,
+	GSRepositoryPermissionsPull = 1 << 1,
+	GSRepositoryPermissionsAdmin = 1 << 2,
+};
+
 @interface GSRepository : GSObject
-@property (nonatomic, readonly) GSUser *owner;
-@property (nonatomic, readonly) NSString *name;
-@property (nonatomic, assign, getter=isPrivate) BOOL private;
-@property (nonatomic, readonly) NSURL *browserURL;
-@property (nonatomic, readonly) BOOL fork;
-@property (nonatomic, readonly, getter=pathString) NSString *pathString;
+@property (nonatomic, readonly, strong) GSUser *owner;
+@property (nonatomic, readonly, strong) NSString *name;
+@property (nonatomic, readonly, assign) GSRepositoryPermissions permissions;
+@property (nonatomic, readonly, getter=isPrivate) BOOL private; // private is a keyword, should change this.
+@property (nonatomic, readonly, getter=isFork) BOOL fork;
+@property (nonatomic, readonly, assign) BOOL downloadsAvailable;
+@property (nonatomic, readonly, assign) BOOL wikiAvailable;
+@property (nonatomic, readonly, assign) BOOL pagesAvailable;
+@property (nonatomic, readonly, assign) BOOL issuesAvailable;
+@property (nonatomic, readonly, strong) NSURL *browserURL;
+@property (nonatomic, readonly, strong) NSURL *browserHomepageURL;
+@property (nonatomic, readonly, strong) NSURL *sshURL;
+@property (nonatomic, readonly, strong) NSURL *gitURL;
+@property (nonatomic, readonly, strong, getter=pathString) NSString *pathString;
+@property (nonatomic, readonly, strong) NSString *language;
+@property (nonatomic, readonly, strong) NSString *defaultBranch;
+// I really prefer language to be an enum, but then i'd be converting it from string, just so the user could convert it back again...
+// Also I'd need to keep an updated list of all languages..
+@property (nonatomic, readonly, strong) NSString *userDescription;
+@property (nonatomic, readonly, strong) NSNumber *numberOfForks;
+@property (nonatomic, readonly, strong) NSNumber *numberOfOpenIssues;
+@property (nonatomic, readonly, strong) NSNumber *numberOfWatchers;
+@property (nonatomic, readonly, strong) NSNumber *numberOfStargazers;
+@property (nonatomic, readonly, strong) NSNumber *repositorySize;
+@property (nonatomic, readonly, strong) NSDate *lastPushDate;
 
 @end

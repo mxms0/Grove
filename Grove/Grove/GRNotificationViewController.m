@@ -59,9 +59,8 @@
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
-	
-	[self.view setBackgroundColor:[UIColor whiteColor]];
-	[tableView setBackgroundColor:[UIColor whiteColor]];
+
+	[tableView setBackgroundColor:[UIColor clearColor]];
 	
 	[self.view addSubview:tableView];
 	[tableView setFrame:self.view.bounds];

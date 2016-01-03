@@ -98,15 +98,15 @@
 				GSSafeHandlerCall(handler, error);
 			}
 			else if (!ret) {
-				[self configureWithDictionary:nil];
 				GSSafeHandlerCall(handler, nil);
+				[self configureWithDictionary:nil];
 			}
 			else if (![ret isKindOfClass:[NSDictionary class]]) {
 				GSAssert();
 			}
 			else {
-				[self configureWithDictionary:ret];
 				GSSafeHandlerCall(handler, nil);
+				[self configureWithDictionary:ret];
 			}
 			
 			self.updating = NO;

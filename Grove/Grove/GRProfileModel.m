@@ -43,7 +43,7 @@
 			_GSAssert(NO, [error localizedDescription]);
 		}
 		else {
-			numberOfStarredRepositories = @([repos count]);
+			[visibleUser setNumberOfStarredRepositories:@([repos count])];
 			[self reloadDelegate];
 		}
 	}];
@@ -61,7 +61,7 @@
 			_GSAssert(NO, [error localizedDescription]);
 			return;
 		}
-		[visibleUser setNumberOfStarredRepositories:@([repos count])];
+		repositories = repos;
 		[self reloadDelegate];
 	}];
 }
