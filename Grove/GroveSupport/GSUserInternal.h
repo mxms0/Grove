@@ -22,7 +22,6 @@
 @property (nonatomic, nullable, strong) NSURL *repositoriesAPIURL;
 @property (nonatomic, nullable, strong) NSURL *eventsAPIURL;
 @property (nonatomic, nullable, strong) NSURL *receivedEventsAPIURL;
-@property (nonatomic, nullable, readwrite, strong) NSNumber *starredRepositoryCount;
 @end
 
 #endif

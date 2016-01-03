@@ -39,6 +39,7 @@
 }
 
 - (void)setUser:(GSUser *)newUser {
+	NSLog(@"what is this %@", newUser);
 	if (self.user) {
 		[self.user removeObserver:self forKeyPath:GSUpdatedDateKey];
 	}
@@ -46,7 +47,10 @@
 	[self.user addObserver:self forKeyPath:GSUpdatedDateKey options:0 context:NULL];
 	[self.user update];
 	
-	model = [[GRProfileModel alloc] initWithUser:self.user];
+	GRApplicationUser *formalUser = [[GRApplicationUser alloc] init];
+	[formalUser setUser:self.user];
+	
+	model = [[GRProfileModel alloc] initWithUser:formalUser];
 	[model setDelegate:self];
 }
 

@@ -26,7 +26,8 @@
 }
 
 - (void)requestNewData {
-	[[GSGitHubEngine sharedInstance] eventsForUser:[[[GRSessionManager sharedInstance] currentUser] user] completionHandler:^(NSArray *events, NSError * error) {
+	[[GSGitHubEngine sharedInstance] eventsForUser:[[[GRSessionManager sharedInstance] currentUser] user] completionHandler:^(NSArray *events, NSError *error) {
+		NSLog(@"what%@:%@", events,error);
 		[self handleNewleyArrivedEvents:events];
 	}];
 }
@@ -37,6 +38,7 @@
 		GREventCellModel *model = [[GREventCellModel alloc] initWithEvent:evt];
 		[eventModels addObject:model];
 	}
+	NSLog(@"fds %@", eventModels);
 	
 	self.eventModels = eventModels;
 	[self.delegate reloadData];

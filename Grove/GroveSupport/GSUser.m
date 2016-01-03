@@ -99,7 +99,6 @@ static NSMutableDictionary *cachedUsers = nil;
 	GSEncode(coder, @"owned_private_repos", _ownedPrivateRepoCount);
 	GSEncode(coder, @"disk_usage", _diskUsage);
 	GSEncode(coder, @"collaborators", _collaboratorCount);
-	GSEncode(coder, @"starredRepositoryCount", _starredRepositoryCount);
 	
 	GSEncode(coder, @"html_url", _browserURL);
 	GSEncode(coder, @"followers_url", _followersAPIURL);
@@ -115,6 +114,13 @@ static NSMutableDictionary *cachedUsers = nil;
 
 - (instancetype)initWithCoder:(NSCoder *)coder {
 	if ((self = [super initWithCoder:coder])) {
+		GSUser *cachedSelf = [GSUser cachedUserWithUsername:self.username];
+
+		if (cachedSelf) {
+			NSLog(@"GSUser cached. Reusing.");
+			return cachedSelf;
+		}
+		
 		GSDecodeAssign(coder, @"__token", _token);
 		GSDecodeAssign(coder, @"name", _fullName);
 		GSDecodeAssign(coder, @"company", _company);
@@ -132,7 +138,6 @@ static NSMutableDictionary *cachedUsers = nil;
 		GSDecodeAssign(coder, @"owned_private_repos", _ownedPrivateRepoCount);
 		GSDecodeAssign(coder, @"disk_usage", _diskUsage);
 		GSDecodeAssign(coder, @"collaborators", _collaboratorCount);
-		GSDecodeAssign(coder, @"starredRepositoryCount", _starredRepositoryCount);
 		
 		GSDecodeAssign(coder, @"html_url", _browserURL);
 		GSDecodeAssign(coder, @"followers_url", _followersAPIURL);
@@ -144,7 +149,12 @@ static NSMutableDictionary *cachedUsers = nil;
 		GSDecodeAssign(coder, @"repos_url", _repositoriesAPIURL);
 		GSDecodeAssign(coder, @"events_url", _eventsAPIURL);
 		GSDecodeAssign(coder, @"received_events_url", _receivedEventsAPIURL);
+		
+		@synchronized(cachedUsers) {
+			cachedUsers[self.username] = self;
+		}
 	}
+	
 	return self;
 }
 

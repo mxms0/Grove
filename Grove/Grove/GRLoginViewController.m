@@ -104,6 +104,7 @@
 				
 				[password resignFirstResponder];
 				[username resignFirstResponder];
+				[tfa resignFirstResponder];
 				
 				GRAppDelegate *appDelegate = (GRAppDelegate *)[[UIApplication sharedApplication] delegate];
 				[appDelegate presentTabBar];

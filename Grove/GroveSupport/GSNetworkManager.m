@@ -99,7 +99,9 @@
 
 - (void)sendDataRequest:(NSURLRequest *)request completionHandler:(void (^)(GSSerializable *response, NSError *error))handler {
 	NSURLSessionDataTask *task = [[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-		
+#if DEBUG
+		NSLog(@"Request:%@ Response: %@", request, response);
+#endif
 		NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response; // put safety checks here. albeit unlikely
 		switch ([httpResponse statusCode]) {
 			case 200: {

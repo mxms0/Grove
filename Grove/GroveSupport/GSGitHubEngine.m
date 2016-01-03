@@ -119,27 +119,6 @@ NS_ASSUME_NONNULL_BEGIN
 	
 	_user = [[GSUser alloc] initWithDictionary:userData];
 	[_user setToken:token];
-	
-	wait = dispatch_semaphore_create(0);
-	
-	__block NSArray *starredRepoData = nil;
-	
-	[self repositoriesStarredByUser:_user completionHandler:^(NSArray *repos, NSError *errorParam) {
-		error = errorParam;
-		starredRepoData = repos;
-		
-		dispatch_semaphore_signal(wait);
-		
-	}];
-	
-	dispatch_semaphore_wait(wait, DISPATCH_TIME_FOREVER);
-	
-	if (error) {
-		handler(nil, error);
-		return;
-	}
-	
-	[_user setStarredRepositoryCount:@([starredRepoData count])];
 
 	handler(_user, nil);
 }
@@ -156,16 +135,17 @@ NS_ASSUME_NONNULL_BEGIN
 			handler(nil, [NSError errorWithDomain:GSErrorDomain code:1 userInfo:@{NSLocalizedDescriptionKey: events[@"message"]}]);
 		}
 		else {
+//			NSLog(@"nnnf %@:%@:%@:%@:%@", NSStringFromClass([events class]), events,events[0], events[1], events[2]);
 			NSMutableArray *serializedEvents = [[NSMutableArray alloc] init];
-			for (NSDictionary *eventPacket in events) {
-				if (![eventPacket isKindOfClass:[NSDictionary class]]) {
-					GSAssert();
-				}
-				GSEvent *event = [[GSEvent alloc] initWithDictionary:eventPacket];
-				[serializedEvents addObject:event];
-			}
 			
-			handler(serializedEvents, error);
+			[events enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL * _Nonnull stop) {
+				NSDictionary *eventPacket = (NSDictionary *)obj;
+				NSLog(@"mmmmm %@", eventPacket);
+				GSEvent *evt = [[GSEvent alloc] initWithDictionary:eventPacket];
+				[serializedEvents addObject:evt];
+			}];
+
+			handler(serializedEvents, nil);
 		}
 	}];
 }
@@ -217,16 +197,12 @@ NS_ASSUME_NONNULL_BEGIN
 	[self _userInformationForUsername:username completionHandler:^(NSDictionary * _Nullable info, NSError * _Nullable error) {
 		GSUser *user = [[GSUser alloc] initWithDictionary:info];
 		
-		[self repositoriesStarredByUser:user completionHandler:^(NSArray * _Nullable repos, NSError * _Nullable error) {
-			if (error) {
-				handler(nil, error);
-				return;
-			}
-			
-			[user setStarredRepositoryCount:@([repos count])];
-			NSLog(@"USER FOUD BEING USED %@", user);
-			handler(user, nil);
-		}];
+		if (error) {
+			handler(nil, error);
+		}
+		else {
+			handler(user, error);
+		}
 	}];
 }
 

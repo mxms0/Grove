@@ -102,6 +102,12 @@
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
+	/*
+	NSArray *URLs = [[UIPasteboard generalPasteboard] URLs];
+	NSArray *possibleURLS = [[UIPasteboard generalPasteboard] strings];
+	 Check if these are valid GitHub related URLs. Also make this a setting, 
+	 some users may not want me reading their clipboard.
+	 */
 	// Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }
 

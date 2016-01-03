@@ -84,8 +84,11 @@
 }
 
 - (void)updateWithCompletionHandler:(void (^)(NSError *error))handler {
-	// If already updating, call handler(nil)? or handler(already updating..?)
-	if (self.updating) return;
+	if (self.updating) {
+		handler(nil);
+		// maybe pass NSError(already updating...);
+		return;
+	}
 	
 	if (self.directAPIURL) {
 		self.updating = YES;

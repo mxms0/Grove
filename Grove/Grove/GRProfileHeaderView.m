@@ -82,15 +82,15 @@
 	[self setUser:self.user];
 }
 
-- (void)setUser:(GSUser *)user {
+- (void)setUser:(GRApplicationUser *)user {
 	_user = user;
-	[usernameLabel setText:[user username]];
-	[nameLabel setText:[user fullName]];
-	[locationLabel setText:[user location]];
+	[usernameLabel setText:[user.user username]];
+	[nameLabel setText:[user.user fullName]];
+	[locationLabel setText:[user.user location]];
 
-	[starredButton setText:[[user starredRepositoryCount] stringValue]];
-	[followingButton setText:[[user followingCount] stringValue]];
-	[followersButton setText:[[user followersCount] stringValue]];
+	[starredButton setText:[[user numberOfStarredRepositories] stringValue]];
+	[followingButton setText:[[user.user followingCount] stringValue]];
+	[followersButton setText:[[user.user followersCount] stringValue]];
 }
 
 - (void)setProfileImage:(UIImage *)profileImage {
