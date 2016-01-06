@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class GSUser, GSEvent, GSRepository, GSGist;
+@class GSUser, GSEvent, GSRepository, GSGist, GSNotification;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -23,9 +23,9 @@ typedef NS_ENUM(NSInteger, GSTwoFactorAuthMethod) {
 + (instancetype)sharedInstance;
 - (void)authenticateUserWithUsername:(NSString *)username password:(NSString *)password completionHandler:(void (^__nullable)(GSUser *__nullable, NSError *__nullable))handler;
 - (void)authenticateUserWithUsername:(NSString *)username password:(NSString *)password twoFactorToken:(NSString *__nullable)twoFa completionHandler:(void (^__nullable)(GSUser *__nullable, NSError *__nullable))handler;
-- (void)eventsForUser:(GSUser *)user completionHandler:(void (^)(NSArray *__nullable events, NSError *__nullable error))handler;
+- (void)eventsForUser:(GSUser *)user completionHandler:(void (^)(NSArray<GSEvent *> *__nullable events, NSError *__nullable error))handler;
 - (void)userForUsername:(NSString *)username completionHandler:(void (^)(GSUser *__nullable user, NSError *__nullable error))handler;
-- (void)notificationsForUser:(GSUser *)user completionHandler:(void (^)(NSArray *__nullable notifications, NSError *__nullable error))handler;
+- (void)notificationsForUser:(GSUser *)user completionHandler:(void (^)(NSArray<GSNotification *> *__nullable notifications, NSError *__nullable error))handler;
 // Users
 //- (void)emailsForUser:(GSUser *__nonnull)user completionHandler:(void (^__nonnull)(NSArray *__nullable emails, NSError *__nullable error))handler;
 // emails have 3 fields, address, verified, and primary. hmm...

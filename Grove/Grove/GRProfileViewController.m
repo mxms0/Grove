@@ -10,6 +10,8 @@
 #import "GRProfileModel.h"
 #import "GRProfileHeaderView.h"
 #import "GRSessionManager.h"
+#import "GRRepositoryViewController.h"
+
 #import <GroveSupport/GSGitHubEngine.h>
 #import <GroveSupport/GroveSupport.h>
 
@@ -118,6 +120,27 @@
 	}
 	cell.textLabel.text = textContent;
 	return cell;
+}
+
+- (void)tableView:(UITableView *)_tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+	[_tableView deselectRowAtIndexPath:indexPath animated:YES];
+	switch (indexPath.section) {
+		case 0:
+			break;
+		case 1: {
+			GSRepository *repository = [model repositoryForIndex:indexPath.row];
+			[self pushRepositoryViewControllerWithRepository:repository];
+			break;
+		}
+		default:
+			break;
+	}
+}
+
+- (void)pushRepositoryViewControllerWithRepository:(GSRepository *)repo {
+	GRRepositoryViewController *repoViewController = [[GRRepositoryViewController alloc] init];
+	[repoViewController setRepository:repo];
+	[self.navigationController pushViewController:repoViewController animated:YES];
 }
 
 @end

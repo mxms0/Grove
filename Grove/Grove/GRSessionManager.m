@@ -67,8 +67,8 @@
 		_users = usersTmp;
 	
 	if ([_users count] > 0) {
-		[[GSGitHubEngine sharedInstance] setActiveUser:self.currentUser.user];
 		self.currentUser = _users[0];
+		[[GSGitHubEngine sharedInstance] setActiveUser:self.currentUser.user];
 		// bad hack for now
 	}
 	// ASK GSGitHubEngine for new data on these now.

@@ -23,8 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)downloadResourceFromURL:(NSURL *)url token:(NSString *__nullable)token completionHandler:(void (^)(NSURL *__nullable filePath, NSError *__nullable error))handler;
 
 - (void)requestUserNotificationsWithToken:(NSString *)token completionHandler:(void (^)(NSArray *__nullable notifications, NSError *__nullable error))handler;
-- (void)requestRepositoriesForUsername:(NSString *)username token:(NSString *__nullable)token completionHandler:(void (^)(NSArray *__nullable repos, NSError *__nullable error))handler;
-
+- (void)requestRepositoriesForUsername:(NSString *)username completionHandler:(void (^)(NSArray *__nullable repos, NSError *__nullable error))handler;
+- (void)requestRepositoriesForCurrentUserWithToken:(NSString *)token completionHandler:(void (^)(NSArray *__nullable repos, NSError *__nullable error))handler;
 - (void)sendRequest:(GSURLRequest *)request completionHandler:(void (^)(GSSerializable *__nullable serializeable, NSError *__nullable error))handler;
 
 // not sure if i like exposing endpoints outside of the network manager. this is an idea for now.

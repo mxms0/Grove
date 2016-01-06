@@ -215,11 +215,26 @@
 	}];
 }
 
-- (void)requestRepositoriesForUsername:(NSString *)username token:(NSString *__nullable)token completionHandler:(void (^)(NSArray *__nullable repos, NSError *__nullable error))handler {
+- (void)requestRepositoriesForCurrentUserWithToken:(NSString *)token completionHandler:(void (^)(NSArray *__nullable repos, NSError *__nullable error))handler {
+	NSURL *requestURL = GSAPIURLComplex(GSAPIEndpointUser, GSAPIEndpointRepos, nil);
+	NSLog(@"requ url %@", requestURL);
+	GSURLRequest *request = [[GSURLRequest alloc] initWithURL:requestURL];
+	[request setAuthToken:token];
+	
+	[self sendDataRequest:request completionHandler:^(GSSerializable *response, NSError *error) {
+		if (error) {
+			handler(nil, error);
+		}
+		else {
+			handler((NSArray *)response, nil);
+		}
+	}];
+}
+
+- (void)requestRepositoriesForUsername:(NSString *)username completionHandler:(void (^)(NSArray *__nullable repos, NSError *__nullable error))handler {
 	
 	NSURL *requestURL = GSAPIURLComplex(GSAPIEndpointUsers, username, GSAPIEndpointRepos);
 	GSURLRequest *request = [[GSURLRequest alloc] initWithURL:requestURL];
-	[request setAuthToken:token];
 	
 	[self sendDataRequest:request completionHandler:^(GSSerializable *response, NSError *error) {
 		if (error) {

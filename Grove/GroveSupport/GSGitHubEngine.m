@@ -302,7 +302,8 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark Repositories
 
 - (void)repositoriesForUser:(GSUser *)user completionHandler:(void (^)(NSArray<GSRepository *> *__nullable repos, NSError *__nullable error))handler {
-	[[GSNetworkManager sharedInstance] requestRepositoriesForUsername:user.username token:_activeUser.token completionHandler:^(NSArray<NSDictionary *>* _Nullable repos, NSError * _Nullable error) {
+	
+	void (^basicHandler)(NSArray<NSDictionary *>* __nullable repos, NSError *__nullable error) = ^(NSArray<NSDictionary *>* __nullable repos, NSError *__nullable error) {
 		if (error) {
 			handler(nil, error);
 		}
@@ -317,7 +318,14 @@ NS_ASSUME_NONNULL_BEGIN
 			}
 			handler(serializedRepos, nil);
 		}
-	}];
+	};
+	
+	if ([_activeUser isEqual:user] && _activeUser.token) {
+		[[GSNetworkManager sharedInstance] requestRepositoriesForCurrentUserWithToken:_activeUser.token completionHandler:basicHandler];
+	}
+	else {
+		[[GSNetworkManager sharedInstance] requestRepositoriesForUsername:user.username completionHandler:basicHandler];
+	}
 }
 
 - (void)repositoriesForUsername:(NSString *)username completionHandler:(void (^)(NSArray *__nullable repos, NSError *__nullable error))handler {
