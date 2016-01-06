@@ -8,6 +8,7 @@
 
 #import "GRRepositoryViewController.h"
 #import "GRRepositoryHeaderView.h"
+#import "GRRepositoryFileBrowserView.h"
 
 #import <GroveSupport/GroveSupport.h>
 
@@ -15,12 +16,16 @@ static CGFloat GRHeaderSizeRatio = .10f;
 
 @implementation GRRepositoryViewController {
 	GRRepositoryHeaderView *header;
+	GRRepositoryFileBrowserView *fileBrowser;
+
 }
 
 - (instancetype)init {
 	if ((self = [super init])) {
 		header = [[GRRepositoryHeaderView alloc] init];
 		[header setBackgroundColor:GSRandomUIColor()];
+		
+		fileBrowser = [[GRRepositoryFileBrowserView alloc] init];
 		// Notes about this view:
 		// Consider perhaps User/Reponame only when its a reasonable length
 		// otherwise Reponame\n User
@@ -35,6 +40,7 @@ static CGFloat GRHeaderSizeRatio = .10f;
 	[_repository addObserver:self forKeyPath:GSUpdatedDateKey options:0 context:NULL];
 	[_repository update];
 	
+	[fileBrowser setRepository:newRepository];
 	[header setRepositoryName:_repository.name];
 	[header setRepositoryOwner:_repository.owner.username];
 }
@@ -46,15 +52,22 @@ static CGFloat GRHeaderSizeRatio = .10f;
 - (void)viewDidLoad {
 	[super viewDidLoad];
 
-	for (UIView *v in @[header]) {
+	for (UIView *v in @[header, fileBrowser]) {
 		[self.view addSubview:v];
 	}
+}
+
+- (void)viewWillLayoutSubviews {
+	[super viewWillLayoutSubviews];
 	
 	[header setFrame:CGRectMake(0, GRStatusBarHeight(), self.view.frame.size.width, ceilf(self.view.frame.size.height * GRHeaderSizeRatio))];
+	
+	[fileBrowser setFrame:CGRectMake(0, header.frame.origin.y + header.frame.size.height, self.view.frame.size.width, self.view.frame.size.height - header.frame.size.height)];
+	
 }
 
 - (void)dealloc {
-	[_repository removeObserver:self forKeyPath:GSUpdatedDateKey];
+	[self setRepository:nil];
 }
 
 @end

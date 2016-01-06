@@ -9,7 +9,7 @@
 #import "GSObject.h"
 #import "GroveSupportInternal.h"
 
-@implementation GSObject
+@implementation GSObject 
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary {
 	if (!dictionary) {
@@ -91,22 +91,28 @@
 	}
 	
 	if (self.directAPIURL) {
+		NSLog(@"API URL EXISTS.");
 		self.updating = YES;
 		[[GSGitHubEngine sharedInstance] _dirtyRequestWithObject:self completionHandler:^(NSDictionary *ret, NSError *error) {
+			NSLog(@"ENTERING COMPLETION HANDLER.");
 			if (error) {
+				NSLog(@"4");
 				_GSAssert(NO, [error description]);
 				GSSafeHandlerCall(handler, error);
 			}
 			else if (!ret) {
-				GSSafeHandlerCall(handler, nil);
+				NSLog(@"3");
 				[self configureWithDictionary:nil];
+				GSSafeHandlerCall(handler, nil);
 			}
 			else if (![ret isKindOfClass:[NSDictionary class]]) {
+				NSLog(@"2");
 				GSAssert();
 			}
 			else {
-				GSSafeHandlerCall(handler, nil);
+				NSLog(@"1");
 				[self configureWithDictionary:ret];
+				GSSafeHandlerCall(handler, nil);
 			}
 			
 			self.updating = NO;

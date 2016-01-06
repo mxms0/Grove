@@ -10,9 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface GSObject : NSObject <NSCoding> {
-	NSDate *_updatedDate;
-}
+@interface GSObject : NSObject <NSCoding>
 @property (atomic, nullable, readonly, strong) NSDate *updatedDate;
 - (void)update; // Asynchronous
 - (BOOL)updateSynchronouslyWithError:(NSError *__autoreleasing __nullable *__nullable)error;

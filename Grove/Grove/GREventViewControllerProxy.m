@@ -25,7 +25,19 @@
             break;
         }
         case GSEventTypeCreate: {
-            
+			self = (GREventViewControllerProxy *)[[GRRepositoryViewController alloc] init];
+			GSRepository *repository = [event repository];
+			[(GRRepositoryViewController *)self setRepository:repository];
+			
+			switch ([event refType]) {
+				// push to specific location in here..
+				case GSEventRefTypeBranch:
+				case GSEventRefTypeRepository:
+				case GSEventRefTypeTag:
+				case GSEventRefTypeUnknown:
+					break;
+			}
+
             break;
         }
         case GSEventTypeDelete: {

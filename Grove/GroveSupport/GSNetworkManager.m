@@ -92,14 +92,18 @@
 }
 
 - (void)sendRequest:(GSURLRequest *__nonnull)request completionHandler:(void (^__nonnull)(GSSerializable *__nullable serializeable, NSError *__nullable error))handler {
+	NSLog(@"sending request...");
 	[self sendDataRequest:request completionHandler:^(GSSerializable *response, NSError *error) {
 		handler(response, error);
 	}];
 }
 
 - (void)sendDataRequest:(NSURLRequest *)request completionHandler:(void (^)(GSSerializable *response, NSError *error))handler {
+	if (!request) {
+		NSLog(@"te fuck");
+	}
 	NSURLSessionDataTask *task = [[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-#if 0
+#if 1
 		NSLog(@"Request:%@ Response: %@", request, response);
 #endif
 		NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response; // put safety checks here. albeit unlikely
@@ -122,8 +126,9 @@
 				if (!responsePacket) {
 					handler(nil, serializationError);
 				}
-				
-				handler(responsePacket, nil);
+				else {
+					handler(responsePacket, nil);
+				}
 				break;
 			}
 			case 304: {
@@ -153,6 +158,8 @@
 				break;
 		}
 	}];
+	
+	NSLog(@"session crafted %@", task);
 	
 	[task resume];
 }

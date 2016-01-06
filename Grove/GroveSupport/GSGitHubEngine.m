@@ -241,8 +241,9 @@ NS_ASSUME_NONNULL_BEGIN
 	GSURLRequest *request = [[GSURLRequest alloc] initWithURL:obj.directAPIURL];
 	[request setAuthToken:self.activeUser.token];
 	[request setLastModifiedDate:obj.updatedDate];
-	
+	NSLog(@"POSTING REQUEST. GOING OUT.");
 	[[GSNetworkManager sharedInstance] sendRequest:request completionHandler:^(GSSerializable * _Nullable serializeable, NSError * _Nullable error) {
+		NSLog(@"entered handler.");
 		if (error) {
 			handler(nil, error);
 		}
