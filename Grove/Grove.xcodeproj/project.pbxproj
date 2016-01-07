@@ -32,6 +32,7 @@
 		501BA7F01C3DFBC0005C5524 /* GSRepositoryEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = 501BA7EE1C3DFBC0005C5524 /* GSRepositoryEntry.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		501BA7F11C3DFBC0005C5524 /* GSRepositoryEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 501BA7EF1C3DFBC0005C5524 /* GSRepositoryEntry.m */; };
 		501BA7F31C3E029E005C5524 /* GSRepositoryEntryInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = 501BA7F21C3E029E005C5524 /* GSRepositoryEntryInternal.h */; };
+		501BA7F61C3E7378005C5524 /* GRRepositoryFileBrowserEntryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 501BA7F51C3E7378005C5524 /* GRRepositoryFileBrowserEntryCell.m */; };
 		501C042E1BAB78B400DC66C8 /* GSGist.m in Sources */ = {isa = PBXBuildFile; fileRef = 501C042B1BAB78B400DC66C8 /* GSGist.m */; };
 		501C042F1BAB78B400DC66C8 /* GSGistInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = 501C042C1BAB78B400DC66C8 /* GSGistInternal.h */; };
 		501C04301BAB78B400DC66C8 /* GSGist.h in Headers */ = {isa = PBXBuildFile; fileRef = 501C042D1BAB78B400DC66C8 /* GSGist.h */; };
@@ -193,6 +194,8 @@
 		501BA7EE1C3DFBC0005C5524 /* GSRepositoryEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSRepositoryEntry.h; sourceTree = "<group>"; };
 		501BA7EF1C3DFBC0005C5524 /* GSRepositoryEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSRepositoryEntry.m; sourceTree = "<group>"; };
 		501BA7F21C3E029E005C5524 /* GSRepositoryEntryInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSRepositoryEntryInternal.h; sourceTree = "<group>"; };
+		501BA7F41C3E7378005C5524 /* GRRepositoryFileBrowserEntryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRRepositoryFileBrowserEntryCell.h; sourceTree = "<group>"; };
+		501BA7F51C3E7378005C5524 /* GRRepositoryFileBrowserEntryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRRepositoryFileBrowserEntryCell.m; sourceTree = "<group>"; };
 		501C042B1BAB78B400DC66C8 /* GSGist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSGist.m; sourceTree = "<group>"; };
 		501C042C1BAB78B400DC66C8 /* GSGistInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSGistInternal.h; sourceTree = "<group>"; };
 		501C042D1BAB78B400DC66C8 /* GSGist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSGist.h; sourceTree = "<group>"; };
@@ -348,6 +351,8 @@
 				501BA7E51C3D0B16005C5524 /* GRRepositoryFileBrowserModel.m */,
 				501BA7EB1C3D1AA6005C5524 /* GRRepositoryPathBar.h */,
 				501BA7EC1C3D1AA6005C5524 /* GRRepositoryPathBar.m */,
+				501BA7F41C3E7378005C5524 /* GRRepositoryFileBrowserEntryCell.h */,
+				501BA7F51C3E7378005C5524 /* GRRepositoryFileBrowserEntryCell.m */,
 			);
 			name = "Repository View";
 			sourceTree = "<group>";
@@ -878,6 +883,7 @@
 				849FF2121B884DC20077DE06 /* UITabBar+GRExtension.m in Sources */,
 				84F524F51B8326E40077A06C /* GRProfileViewController.m in Sources */,
 				500001591BB73411001564E7 /* GRNotificationHeaderTableViewCell.m in Sources */,
+				501BA7F61C3E7378005C5524 /* GRRepositoryFileBrowserEntryCell.m in Sources */,
 				501BA7E61C3D0B16005C5524 /* GRRepositoryFileBrowserModel.m in Sources */,
 				849872FE1B85A42100D1C6FD /* NSAttributedString+GRExtensions.m in Sources */,
 				84F524FA1B832A7E0077A06C /* GRStreamEventCell.m in Sources */,

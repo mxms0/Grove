@@ -106,6 +106,11 @@
 #endif
 		NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response; // put safety checks here. albeit unlikely
 		switch ([httpResponse statusCode]) {
+			case 0: {
+				// request failed. weeee.
+				GSAssert();
+				break;
+			}
 			case 200: {
 				NSError *serializationError = nil;
 				NSDictionary *response = [NSJSONSerialization JSONObjectWithData:data options:(NSJSONReadingOptions)0 error:&serializationError];
@@ -170,6 +175,7 @@
 	dispatch_async(dispatch_get_main_queue(), ^ {
 		// I don't like this.
 		NSURLSessionDataTask *task = [[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:dataHandler];
+		NSLog(@"crafting task.. %@:%@", task, [task performSelector:@selector(dataTaskCompletion) withObject:nil]);
 		[task resume];
 	});
 }
@@ -243,7 +249,7 @@
 
 - (void)requestRepositoriesForUsername:(NSString *)username completionHandler:(void (^)(NSArray *__nullable repos, NSError *__nullable error))handler {
 	
-	NSURL *requestURL = GSAPIURLComplex(GSAPIEndpointUsers, username, GSAPIEndpointRepos);
+	NSURL *requestURL = GSAPIURLComplex(GSAPIEndpointUsers, username, GSAPIEndpointRepos, nil);
 	GSURLRequest *request = [[GSURLRequest alloc] initWithURL:requestURL];
 	
 	[self sendDataRequest:request completionHandler:^(GSSerializable *response, NSError *error) {
@@ -257,7 +263,7 @@
 }
 
 - (void)requestRepositoryContentsForRepositoryNamed:(NSString *)repoName username:(NSString *)username token:(NSString *)token path:(NSString *)path completionHandler:(void (^)(NSArray *__nullable items, NSError *__nullable error))handler {
-	NSURL *requestURL  = GSAPIURLComplex(GSAPIEndpointRepos, username, repoName, @"contents", path);
+	NSURL *requestURL  = GSAPIURLComplex(GSAPIEndpointRepos, username, repoName, @"contents", path, nil);
 	
 	GSURLRequest *request = [[GSURLRequest alloc] initWithURL:requestURL];
 	[request setAuthToken:token];

@@ -85,7 +85,7 @@
 
 - (void)updateWithCompletionHandler:(void (^)(NSError *error))handler {
 	if (self.updating) {
-		handler(nil);
+		GSSafeHandlerCall(handler, nil);
 		// maybe pass NSError(already updating...);
 		return;
 	}

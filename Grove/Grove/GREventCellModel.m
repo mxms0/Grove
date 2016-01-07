@@ -31,7 +31,6 @@
 }
 
 - (NSAttributedString *)_generatedEventString {
-	NSLog(@"Generating String for event %@", self.event);
 //	UIColor *blue = [UIColor colorWithRed:0.2627 green:0.4784 blue:0.7451 alpha:1.0];
 //	UIFont *boldFont = [UIFont boldSystemFontOfSize:18];
 	UIFont *regularFont = [UIFont systemFontOfSize:18];

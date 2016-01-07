@@ -12,6 +12,7 @@
 
 @implementation GRRepositoryFileBrowserModel {
 	__weak GSRepository *repository;
+	NSDictionary *contentMap;
 	__block NSArray<GSRepositoryEntry *> *contents;
 }
 
@@ -41,7 +42,16 @@
 - (void)updateViewWithNewData {
 	dispatch_async(dispatch_get_main_queue(), ^{
 		[self.delegate prepareForLayout];
+		[self.delegate reloadData];
 	});
+}
+
+- (GSRepositoryEntry *)repositoryEntryForIndex:(NSUInteger)index {
+	return [contents objectAtIndex:index];
+}
+
+- (NSUInteger)numberOfItemsInCurrentDirectory {
+	return [contents count];
 }
 
 @end
