@@ -34,5 +34,5 @@ typedef NS_ENUM(NSInteger, GSAPIHTTPVerb) {
 };
 
 NSString *GSHTTPVerbStringForVerb(GSAPIHTTPVerb verb);
-NSURL *GSAPIURLComplex(NSString *endp, NSString *arg1, NSString *arg2);
+NSURL *GSAPIURLComplex(NSString *endp, ...);
 NSURL *GSAPIURLForEndpoint(NSString *endp);

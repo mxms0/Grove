@@ -72,6 +72,10 @@
 }
 
 - (void)setRepository:(GSRepository *)repo {
+	if (!repo) {
+		model = nil;
+		return;
+	}
 	model = [[GRRepositoryFileBrowserModel alloc] initWithRepository:repo];
 	[model setDelegate:self];
 	[model update];

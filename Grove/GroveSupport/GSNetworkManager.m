@@ -92,18 +92,16 @@
 }
 
 - (void)sendRequest:(GSURLRequest *__nonnull)request completionHandler:(void (^__nonnull)(GSSerializable *__nullable serializeable, NSError *__nullable error))handler {
-	NSLog(@"sending request...");
+
 	[self sendDataRequest:request completionHandler:^(GSSerializable *response, NSError *error) {
 		handler(response, error);
 	}];
 }
 
 - (void)sendDataRequest:(NSURLRequest *)request completionHandler:(void (^)(GSSerializable *response, NSError *error))handler {
-	if (!request) {
-		NSLog(@"te fuck");
-	}
-	NSURLSessionDataTask *task = [[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-#if 1
+
+	void (^dataHandler)(NSData *data, NSURLResponse *response, NSError *error) = ^(NSData *data, NSURLResponse *response, NSError *error) {
+#if 0
 		NSLog(@"Request:%@ Response: %@", request, response);
 #endif
 		NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response; // put safety checks here. albeit unlikely
@@ -151,17 +149,29 @@
 				handler(nil, error);
 				break;
 			}
+			case 404: {
+				NSLog(@"Not Found %@:%@:%@", data, response, request);
+				NSDictionary *userInfo = @{
+										   NSLocalizedDescriptionKey: @"Not Found",
+										   };
+				NSError *error = [NSError errorWithDomain:GSErrorDomain code:404 userInfo:userInfo];
+				handler(nil, error);
+				break;
+			}
 			default:
 				NSLog(@"HTTP Code %ld", (long)[httpResponse statusCode]);
 				GSAssert();
 				handler(nil, error);
 				break;
 		}
-	}];
+
+	};
 	
-	NSLog(@"session crafted %@", task);
-	
-	[task resume];
+	dispatch_async(dispatch_get_main_queue(), ^ {
+		// I don't like this.
+		NSURLSessionDataTask *task = [[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:dataHandler];
+		[task resume];
+	});
 }
 
 - (void)requestEventsForUser:(NSString *)user token:(NSString *)token completionHandler:(void (^)(NSArray *events, NSError *error))handler {
@@ -217,7 +227,7 @@
 
 - (void)requestRepositoriesForCurrentUserWithToken:(NSString *)token completionHandler:(void (^)(NSArray *__nullable repos, NSError *__nullable error))handler {
 	NSURL *requestURL = GSAPIURLComplex(GSAPIEndpointUser, GSAPIEndpointRepos, nil);
-	NSLog(@"requ url %@", requestURL);
+
 	GSURLRequest *request = [[GSURLRequest alloc] initWithURL:requestURL];
 	[request setAuthToken:token];
 	
@@ -235,6 +245,22 @@
 	
 	NSURL *requestURL = GSAPIURLComplex(GSAPIEndpointUsers, username, GSAPIEndpointRepos);
 	GSURLRequest *request = [[GSURLRequest alloc] initWithURL:requestURL];
+	
+	[self sendDataRequest:request completionHandler:^(GSSerializable *response, NSError *error) {
+		if (error) {
+			handler(nil, error);
+		}
+		else {
+			handler((NSArray *)response, nil);
+		}
+	}];
+}
+
+- (void)requestRepositoryContentsForRepositoryNamed:(NSString *)repoName username:(NSString *)username token:(NSString *)token path:(NSString *)path completionHandler:(void (^)(NSArray *__nullable items, NSError *__nullable error))handler {
+	NSURL *requestURL  = GSAPIURLComplex(GSAPIEndpointRepos, username, repoName, @"contents", path);
+	
+	GSURLRequest *request = [[GSURLRequest alloc] initWithURL:requestURL];
+	[request setAuthToken:token];
 	
 	[self sendDataRequest:request completionHandler:^(GSSerializable *response, NSError *error) {
 		if (error) {

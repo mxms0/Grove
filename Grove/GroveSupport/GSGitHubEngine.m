@@ -73,6 +73,8 @@ NS_ASSUME_NONNULL_BEGIN
 	if (error) {
 		NSString *authAttempt = [[error userInfo] objectForKey:GSAuthCriteria];
 		if (authAttempt) {
+			// Wouldn't be in this place if X-GitHub-OTP key wasn't present
+			// can't find a reason where it would be sent and not be requiring 2fa
 			BOOL required = NO;
 			GSTwoFactorAuthMethod method = GSTwoFactorAuthMethodUnknown;
 			NSArray *words = [authAttempt componentsSeparatedByString:@" "];
@@ -123,7 +125,7 @@ NS_ASSUME_NONNULL_BEGIN
 	handler(_user, nil);
 }
 
-- (void)eventsForUser:(GSUser *)user completionHandler:(void (^)(NSArray *__nullable events, NSError *__nullable error))handler {
+- (void)eventsForUser:(GSUser *)user completionHandler:(void (^)(NSArray<GSEvent *> *__nullable events, NSError *__nullable error))handler {
 	[[GSNetworkManager sharedInstance] requestEventsForUser:user.username token:user.token completionHandler:^(id events, NSError *error) {
 		if (error) {
 			handler(nil, error);
@@ -206,7 +208,7 @@ NS_ASSUME_NONNULL_BEGIN
 	}];
 }
 
-- (void)notificationsForUser:(GSUser *)user completionHandler:(void (^)(NSArray *__nullable notifications, NSError *__nullable error))handler {
+- (void)notificationsForUser:(GSUser *)user completionHandler:(void (^)(NSArray<GSNotification *> *__nullable notifications, NSError *__nullable error))handler {
 	if (!user.token) {
 		GSAssert();
 	}
@@ -275,7 +277,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (void)repositoriesStarredByUser:(GSUser *)user completionHandler:(void (^)(NSArray *__nullable repos, NSError *__nullable error))handler {
-	NSURL *destination = GSAPIURLComplex(GSAPIEndpointUsers, user.username, GSAPIComponentStarred);
+	NSURL *destination = GSAPIURLComplex(GSAPIEndpointUsers, user.username, GSAPIComponentStarred, nil);
 	
 	GSURLRequest *request = [[GSURLRequest alloc] initWithURL:destination];
 	[request setAuthToken:user.token];
@@ -338,6 +340,27 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)collaboratorsForRepositoryNamed:(NSString *)repoName owner:(NSString *)owner completionHandler:(void (^)(NSArray *__nullable collabs, NSError *__nullable error))error {
 	GSAssert();
+}
+
+- (void)repositoryContentsForRepository:(GSRepository *)repo completionHandler:(void (^)(NSArray<GSRepositoryEntry *> *__nullable items, NSError *__nullable error))handler {
+	[[GSNetworkManager sharedInstance] requestRepositoryContentsForRepositoryNamed:repo.name username:repo.owner.username token:_activeUser.token path:nil completionHandler:^(NSArray * _Nullable items, NSError * _Nullable error) {
+		if (error) {
+			handler(nil, error);
+		}
+		else if (![items isKindOfClass:[NSArray class]]) {
+			GSAssert();
+		}
+		else {
+			NSMutableArray *directoryContents = [[NSMutableArray alloc] init];
+			
+			for (NSDictionary *dict in items) {
+				GSRepositoryEntry *entry = [[GSRepositoryEntry alloc] initWithDictionary:dict];
+				[directoryContents addObject:entry];
+			}
+			
+			handler(directoryContents, nil);
+		}
+	}];
 }
 
 #pragma mark Gists

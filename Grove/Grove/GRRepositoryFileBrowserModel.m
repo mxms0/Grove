@@ -12,6 +12,7 @@
 
 @implementation GRRepositoryFileBrowserModel {
 	__weak GSRepository *repository;
+	__block NSArray<GSRepositoryEntry *> *contents;
 }
 
 - (instancetype)initWithRepository:(GSRepository *)repo {
@@ -26,9 +27,21 @@
 }
 
 - (void)requestNewData {
-	[self.delegate prepareForLayout];
-//	[[GSGitHubEngine sharedInstance] request]/
+	[[GSGitHubEngine sharedInstance] repositoryContentsForRepository:repository completionHandler:^(NSArray<GSRepositoryEntry *> * _Nullable items, NSError * _Nullable error) {
+		if (error) {
+			GSAssert();
+		}
+		else {
+			contents = items;
+			[self updateViewWithNewData];
+		}
+	}];
 }
 
+- (void)updateViewWithNewData {
+	dispatch_async(dispatch_get_main_queue(), ^{
+		[self.delegate prepareForLayout];
+	});
+}
 
 @end

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class GSUser, GSEvent, GSRepository, GSGist, GSNotification;
+@class GSUser, GSEvent, GSRepository, GSGist, GSNotification, GSRepositoryEntry;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -42,6 +42,8 @@ typedef NS_ENUM(NSInteger, GSTwoFactorAuthMethod) {
 - (void)repositoriesForUsername:(NSString *)username completionHandler:(void (^)(NSArray *__nullable repos, NSError *__nullable error))handler;
 - (void)collaboratorsForRepository:(GSRepository *)repo completionHandler:(void (^)(NSArray *__nullable collabs, NSError *__nullable error))error;
 - (void)collaboratorsForRepositoryNamed:(NSString *)repoName owner:(NSString *)owner completionHandler:(void (^)(NSArray *__nullable collabs, NSError *__nullable error))error;
+
+- (void)repositoryContentsForRepository:(GSRepository *)repo completionHandler:(void (^)(NSArray<GSRepositoryEntry *> *__nullable items, NSError *__nullable error))handler;
 
 // Starring
 - (void)starRepository:(GSRepository *)repo completionHandler:(void (^)(BOOL success, NSError *__nullable error))handler;

@@ -21,8 +21,6 @@
 - (void)_configureWithDictionary:(NSDictionary *)dictionary {
 	[super _configureWithDictionary:dictionary];
 	
-	NSLog(@"fff %@", dictionary);
-	
 	GSObjectAssign(dictionary, @"owner", _owner, GSUser);
 	
 	GSAssign(dictionary, @"name", _name);

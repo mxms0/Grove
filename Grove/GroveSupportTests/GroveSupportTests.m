@@ -46,7 +46,6 @@ static NSString *globalPassword = @"!Rocky&Hugo68";
 			NSLog(@"Image %p:%@", image, error);
 		}];
 		
-		
 		[[GSGitHubEngine sharedInstance] repositoriesStarredByUser:user completionHandler:^(NSArray * _Nullable repos, NSError * _Nullable error) {
 			NSLog(@"Starred %@:%@", repos, error);
 		}];

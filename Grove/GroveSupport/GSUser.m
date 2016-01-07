@@ -37,7 +37,6 @@ static NSMutableDictionary *cachedUsers = nil;
 		// for the same key. Incase it changes, etc.
 		// Also will probably make a list of constants for each key defined in the API later.
 		if (cachedSelf) {
-			NSLog(@"GSUser cached. Reusing.");
 			return cachedSelf;
 		}
 		
@@ -117,7 +116,6 @@ static NSMutableDictionary *cachedUsers = nil;
 		GSUser *cachedSelf = [GSUser cachedUserWithUsername:self.username];
 
 		if (cachedSelf) {
-			NSLog(@"GSUser cached. Reusing.");
 			return cachedSelf;
 		}
 		

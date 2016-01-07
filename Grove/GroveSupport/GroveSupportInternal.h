@@ -22,6 +22,7 @@
 #import "GSIssueInternal.h"
 #import "GSCommentInternal.h"
 #import "GSNetworkManager.h"
+#import "GSRepositoryEntryInternal.h"
 #import "GSGistInternal.h"
 
 #define API_TRUST_LEVEL 0
