@@ -23,6 +23,8 @@ static NSString *const GSRepositoryTreeRootItemPath = @"/";
 	NSArray *files = nil;
 	GSAssign(dictionary, @"tree", files);
 	
+	// store truncate info and hash in here too!!!
+	
 	for (NSDictionary *dictionary in files) {
 		
 		NSString *path = dictionary[@"path"];
