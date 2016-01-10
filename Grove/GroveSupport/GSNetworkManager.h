@@ -26,7 +26,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)requestRepositoriesForUsername:(NSString *)username completionHandler:(void (^)(NSArray *__nullable repos, NSError *__nullable error))handler;
 - (void)requestRepositoriesForCurrentUserWithToken:(NSString *)token completionHandler:(void (^)(NSArray *__nullable repos, NSError *__nullable error))handler;
 - (void)sendRequest:(GSURLRequest *)request completionHandler:(void (^)(GSSerializable *__nullable serializeable, NSError *__nullable error))handler;
-- (void)requestRepositoryContentsForRepositoryNamed:(NSString *)repoName username:(NSString *)username token:(NSString *)token path:(NSString *__nullable)path completionHandler:(void (^)(NSArray *__nullable items, NSError *__nullable error))handler;
+- (void)requestRepositoryContentsForRepositoryNamed:(NSString *)repoName repositoryOwner:(NSString *)username token:(NSString *)token path:(NSString *__nullable)path completionHandler:(void (^)(NSArray *__nullable items, NSError *__nullable error))handler;
+- (void)recursivelyRequestRepositoryTreeForRepositoryNamed:(NSString *)repoName repositoryOwner:(NSString *)owner treeOrBranch:(NSString *)treeOrBranch token:(NSString *)token completionHandler:(void (^)(NSDictionary *__nullable result, NSError *__nullable serror))handler;
 // not sure if i like exposing endpoints outside of the network manager. this is an idea for now.
 - (void)requestAPIEndpoint:(NSString *)endp token:(NSString *__nullable)token completionHandler:(void (^)(GSSerializable *__nullable s, NSError *__nullable error))handler;
 @end

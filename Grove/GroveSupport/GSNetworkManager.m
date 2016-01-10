@@ -262,7 +262,27 @@
 	}];
 }
 
-- (void)requestRepositoryContentsForRepositoryNamed:(NSString *)repoName username:(NSString *)username token:(NSString *)token path:(NSString *)path completionHandler:(void (^)(NSArray *__nullable items, NSError *__nullable error))handler {
+- (void)recursivelyRequestRepositoryTreeForRepositoryNamed:(NSString *)repoName repositoryOwner:(NSString *)owner treeOrBranch:(NSString *)treeOrBranch token:(NSString *)token completionHandler:(void (^)(NSDictionary *__nullable result, NSError *__nullable serror))handler {
+	NSURL *requestURL = GSAPIURLComplex(GSAPIEndpointRepos, owner, repoName, @"git", @"trees", treeOrBranch, nil);
+	
+	NSURLComponents *components = [[NSURLComponents alloc] initWithURL:requestURL resolvingAgainstBaseURL:NO];
+	[components setQuery:@"recursive=1"];
+	
+	GSURLRequest *request = [[GSURLRequest alloc] initWithURL:[components URL]];
+	
+	[request setAuthToken:token];
+	
+	[self sendDataRequest:request completionHandler:^(GSSerializable *response, NSError *error) {
+		if (error) {
+			handler(nil, error);
+		}
+		else {
+			handler((NSDictionary *)response, error);
+		}
+	}];
+}
+
+- (void)requestRepositoryContentsForRepositoryNamed:(NSString *)repoName repositoryOwner:(NSString *)username token:(NSString *)token path:(NSString *)path completionHandler:(void (^)(NSArray *__nullable items, NSError *__nullable error))handler {
 	NSURL *requestURL  = GSAPIURLComplex(GSAPIEndpointRepos, username, repoName, @"contents", path, nil);
 	
 	GSURLRequest *request = [[GSURLRequest alloc] initWithURL:requestURL];

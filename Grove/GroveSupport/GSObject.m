@@ -22,7 +22,7 @@
 }
 
 - (void)configureWithDictionary:(NSDictionary *)dictionary {
-#if !DEBUG
+#if 0
 	NSLog(@"[%@] Packet %@", NSStringFromClass([self class]), dictionary);
 #endif
 	

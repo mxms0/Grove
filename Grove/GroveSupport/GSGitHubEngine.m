@@ -21,7 +21,7 @@
  Else If (!correct type) {}
  Else { this is success }
  handler(x,y) where x (xor) y should always be 1 (1 for object, 0 for nil)
-*/
+ */
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -121,7 +121,7 @@ NS_ASSUME_NONNULL_BEGIN
 	
 	_user = [[GSUser alloc] initWithDictionary:userData];
 	[_user setToken:token];
-
+	
 	handler(_user, nil);
 }
 
@@ -137,7 +137,7 @@ NS_ASSUME_NONNULL_BEGIN
 			handler(nil, [NSError errorWithDomain:GSErrorDomain code:1 userInfo:@{NSLocalizedDescriptionKey: events[@"message"]}]);
 		}
 		else {
-//			NSLog(@"nnnf %@:%@:%@:%@:%@", NSStringFromClass([events class]), events,events[0], events[1], events[2]);
+			//			NSLog(@"nnnf %@:%@:%@:%@:%@", NSStringFromClass([events class]), events,events[0], events[1], events[2]);
 			NSMutableArray *serializedEvents = [[NSMutableArray alloc] init];
 			
 			[events enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -146,7 +146,7 @@ NS_ASSUME_NONNULL_BEGIN
 				GSEvent *evt = [[GSEvent alloc] initWithDictionary:eventPacket];
 				[serializedEvents addObject:evt];
 			}];
-
+			
 			handler(serializedEvents, nil);
 		}
 	}];
@@ -223,12 +223,12 @@ NS_ASSUME_NONNULL_BEGIN
 		}
 		else {
 			NSMutableArray *ret = [[NSMutableArray alloc] init];
-		
+			
 			for (NSDictionary *dict in notifs) {
 				GSNotification *notification = [[GSNotification alloc] initWithDictionary:dict];
 				[ret addObject:notification];
 			}
-		
+			
 			handler(ret, nil);
 		}
 	}];
@@ -342,25 +342,45 @@ NS_ASSUME_NONNULL_BEGIN
 	GSAssert();
 }
 
-- (void)repositoryContentsForRepository:(GSRepository *)repo completionHandler:(void (^)(NSArray<GSRepositoryEntry *> *__nullable items, NSError *__nullable error))handler {
-	[[GSNetworkManager sharedInstance] requestRepositoryContentsForRepositoryNamed:repo.name username:repo.owner.username token:_activeUser.token path:nil completionHandler:^(NSArray * _Nullable items, NSError * _Nullable error) {
-		if (error) {
-			handler(nil, error);
-		}
-		else if (![items isKindOfClass:[NSArray class]]) {
-			GSAssert();
-		}
-		else {
-			NSMutableArray *directoryContents = [[NSMutableArray alloc] init];
-			
-			for (NSDictionary *dict in items) {
-				GSRepositoryEntry *entry = [[GSRepositoryEntry alloc] initWithDictionary:dict];
-				[directoryContents addObject:entry];
+- (void)repositoryContentsForRepository:(GSRepository *)repo atPath:(NSString *__nullable)path recurse:(BOOL)recurse completionHandler:(nonnull void (^)(NSArray<GSRepositoryEntry *> * _Nullable, NSError * _Nullable))handler {
+	
+	if (recurse) {
+		[[GSNetworkManager sharedInstance] recursivelyRequestRepositoryTreeForRepositoryNamed:repo.name repositoryOwner:repo.owner.username treeOrBranch:@"master" token:_activeUser.token completionHandler:^(NSDictionary * _Nullable primitiveTree, NSError * _Nullable error) {
+			if (error) {
+				handler(nil, error);
 			}
-			
-			handler(directoryContents, nil);
-		}
-	}];
+			else if (![primitiveTree isKindOfClass:[NSDictionary class]]) {
+				GSAssert();
+				// this should never happen
+			}
+			else {
+				GSRepositoryTree *tree = [[GSRepositoryTree alloc] initWithDictionary:primitiveTree];
+				[tree setRecursive:recurse];
+
+			}
+		}];
+	}
+	else {
+		
+		[[GSNetworkManager sharedInstance] requestRepositoryContentsForRepositoryNamed:repo.name repositoryOwner:repo.owner.username token:_activeUser.token path:path completionHandler:^(NSArray * _Nullable items, NSError * _Nullable error) {
+			if (error) {
+				handler(nil, error);
+			}
+			else if (![items isKindOfClass:[NSArray class]]) {
+				GSAssert();
+			}
+			else {
+				NSMutableArray *directoryContents = [[NSMutableArray alloc] init];
+				
+				for (NSDictionary *dict in items) {
+					GSRepositoryEntry *entry = [[GSRepositoryEntry alloc] initWithDictionary:dict];
+					[directoryContents addObject:entry];
+				}
+				
+				handler(directoryContents, nil);
+			}
+		}];
+	}
 }
 
 #pragma mark Gists

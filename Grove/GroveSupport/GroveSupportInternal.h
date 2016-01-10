@@ -24,6 +24,7 @@
 #import "GSNetworkManager.h"
 #import "GSRepositoryEntryInternal.h"
 #import "GSGistInternal.h"
+#import "GSRepositoryTreeInternal.h"
 
 #define API_TRUST_LEVEL 0
 

@@ -25,6 +25,8 @@
 	
 	GSAssign(dictionary, @"name", _name);
 	
+	NSLog(@"repo packet %@", dictionary);
+	
 	// API is inconsistent here
 	// sometimes "name" represents User/RepoName
 	// sometimes "name" just represents RepoName

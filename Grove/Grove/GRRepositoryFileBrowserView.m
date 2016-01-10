@@ -77,6 +77,11 @@
 	return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+	[tableView deselectRowAtIndexPath:indexPath animated:YES];
+	[model pushItemFromIndexPath:indexPath];
+}
+
 - (void)setRepository:(GSRepository *)repo {
 	if (!repo) {
 		model = nil;

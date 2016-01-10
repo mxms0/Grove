@@ -27,6 +27,7 @@ FOUNDATION_EXPORT const unsigned char GroveSupportVersionString[];
 #import <GroveSupport/GSOrganization.h>
 #import <GroveSupport/GSRepositoryEntry.h>
 #import <GroveSupport/GSUtilities.h>
+#import <GroveSupport/GSRepositoryTree.h>
 
 // In this header, you should import all the public headers of your framework using statements like #import <GroveSupport/PublicHeader.h>
 

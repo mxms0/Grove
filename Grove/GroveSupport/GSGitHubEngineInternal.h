@@ -1,9 +1,9 @@
 //
 //  GSGitHubEngineInternal.h
-//  Grove
+//  GroveSupport
 //
 //  Created by Max Shavrick on 11/25/15.
-//  Copyright © 2015 Milo. All rights reserved.
+//  Copyright (c) 2015 Milo. All rights reserved.
 //
 
 #ifndef GSGitHubEngineInternal_h

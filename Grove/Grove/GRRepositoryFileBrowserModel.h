@@ -23,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)update;
 - (NSUInteger)numberOfItemsInCurrentDirectory;
 - (GSRepositoryEntry *)repositoryEntryForIndex:(NSUInteger)index;
+- (void)pushItemFromIndexPath:(NSIndexPath *)path;
 @end
 
 NS_ASSUME_NONNULL_END
