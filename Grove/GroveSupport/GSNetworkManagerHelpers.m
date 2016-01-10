@@ -55,5 +55,5 @@ NSURL *GSAPIURLComplex(NSString *endp, ...) {
 }
 
 NSURL *GSAPIURLForEndpoint(NSString *endp) {
-	return [NSURL URLWithString:[GSAPIHostURL stringByAppendingPathComponent:endp]];
+	return [[NSURL URLWithString:GSAPIHostURL] URLByAppendingPathComponent:endp];
 }

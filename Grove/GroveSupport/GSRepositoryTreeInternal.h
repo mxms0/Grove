@@ -13,6 +13,7 @@
 
 @interface GSRepositoryTree ()
 @property (nonatomic, assign, readwrite) BOOL recursive;
+- (instancetype)initWithRootEntries:(NSArray<NSDictionary *> *)entries basePath:(NSString *)base;
 @end
 
 #endif /* GSRepositoryTreeInternal_h */

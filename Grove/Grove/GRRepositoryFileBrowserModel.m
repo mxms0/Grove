@@ -12,9 +12,11 @@
 
 @implementation GRRepositoryFileBrowserModel {
 	__weak GSRepository *repository;
-	NSDictionary *contentMap;
 	NSMutableArray *currentDirectoryComponents;
 	__block NSArray<GSRepositoryEntry *> *contents;
+	__strong GSRepositoryTree *directoryTree;
+	BOOL hasCompleteTree;
+	BOOL requestedCompleteTree;
 }
 
 - (instancetype)initWithRepository:(GSRepository *)repo {
@@ -28,33 +30,66 @@
 - (void)update {
 	[self requestNewData];
 	
-	static dispatch_once_t onceToken;
-	dispatch_once(&onceToken, ^{
+	if (!requestedCompleteTree) {
+		return;
+		requestedCompleteTree = YES;
 		[self requestFullTree];
-	});
+	}
 }
 
 - (void)requestFullTree {
-	[[GSGitHubEngine sharedInstance] repositoryContentsForRepository:repository atPath:[self _currentDirectoryAsString] recurse:YES completionHandler:^(NSArray<GSRepositoryEntry *> * _Nullable items, NSError * _Nullable error) {
-		
+	[[GSGitHubEngine sharedInstance] repositoryContentsForRepository:repository atPath:[self _currentDirectoryAsString] recurse:YES completionHandler:^(GSRepositoryTree* _Nullable tree, NSError * _Nullable error) {
+		hasCompleteTree = YES;
+		directoryTree = tree;
 	}];
 }
 
 - (NSString *)_currentDirectoryAsString {
-	return [currentDirectoryComponents componentsJoinedByString:@"/"];
+	NSString *directory = nil;
+	@synchronized(currentDirectoryComponents) {
+		directory = [currentDirectoryComponents componentsJoinedByString:@"/"];
+	}
+	NSLog(@"fds %@", directory);
+	return directory;
 }
 
 - (void)pushItemFromIndexPath:(NSIndexPath *)path {
-	
+	GSRepositoryEntry *entry = [contents objectAtIndex:path.row];
+	switch ([entry type]) {
+		case GSRepositoryEntryTypeDirectory: {
+			[self _pushNewDirectoryWithEntry:entry];
+			break;
+		}
+		case GSRepositoryEntryTypeFile:
+		case GSRepositoryEntryTypeSubmodule:
+		case GSRepositoryEntryTypeSymlink:
+		case GSRepositoryEntryTypeUnknown:
+		default:
+			break;
+	}
+}
+
+- (void)_pushNewDirectoryWithEntry:(GSRepositoryEntry *)entry {
+	[currentDirectoryComponents addObject:entry.name];
+	if (hasCompleteTree) {
+		contents = [directoryTree entriesForPath:[self _currentDirectoryAsString]];
+		[self.delegate pushToNewDirectory];
+	}
+	else {
+		[self.delegate pushToNewDirectory];
+		[self.delegate presentLoadingIndicator];
+		[self requestNewData];
+	}
 }
 
 - (void)requestNewData {
-	[[GSGitHubEngine sharedInstance] repositoryContentsForRepository:repository atPath:[self _currentDirectoryAsString] recurse:NO completionHandler:^(NSArray<GSRepositoryEntry *> * _Nullable items, NSError * _Nullable error) {
+	[[GSGitHubEngine sharedInstance] repositoryContentsForRepository:repository atPath:[self _currentDirectoryAsString] recurse:NO completionHandler:^(GSRepositoryTree *_Nullable items, NSError * _Nullable error) {
 		if (error) {
 			GSAssert();
 		}
 		else {
-			contents = items;
+			NSLog(@"Ff %@", items);
+			contents = [items rootEntries];
 			[self updateViewWithNewData];
 		}
 	}];

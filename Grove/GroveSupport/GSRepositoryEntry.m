@@ -22,6 +22,10 @@
 	GSAssign(dictionary, @"size", _size);
 	GSAssign(dictionary, @"sha", _shaHash);
 	
+	NSString *type = nil;
+	GSAssign(dictionary, @"type", type);
+	_type= [self _entryTypeForString:type];
+	
 	if (!_name) {
 		_name = [_path lastPathComponent];
 	}
@@ -29,6 +33,20 @@
 
 - (NSString *)description {
 	return [NSString stringWithFormat:@"<%@: %p; Name = %@; Path = %@;>", NSStringFromClass([self class]), self, _name, _path];
+}
+
+- (GSRepositoryEntryType)_entryTypeForString:(NSString *)str {
+	NSDictionary *const fileTypeMap = @{
+										@"file":		@(GSRepositoryEntryTypeFile),
+										@"symlink":		@(GSRepositoryEntryTypeSymlink),
+										@"dir":			@(GSRepositoryEntryTypeDirectory),
+										@"submodule":	@(GSRepositoryEntryTypeSubmodule),
+										@"blob":		@(GSRepositoryEntryTypeFile),
+										@"tree":		@(GSRepositoryEntryTypeDirectory),
+										@"commit":		@(GSRepositoryEntryTypeSubmodule),
+										};
+	
+	return (GSRepositoryEntryType)(fileTypeMap[str] ? [fileTypeMap[str] intValue] : GSRepositoryEntryTypeUnknown);
 }
 
 @end

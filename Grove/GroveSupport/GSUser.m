@@ -166,13 +166,11 @@ static NSMutableDictionary *cachedUsers = nil;
 			if (self.username) {
 				[[GSGitHubEngine sharedInstance] _userInformationForUsername:self.username completionHandler:^(NSDictionary *info, NSError *error) {
 					if (error) {
-						if (handler)
-							handler(error);
+						GSSafeHandlerCall(handler, error);
 					}
 					else {
 						[self configureWithDictionary:info];
-						if (handler)
-							handler(nil);
+						GSSafeHandlerCall(handler, nil);
 					}
 				}];
 				
@@ -184,12 +182,12 @@ static NSMutableDictionary *cachedUsers = nil;
 				GSAssert();
 				// got nothin'
 				// forward error up i guess
-				if (handler)
-					handler(error);
+				GSSafeHandlerCall(handler, error);
 			}
 		}
-		if (handler)
-			handler(nil);
+		else {
+			GSSafeHandlerCall(handler, nil);
+		}
 	}];
 }
 

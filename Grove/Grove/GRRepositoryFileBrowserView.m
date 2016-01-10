@@ -39,17 +39,16 @@
 	[pathBar setBackgroundColor:GSRandomUIColor()];
 	
 	loadingIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-	[loadingIndicator setHidden:NO];
-	[loadingIndicator startAnimating];
 	
 	directoryTableView = [[UITableView alloc] init];
 	[directoryTableView setDelegate:self];
 	[directoryTableView setDataSource:self];
-	[directoryTableView setHidden:YES];
 	
 	for (UIView *v in @[pathBar, loadingIndicator, directoryTableView]) {
 		[self addSubview:v];
 	}
+	
+	[self presentLoadingIndicator];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -92,11 +91,21 @@
 	[model update];
 }
 
+- (void)presentLoadingIndicator {
+	[loadingIndicator startAnimating];
+	[loadingIndicator setHidden:NO];
+	[directoryTableView setHidden:YES];
+}
+
 - (void)prepareForLayout {
 	[loadingIndicator setHidden:YES];
 	[loadingIndicator stopAnimating];
 	[directoryTableView setHidden:NO];
 	// perhaps a graceful animation in..
+}
+
+- (void)pushToNewDirectory {
+	[directoryTableView reloadData];
 }
 
 - (void)reloadData {

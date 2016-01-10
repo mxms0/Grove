@@ -8,6 +8,14 @@
 
 #import <GroveSupport/GroveSupport.h>
 
+typedef NS_ENUM(NSInteger, GSRepositoryEntryType) {
+	GSRepositoryEntryTypeFile, // blob
+	GSRepositoryEntryTypeDirectory, // tree
+	GSRepositoryEntryTypeSymlink, //  ???
+	GSRepositoryEntryTypeSubmodule, // commit ???
+	GSRepositoryEntryTypeUnknown
+};
+
 @interface GSRepositoryEntry : GSObject
 @property (nonatomic, strong, nullable) NSURL *downloadURL;
 @property (nonatomic, strong, nullable) NSURL *gitURL;
@@ -16,5 +24,5 @@
 @property (nonatomic, strong, nullable) NSString *path;
 @property (nonatomic, strong, nullable) NSString *shaHash;
 @property (nonatomic, strong, nullable) NSNumber *size;
-@property (nonatomic, assign) int type;
+@property (nonatomic, assign) GSRepositoryEntryType type;
 @end

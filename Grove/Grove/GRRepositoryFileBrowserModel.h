@@ -13,6 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol GRRepositoryFileBrowserModelDelegate <NSObject>
 // this is muy importante
 - (void)prepareForLayout;
+- (void)presentLoadingIndicator;
+- (void)pushToNewDirectory;
 - (void)reloadData;
 @end
 
@@ -24,6 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSUInteger)numberOfItemsInCurrentDirectory;
 - (GSRepositoryEntry *)repositoryEntryForIndex:(NSUInteger)index;
 - (void)pushItemFromIndexPath:(NSIndexPath *)path;
+- (NSString *)currentDirectory;
 @end
 
 NS_ASSUME_NONNULL_END

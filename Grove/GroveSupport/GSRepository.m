@@ -25,8 +25,6 @@
 	
 	GSAssign(dictionary, @"name", _name);
 	
-	NSLog(@"repo packet %@", dictionary);
-	
 	// API is inconsistent here
 	// sometimes "name" represents User/RepoName
 	// sometimes "name" just represents RepoName
@@ -38,9 +36,11 @@
 		if (inconsistencyFix.location != NSNotFound) {
 			NSString *username = [_name substringToIndex:inconsistencyFix.location];
 			// may have to be an organization in the future, BEWARE MAX
-			GSUser *user = [[GSUser alloc] initWithDictionary:@{@"login": username }];
-			[user updateSynchronouslyWithError:nil];
-			_owner = user;
+			if (!_owner) {
+				GSUser *user = [[GSUser alloc] initWithDictionary:@{@"login": username }];
+				[user updateSynchronouslyWithError:nil];
+				_owner = user;
+			}
 		}
 		else {
 			NSLog(@"Repo with no owner???");

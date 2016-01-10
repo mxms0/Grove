@@ -137,12 +137,10 @@ NS_ASSUME_NONNULL_BEGIN
 			handler(nil, [NSError errorWithDomain:GSErrorDomain code:1 userInfo:@{NSLocalizedDescriptionKey: events[@"message"]}]);
 		}
 		else {
-			//			NSLog(@"nnnf %@:%@:%@:%@:%@", NSStringFromClass([events class]), events,events[0], events[1], events[2]);
 			NSMutableArray *serializedEvents = [[NSMutableArray alloc] init];
 			
 			[events enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL * _Nonnull stop) {
 				NSDictionary *eventPacket = (NSDictionary *)obj;
-				NSLog(@"mmmmm %@", eventPacket);
 				GSEvent *evt = [[GSEvent alloc] initWithDictionary:eventPacket];
 				[serializedEvents addObject:evt];
 			}];
@@ -243,9 +241,7 @@ NS_ASSUME_NONNULL_BEGIN
 	GSURLRequest *request = [[GSURLRequest alloc] initWithURL:obj.directAPIURL];
 	[request setAuthToken:self.activeUser.token];
 	[request setLastModifiedDate:obj.updatedDate];
-	NSLog(@"POSTING REQUEST. GOING OUT.");
 	[[GSNetworkManager sharedInstance] sendRequest:request completionHandler:^(GSSerializable * _Nullable serializeable, NSError * _Nullable error) {
-		NSLog(@"entered handler.");
 		if (error) {
 			handler(nil, error);
 		}
@@ -255,7 +251,6 @@ NS_ASSUME_NONNULL_BEGIN
 			handler(nil, nil);
 		}
 		else if (![serializeable isKindOfClass:[NSDictionary class]] && ![serializeable isKindOfClass:[NSArray class]]) {
-			NSLog(@"fds %@:%@", serializeable, request);
 			GSAssert();
 		}
 		else {
@@ -342,7 +337,7 @@ NS_ASSUME_NONNULL_BEGIN
 	GSAssert();
 }
 
-- (void)repositoryContentsForRepository:(GSRepository *)repo atPath:(NSString *__nullable)path recurse:(BOOL)recurse completionHandler:(nonnull void (^)(NSArray<GSRepositoryEntry *> * _Nullable, NSError * _Nullable))handler {
+- (void)repositoryContentsForRepository:(GSRepository *)repo atPath:(NSString *__nullable)path recurse:(BOOL)recurse completionHandler:(nonnull void (^)(GSRepositoryTree *_Nullable, NSError *_Nullable))handler {
 	
 	if (recurse) {
 		[[GSNetworkManager sharedInstance] recursivelyRequestRepositoryTreeForRepositoryNamed:repo.name repositoryOwner:repo.owner.username treeOrBranch:@"master" token:_activeUser.token completionHandler:^(NSDictionary * _Nullable primitiveTree, NSError * _Nullable error) {
@@ -356,7 +351,7 @@ NS_ASSUME_NONNULL_BEGIN
 			else {
 				GSRepositoryTree *tree = [[GSRepositoryTree alloc] initWithDictionary:primitiveTree];
 				[tree setRecursive:recurse];
-
+				handler(tree, nil);
 			}
 		}];
 	}
@@ -370,14 +365,8 @@ NS_ASSUME_NONNULL_BEGIN
 				GSAssert();
 			}
 			else {
-				NSMutableArray *directoryContents = [[NSMutableArray alloc] init];
-				
-				for (NSDictionary *dict in items) {
-					GSRepositoryEntry *entry = [[GSRepositoryEntry alloc] initWithDictionary:dict];
-					[directoryContents addObject:entry];
-				}
-				
-				handler(directoryContents, nil);
+				GSRepositoryTree *tree = [[GSRepositoryTree alloc] initWithRootEntries:items basePath:path];
+				handler(tree, nil);
 			}
 		}];
 	}
