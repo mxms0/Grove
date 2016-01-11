@@ -9,6 +9,7 @@
 #import "GSCacheManager.h"
 #import "GSUser.h"
 #import "GSUserInternal.h"
+#import "GSObjectInternal.h"
 #import "GSUtilities.h"
 #import "GSNetworkManager.h"
 
@@ -142,6 +143,20 @@
 		}
 	}
 	GSAssert();
+}
+
+- (void)findUserAvatarFromActor:(GSActor *__nonnull)user downloadIfNecessary:(BOOL)necessary completionHandler:(void (^__nonnull)(UIImage *__nullable image, NSError *__nullable error))handler {
+	
+	NSURL *avatarURL = user.avatarURL;
+
+	if (!avatarURL) {
+		avatarURL = [[NSURL URLWithString:@"https://avatars.githubusercontent.com/u/"] URLByAppendingPathComponent:[user.identifier stringValue]];
+		// attempt generic avatar URL
+	}
+	
+	[self findImageAssetWithURL:avatarURL loggedInUser:nil downloadIfNecessary:necessary completionHandler:^(UIImage * _Nullable image, NSError * _Nullable error) {
+		handler(image, error);
+	}];
 }
 
 - (void)findFileAssetWithURL:(NSURL *)url user:(GSUser *)user downloadIfNecessary:(BOOL)download completionHandler:(void (^)(NSURL *filePath, NSError *error))handler {

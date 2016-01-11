@@ -19,8 +19,9 @@
 	if ((self = [super init])) {
 		self.event = event;
 		
-		[[GSCacheManager sharedInstance] findImageAssetWithURL:self.event.actor.avatarURL loggedInUser:nil downloadIfNecessary:YES completionHandler:^(UIImage * _Nullable image, NSError * _Nullable error) {
+		[[GSCacheManager sharedInstance] findUserAvatarFromActor:self.event.actor downloadIfNecessary:YES completionHandler:^(UIImage *image, NSError *error) {
 			avatar = image;
+			RELOAD_VIEW(GRStreamViewControllerNotificationKey);
 		}];
 	}
 	return self;

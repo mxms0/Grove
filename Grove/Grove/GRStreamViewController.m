@@ -45,8 +45,14 @@ static NSString *reuseIdentifier = @"reuseIdentifier";
         [tableView makeConstraints:^(MASConstraintMaker *make) {
             make.edges.equalTo(self.view);
         }];
+		
+		REGISTER_RELOAD_VIEW(GRStreamViewControllerNotificationKey);
     }
     return self;
+}
+
+- (void)_reloadNotification {
+	[tableView reloadData];
 }
 
 #pragma mark - TableView Datasource

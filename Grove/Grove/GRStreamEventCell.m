@@ -35,7 +35,7 @@
         
         //Set Properties
         [imageView setContentMode:UIViewContentModeScaleAspectFit];
-		[imageView setBackgroundColor:[UIColor blackColor]];
+		[imageView setBackgroundColor:[UIColor whiteColor]];
 		[imageView.layer setCornerRadius:2.0f];
 		[imageView.layer setMasksToBounds:YES];
         [titleLabel setLineBreakMode:NSLineBreakByWordWrapping];

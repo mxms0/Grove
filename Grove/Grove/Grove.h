@@ -29,4 +29,16 @@ static inline UIColor *GSRandomUIColor() {
 	return color;
 }
 
+static NSString *const GRStreamViewControllerNotificationKey = @"GRStreamViewControllerNotificationKey";
+
+#define REGISTER_RELOAD_VIEW(x) \
+	do { \
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_reloadNotification) name:x object:nil]; \
+	} while (0); 
+
+#define RELOAD_VIEW(x) \
+	do { \
+		[[NSNotificationCenter defaultCenter] postNotificationName:x object:nil]; \
+	} while (0);
+
 #endif
