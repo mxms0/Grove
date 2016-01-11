@@ -89,6 +89,8 @@
 	model = [[GRRepositoryFileBrowserModel alloc] initWithRepository:repo];
 	[model setDelegate:self];
 	[model update];
+	[pathBar setDelegate:model];
+	[model setPathBar:pathBar];
 }
 
 - (void)presentLoadingIndicator {
@@ -105,6 +107,10 @@
 }
 
 - (void)pushToNewDirectory {
+	[directoryTableView reloadData];
+}
+
+- (void)pushToPreviousDirectory {
 	[directoryTableView reloadData];
 }
 

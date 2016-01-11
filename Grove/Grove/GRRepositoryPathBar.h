@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class GRRepositoryPathBar;
 @protocol GRRepositoryPathBarDelegate <NSObject>
+- (NSString *)currentDirectory;
 - (BOOL)isAtRootForPathBar:(GRRepositoryPathBar *)bar;
 - (void)popPathForPathBar:(GRRepositoryPathBar *)bar;
 - (void)popToRootForPathBar:(GRRepositoryPathBar *)bar;

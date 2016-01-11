@@ -11,6 +11,8 @@
 @implementation GRRepositoryPathBar {
 	UILabel *pathLabel;
 	NSMutableArray *pathComponents;
+	UIButton *backButton;
+	BOOL isAtRoot;
 }
 
 - (instancetype)init {
@@ -29,11 +31,33 @@
 
 - (void)commonInit {
 	pathLabel = [[UILabel alloc] init];
-	[self addSubview:pathLabel];
+	[pathLabel setTextAlignment:NSTextAlignmentCenter];
+	
+	backButton = [[UIButton alloc] init];
+	[backButton setTitle:@"Back" forState:UIControlStateNormal];
+	[backButton addTarget:self action:@selector(backButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+	[backButton setHidden:YES];
+	
+	for (UIView *v in @[pathLabel, backButton]) {
+		[self addSubview:v];
+	}
+}
+
+- (void)backButtonPressed:(UIButton *)b {
+	[self popLastPathItem];
+}
+
+- (void)popLastPathItem {
+	[self.delegate popPathForPathBar:self];
+	isAtRoot = [self.delegate isAtRootForPathBar:self];
+	[backButton setHidden:isAtRoot];
+	[pathLabel setText:[self.delegate currentDirectory]];
 }
 
 - (void)pushPath:(NSString *)path {
-	[pathComponents addObject:path];
+	isAtRoot = [self.delegate isAtRootForPathBar:self];
+	[backButton setHidden:isAtRoot];
+	[pathLabel setText:[self.delegate currentDirectory]];
 }
 
 - (void)setRoot:(NSString *)root {
@@ -44,8 +68,17 @@
 - (void)layoutSubviews {
 	[super layoutSubviews];
 	
-	const CGFloat pathLabelPadding = 5.0f;
-	[pathLabel setFrame:CGRectMake(pathLabelPadding, 0, self.frame.size.width - 2*pathLabelPadding, self.frame.size.height)];
+	CGFloat leftOffsetUsed = 0.0f;
+	
+	const CGFloat genericHorizontalPadding = 5.0f;
+	const CGFloat genericVerticalPadding = 0.0f;
+	
+	if (!isAtRoot) {
+		[backButton setFrame:CGRectMake(genericHorizontalPadding, genericVerticalPadding, 84.0f, self.frame.size.height - 2*genericVerticalPadding)];
+		leftOffsetUsed += backButton.frame.size.width + backButton.frame.origin.x;
+	}
+	
+	[pathLabel setFrame:CGRectMake(leftOffsetUsed + genericHorizontalPadding + genericHorizontalPadding, genericVerticalPadding, (self.frame.size.width - (leftOffsetUsed + genericHorizontalPadding + genericHorizontalPadding + genericHorizontalPadding)), self.frame.size.height - 2*genericVerticalPadding)];
 }
 
 @end

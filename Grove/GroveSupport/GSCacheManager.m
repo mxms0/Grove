@@ -77,13 +77,18 @@
 
 - (void)_downloadResourceWithURL:(NSURL *)url user:(GSUser *)user completionHandler:(void (^)(NSURL *path, NSError *error))handler {
 	[[GSNetworkManager sharedInstance] downloadResourceFromURL:url token:user.token completionHandler:^(NSURL *filePath, NSError *error) {
-		NSURL *urlPath = [self _workingDirectoryForToken:user.token];
-		NSURL *targetPath = [urlPath URLByAppendingPathComponent:GSMD5HashFromString([url absoluteString])];
-		if ([self _moveFileFromPath:filePath toPath:targetPath]) {
-			handler(targetPath, error);
+		if (error) {
+			handler(nil, error);
 		}
 		else {
-			GSAssert();
+			NSURL *urlPath = [self _workingDirectoryForToken:user.token];
+			NSURL *targetPath = [urlPath URLByAppendingPathComponent:GSMD5HashFromString([url absoluteString])];
+			if ([self _moveFileFromPath:filePath toPath:targetPath]) {
+				handler(targetPath, error);
+			}
+			else {
+				GSAssert();
+			}
 		}
 	}];
 }

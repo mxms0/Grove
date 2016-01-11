@@ -15,6 +15,7 @@
 	NSMutableArray *currentDirectoryComponents;
 	__block NSArray<GSRepositoryEntry *> *contents;
 	__strong GSRepositoryTree *directoryTree;
+	NSMutableDictionary *directoryContentCache;
 	BOOL hasCompleteTree;
 	BOOL requestedCompleteTree;
 }
@@ -23,6 +24,7 @@
 	if ((self = [super init])) {
 		repository = repo;
 		currentDirectoryComponents = [[NSMutableArray alloc] init];
+		directoryContentCache = [[NSMutableDictionary alloc] init];
 	}
 	return self;
 }
@@ -44,12 +46,20 @@
 	}];
 }
 
+- (BOOL)isAtRootDirectory {
+	return ([[self _currentDirectoryAsString] length] == 0);
+}
+
+- (NSString *)currentDirectory {
+	return [self _currentDirectoryAsString];
+}
+
 - (NSString *)_currentDirectoryAsString {
 	NSString *directory = nil;
 	@synchronized(currentDirectoryComponents) {
 		directory = [currentDirectoryComponents componentsJoinedByString:@"/"];
 	}
-	NSLog(@"fds %@", directory);
+	
 	return directory;
 }
 
@@ -65,12 +75,14 @@
 		case GSRepositoryEntryTypeSymlink:
 		case GSRepositoryEntryTypeUnknown:
 		default:
+			NSLog(@"Not prepared to handle file %@", entry);
 			break;
 	}
 }
 
 - (void)_pushNewDirectoryWithEntry:(GSRepositoryEntry *)entry {
 	[currentDirectoryComponents addObject:entry.name];
+	[self.pathBar pushPath:entry.name];
 	if (hasCompleteTree) {
 		contents = [directoryTree entriesForPath:[self _currentDirectoryAsString]];
 		[self.delegate pushToNewDirectory];
@@ -82,14 +94,26 @@
 	}
 }
 
+- (void)_popCurrentDirectoryItem {
+	[currentDirectoryComponents removeLastObject];
+	if (hasCompleteTree) {
+		contents = [directoryTree entriesForPath:[self _currentDirectoryAsString]];
+	}
+	else {
+		contents = [directoryContentCache objectForKey:[self _currentDirectoryAsString]];
+	}
+	
+	[self.delegate pushToPreviousDirectory];
+}
+
 - (void)requestNewData {
-	[[GSGitHubEngine sharedInstance] repositoryContentsForRepository:repository atPath:[self _currentDirectoryAsString] recurse:NO completionHandler:^(GSRepositoryTree *_Nullable items, NSError * _Nullable error) {
+	[[GSGitHubEngine sharedInstance] repositoryContentsForRepository:repository atPath:[self _currentDirectoryAsString] recurse:NO completionHandler:^(GSRepositoryTree *_Nullable tree, NSError * _Nullable error) {
 		if (error) {
 			GSAssert();
 		}
 		else {
-			NSLog(@"Ff %@", items);
-			contents = [items rootEntries];
+			contents = [tree rootEntries];
+			[directoryContentCache setObject:contents forKey:[self _currentDirectoryAsString]];
 			[self updateViewWithNewData];
 		}
 	}];
@@ -108,6 +132,18 @@
 
 - (NSUInteger)numberOfItemsInCurrentDirectory {
 	return [contents count];
+}
+
+- (BOOL)isAtRootForPathBar:(GRRepositoryPathBar *)bar {
+	return [self isAtRootDirectory];
+}
+
+- (void)popPathForPathBar:(GRRepositoryPathBar *)bar {
+	[self _popCurrentDirectoryItem];
+}
+
+- (void)popToRootForPathBar:(GRRepositoryPathBar *)bar {
+
 }
 
 @end
