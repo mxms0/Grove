@@ -110,7 +110,7 @@
 - (void)sendDataRequest:(NSURLRequest *)request completionHandler:(void (^)(GSSerializable *response, NSError *error))handler {
 
 	void (^dataHandler)(NSData *data, NSURLResponse *response, NSError *error) = ^(NSData *data, NSURLResponse *response, NSError *responseError) {
-#if 0
+#if 1
 		NSLog(@"Request:%@ Response: %@", request, response);
 #endif
 		NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response; // put safety checks here. albeit unlikely
@@ -167,7 +167,12 @@
 				break;
 			}
 			case 403: {
-				error = responseError;
+				if (!error) {
+					// this is most likely API rate limit exceeded... ;_; make new error
+				}
+				else {
+					error = responseError;
+				}
 				break;
 			}
 			case 404: {
