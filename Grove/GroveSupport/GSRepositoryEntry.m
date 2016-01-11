@@ -32,7 +32,7 @@
 }
 
 - (NSString *)description {
-	return [NSString stringWithFormat:@"<%@: %p; Name = %@; Path = %@;>", NSStringFromClass([self class]), self, _name, _path];
+	return [NSString stringWithFormat:@"<%@: %p; name = %@; path = %@;>", NSStringFromClass([self class]), self, _name, _path];
 }
 
 - (GSRepositoryEntryType)_entryTypeForString:(NSString *)str {

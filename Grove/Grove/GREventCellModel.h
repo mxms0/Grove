@@ -14,6 +14,7 @@
 - (nonnull instancetype)initWithEvent:(GSEvent *__nonnull)event;
 
 - (nonnull NSAttributedString *)eventString;
+- (nonnull NSString *)username;
 - (nonnull UIImage *)imageIcon;
 - (nonnull NSString *)dateStringFromEvent;
 @end

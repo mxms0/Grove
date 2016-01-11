@@ -199,7 +199,7 @@
 	};
 	
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^ {
-		// I don't like this.
+		// this probably isn't necessary anymore.
 		NSURLSessionDataTask *task = [currentSession dataTaskWithRequest:request completionHandler:dataHandler];
 		[task resume];
 	});

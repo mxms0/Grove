@@ -17,7 +17,7 @@
     UIImageView *imageView;
     UILabel *titleLabel;
     UILabel *timeLabel;
-    UILabel *repoLabel;
+	UILabel *usernameLabel;
     
     GREventCellModel *eventModel;
 }
@@ -28,64 +28,70 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         //Initialize Variables
-        imageView   = [[UIImageView alloc] initWithFrame:CGRectZero];
-        titleLabel  = [[UILabel alloc] initWithFrame:CGRectZero];
-        timeLabel   = [[UILabel alloc] initWithFrame:CGRectZero];
-        repoLabel   = [[UILabel alloc] initWithFrame:CGRectZero];
+        imageView		= [[UIImageView alloc] initWithFrame:CGRectZero];
+        titleLabel		= [[UILabel alloc] initWithFrame:CGRectZero];
+        timeLabel		= [[UILabel alloc] initWithFrame:CGRectZero];
+        usernameLabel	= [[UILabel alloc] initWithFrame:CGRectZero];
         
         //Set Properties
         [imageView setContentMode:UIViewContentModeScaleAspectFit];
+		[imageView setBackgroundColor:[UIColor blackColor]];
+		[imageView.layer setCornerRadius:2.0f];
+		[imageView.layer setMasksToBounds:YES];
         [titleLabel setLineBreakMode:NSLineBreakByWordWrapping];
         [titleLabel setNumberOfLines:0];
+		[titleLabel setFont:[UIFont systemFontOfSize:13]];
         [timeLabel setFont:[UIFont systemFontOfSize:13]];
         [timeLabel setTextColor:[UIColor darkGrayColor]];
         [timeLabel setTextAlignment:NSTextAlignmentRight];
+		
+		[usernameLabel setFont:[UIFont boldSystemFontOfSize:13]];
         
         //Add Views
-        for (UIView *view in @[imageView, titleLabel, repoLabel, timeLabel]) {
+        for (UIView *view in @[imageView, titleLabel, usernameLabel, timeLabel]) {
             [self.contentView addSubview:view];
         }
-        
-        //Set Constraints
-        [imageView makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.equalTo(self.contentView);
-            make.left.equalTo(self.contentView).offset(5);
-            make.top.equalTo(self.contentView).offset(30);
-            make.bottom.equalTo(self.contentView).offset(-30);
-            make.height.equalTo(imageView.width);
-        }];
-        [titleLabel makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(timeLabel.bottom).offset(4);
-            make.left.equalTo(imageView.right).offset(7);
-            make.right.equalTo(self.contentView).offset(-20);
-            make.bottom.equalTo(repoLabel.top).offset(-7);
-        }];
-        [repoLabel makeConstraints:^(MASConstraintMaker *make) {
-            make.bottom.equalTo(self.contentView).offset(-4);
-            make.left.equalTo(titleLabel);
-            make.right.equalTo(titleLabel).offset(-5);
-            make.height.equalTo(@18);
-        }];
-        [timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.contentView).offset(3);
-            make.right.equalTo(self.contentView).offset(-3);
-            make.height.equalTo(@10);
-            make.width.equalTo(@65);
-        }];
     }
     return self;
 }
 
 - (void)layoutSubviews {
     [super layoutSubviews];
+	
+	CGFloat leftOffsetUsed = 0.0f;
+	CGFloat verticalOffsetUsed = 0.0f;
+	CGFloat genericHorizontalPadding = 10.0f;
+	CGFloat genericVerticalPadding = 10.0f;
+	
+	leftOffsetUsed += genericHorizontalPadding;
+	
+	const CGFloat avatarSize = 55.0f;
+	
+	[imageView setFrame:CGRectMake(leftOffsetUsed, genericVerticalPadding, avatarSize, avatarSize)];
+	
+	leftOffsetUsed += imageView.frame.size.width;
+	
+	leftOffsetUsed += genericHorizontalPadding;
+	
+	verticalOffsetUsed += genericVerticalPadding;
+	
+	[usernameLabel setFrame:CGRectMake(leftOffsetUsed, verticalOffsetUsed, self.frame.size.width - (leftOffsetUsed + genericHorizontalPadding), 13)];
+	
+	verticalOffsetUsed += usernameLabel.frame.size.height;
+	
+	verticalOffsetUsed += floorf(genericVerticalPadding / 2);
+	
+	[titleLabel setFrame:CGRectMake(leftOffsetUsed, verticalOffsetUsed, self.frame.size.width - (leftOffsetUsed + genericHorizontalPadding), 40)];
+	[titleLabel sizeToFit];
 }
-
 
 - (void)configureWithEventModel:(GREventCellModel *)event; {
     eventModel = event;
     
     [timeLabel setText:[event dateStringFromEvent]];
     [titleLabel setAttributedText:[event eventString]];
+	[usernameLabel setText:[event username]];
+	[imageView setImage:[event imageIcon]];
 //	[repoLabel setText:eventModel.event.repository.name];
 //	[imageView setImage:[event imageIcon]];
 }

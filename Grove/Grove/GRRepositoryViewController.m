@@ -62,8 +62,7 @@ static CGFloat GRHeaderSizeRatio = .10f;
 	
 	[header setFrame:CGRectMake(0, GRStatusBarHeight(), self.view.frame.size.width, ceilf(self.view.frame.size.height * GRHeaderSizeRatio))];
 	
-	[fileBrowser setFrame:CGRectMake(0, header.frame.origin.y + header.frame.size.height, self.view.frame.size.width, self.view.frame.size.height - header.frame.size.height)];
-	
+	[fileBrowser setFrame:CGRectMake(0, header.frame.origin.y + header.frame.size.height, self.view.frame.size.width, self.view.frame.size.height - (header.frame.size.height + header.frame.origin.y))];	
 }
 
 - (void)dealloc {
