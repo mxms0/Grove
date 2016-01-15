@@ -120,6 +120,7 @@
 			handler(image, nil);
 		}
 		else {
+			// likely can't read from disk. 
 			GSAssert();
 		}
 	}

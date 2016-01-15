@@ -9,6 +9,7 @@
 #import "GRRepositoryViewController.h"
 #import "GRRepositoryHeaderView.h"
 #import "GRRepositoryFileBrowserView.h"
+#import "GRRepositoryViewSelector.h"
 
 #import <GroveSupport/GroveSupport.h>
 
@@ -16,6 +17,7 @@ static CGFloat GRHeaderSizeRatio = .10f;
 
 @implementation GRRepositoryViewController {
 	GRRepositoryHeaderView *header;
+	GRRepositoryViewSelector *viewSelector;
 	GRRepositoryFileBrowserView *fileBrowser;
 
 }
@@ -24,6 +26,8 @@ static CGFloat GRHeaderSizeRatio = .10f;
 	if ((self = [super init])) {
 		header = [[GRRepositoryHeaderView alloc] init];
 		[header setBackgroundColor:GSRandomUIColor()];
+		
+		viewSelector = [[GRRepositoryViewSelector alloc] init];
 		
 		fileBrowser = [[GRRepositoryFileBrowserView alloc] init];
 		// Notes about this view:
@@ -52,7 +56,7 @@ static CGFloat GRHeaderSizeRatio = .10f;
 - (void)viewDidLoad {
 	[super viewDidLoad];
 
-	for (UIView *v in @[header, fileBrowser]) {
+	for (UIView *v in @[header, fileBrowser, viewSelector]) {
 		[self.view addSubview:v];
 	}
 }
@@ -60,9 +64,17 @@ static CGFloat GRHeaderSizeRatio = .10f;
 - (void)viewWillLayoutSubviews {
 	[super viewWillLayoutSubviews];
 	
-	[header setFrame:CGRectMake(0, GRStatusBarHeight(), self.view.frame.size.width, ceilf(self.view.frame.size.height * GRHeaderSizeRatio))];
+	CGFloat verticalOffsetUsed = GRStatusBarHeight();
 	
-	[fileBrowser setFrame:CGRectMake(0, header.frame.origin.y + header.frame.size.height, self.view.frame.size.width, self.view.frame.size.height - (header.frame.size.height + header.frame.origin.y))];	
+	[header setFrame:CGRectMake(0, verticalOffsetUsed, self.view.frame.size.width, ceilf(self.view.frame.size.height * GRHeaderSizeRatio))];
+	
+	verticalOffsetUsed += header.frame.size.height;
+	
+	[viewSelector setFrame:CGRectMake(0, verticalOffsetUsed, self.view.frame.size.width, 44.0f)];
+	
+	verticalOffsetUsed += viewSelector.frame.size.height;
+	
+	[fileBrowser setFrame:CGRectMake(0, verticalOffsetUsed, self.view.frame.size.width, self.view.frame.size.height - verticalOffsetUsed)];
 }
 
 - (void)dealloc {
