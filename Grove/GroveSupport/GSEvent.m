@@ -14,7 +14,7 @@
 - (void)_configureWithDictionary:(NSDictionary *)dictionary {
 	[super _configureWithDictionary:dictionary];
 	
-#if 0
+#if 1
 	NSLog(@"Event information %@", dictionary);
 #endif
 	
@@ -45,6 +45,9 @@
 	
 	GSObjectAssign(payload, @"comment", _comment, GSComment);
 	GSObjectAssign(payload, @"issue", _issue, GSIssue);
+	GSObjectAssign(payload, @"member", _member, GSUser);
+	// this is an issue wherever member is an organization
+	// organizations aren't handled properly, pretty much anywhere.
 	
 	GSObjectAssign(payload, @"forkee", _forkee, GSRepository);
 	

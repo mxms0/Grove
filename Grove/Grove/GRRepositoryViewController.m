@@ -16,10 +16,10 @@
 static CGFloat GRHeaderSizeRatio = .10f;
 
 @implementation GRRepositoryViewController {
+	
 	GRRepositoryHeaderView *header;
 	GRRepositoryViewSelector *viewSelector;
 	GRRepositoryFileBrowserView *fileBrowser;
-
 }
 
 - (instancetype)init {

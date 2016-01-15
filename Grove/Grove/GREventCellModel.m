@@ -51,10 +51,9 @@
 	
 	switch (self.event.type) {
 		case GSEventTypeFork: {
-			NSAttributedString *user = [[NSAttributedString alloc] initWithString:self.event.actor.username attributes:@{NSFontAttributeName : regularFont}];
 			NSAttributedString *message = [[NSAttributedString alloc] initWithString:@"Forked " attributes:@{NSFontAttributeName : regularFont}];
 			NSAttributedString *cp1 = [[NSAttributedString alloc] initWithString:self.event.repository.pathString attributes:@{NSFontAttributeName: regularFont}];
-			[components addObjectsFromArray:@[user, message, cp1]];
+			[components addObjectsFromArray:@[message, cp1]];
 			break;
 		}
 		case GSEventTypeCommitComment:
@@ -118,7 +117,7 @@
 		case GSEventTypeIssues:
 		case GSEventTypeMember: {
 			NSAttributedString *verb = nil;
-			NSAttributedString *person = [[NSAttributedString alloc] initWithString:@"<person>" attributes:nil];
+			NSAttributedString *person = [[NSAttributedString alloc] initWithString:self.event.member.username attributes:nil];
 			NSAttributedString *prep = nil;
 			NSAttributedString *destination = [[NSAttributedString alloc] initWithString:self.event.repository.pathString attributes:nil];
 			switch ([self.event action]) {
