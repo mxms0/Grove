@@ -41,7 +41,7 @@
         [titleLabel setLineBreakMode:NSLineBreakByWordWrapping];
         [titleLabel setNumberOfLines:0];
 		[titleLabel setFont:[UIFont systemFontOfSize:13]];
-        [timeLabel setFont:[UIFont systemFontOfSize:13]];
+        [timeLabel setFont:[UIFont systemFontOfSize:11]];
         [timeLabel setTextColor:[UIColor darkGrayColor]];
         [timeLabel setTextAlignment:NSTextAlignmentRight];
 		
@@ -55,6 +55,10 @@
     return self;
 }
 
+- (void)setAvatar:(UIImage *)image {
+	[imageView setImage:image];
+}
+
 - (void)layoutSubviews {
     [super layoutSubviews];
 	
@@ -65,7 +69,7 @@
 	
 	leftOffsetUsed += genericHorizontalPadding;
 	
-	const CGFloat avatarSize = 55.0f;
+	const CGFloat avatarSize = 35.0f;
 	
 	[imageView setFrame:CGRectMake(leftOffsetUsed, genericVerticalPadding, avatarSize, avatarSize)];
 	
@@ -83,6 +87,8 @@
 	
 	[titleLabel setFrame:CGRectMake(leftOffsetUsed, verticalOffsetUsed, self.frame.size.width - (leftOffsetUsed + genericHorizontalPadding), 40)];
 	[titleLabel sizeToFit];
+	
+	[timeLabel setFrame:CGRectMake((self.frame.size.width - genericHorizontalPadding - 55.0f), genericVerticalPadding, 55.0f, 13)];
 }
 
 - (void)configureWithEventModel:(GREventCellModel *)event; {

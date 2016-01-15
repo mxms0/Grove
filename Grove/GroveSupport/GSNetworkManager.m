@@ -157,6 +157,7 @@
 				break;
 			}
 			case 401: {
+				NSLog(@"401: %@", data);
 				NSMutableDictionary *errorInfo = [@{NSLocalizedDescriptionKey: @"Not Authorized."} mutableCopy];
 				NSString *authEtc = [[httpResponse allHeaderFields] objectForKey:GSHTTPTwoFactorAuthHeaderKey];
 				if (authEtc) {
@@ -168,6 +169,8 @@
 			}
 			case 403: {
 				if (!error) {
+					// check X-RateLimit-Remaining HTTP header.
+					NSLog(@"[403] %@", data);
 					// this is most likely API rate limit exceeded... ;_; make new error
 				}
 				else {

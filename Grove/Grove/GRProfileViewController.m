@@ -106,7 +106,6 @@
 			reuseIdentifier = @"repositoryCell";
 			GSRepository *repo = [model repositoryForIndex:indexPath.row];
 			textContent = repo.name;
-			NSLog(@"%@:%@", model, repo);
 			break;
 		}
 		case 2:

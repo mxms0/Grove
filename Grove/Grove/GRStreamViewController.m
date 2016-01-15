@@ -70,6 +70,8 @@ static NSString *reuseIdentifier = @"reuseIdentifier";
     if (!cell) {
         cell = [[GRStreamEventCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
     }
+	GREventCellModel *cellModel = [model eventCellModelForIndexPath:indexPath];
+	[cellModel setTableCell:cell];
     [cell configureWithEventModel:[model eventCellModelForIndexPath:indexPath]];
     return cell;
 }
@@ -77,7 +79,7 @@ static NSString *reuseIdentifier = @"reuseIdentifier";
 #pragma mark - TableView Delegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 75;
+    return 55;
 }
 
 - (void)tableView:(UITableView *)aTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

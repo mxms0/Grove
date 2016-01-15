@@ -13,6 +13,8 @@
 #import "GSUtilities.h"
 #import "GSNetworkManager.h"
 
+#include <sys/stat.h>
+
 @implementation GSCacheManager {
 	NSMutableDictionary *tokenDirectoryMap;
 }
@@ -62,7 +64,7 @@
 		[[NSUserDefaults standardUserDefaults] synchronize];
 	}
 
-	return [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingPathComponent:extension]];;
+	return [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingPathComponent:extension]];
 }
 
 - (NSURL *)_createWorkingDirectoryForToken:(NSString *)token {
@@ -107,15 +109,15 @@
 - (void)findImageAssetWithURL:(NSURL *)url loggedInUser:(GSUser *)user downloadIfNecessary:(BOOL)download completionHandler:(void (^)(UIImage *image, NSError *error))handler {
 	NSURL *directory = [self _workingDirectoryForToken:user.token];
 	NSURL *assetPath = [directory URLByAppendingPathComponent:GSMD5HashFromString([url absoluteString])];
-
-	if ([[NSFileManager defaultManager] fileExistsAtPath:assetPath.absoluteString]) {
+	NSString *properAssetPath = [assetPath relativePath];
+	
+	if ([[NSFileManager defaultManager] fileExistsAtPath:properAssetPath]) {
 		NSLog(@"woo file exists.");
 		// leaving this log because never verified this works,
 		// especially being that acccess(..., F_OK) hates me (or iOS' sandbox...) [or both...]
-		UIImage *image = [UIImage imageWithContentsOfFile:[assetPath absoluteString]];
+		UIImage *image = [UIImage imageWithContentsOfFile:properAssetPath];
 		if (image) {
 			handler(image, nil);
-			return;
 		}
 		else {
 			GSAssert();
@@ -125,7 +127,7 @@
 		if (download) {
 			[self _downloadResourceWithURL:url user:user completionHandler:^(NSURL *filePath, NSError *error) {
 				if (filePath) {
-					//					UIImage *image = [UIImage imageWithContentsOfFile:filePath.absoluteString]; // null everytime. k
+//					UIImage *image = [UIImage imageWithContentsOfFile:filePath.absoluteString]; // null everytime. k
 					NSData *data = [NSData dataWithContentsOfURL:filePath];
 					if (data) {
 						handler([UIImage imageWithData:data], nil);
@@ -138,14 +140,11 @@
 					GSAssert();
 				}
 			}];
-			
-			return;
 		}
 	}
-	GSAssert();
 }
 
-- (void)findUserAvatarFromActor:(GSActor *__nonnull)user downloadIfNecessary:(BOOL)necessary completionHandler:(void (^__nonnull)(UIImage *__nullable image, NSError *__nullable error))handler {
+- (void)findAvatarForActor:(GSActor *__nonnull)user downloadIfNecessary:(BOOL)necessary completionHandler:(void (^__nonnull)(UIImage *__nullable image, NSError *__nullable error))handler {
 	
 	NSURL *avatarURL = user.avatarURL;
 

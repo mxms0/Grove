@@ -11,4 +11,5 @@
 @class GSEvent, GREventCellModel;
 @interface GRStreamEventCell : UITableViewCell
 - (void)configureWithEventModel:(GREventCellModel *)event;
+- (void)setAvatar:(UIImage *)image;
 @end

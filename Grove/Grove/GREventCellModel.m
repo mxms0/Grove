@@ -9,6 +9,7 @@
 #import "GREventCellModel.h"
 #import "GSEvent.h"
 #import "NSAttributedString+GRExtensions.h"
+#import "GRStreamEventCell.h"
 
 @implementation GREventCellModel {
 	NSAttributedString *attributedMessage;
@@ -19,9 +20,11 @@
 	if ((self = [super init])) {
 		self.event = event;
 		
-		[[GSCacheManager sharedInstance] findUserAvatarFromActor:self.event.actor downloadIfNecessary:YES completionHandler:^(UIImage *image, NSError *error) {
+		[[GSCacheManager sharedInstance] findAvatarForActor:self.event.actor downloadIfNecessary:YES completionHandler:^(UIImage *image, NSError *error) {
 			avatar = image;
-			RELOAD_VIEW(GRStreamViewControllerNotificationKey);
+			dispatch_async(dispatch_get_main_queue(), ^ {
+				[self.tableCell setAvatar:avatar];
+			});
 		}];
 	}
 	return self;
