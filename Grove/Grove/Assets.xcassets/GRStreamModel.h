@@ -12,7 +12,7 @@
 @class GSEvent, GREventCellModel;
 
 @interface GRStreamModel : GRViewModel
-
+- (void)requestNewData;
 - (NSInteger)numberOfSections;
 - (NSInteger)numberOfRowsInSection:(NSInteger)section;
 - (GREventCellModel *)eventCellModelForIndexPath:(NSIndexPath *)indexPath;

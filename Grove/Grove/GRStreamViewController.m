@@ -17,8 +17,8 @@
 static NSString *reuseIdentifier = @"reuseIdentifier";
 
 @implementation GRStreamViewController {
-    UITableView *tableView;
     GRStreamModel *model;
+	UIRefreshControl *refreshControl;
 }
 
 #pragma mark - Initializers
@@ -26,33 +26,27 @@ static NSString *reuseIdentifier = @"reuseIdentifier";
 - (instancetype)init {
     self = [super init];
     if (self) {
-        //Initialze Variables
-        tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         model = [[GRStreamModel alloc] init];
-        
-        //Set Properties
+		
         [model setDelegate:self];
-        [tableView setDataSource:self];
-        [tableView setDelegate:self];
-        [tableView registerClass:[GRStreamEventCell class] forCellReuseIdentifier:reuseIdentifier];
-        
-        //Add Subviews
-        for (UIView *view in @[tableView]) {
-            [self.view addSubview:view];
-        }
-
-        //Set Constraints
-        [tableView makeConstraints:^(MASConstraintMaker *make) {
-            make.edges.equalTo(self.view);
-        }];
+		
+		[self.tableView registerClass:[GRStreamEventCell class] forCellReuseIdentifier:reuseIdentifier];
+		
+		refreshControl = [[UIRefreshControl alloc] init];
+		[refreshControl addTarget:self action:@selector(refreshTableView:) forControlEvents:UIControlEventValueChanged];
+		[self.tableView addSubview:refreshControl];
 		
 		REGISTER_RELOAD_VIEW(GRStreamViewControllerNotificationKey);
     }
     return self;
 }
 
+- (void)refreshTableView:(UIRefreshControl *)control {
+	[model requestNewData];
+}
+
 - (void)_reloadNotification {
-	[tableView reloadData];
+	[self.tableView reloadData];
 }
 
 #pragma mark - TableView Datasource
@@ -94,7 +88,8 @@ static NSString *reuseIdentifier = @"reuseIdentifier";
 	// this is a temporary solution
 	// perhaps make GSGitHubEngine function only on one thread
 	dispatch_async(dispatch_get_main_queue(), ^ {
-		[tableView reloadData];
+		[refreshControl endRefreshing];
+		[self.tableView reloadData];
 	});
 }
 
