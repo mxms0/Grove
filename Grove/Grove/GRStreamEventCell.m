@@ -88,7 +88,7 @@
 	[titleLabel setFrame:CGRectMake(leftOffsetUsed, verticalOffsetUsed, self.frame.size.width - (leftOffsetUsed + genericHorizontalPadding), 40)];
 	[titleLabel sizeToFit];
 	
-	[timeLabel setFrame:CGRectMake((self.frame.size.width - genericHorizontalPadding - 55.0f), genericVerticalPadding, 55.0f, 13)];
+	[timeLabel setFrame:CGRectMake((self.frame.size.width - genericHorizontalPadding - 75.0f), genericVerticalPadding, 75.0f, 13)];
 }
 
 - (void)configureWithEventModel:(GREventCellModel *)event; {

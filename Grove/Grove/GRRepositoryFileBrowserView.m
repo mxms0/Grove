@@ -13,25 +13,9 @@
 #import <GroveSupport/GroveSupport.h>
 
 @implementation GRRepositoryFileBrowserView {
-	GRRepositoryFileBrowserModel *model;
 	UIActivityIndicatorView *loadingIndicator;
 	GRRepositoryPathBar *pathBar;
 	UITableView *directoryTableView;
-}
-
-- (instancetype)initWithRepository:(GSRepository *)repo {
-	if ((self = [super init])) {
-		[self setRepository:repo];
-		[self commonInit];
-	}
-	return self;
-}
-
-- (instancetype)init {
-	if ((self = [super init])) {
-		[self commonInit];
-	}
-	return self;
 }
 
 - (void)commonInit {
@@ -52,7 +36,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	return [model numberOfItemsInCurrentDirectory];
+	return [(GRRepositoryFileBrowserModel *)model numberOfItemsInCurrentDirectory];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -69,7 +53,7 @@
 		cell = [[GRRepositoryFileBrowserEntryCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"c"];
 	}
 	
-	GSRepositoryEntry *entry = [model repositoryEntryForIndex:indexPath.row];
+	GSRepositoryEntry *entry = [(GRRepositoryFileBrowserModel *)model repositoryEntryForIndex:indexPath.row];
 	
 	[cell configureWithEntry:entry];
 	
@@ -78,19 +62,18 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
-	[model pushItemFromIndexPath:indexPath];
+	[(GRRepositoryFileBrowserModel *)model pushItemFromIndexPath:indexPath];
+}
+
+- (Class)designatedModelClass {
+	return [GRRepositoryFileBrowserModel class];
 }
 
 - (void)setRepository:(GSRepository *)repo {
-	if (!repo) {
-		model = nil;
-		return;
-	}
-	model = [[GRRepositoryFileBrowserModel alloc] initWithRepository:repo];
-	[model setDelegate:self];
-	[model update];
-	[pathBar setDelegate:model];
-	[model setPathBar:pathBar];
+	[super setRepository:repo];
+
+	[pathBar setDelegate:(GRRepositoryFileBrowserModel *)model];
+	[(GRRepositoryFileBrowserModel *)model setPathBar:pathBar];
 }
 
 - (void)presentLoadingIndicator {

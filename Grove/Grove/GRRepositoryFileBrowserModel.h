@@ -8,11 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+#import "GRRepositoryGenericSectionModel.h"
 #import "GRRepositoryPathBar.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol GRRepositoryFileBrowserModelDelegate <NSObject>
+@protocol GRRepositoryFileBrowserModelDelegate <GRRepositoryGenericSectionModelDelegate>
 // this is muy importante
 - (void)prepareForLayout;
 - (void)presentLoadingIndicator;
@@ -22,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @class GSRepository, GSRepositoryEntry;
-@interface GRRepositoryFileBrowserModel : NSObject <GRRepositoryPathBarDelegate>
+@interface GRRepositoryFileBrowserModel : GRRepositoryGenericSectionModel <GRRepositoryPathBarDelegate>
 @property (nonatomic, weak, nullable) id <GRRepositoryFileBrowserModelDelegate> delegate;
 @property (nonatomic, weak) GRRepositoryPathBar *pathBar;
 - (instancetype)initWithRepository:(GSRepository *)repo;

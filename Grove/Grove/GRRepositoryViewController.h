@@ -7,8 +7,9 @@
 //
 
 #import "GRViewController.h"
+#import "GRRepositoryViewSelector.h"
 
 @class GSRepository;
-@interface GRRepositoryViewController : GRViewController
+@interface GRRepositoryViewController : GRViewController <GRRepositoryViewSelectorDelegate>
 @property (nonatomic, weak) GSRepository *repository;
 @end

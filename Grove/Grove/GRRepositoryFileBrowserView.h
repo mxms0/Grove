@@ -8,13 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "GRRepositoryFileBrowserModel.h"
+#import "GRRepositoryGenericSectionView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @class GSRepository;
-@interface GRRepositoryFileBrowserView : UIView <GRRepositoryFileBrowserModelDelegate, UITableViewDataSource, UITableViewDelegate>
-@property (nonatomic, strong, nullable, setter=setRepository:) GSRepository *repository;
-- (instancetype)initWithRepository:(GSRepository *)repo;
+@interface GRRepositoryFileBrowserView : GRRepositoryGenericSectionView <GRRepositoryFileBrowserModelDelegate, UITableViewDataSource, UITableViewDelegate>
 @end
 
 NS_ASSUME_NONNULL_END

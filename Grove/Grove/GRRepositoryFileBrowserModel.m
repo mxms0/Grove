@@ -19,6 +19,7 @@
 	BOOL hasCompleteTree;
 	BOOL requestedCompleteTree;
 }
+@dynamic delegate;
 
 - (instancetype)initWithRepository:(GSRepository *)repo {
 	if ((self = [super init])) {

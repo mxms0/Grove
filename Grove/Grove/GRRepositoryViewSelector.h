@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 typedef NS_ENUM(NSInteger, GRRepositoryViewSelectorType) {
+	GRRepositoryViewSelectorTypeInfoView,
 	GRRepositoryViewSelectorTypeCodeView,
 	GRRepositoryViewSelectorTypeIssuesView,
 	GRRepositoryViewSelectorTypePullRequestsView,

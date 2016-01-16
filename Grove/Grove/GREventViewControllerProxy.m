@@ -85,7 +85,9 @@
             break;
         }
         case GSEventTypeMember: {
-            
+			self = (GREventViewControllerProxy *)[[GRRepositoryViewController alloc] init];
+			GSRepository *repository = [event repository];
+			[(GRRepositoryViewController *)self setRepository:repository];
             break;
         }
         case GSEventTypeMembership: {
