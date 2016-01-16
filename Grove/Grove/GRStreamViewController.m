@@ -19,6 +19,7 @@ static NSString *reuseIdentifier = @"reuseIdentifier";
 @implementation GRStreamViewController {
     GRStreamModel *model;
 	UIRefreshControl *refreshControl;
+	BOOL attemptingRefresh;
 }
 
 #pragma mark - Initializers
@@ -34,14 +35,29 @@ static NSString *reuseIdentifier = @"reuseIdentifier";
 		
 		refreshControl = [[UIRefreshControl alloc] init];
 		[refreshControl addTarget:self action:@selector(refreshTableView:) forControlEvents:UIControlEventValueChanged];
-		[self.tableView addSubview:refreshControl];
+		
+		[self setRefreshControl:refreshControl];
 		
 		REGISTER_RELOAD_VIEW(GRStreamViewControllerNotificationKey);
     }
     return self;
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+	[super viewWillAppear:animated];
+	if (!attemptingRefresh) {
+		[refreshControl endRefreshing];
+	}
+	else {
+		[refreshControl endRefreshing];
+		[refreshControl beginRefreshing];
+		[self.tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
+		// UIRefreshControl is actually broken.
+	}
+}
+
 - (void)refreshTableView:(UIRefreshControl *)control {
+	attemptingRefresh = YES;
 	[model requestNewData];
 }
 
@@ -88,6 +104,7 @@ static NSString *reuseIdentifier = @"reuseIdentifier";
 	// this is a temporary solution
 	// perhaps make GSGitHubEngine function only on one thread
 	dispatch_async(dispatch_get_main_queue(), ^ {
+		attemptingRefresh = NO;
 		[refreshControl endRefreshing];
 		[self.tableView reloadData];
 	});
