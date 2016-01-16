@@ -9,18 +9,29 @@
 #import "GRRepositoryViewSelector.h"
 
 @implementation GRRepositoryViewSelector {
-	UILabel *currentViewLabel;
 	GRRepositoryViewSelectorType currentViewType;
+	UIButton *infoButton;
+	UIButton *codeButton;
+	UIButton *issuesButton;
+	UIButton *pullRequestsButton;
 }
 
 - (instancetype)init {
 	if ((self = [super init])) {
-		currentViewType = GRRepositoryViewSelectorTypeCodeView;
-		currentViewLabel = [[UILabel alloc] init];
-		[currentViewLabel setTextAlignment:NSTextAlignmentCenter];
-		[currentViewLabel setText:[self _stringForViewType:currentViewType]];
+		currentViewType = GRRepositoryViewSelectorTypeInfoView;
 
-		for (UIView *v in @[currentViewLabel]) {
+		infoButton = [[UIButton alloc] init];
+		codeButton = [[UIButton alloc] init];
+		issuesButton = [[UIButton alloc] init];
+		pullRequestsButton = [[UIButton alloc] init];
+		
+		[infoButton setTitle:@"info" forState:UIControlStateNormal];
+		[codeButton setTitle:@"code" forState:UIControlStateNormal];
+		[issuesButton setTitle:@"issues" forState:UIControlStateNormal];
+		[pullRequestsButton setTitle:@"pr" forState:UIControlStateNormal];
+		
+		for (UIButton *v in @[infoButton, codeButton, issuesButton, pullRequestsButton]) {
+			[v setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
 			[self addSubview:v];
 		}
 	}
@@ -29,7 +40,13 @@
 
 - (void)layoutSubviews {
 	[super layoutSubviews];
-	[currentViewLabel setFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+	int idx = 0;
+	NSArray *buttons = @[infoButton, codeButton, issuesButton, pullRequestsButton];
+	CGFloat buttonWidth = floorf(self.frame.size.width / [buttons count]);
+	for (UIView *btn in buttons) {
+		[btn setFrame:CGRectMake(buttonWidth * idx, 0, buttonWidth, self.frame.size.height)];
+		idx++;
+	}
 }
 
 - (NSString *)_stringForViewType:(GRRepositoryViewSelectorType)type {

@@ -9,17 +9,18 @@
 #import "GRRepositoryViewController.h"
 #import "GRRepositoryHeaderView.h"
 #import "GRRepositoryFileBrowserView.h"
-#import "GRRepositoryViewSelector.h"
+#import "GRRepositoryInfoView.h"
 
 #import <GroveSupport/GroveSupport.h>
 
 static CGFloat GRHeaderSizeRatio = .10f;
 
 @implementation GRRepositoryViewController {
-	
 	GRRepositoryHeaderView *header;
 	GRRepositoryViewSelector *viewSelector;
 	GRRepositoryFileBrowserView *fileBrowser;
+	GRRepositoryInfoView *infoView;
+	UIView *currentSectionView;
 }
 
 - (instancetype)init {
@@ -28,8 +29,11 @@ static CGFloat GRHeaderSizeRatio = .10f;
 		[header setBackgroundColor:GSRandomUIColor()];
 		
 		viewSelector = [[GRRepositoryViewSelector alloc] init];
+		[viewSelector setDelegate:self];
 		
-		fileBrowser = [[GRRepositoryFileBrowserView alloc] init];
+		infoView = [[GRRepositoryInfoView alloc] init];
+		
+		currentSectionView = infoView;
 		// Notes about this view:
 		// Consider perhaps User/Reponame only when its a reasonable length
 		// otherwise Reponame\n User
@@ -44,9 +48,14 @@ static CGFloat GRHeaderSizeRatio = .10f;
 	[_repository addObserver:self forKeyPath:GSUpdatedDateKey options:0 context:NULL];
 	[_repository update];
 	
+	[infoView setRepository:newRepository];
 	[fileBrowser setRepository:newRepository];
 	[header setRepositoryName:_repository.name];
 	[header setRepositoryOwner:_repository.owner.username];
+}
+
+- (void)viewSelector:(GRRepositoryViewSelector *)selector didChangeToViewType:(GRRepositoryViewSelectorType)viewType {
+	
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
@@ -56,7 +65,7 @@ static CGFloat GRHeaderSizeRatio = .10f;
 - (void)viewDidLoad {
 	[super viewDidLoad];
 
-	for (UIView *v in @[header, fileBrowser, viewSelector]) {
+	for (UIView *v in @[header, currentSectionView, viewSelector]) {
 		[self.view addSubview:v];
 	}
 }
@@ -74,7 +83,7 @@ static CGFloat GRHeaderSizeRatio = .10f;
 	
 	verticalOffsetUsed += viewSelector.frame.size.height;
 	
-	[fileBrowser setFrame:CGRectMake(0, verticalOffsetUsed, self.view.frame.size.width, self.view.frame.size.height - verticalOffsetUsed)];
+	[currentSectionView setFrame:CGRectMake(0, verticalOffsetUsed, self.view.frame.size.width, self.view.frame.size.height - verticalOffsetUsed)];
 }
 
 - (void)dealloc {
