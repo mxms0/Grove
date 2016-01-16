@@ -11,8 +11,6 @@
 #import "GRTabBarController.h"
 #import "GRNavigationController.h"
 
-static float animationDuration = 0.4f;
-
 @implementation GRTabBarController {
     GRNavigationController *currentNavigationController;
     UIButton *backButton;
@@ -21,28 +19,8 @@ static float animationDuration = 0.4f;
 #pragma mark - Initializer
 
 - (instancetype)init {
-    self = [super init];
-    if (self) {
-        //Initializers
-        backButton = [[UIButton alloc] initWithFrame:CGRectZero];
-        
-        //Attributes
-        [backButton setBackgroundColor:[UIColor colorWithRed:50/255.0 green:60/255.0 blue:61/255.0 alpha:1.0]];
-        [backButton setTitle:@"Back" forState:UIControlStateNormal];
-        [backButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [backButton addTarget:self action:@selector(popViewcontroller) forControlEvents:UIControlEventTouchUpInside];
-        
-        //Add Subview
-        [self.view addSubview:backButton];
-        
-        //Set Constraints
-        [backButton makeConstraints:^(MASConstraintMaker *make) {
-            make.height.equalTo(self.tabBar);
-            make.left.equalTo(self.view);
-            make.right.equalTo(self.view);
-            make.top.lessThanOrEqualTo(self.view.bottom).offset(0);
-            make.top.greaterThanOrEqualTo(self.view.bottom).offset(-49);
-        }];
+	if ((self = [super init])) {
+		
     }
     return self;
 }
@@ -71,16 +49,12 @@ static float animationDuration = 0.4f;
 
 - (void)didPushViewController:(GRNavigationController *)navigationController {
     currentNavigationController = navigationController;
-    [UIView animateWithDuration:animationDuration animations:^{
-        [backButton setFrame:CGRectMake(0, self.view.frame.size.height-49, backButton.frame.size.width, backButton.frame.size.height)];
-    }];
+	[navigationController showBackButtonAnimated:YES];
 }
 
 - (void)didPopViewController:(GRNavigationController *)navigationController {
     if (navigationController.viewControllers.count == 1) {
-        [UIView animateWithDuration:animationDuration animations:^{
-            [backButton setFrame:CGRectMake(0, self.view.frame.size.height, backButton.frame.size.width, backButton.frame.size.height)];
-        }];
+		[navigationController hideBackButtonAnimated:YES];
     }
 }
 

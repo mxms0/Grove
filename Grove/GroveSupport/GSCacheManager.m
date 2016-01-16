@@ -112,7 +112,6 @@
 	NSString *properAssetPath = [assetPath relativePath];
 	
 	if ([[NSFileManager defaultManager] fileExistsAtPath:properAssetPath]) {
-		NSLog(@"woo file exists.");
 		// leaving this log because never verified this works,
 		// especially being that acccess(..., F_OK) hates me (or iOS' sandbox...) [or both...]
 		UIImage *image = [UIImage imageWithContentsOfFile:properAssetPath];

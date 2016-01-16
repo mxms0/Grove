@@ -16,6 +16,7 @@ typedef NS_OPTIONS(NSInteger, GSRepositoryPermissions) {
 	GSRepositoryPermissionsAdmin = 1 << 2,
 };
 
+@class GSUser;
 @interface GSRepository : GSObject
 @property (nonatomic, readonly, strong) GSUser *owner;
 @property (nonatomic, readonly, strong) NSString *name;
