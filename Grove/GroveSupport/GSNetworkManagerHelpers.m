@@ -37,19 +37,23 @@ NSString *GSHTTPVerbStringForVerb(GSAPIHTTPVerb verb) {
 	return ret;
 }
 
-NSURL *GSAPIURLComplex(NSString *endp, NSString *arg1, NSString *arg2) {
+NSURL *GSAPIURLComplex(NSString *endp, ...) {
 	NSURL *base = GSAPIURLForEndpoint(endp);
-
-	if (arg1) {
-		base = [base URLByAppendingPathComponent:arg1];
-		if (arg2) {
-			base = [base URLByAppendingPathComponent:arg2];
+	
+	va_list ap;
+	va_start(ap, endp);
+	id pathComponent;
+	while ((pathComponent = va_arg(ap, id))) {
+		if (pathComponent) {
+			base = [base URLByAppendingPathComponent:pathComponent];
 		}
 	}
+	
+	va_end(ap);
 	
 	return base;
 }
 
 NSURL *GSAPIURLForEndpoint(NSString *endp) {
-	return [NSURL URLWithString:[GSAPIHostURL stringByAppendingPathComponent:endp]];
+	return [[NSURL URLWithString:GSAPIHostURL] URLByAppendingPathComponent:endp];
 }

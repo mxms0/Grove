@@ -12,16 +12,16 @@
 #import "GSUser.h"
 
 @interface GSUser ()
-@property (nonatomic, strong) NSString *token;
-@property (nonatomic, strong) NSURL *followersAPIURL;
-@property (nonatomic, strong) NSURL *followingAPIURL;
-@property (nonatomic, strong) NSURL *gistsAPIURL;
-@property (nonatomic, strong) NSURL *starredAPIURL;
-@property (nonatomic, strong) NSURL *subscriptionsAPIURL;
-@property (nonatomic, strong) NSURL *organizationsAPIURL;
-@property (nonatomic, strong) NSURL *repositoriesAPIURL;
-@property (nonatomic, strong) NSURL *eventsAPIURL;
-@property (nonatomic, strong) NSURL *receivedEventsAPIURL;
+@property (nonatomic, nullable, strong) NSString *token;
+@property (nonatomic, nullable, strong) NSURL *followersAPIURL;
+@property (nonatomic, nullable, strong) NSURL *followingAPIURL;
+@property (nonatomic, nullable, strong) NSURL *gistsAPIURL;
+@property (nonatomic, nullable, strong) NSURL *starredAPIURL;
+@property (nonatomic, nullable, strong) NSURL *subscriptionsAPIURL;
+@property (nonatomic, nullable, strong) NSURL *organizationsAPIURL;
+@property (nonatomic, nullable, strong) NSURL *repositoriesAPIURL;
+@property (nonatomic, nullable, strong) NSURL *eventsAPIURL;
+@property (nonatomic, nullable, strong) NSURL *receivedEventsAPIURL;
 @end
 
 #endif

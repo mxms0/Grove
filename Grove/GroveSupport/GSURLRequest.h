@@ -7,7 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "GroveSupportInternal.h"
 
 @interface GSURLRequest : NSMutableURLRequest
-- (void)addAuthToken:(NSString *)token;
+- (void)setAuthToken:(NSString *__nullable)token;
+- (void)setTwoFactorAuthToken:(NSString *__nullable)token;
+- (void)setLastModifiedDate:(NSDate *__nullable)date;
 @end

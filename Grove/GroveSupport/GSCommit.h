@@ -9,10 +9,14 @@
 #import <Foundation/Foundation.h>
 #import "GSObject.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface GSCommit : GSObject
-@property (nonatomic, readonly) NSString *shaHash;
-@property (nonatomic, readonly) NSString *message;
+@property (nonatomic, readonly, strong) NSString *shaHash;
+@property (nonatomic, readonly, strong) NSString *message;
 @property (nonatomic, readonly) BOOL distinct;
-@property (nonatomic, readonly) NSURL *commitURL;
-@property (nonatomic, readonly) id author;
+@property (nonatomic, readonly, strong) NSURL *commitURL;
+@property (nonatomic, readonly, strong) id author; /* GSActor?? */
 @end
+
+NS_ASSUME_NONNULL_END

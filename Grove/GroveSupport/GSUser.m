@@ -37,7 +37,6 @@ static NSMutableDictionary *cachedUsers = nil;
 		// for the same key. Incase it changes, etc.
 		// Also will probably make a list of constants for each key defined in the API later.
 		if (cachedSelf) {
-			NSLog(@"GSUser cached. Reusing.");
 			return cachedSelf;
 		}
 		
@@ -99,7 +98,6 @@ static NSMutableDictionary *cachedUsers = nil;
 	GSEncode(coder, @"owned_private_repos", _ownedPrivateRepoCount);
 	GSEncode(coder, @"disk_usage", _diskUsage);
 	GSEncode(coder, @"collaborators", _collaboratorCount);
-	GSEncode(coder, @"starredRepositoryCount", _starredRepositoryCount);
 	
 	GSEncode(coder, @"html_url", _browserURL);
 	GSEncode(coder, @"followers_url", _followersAPIURL);
@@ -115,6 +113,12 @@ static NSMutableDictionary *cachedUsers = nil;
 
 - (instancetype)initWithCoder:(NSCoder *)coder {
 	if ((self = [super initWithCoder:coder])) {
+		GSUser *cachedSelf = [GSUser cachedUserWithUsername:self.username];
+
+		if (cachedSelf) {
+			return cachedSelf;
+		}
+		
 		GSDecodeAssign(coder, @"__token", _token);
 		GSDecodeAssign(coder, @"name", _fullName);
 		GSDecodeAssign(coder, @"company", _company);
@@ -132,7 +136,6 @@ static NSMutableDictionary *cachedUsers = nil;
 		GSDecodeAssign(coder, @"owned_private_repos", _ownedPrivateRepoCount);
 		GSDecodeAssign(coder, @"disk_usage", _diskUsage);
 		GSDecodeAssign(coder, @"collaborators", _collaboratorCount);
-		GSDecodeAssign(coder, @"starredRepositoryCount", _starredRepositoryCount);
 		
 		GSDecodeAssign(coder, @"html_url", _browserURL);
 		GSDecodeAssign(coder, @"followers_url", _followersAPIURL);
@@ -144,7 +147,12 @@ static NSMutableDictionary *cachedUsers = nil;
 		GSDecodeAssign(coder, @"repos_url", _repositoriesAPIURL);
 		GSDecodeAssign(coder, @"events_url", _eventsAPIURL);
 		GSDecodeAssign(coder, @"received_events_url", _receivedEventsAPIURL);
+		
+		@synchronized(cachedUsers) {
+			cachedUsers[self.username] = self;
+		}
 	}
+	
 	return self;
 }
 
@@ -158,13 +166,11 @@ static NSMutableDictionary *cachedUsers = nil;
 			if (self.username) {
 				[[GSGitHubEngine sharedInstance] _userInformationForUsername:self.username completionHandler:^(NSDictionary *info, NSError *error) {
 					if (error) {
-						if (handler)
-							handler(error);
+						GSSafeHandlerCall(handler, error);
 					}
 					else {
 						[self configureWithDictionary:info];
-						if (handler)
-							handler(nil);
+						GSSafeHandlerCall(handler, nil);
 					}
 				}];
 				
@@ -176,13 +182,17 @@ static NSMutableDictionary *cachedUsers = nil;
 				GSAssert();
 				// got nothin'
 				// forward error up i guess
-				if (handler)
-					handler(error);
+				GSSafeHandlerCall(handler, error);
 			}
 		}
-		if (handler)
-			handler(nil);
+		else {
+			GSSafeHandlerCall(handler, nil);
+		}
 	}];
+}
+
+- (NSString *)description {
+	return [NSString stringWithFormat:@"<%@: %p; username = %@; admin = %d;>", NSStringFromClass([self class]), self, self.username, self.isAdmin];
 }
 
 @end

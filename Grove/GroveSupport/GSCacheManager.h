@@ -11,5 +11,6 @@
 @class GSUser;
 @interface GSCacheManager : NSObject
 + (nonnull instancetype)sharedInstance;
+- (void)findAvatarForActor:(GSActor *__nonnull)user downloadIfNecessary:(BOOL)necessary completionHandler:(void (^__nonnull)(UIImage *__nullable image, NSError *__nullable error))handler;
 - (void)findImageAssetWithURL:(NSURL *__nonnull)url loggedInUser:(GSUser *__nullable)user downloadIfNecessary:(BOOL)download completionHandler:(void (^__nonnull)(UIImage *__nullable image, NSError *__nullable error))handler;
 @end

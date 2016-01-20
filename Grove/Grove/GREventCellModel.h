@@ -8,12 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
-@class GSEvent;
+@class GSEvent, GRStreamEventCell;
 @interface GREventCellModel : NSObject
 @property (nonatomic, strong, nonnull) GSEvent *event;
+@property (nonatomic, weak, nullable) GRStreamEventCell *tableCell;
 - (nonnull instancetype)initWithEvent:(GSEvent *__nonnull)event;
 
 - (nonnull NSAttributedString *)eventString;
+- (nonnull NSString *)username;
 - (nonnull UIImage *)imageIcon;
 - (nonnull NSString *)dateStringFromEvent;
 @end

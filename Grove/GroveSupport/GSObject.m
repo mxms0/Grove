@@ -9,7 +9,7 @@
 #import "GSObject.h"
 #import "GroveSupportInternal.h"
 
-@implementation GSObject
+@implementation GSObject 
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary {
 	if (!dictionary) {
@@ -22,14 +22,15 @@
 }
 
 - (void)configureWithDictionary:(NSDictionary *)dictionary {
-#if !DEBUG
+#if 0
 	NSLog(@"[%@] Packet %@", NSStringFromClass([self class]), dictionary);
 #endif
 	
-	GSAssign(dictionary, @"id", _identifier);
-	GSURLAssign(dictionary, @"url", _directAPIURL);
+	if (dictionary) {
+		[self _configureWithDictionary:dictionary];
+	}
 	
-	[self _configureWithDictionary:dictionary];
+	// Updated date is time of last request, not time of new data.
 
 	[self willChangeValueForKey:GSUpdatedDateKey];
 	self.updatedDate = [NSDate date];
@@ -37,7 +38,8 @@
 }
 
 - (void)_configureWithDictionary:(NSDictionary *)dictionary {
-	
+	GSAssign(dictionary, @"id", _identifier);
+	GSURLAssign(dictionary, @"url", _directAPIURL);
 }
 
 - (NSDate *)dateFromISO8601String:(NSString *)string {
@@ -61,7 +63,7 @@
 	return self;
 }
 
-- (BOOL)updateSynchronouslyWithError:(NSError *__autoreleasing *)error; {
+- (BOOL)updateSynchronouslyWithError:(NSError **)error {
 	dispatch_semaphore_t wait = dispatch_semaphore_create(0);
 	__block NSError *lError = nil;
 	[self updateWithCompletionHandler:^(NSError *error) {
@@ -82,22 +84,36 @@
 }
 
 - (void)updateWithCompletionHandler:(void (^)(NSError *error))handler {
+	if (self.updating) {
+		GSSafeHandlerCall(handler, nil);
+		// maybe pass NSError(already updating...);
+		return;
+	}
+	
 	if (self.directAPIURL) {
+		self.updating = YES;
 		[[GSGitHubEngine sharedInstance] _dirtyRequestWithObject:self completionHandler:^(NSDictionary *ret, NSError *error) {
-			if (!error) {
-				[self configureWithDictionary:ret];
+			if (error) {
+				_GSAssert(NO, [error description]);
+				GSSafeHandlerCall(handler, error);
 			}
-			else {
-				NSLog(@"error %@", error);
+			else if (!ret) {
+				[self configureWithDictionary:nil];
+				GSSafeHandlerCall(handler, nil);
+			}
+			else if (![ret isKindOfClass:[NSDictionary class]]) {
 				GSAssert();
 			}
-			if (handler)
-				handler(error);
+			else {
+				[self configureWithDictionary:ret];
+				GSSafeHandlerCall(handler, nil);
+			}
+			
+			self.updating = NO;
 		}];
 	}
 	else {
-		if (handler)
-			handler([NSError errorWithDomain:GSErrorDomain code:(INT_MAX - 15) userInfo:@{NSLocalizedDescriptionKey: @"Couldn't send proper request."}]);
+		GSSafeHandlerCall(handler, [NSError errorWithDomain:GSErrorDomain code:(INT_MAX - 15) userInfo:@{NSLocalizedDescriptionKey: @"Couldn't send proper request."}]);
 	}
 }
 

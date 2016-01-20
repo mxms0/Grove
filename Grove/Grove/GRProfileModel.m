@@ -12,59 +12,65 @@
 #import <GroveSupport/GroveSupport.h>
 
 @implementation GRProfileModel {
-	GSUser *visibleUser;
+	__strong GRApplicationUser *visibleUser;
 	__block NSArray *repositories;
+	NSNumber *numberOfStarredRepositories;
 }
 
-- (instancetype)initWithUser:(GSUser *)user {
+- (instancetype)initWithUser:(GRApplicationUser *)user {
 	if ((self = [super init])) {
 		visibleUser = user;
 		
 		[self requestNewData];
-		
-		[[GSCacheManager sharedInstance] findImageAssetWithURL:[visibleUser avatarURL] loggedInUser:nil downloadIfNecessary:YES completionHandler:^(UIImage * __nullable image, NSError *__nullable error) {
-			if (image) {
-				GRApplicationUser *appUser = [[GRSessionManager sharedInstance] currentUser];
-				[appUser prepareUnprocessedProfileImage:image];
-				_profileImage = [appUser profilePicture];
-				
-				dispatch_async(dispatch_get_main_queue(), ^ {
-					[self.delegate reloadData];
-				});
-			}
-		}];
 	}
 	return self;
 }
 
 - (void)requestNewData {
-	[visibleUser updateWithCompletionHandler:^(NSError *error) {
+	
+	[[GSCacheManager sharedInstance] findImageAssetWithURL:[visibleUser.user avatarURL] loggedInUser:nil downloadIfNecessary:YES completionHandler:^(UIImage * __nullable image, NSError *__nullable error) {
+		if (image) {
+			GRApplicationUser *appUser = [[GRSessionManager sharedInstance] currentUser];
+			[appUser prepareUnprocessedProfileImage:image];
+			_profileImage = [appUser profilePicture];
+			
+			[self reloadDelegate];
+		}
+	}];
+	
+	[[GSGitHubEngine sharedInstance] repositoriesStarredByUser:visibleUser.user completionHandler:^(NSArray * _Nullable repos, NSError * _Nullable error) {
+		if (error) {
+			_GSAssert(NO, [error localizedDescription]);
+		}
+		else {
+			[visibleUser setNumberOfStarredRepositories:@([repos count])];
+			[self reloadDelegate];
+		}
+	}];
+	
+	[visibleUser.user updateWithCompletionHandler:^(NSError *error) {
 		if (error) {
 			_GSAssert(NO, [error localizedDescription]);
 			return;
 		}
-		dispatch_async(dispatch_get_main_queue(), ^ {
-			[self.delegate reloadData];
-		});
+		[self reloadDelegate];
 	}];
 	
-	[[GSGitHubEngine sharedInstance] repositoriesForUser:visibleUser completionHandler:^(NSArray *repos, NSError *error) {
+	[[GSGitHubEngine sharedInstance] repositoriesForUser:visibleUser.user completionHandler:^(NSArray *repos, NSError *error) {
 		if (error) {
 			_GSAssert(NO, [error localizedDescription]);
 			return;
 		}
 		repositories = repos;
-		NSLog(@"got REPOS %@", repositories);
-		dispatch_async(dispatch_get_main_queue(), ^ {
-			[self.delegate reloadData];
-		});
+		[self reloadDelegate];
 	}];
-	
+}
 
-//	[[GSGitHubEngine sharedInstance] userForUsername:appUser.user.username completionHandler:^(GSUser *user, NSError *error) {
-		// reload data here
-		// use If-Modified-Since ETAG to request profile picture, that way we dont waste resources
-//	}];
+- (void)reloadDelegate {
+	__weak GRViewModel *weakSelf = self;
+	dispatch_async(dispatch_get_main_queue(), ^ {
+		[weakSelf.delegate reloadData];
+	});
 }
 
 - (GSRepository *)repositoryForIndex:(NSUInteger)index {
@@ -74,7 +80,7 @@
 		return nil;
 }
 
-- (GSUser *)visibleUser {
+- (GRApplicationUser *)visibleUser {
 	return visibleUser;
 }
 
@@ -122,7 +128,7 @@
 }
 
 - (CGFloat)heightForProfileHeader {
-	return 154;
+	return 240.0f;
 }
 
 - (CGFloat)cellHeightForRowAtIndexPath:(NSIndexPath *)indexPath {

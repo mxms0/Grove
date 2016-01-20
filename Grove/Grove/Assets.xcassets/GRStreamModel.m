@@ -26,7 +26,7 @@
 }
 
 - (void)requestNewData {
-	[[GSGitHubEngine sharedInstance] eventsForUser:[[[GRSessionManager sharedInstance] currentUser] user] completionHandler:^(NSArray *events, NSError * error) {
+	[[GSGitHubEngine sharedInstance] eventsForUser:[[[GRSessionManager sharedInstance] currentUser] user] completionHandler:^(NSArray *events, NSError *error) {
 		[self handleNewleyArrivedEvents:events];
 	}];
 }

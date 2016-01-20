@@ -40,14 +40,28 @@
 		[coder encodeObject:obj forKey:key]; \
 	} while (0);
 
+#define GSSafeHandlerCall(x, ...) \
+	do { \
+		if ((x)) { \
+			x(__VA_ARGS__); \
+		} \
+	} while (0);
+
 // perhaps create one of these for dates too. that seeems to cover most of the possibilities.
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface GSObject ()
 @property (nonatomic, nullable, readonly) NSURL *directAPIURL;
 @property (nonatomic, nullable, readonly) NSNumber *identifier;
-- (nonnull instancetype)initWithDictionary:(NSDictionary *__nonnull)dictionary;
-- (nullable NSDate *)dateFromISO8601String:(NSString *__nonnull)string;
+@property (atomic, nullable, readwrite, strong) NSDate *updatedDate;
+@property (atomic, assign) BOOL updating;
+- (nonnull instancetype)initWithDictionary:(NSDictionary *)dictionary;
+- (nullable NSDate *)dateFromISO8601String:(NSString *)string;
+- (void)configureWithDictionary:(NSDictionary *__nullable)dictionary;
 - (void)_configureWithDictionary:(NSDictionary *)dictionary;
 @end
+
+NS_ASSUME_NONNULL_END
 
 #endif

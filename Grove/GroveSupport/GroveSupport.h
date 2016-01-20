@@ -14,6 +14,7 @@ FOUNDATION_EXPORT double GroveSupportVersionNumber;
 //! Project version string for GroveSupport.
 FOUNDATION_EXPORT const unsigned char GroveSupportVersionString[];
 
+#import <GroveSupport/GroveSupportStrings.h>
 #import <GroveSupport/GSUser.h>
 #import <GroveSupport/GSGitHubEngine.h>
 #import <GroveSupport/GSActor.h>
@@ -24,13 +25,16 @@ FOUNDATION_EXPORT const unsigned char GroveSupportVersionString[];
 #import <GroveSupport/GSNotification.h>
 #import <GroveSupport/GSComment.h>
 #import <GroveSupport/GSOrganization.h>
+#import <GroveSupport/GSRepositoryEntry.h>
 #import <GroveSupport/GSUtilities.h>
+#import <GroveSupport/GSRepositoryTree.h>
 
 // In this header, you should import all the public headers of your framework using statements like #import <GroveSupport/PublicHeader.h>
 
-static NSString *const GSDomain = @"com.RickSupport.morty";
-static NSString *const GSErrorDomain = @"MortiestMorty";
-static NSString *const GSUpdatedDateKey = @"updatedDate";
+typedef NS_ENUM(NSInteger, GSErrorReason) {
+	GSErrorReasonUnknown,
+	GSErrorReasonTwoFactorAuthRequired,
+};
 
 void _GSAssert(BOOL cond, NSString *fmt, ...);
 #define GSAssert() _GSAssert(NO, @"(%s) in [%s:%d]", __PRETTY_FUNCTION__, __FILE__, __LINE__)

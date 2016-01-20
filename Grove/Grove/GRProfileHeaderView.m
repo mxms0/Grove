@@ -34,10 +34,12 @@
 		
 		usernameLabel = [[UILabel alloc] init];
 		[usernameLabel setFont:[UIFont boldSystemFontOfSize:20]];
+		[usernameLabel setTextAlignment:NSTextAlignmentCenter];
 		[self addSubview:usernameLabel];
 		
 		nameLabel = [[UILabel alloc] init];
 		[nameLabel setFont:[UIFont systemFontOfSize:18]];
+		[nameLabel setTextAlignment:NSTextAlignmentCenter];
 		[self addSubview:nameLabel];
 		
 		locationLabel = [[UILabel alloc] init];
@@ -55,7 +57,6 @@
 		
 		NSArray *statsButtons = @[followersButton, starredButton, followingButton];
 		
-		
 		for (int i = 0; i < 3; i++) {
 			GRProfileStatisticButton *button = statsButtons[i];
 			[button setBackgroundColor:[UIColor whiteColor]];
@@ -67,9 +68,23 @@
 
 - (void)layoutSubviews {
 	[super layoutSubviews];
-	[profileImageView setFrame:CGRectMake(8, 8, 72, 72)];
-	[usernameLabel setFrame:CGRectMake(72 + 8 + 8, 8, (320 - (72 + 8 + 8)), 22)];
-	[nameLabel setFrame:CGRectMake(72 + 8 + 8, 8 + 24 + 2, (320 - (72 + 8 + 8)), 20)];
+	
+	const CGFloat genericHorizontalPadding = 10.0f;
+	const CGFloat profilePictureSize = 64.0f;
+	const CGFloat genericVerticalPadding = 5.0f;
+	
+	CGFloat verticalOffsetUsed = 5.0f;
+	
+	[usernameLabel setFrame:CGRectMake(genericHorizontalPadding, verticalOffsetUsed, self.frame.size.width - 2 * genericHorizontalPadding, 30.0f)];
+	
+	verticalOffsetUsed += usernameLabel.frame.origin.x + usernameLabel.frame.size.height;
+	
+	[profileImageView setFrame:CGRectMake((self.frame.size.width/2 - profilePictureSize/2), verticalOffsetUsed + genericVerticalPadding, profilePictureSize, profilePictureSize)];
+	
+	verticalOffsetUsed = profileImageView.frame.origin.y + profileImageView.frame.size.height;
+	
+	[nameLabel setFrame:CGRectMake(genericHorizontalPadding, verticalOffsetUsed + genericVerticalPadding, self.frame.size.width - genericHorizontalPadding * 2, 25)];
+
 	[locationLabel setFrame:CGRectMake(72 + 8 + 8, 8 + 24 + 22 + 2 + 2, (320 - (72 + 8 + 8)), 20)];
 	
 	NSArray *statsButtons = @[followersButton, starredButton, followingButton];
@@ -82,15 +97,15 @@
 	[self setUser:self.user];
 }
 
-- (void)setUser:(GSUser *)user {
+- (void)setUser:(GRApplicationUser *)user {
 	_user = user;
-	[usernameLabel setText:[user username]];
-	[nameLabel setText:[user fullName]];
-	[locationLabel setText:[user location]];
+	[usernameLabel setText:[user.user username]];
+	[nameLabel setText:[user.user fullName]];
+	[locationLabel setText:[user.user location]];
 
-	[starredButton setText:[[user starredRepositoryCount] stringValue]];
-	[followingButton setText:[[user followingCount] stringValue]];
-	[followersButton setText:[[user followersCount] stringValue]];
+	[starredButton setText:[[user numberOfStarredRepositories] stringValue]];
+	[followingButton setText:[[user.user followingCount] stringValue]];
+	[followersButton setText:[[user.user followersCount] stringValue]];
 }
 
 - (void)setProfileImage:(UIImage *)profileImage {

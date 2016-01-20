@@ -10,8 +10,8 @@
 
 @interface GSGist : GSObject
 @property (nonatomic, strong) NSString *stringDescription;
-@property (nonatomic, assign, getter=isPublic) BOOL publiclyAccessible;
-@property (nonatomic, weak) GSUser *owner;
-@property (nonatomic, strong) NSArray *files;
+@property (nonatomic, getter=isPublic) BOOL publiclyAccessible;
+@property (nonatomic, strong) GSUser *owner;
+@property (nonatomic, strong) NSArray<id> *files;
 
 @end

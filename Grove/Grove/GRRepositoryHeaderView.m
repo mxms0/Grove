@@ -48,7 +48,7 @@ static CGFloat GRRepositoryGenericPadding = 5.0f;
 		
 		usesOneLine = (boundingRect.size.width < (screenSize.width - 2 * GRRepositoryGenericPadding));
 		
-				NSLog(@"fds %@:%d:%f", NSStringFromCGRect(boundingRect), usesOneLine, screenSize.width);
+		NSLog(@"View properties: %@:%d:%f", NSStringFromCGRect(boundingRect), usesOneLine, screenSize.width);
 		
 		if (usesOneLine) {
 			[upperLabel setText:combinedString];

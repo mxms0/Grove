@@ -19,4 +19,26 @@ static inline CGFloat GRStatusBarHeight(void) {
 	return [[UIApplication sharedApplication] statusBarFrame].size.height;
 }
 
+static inline UIColor *GSRandomUIColor() {
+	CGFloat hue = (arc4random() % 256 / 256.0);
+	CGFloat saturation = (arc4random() % 128 / 256.0) + 0.5;
+	CGFloat brightness = (arc4random() % 128 / 256.0) + 0.5;
+	CGFloat alpha = ((arc4random() % 128) / 256.0) + 0.5;
+	
+	UIColor *color = [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:alpha];
+	return color;
+}
+
+static NSString *const GRStreamViewControllerNotificationKey = @"GRStreamViewControllerNotificationKey";
+
+#define REGISTER_RELOAD_VIEW(x) \
+	do { \
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_reloadNotification) name:x object:nil]; \
+	} while (0); 
+
+#define RELOAD_VIEW(x) \
+	do { \
+		[[NSNotificationCenter defaultCenter] postNotificationName:x object:nil]; \
+	} while (0);
+
 #endif

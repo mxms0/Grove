@@ -10,6 +10,8 @@
 #import "GRProfileModel.h"
 #import "GRProfileHeaderView.h"
 #import "GRSessionManager.h"
+#import "GRRepositoryViewController.h"
+
 #import <GroveSupport/GSGitHubEngine.h>
 #import <GroveSupport/GroveSupport.h>
 
@@ -20,7 +22,6 @@
 
 - (instancetype)init {
 	if ((self = [super init])) {
-        self.view.backgroundColor = [UIColor blackColor];
 
 		tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
 		[tableView setDelegate:self];
@@ -39,6 +40,7 @@
 }
 
 - (void)setUser:(GSUser *)newUser {
+	NSLog(@"what is this %@", newUser);
 	if (self.user) {
 		[self.user removeObserver:self forKeyPath:GSUpdatedDateKey];
 	}
@@ -46,7 +48,10 @@
 	[self.user addObserver:self forKeyPath:GSUpdatedDateKey options:0 context:NULL];
 	[self.user update];
 	
-	model = [[GRProfileModel alloc] initWithUser:self.user];
+	GRApplicationUser *formalUser = [[GRApplicationUser alloc] init];
+	[formalUser setUser:self.user];
+	
+	model = [[GRProfileModel alloc] initWithUser:formalUser];
 	[model setDelegate:self];
 }
 
@@ -101,7 +106,6 @@
 			reuseIdentifier = @"repositoryCell";
 			GSRepository *repo = [model repositoryForIndex:indexPath.row];
 			textContent = repo.name;
-			NSLog(@"%@:%@", model, repo);
 			break;
 		}
 		case 2:
@@ -115,6 +119,27 @@
 	}
 	cell.textLabel.text = textContent;
 	return cell;
+}
+
+- (void)tableView:(UITableView *)_tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+	[_tableView deselectRowAtIndexPath:indexPath animated:YES];
+	switch (indexPath.section) {
+		case 0:
+			break;
+		case 1: {
+			GSRepository *repository = [model repositoryForIndex:indexPath.row];
+			[self pushRepositoryViewControllerWithRepository:repository];
+			break;
+		}
+		default:
+			break;
+	}
+}
+
+- (void)pushRepositoryViewControllerWithRepository:(GSRepository *)repo {
+	GRRepositoryViewController *repoViewController = [[GRRepositoryViewController alloc] init];
+	[repoViewController setRepository:repo];
+	[self.navigationController pushViewController:repoViewController animated:YES];
 }
 
 @end

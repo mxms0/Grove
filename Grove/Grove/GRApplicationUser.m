@@ -15,13 +15,13 @@
 
 - (instancetype)initWithCoder:(NSCoder *)coder {
 	if ((self = [super init])) {
-		GSDecodeAssign(coder, @"users", _user);
+		GSDecodeAssign(coder, @"user", _user);
 	}
 	return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)coder {
-	[coder encodeObject:_user forKey:@"users"];
+	GSEncode(coder, @"user", _user);
 }
 
 - (void)prepareUnprocessedProfileImage:(UIImage *)image {

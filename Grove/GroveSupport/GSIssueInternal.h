@@ -12,10 +12,10 @@
 #import "GSIssue.h"
 
 @interface GSIssue ()
-@property (nonatomic, readonly) NSURL *commentsAPIURL;
-@property (nonatomic, readonly) NSURL *labelsAPIURL;
-@property (nonatomic, readonly) NSURL *eventsAPIURL;
-@property (nonatomic, readonly) NSURL *browserAPIURL;
+@property (nonatomic, readonly, strong) NSURL *commentsAPIURL;
+@property (nonatomic, readonly, strong) NSURL *labelsAPIURL;
+@property (nonatomic, readonly, strong) NSURL *eventsAPIURL;
+@property (nonatomic, readonly, strong) NSURL *browserAPIURL;
 @end
 
 

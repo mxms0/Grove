@@ -10,7 +10,7 @@
 #import "GSObject.h"
 
 @interface GSActor : GSObject <NSCoding>
-@property (nonatomic, readonly) NSString *username; // synonymous with login?
-@property (nonatomic, readonly) NSString *gravatarIdentifier;
-@property (nonatomic, readonly) NSURL *avatarURL;
+@property (nonatomic, readonly, strong) NSString *username; // synonymous with login?
+@property (nonatomic, readonly, strong) NSString *gravatarIdentifier;
+@property (nonatomic, readonly, strong) NSURL *avatarURL;
 @end

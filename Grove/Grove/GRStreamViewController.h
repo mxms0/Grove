@@ -6,9 +6,9 @@
 //  Copyright (c) 2015 Milo. All rights reserved.
 //
 
-#import "GRViewController.h"
+#import "GRTableViewController.h"
 #import "GRViewModel.h"
 
-@interface GRStreamViewController : GRViewController <UITableViewDataSource, UITableViewDelegate, GRViewModelDelegate>
+@interface GRStreamViewController : GRTableViewController <UITableViewDataSource, UITableViewDelegate, GRViewModelDelegate>
 
 @end

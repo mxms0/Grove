@@ -17,36 +17,51 @@
 static NSString *reuseIdentifier = @"reuseIdentifier";
 
 @implementation GRStreamViewController {
-    UITableView *tableView;
     GRStreamModel *model;
+	UIRefreshControl *refreshControl;
+	BOOL attemptingRefresh;
 }
 
 #pragma mark - Initializers
 
 - (instancetype)init {
-    self = [super init];
-    if (self) {
-        //Initialze Variables
-        tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+	if ((self = [super init])) {
         model = [[GRStreamModel alloc] init];
-        
-        //Set Properties
+		
         [model setDelegate:self];
-        [tableView setDataSource:self];
-        [tableView setDelegate:self];
-        [tableView registerClass:[GRStreamEventCell class] forCellReuseIdentifier:reuseIdentifier];
-        
-        //Add Subviews
-        for (UIView *view in @[tableView]) {
-            [self.view addSubview:view];
-        }
-
-        //Set Constraints
-        [tableView makeConstraints:^(MASConstraintMaker *make) {
-            make.edges.equalTo(self.view);
-        }];
+		
+		[self.tableView registerClass:[GRStreamEventCell class] forCellReuseIdentifier:reuseIdentifier];
+		
+		refreshControl = [[UIRefreshControl alloc] init];
+		[refreshControl addTarget:self action:@selector(refreshTableView:) forControlEvents:UIControlEventValueChanged];
+		
+		[self setRefreshControl:refreshControl];
+		
+		REGISTER_RELOAD_VIEW(GRStreamViewControllerNotificationKey);
     }
     return self;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+	[super viewWillAppear:animated];
+	if (!attemptingRefresh) {
+		[refreshControl endRefreshing];
+	}
+	else {
+		[refreshControl endRefreshing];
+		[refreshControl beginRefreshing];
+		[self.tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
+		// UIRefreshControl is actually broken.
+	}
+}
+
+- (void)refreshTableView:(UIRefreshControl *)control {
+	attemptingRefresh = YES;
+	[model requestNewData];
+}
+
+- (void)_reloadNotification {
+	[self.tableView reloadData];
 }
 
 #pragma mark - TableView Datasource
@@ -64,6 +79,8 @@ static NSString *reuseIdentifier = @"reuseIdentifier";
     if (!cell) {
         cell = [[GRStreamEventCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
     }
+	GREventCellModel *cellModel = [model eventCellModelForIndexPath:indexPath];
+	[cellModel setTableCell:cell];
     [cell configureWithEventModel:[model eventCellModelForIndexPath:indexPath]];
     return cell;
 }
@@ -71,7 +88,7 @@ static NSString *reuseIdentifier = @"reuseIdentifier";
 #pragma mark - TableView Delegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 100;
+    return 55;
 }
 
 - (void)tableView:(UITableView *)aTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -86,7 +103,9 @@ static NSString *reuseIdentifier = @"reuseIdentifier";
 	// this is a temporary solution
 	// perhaps make GSGitHubEngine function only on one thread
 	dispatch_async(dispatch_get_main_queue(), ^ {
-		[tableView reloadData];
+		attemptingRefresh = NO;
+		[refreshControl endRefreshing];
+		[self.tableView reloadData];
 	});
 }
 

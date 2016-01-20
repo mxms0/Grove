@@ -10,28 +10,28 @@
 #import "GSActor.h"
 
 @interface GSUser : GSActor <NSCoding>
-@property (nonatomic, nullable, strong) NSURL *browserURL;
+@property (nonatomic, nullable, readonly, strong) NSURL *browserURL;
 @property (nonatomic, assign) int type; // either User or Organization afaik
 @property (nonatomic, assign, getter=isAdmin) BOOL admin;
-@property (nonatomic, nullable, strong) NSString *fullName;
-@property (nonatomic, nullable, strong) NSString *company;
-@property (nonatomic, nullable, strong) NSString *blog;
-@property (nonatomic, nullable, strong) NSString *location;
-@property (nonatomic, nullable, strong) NSString *email;
-@property (nonatomic, nullable, strong) NSString *hireable;
-@property (nonatomic, nullable, strong) NSString *biography;
-@property (nonatomic, nullable, strong) NSNumber *followersCount;
-@property (nonatomic, nullable, strong) NSNumber *followingCount;
-@property (nonatomic, nullable, strong) NSNumber *starredRepositoryCount;
-@property (nonatomic, nullable, strong) NSNumber *publicRepoCount;
-@property (nonatomic, nullable, strong) NSNumber *publicGistCount;
-@property (nonatomic, nullable, strong) NSDate *createdDate;
-@property (nonatomic, nullable, strong) NSNumber *privateGistsCount;
-@property (nonatomic, nullable, strong) NSNumber *totalPrivateRepoCount;
-@property (nonatomic, nullable, strong) NSNumber *ownedPrivateRepoCount;
-@property (nonatomic, nullable, strong) NSNumber *diskUsage;
-@property (nonatomic, nullable, strong) NSNumber *collaboratorCount;
- /* Missing
+@property (nonatomic, nullable, readonly, strong) NSString *fullName;
+@property (nonatomic, nullable, readonly, strong) NSString *company;
+@property (nonatomic, nullable, readonly, strong) NSString *blog;
+@property (nonatomic, nullable, readonly, strong) NSString *location;
+@property (nonatomic, nullable, readonly, strong) NSString *email;
+@property (nonatomic, nullable, readonly, strong) NSString *hireable;
+@property (nonatomic, nullable, readonly, strong) NSString *biography;
+@property (nonatomic, nullable, readonly, strong) NSNumber *followersCount;
+@property (nonatomic, nullable, readonly, strong) NSNumber *followingCount;
+@property (nonatomic, nullable, readonly, strong) NSNumber *publicRepoCount;
+@property (nonatomic, nullable, readonly, strong) NSNumber *publicGistCount;
+@property (nonatomic, nullable, readonly, strong) NSDate *createdDate;
+@property (nonatomic, nullable, readonly, strong) NSNumber *privateGistsCount;
+@property (nonatomic, nullable, readonly, strong) NSNumber *totalPrivateRepoCount;
+@property (nonatomic, nullable, readonly, strong) NSNumber *ownedPrivateRepoCount;
+@property (nonatomic, nullable, readonly, strong) NSNumber *diskUsage;
+@property (nonatomic, nullable, readonly, strong) NSNumber *collaboratorCount;
+ /* 
+  Missing
  "plan": {
   "name": "micro",
   "space": 976562499,

@@ -24,11 +24,12 @@
 		GRApplicationUser *user = [[GRSessionManager sharedInstance] currentUser];
 
 		__weak id weakSelf = self;
+		__weak UITableView *weakTableView = tableView;
 		[[GSGitHubEngine sharedInstance] notificationsForUser:user.user completionHandler:^(NSArray *__nullable notifs, NSError *__nullable error) {
 			
 			[weakSelf sortNewNotifications:notifs];
 			
-			[tableView reloadData];
+			[weakTableView reloadData];
 		}];
 		
     }
@@ -58,9 +59,8 @@
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
-	
-	[self.view setBackgroundColor:[UIColor whiteColor]];
-	[tableView setBackgroundColor:[UIColor whiteColor]];
+
+	[tableView setBackgroundColor:[UIColor clearColor]];
 	
 	[self.view addSubview:tableView];
 	[tableView setFrame:self.view.bounds];
