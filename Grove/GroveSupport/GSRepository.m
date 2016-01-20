@@ -21,6 +21,10 @@
 - (void)_configureWithDictionary:(NSDictionary *)dictionary {
 	[super _configureWithDictionary:dictionary];
 	
+#if 1
+	NSLog(@"Repo %@", dictionary);
+#endif
+	
 	GSObjectAssign(dictionary, @"owner", _owner, GSUser);
 	
 	GSAssign(dictionary, @"name", _name);

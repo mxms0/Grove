@@ -131,6 +131,10 @@
 	return [contents objectAtIndex:index];
 }
 
+- (NSUInteger)numberOfSections {
+	return (contents ? 1 : 0);
+}
+
 - (NSUInteger)numberOfItemsInCurrentDirectory {
 	return [contents count];
 }

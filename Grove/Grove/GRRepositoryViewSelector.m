@@ -26,16 +26,26 @@
 		pullRequestsButton = [[UIButton alloc] init];
 		
 		[infoButton setTitle:@"info" forState:UIControlStateNormal];
+		[infoButton setTag:GRRepositoryViewSelectorTypeInfoView];
 		[codeButton setTitle:@"code" forState:UIControlStateNormal];
+		[codeButton setTag:GRRepositoryViewSelectorTypeCodeView];
 		[issuesButton setTitle:@"issues" forState:UIControlStateNormal];
+		[issuesButton setTag:GRRepositoryViewSelectorTypeIssuesView];
 		[pullRequestsButton setTitle:@"pr" forState:UIControlStateNormal];
+		[pullRequestsButton setTag:GRRepositoryViewSelectorTypePullRequestsView];
 		
 		for (UIButton *v in @[infoButton, codeButton, issuesButton, pullRequestsButton]) {
 			[v setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+			[v addTarget:self action:@selector(genericButtonPress:) forControlEvents:UIControlEventTouchUpInside];
 			[self addSubview:v];
 		}
 	}
 	return self;
+}
+
+- (void)genericButtonPress:(UIButton *)button {
+	GRRepositoryViewSelectorType typ = (GRRepositoryViewSelectorType)[button tag];
+	[self.delegate viewSelector:self didChangeToViewType:typ];
 }
 
 - (void)layoutSubviews {

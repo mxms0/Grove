@@ -32,11 +32,11 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	return 0;
+	return [(GRRepositoryInfoModel *)model numberOfRowsInSection:section];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-	return 0;
+	return [(GRRepositoryInfoModel *)model numberOfSections];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)_tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -44,6 +44,13 @@
 	
 	if (!cell) {
 		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"infoCell"];
+	}
+	
+	switch (indexPath.row) {
+		case 0:
+
+		default:
+			break;
 	}
 	
 	return cell;
