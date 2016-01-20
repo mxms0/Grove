@@ -101,7 +101,9 @@
 }
 
 - (void)sendRequest:(GSURLRequest *__nonnull)request completionHandler:(void (^__nonnull)(GSSerializable *__nullable serializeable, NSError *__nullable error))handler {
-
+	// placeholder for direction
+	// since there may be a download request
+	// and an upload request too.
 	[self sendDataRequest:request completionHandler:^(GSSerializable *response, NSError *error) {
 		handler(response, error);
 	}];
@@ -120,8 +122,10 @@
 		
 		switch ([httpResponse statusCode]) {
 			case 0: {
+				error = [NSError errorWithDomain:GSErrorDomain code:-1 userInfo:@{
+																				  NSLocalizedDescriptionKey: @"Failed to send network request."
+																				  }];
 				// request failed. weeee.
-				GSAssert();
 				break;
 			}
 			case 200: {

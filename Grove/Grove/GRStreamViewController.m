@@ -25,8 +25,7 @@ static NSString *reuseIdentifier = @"reuseIdentifier";
 #pragma mark - Initializers
 
 - (instancetype)init {
-    self = [super init];
-    if (self) {
+	if ((self = [super init])) {
         model = [[GRStreamModel alloc] init];
 		
         [model setDelegate:self];
