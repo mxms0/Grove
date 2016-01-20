@@ -170,7 +170,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (void)_userInformationForUsername:(NSString *)username completionHandler:(void (^)(NSDictionary *__nullable info, NSError *__nullable error))handler {
-	[[GSNetworkManager sharedInstance] requestUserInformationForUsername:username token:nil completionHandler:^(NSDictionary *__nullable response, NSError * _Nullable error) {
+	[[GSNetworkManager sharedInstance] requestUserInformationForUsername:username token:_activeUser.token completionHandler:^(NSDictionary *__nullable response, NSError * _Nullable error) {
 		if (error) {
 			handler(nil, error);
 		}

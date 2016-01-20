@@ -11,4 +11,6 @@
 
 @class GSRepository;
 @interface GRRepositoryInfoModel : GRRepositoryGenericSectionModel
+- (NSUInteger)numberOfSections;
+- (NSUInteger)numberOfRowsInSection:(NSUInteger)section;
 @end

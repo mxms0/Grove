@@ -28,6 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak) GRRepositoryPathBar *pathBar;
 - (instancetype)initWithRepository:(GSRepository *)repo;
 - (void)update;
+- (NSUInteger)numberOfSections;
 - (NSUInteger)numberOfItemsInCurrentDirectory;
 - (GSRepositoryEntry *)repositoryEntryForIndex:(NSUInteger)index;
 - (void)pushItemFromIndexPath:(NSIndexPath *)path;

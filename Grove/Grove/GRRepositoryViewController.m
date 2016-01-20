@@ -21,6 +21,7 @@ static CGFloat GRHeaderSizeRatio = .10f;
 	GRRepositoryFileBrowserView *fileBrowser;
 	GRRepositoryInfoView *infoView;
 	UIView *currentSectionView;
+	GRRepositoryViewSelectorType currentViewType;
 }
 
 - (instancetype)init {
@@ -43,7 +44,7 @@ static CGFloat GRHeaderSizeRatio = .10f;
 
 - (void)setRepository:(GSRepository *)newRepository {
 	[_repository removeObserver:self forKeyPath:GSUpdatedDateKey];
-
+	
 	_repository = newRepository;
 	[_repository addObserver:self forKeyPath:GSUpdatedDateKey options:0 context:NULL];
 	[_repository update];
@@ -55,7 +56,41 @@ static CGFloat GRHeaderSizeRatio = .10f;
 }
 
 - (void)viewSelector:(GRRepositoryViewSelector *)selector didChangeToViewType:(GRRepositoryViewSelectorType)viewType {
+	if (currentViewType == viewType) return;
+	currentViewType = viewType;
+	switch (viewType) {
+		case GRRepositoryViewSelectorTypeCodeView:
+			[self _presentCodeView];
+			break;
+		case GRRepositoryViewSelectorTypeInfoView:
+			[self _presentInfoView];
+			break;
+		case GRRepositoryViewSelectorTypeIssuesView:
+			break;
+		case GRRepositoryViewSelectorTypePullRequestsView:
+			break;
+		default:
+			break;
+	}
+	[self properLayoutSubviews];
+}
+
+- (void)_presentInfoView {
+	[currentSectionView removeFromSuperview];
+	currentSectionView = nil;
+	currentSectionView = [[GRRepositoryInfoView alloc] init];
+	[(GRRepositoryInfoView *)currentSectionView setRepository:_repository];
 	
+	[self.view addSubview:currentSectionView];
+}
+
+- (void)_presentCodeView {
+	[currentSectionView removeFromSuperview];
+	currentSectionView = nil;
+	currentSectionView = [[GRRepositoryFileBrowserView alloc] init];
+	[(GRRepositoryFileBrowserView *)currentSectionView setRepository:_repository];
+	
+	[self.view addSubview:currentSectionView];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
@@ -64,14 +99,13 @@ static CGFloat GRHeaderSizeRatio = .10f;
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
-
+	
 	for (UIView *v in @[header, currentSectionView, viewSelector]) {
 		[self.view addSubview:v];
 	}
 }
 
-- (void)viewWillLayoutSubviews {
-	[super viewWillLayoutSubviews];
+- (void)properLayoutSubviews {
 	
 	CGFloat verticalOffsetUsed = GRStatusBarHeight();
 	
@@ -84,6 +118,11 @@ static CGFloat GRHeaderSizeRatio = .10f;
 	verticalOffsetUsed += viewSelector.frame.size.height;
 	
 	[currentSectionView setFrame:CGRectMake(0, verticalOffsetUsed, self.view.frame.size.width, self.view.frame.size.height - verticalOffsetUsed)];
+}
+
+- (void)viewWillLayoutSubviews {
+	[super viewWillLayoutSubviews];
+	[self properLayoutSubviews];
 }
 
 - (void)dealloc {

@@ -14,7 +14,7 @@
 - (void)_configureWithDictionary:(NSDictionary *)dictionary {
 	[super _configureWithDictionary:dictionary];
 	
-#if 1
+#if 0
 	NSLog(@"Event information %@", dictionary);
 #endif
 	

@@ -21,6 +21,10 @@
 - (void)_configureWithDictionary:(NSDictionary *)dictionary {
 	[super _configureWithDictionary:dictionary];
 	
+#if 1
+	NSLog(@"Repo %@", dictionary);
+#endif
+	
 	GSObjectAssign(dictionary, @"owner", _owner, GSUser);
 	
 	GSAssign(dictionary, @"name", _name);
@@ -36,11 +40,9 @@
 		if (inconsistencyFix.location != NSNotFound) {
 			NSString *username = [_name substringToIndex:inconsistencyFix.location];
 			// may have to be an organization in the future, BEWARE MAX
-			if (!_owner) {
-				GSUser *user = [[GSUser alloc] initWithDictionary:@{@"login": username }];
-				[user updateSynchronouslyWithError:nil];
-				_owner = user;
-			}
+			GSUser *user = [[GSUser alloc] initWithDictionary:@{@"login": username }];
+			[user updateSynchronouslyWithError:nil];
+			_owner = user;
 		}
 		else {
 			NSLog(@"Repo with no owner???");
