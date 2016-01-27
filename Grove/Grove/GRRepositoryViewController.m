@@ -10,6 +10,8 @@
 #import "GRRepositoryHeaderView.h"
 #import "GRRepositoryFileBrowserView.h"
 #import "GRRepositoryInfoView.h"
+#import "GRRepositoryIssuesView.h"
+#import "GRRepositoryPullRequestView.h"
 
 #import <GroveSupport/GroveSupport.h>
 
@@ -20,7 +22,9 @@ static CGFloat GRHeaderSizeRatio = .10f;
 	GRRepositoryViewSelector *viewSelector;
 	GRRepositoryFileBrowserView *fileBrowser;
 	GRRepositoryInfoView *infoView;
-	UIView *currentSectionView;
+	GRRepositoryPullRequestView *pullRequestView;
+	GRRepositoryIssuesView *issuesView;
+	GRRepositoryGenericSectionView *currentSectionView;
 	GRRepositoryViewSelectorType currentViewType;
 }
 
@@ -55,42 +59,73 @@ static CGFloat GRHeaderSizeRatio = .10f;
 	[header setRepositoryOwner:_repository.owner.username];
 }
 
+
 - (void)viewSelector:(GRRepositoryViewSelector *)selector didChangeToViewType:(GRRepositoryViewSelectorType)viewType {
 	if (currentViewType == viewType) return;
 	currentViewType = viewType;
+	
+	[currentSectionView removeFromSuperview];
+	
+	GRRepositoryGenericSectionView *viewToSwitch = nil;
+	
 	switch (viewType) {
 		case GRRepositoryViewSelectorTypeCodeView:
-			[self _presentCodeView];
+			viewToSwitch = [self _presentCodeView];
 			break;
 		case GRRepositoryViewSelectorTypeInfoView:
-			[self _presentInfoView];
+			viewToSwitch = [self _presentInfoView];
 			break;
 		case GRRepositoryViewSelectorTypeIssuesView:
+			viewToSwitch = [self _presentIssuesView];
 			break;
 		case GRRepositoryViewSelectorTypePullRequestsView:
+			viewToSwitch = [self _presentPullRequestsView];
 			break;
 		default:
 			break;
 	}
+	
+	currentSectionView = viewToSwitch;
+	
+	[self.view addSubview:currentSectionView];
+	
 	[self properLayoutSubviews];
 }
 
-- (void)_presentInfoView {
-	[currentSectionView removeFromSuperview];
-	currentSectionView = nil;
-	currentSectionView = [[GRRepositoryInfoView alloc] init];
-	[(GRRepositoryInfoView *)currentSectionView setRepository:_repository];
+- (GRRepositoryGenericSectionView *)_presentIssuesView {
+	if (!issuesView) {
+		issuesView = [[GRRepositoryIssuesView alloc] init];
+		[issuesView setRepository:_repository];
+	}
 	
-	[self.view addSubview:currentSectionView];
+	return issuesView;
 }
 
-- (void)_presentCodeView {
-	[currentSectionView removeFromSuperview];
-	currentSectionView = nil;
-	currentSectionView = [[GRRepositoryFileBrowserView alloc] init];
-	[(GRRepositoryFileBrowserView *)currentSectionView setRepository:_repository];
+- (GRRepositoryGenericSectionView *)_presentPullRequestsView {
+	if (!pullRequestView) {
+		pullRequestView = [[GRRepositoryPullRequestView alloc] init];
+		[pullRequestView setRepository:_repository];
+	}
+
+	return pullRequestView;
+}
+
+- (GRRepositoryGenericSectionView *)_presentInfoView {
+	if (!infoView) {
+		infoView = [[GRRepositoryInfoView alloc] init];
+		[infoView setRepository:_repository];
+	}
 	
-	[self.view addSubview:currentSectionView];
+	return infoView;
+}
+
+- (GRRepositoryGenericSectionView *)_presentCodeView {
+	if (!fileBrowser) {
+		fileBrowser = [[GRRepositoryFileBrowserView alloc] init];
+		[fileBrowser setRepository:_repository];
+	}
+	
+	return fileBrowser;
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {

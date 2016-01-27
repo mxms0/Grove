@@ -51,7 +51,7 @@
 	
 	switch (self.event.type) {
 		case GSEventTypeFork: {
-			NSAttributedString *message = [[NSAttributedString alloc] initWithString:@"Forked " attributes:@{NSFontAttributeName : regularFont}];
+			NSAttributedString *message = [[NSAttributedString alloc] initWithString:@"🍴 Forked " attributes:@{NSFontAttributeName : regularFont}];
 			NSAttributedString *cp1 = [[NSAttributedString alloc] initWithString:self.event.repository.pathString attributes:@{NSFontAttributeName: regularFont}];
 			[components addObjectsFromArray:@[message, cp1]];
 			break;
@@ -64,11 +64,11 @@
 			
 			switch ([self.event refType]) {
 				case GSEventRefTypeBranch:
-					verb = [[NSAttributedString alloc] initWithString:@"Created branch " attributes:nil];
+					verb = [[NSAttributedString alloc] initWithString:@"💡 Created branch " attributes:nil];
 					subject = [[NSAttributedString alloc] initWithString:self.event.ref attributes:nil];
 					break;
 				case GSEventRefTypeRepository:
-					verb = [[NSAttributedString alloc] initWithString:@"Created repository " attributes:nil];
+					verb = [[NSAttributedString alloc] initWithString:@"💡 Created repository " attributes:nil];
 					subject = [[NSAttributedString alloc] initWithString:self.event.repository.pathString attributes:nil];
 					break;
 				case GSEventRefTypeTag:
@@ -83,7 +83,7 @@
 			break;
 		}
 		case GSEventTypeDelete: {
-			NSAttributedString *msg = [[NSAttributedString alloc] initWithString:@"Deleted " attributes:nil];
+			NSAttributedString *msg = [[NSAttributedString alloc] initWithString:@"💔 Deleted " attributes:nil];
 			NSAttributedString *target1 = nil;
 			NSAttributedString *thing = [[NSAttributedString alloc] initWithString:@" at " attributes:nil];
 			NSAttributedString *target2 = nil;
@@ -126,7 +126,7 @@
 					prep = [[NSAttributedString alloc] initWithString:@" to " attributes:nil];
 					break;
 				default:
-					NSLog(@"Unhandled member-type event.");
+					NSLog(@"Unhandled member-type event. %@", self.event);
 					GSAssert();
 					break;
 			}
@@ -153,7 +153,7 @@
 		case GSEventTypeStar: {
 			// watch = star, cool
 			// https://developer.github.com/changes/2012-9-5-watcher-api/
-			NSAttributedString *message = [[NSAttributedString alloc] initWithString:@"Starred " attributes:@{NSFontAttributeName : regularFont}];
+			NSAttributedString *message = [[NSAttributedString alloc] initWithString:@"⭐️ Starred " attributes:@{NSFontAttributeName : regularFont}];
 			NSAttributedString *repository = [[NSAttributedString alloc] initWithString:self.event.repository.pathString attributes:@{NSFontAttributeName: regularFont}];
 			[components addObjectsFromArray:@[message, repository]];
 			break;

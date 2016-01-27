@@ -71,6 +71,8 @@
 		case GRRepositoryViewSelectorTypePullRequestsView:
 			ret = @"Pull Request";
 			break;
+		case GRRepositoryViewSelectorTypeInfoView:
+			ret = @"Info";
 		default:
 			ret = @"Unknown";
 			break;
