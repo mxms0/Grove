@@ -20,27 +20,43 @@
 	if ((self = [super init])) {
 		currentViewType = GRRepositoryViewSelectorTypeInfoView;
 
-		infoButton = [[UIButton alloc] init];
-		codeButton = [[UIButton alloc] init];
-		issuesButton = [[UIButton alloc] init];
-		pullRequestsButton = [[UIButton alloc] init];
-		
-		[infoButton setTitle:@"info" forState:UIControlStateNormal];
-		[infoButton setTag:GRRepositoryViewSelectorTypeInfoView];
-		[codeButton setTitle:@"code" forState:UIControlStateNormal];
-		[codeButton setTag:GRRepositoryViewSelectorTypeCodeView];
-		[issuesButton setTitle:@"issues" forState:UIControlStateNormal];
-		[issuesButton setTag:GRRepositoryViewSelectorTypeIssuesView];
-		[pullRequestsButton setTitle:@"pr" forState:UIControlStateNormal];
-		[pullRequestsButton setTag:GRRepositoryViewSelectorTypePullRequestsView];
+		infoButton = [self _selectorButtonForViewType:GRRepositoryViewSelectorTypeInfoView];
+		codeButton = [self _selectorButtonForViewType:GRRepositoryViewSelectorTypeCodeView];
+		issuesButton = [self _selectorButtonForViewType:GRRepositoryViewSelectorTypeIssuesView];
+		pullRequestsButton = [self _selectorButtonForViewType:GRRepositoryViewSelectorTypePullRequestsView];
 		
 		for (UIButton *v in @[infoButton, codeButton, issuesButton, pullRequestsButton]) {
-			[v setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-			[v addTarget:self action:@selector(genericButtonPress:) forControlEvents:UIControlEventTouchUpInside];
 			[self addSubview:v];
 		}
 	}
 	return self;
+}
+
+- (UIButton *)_selectorButtonForViewType:(GRRepositoryViewSelectorType)tp {
+	UIButton *btn = [[UIButton alloc] init];
+	[btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+	[btn addTarget:self action:@selector(genericButtonPress:) forControlEvents:UIControlEventTouchUpInside];
+	[btn setTag:tp];
+	NSString *titleString = nil;
+	switch (tp) {
+		case GRRepositoryViewSelectorTypeCodeView:
+			titleString = @"code";
+			break;
+		case GRRepositoryViewSelectorTypeInfoView:
+			titleString = @"info";
+			break;
+		case GRRepositoryViewSelectorTypeIssuesView:
+			titleString = @"issues";
+			break;
+		case GRRepositoryViewSelectorTypePullRequestsView:
+			titleString = @"pr";
+			break;
+		default:
+			GSAssert();
+			break;
+	}
+	[btn setTitle:titleString forState:UIControlStateNormal];
+	return btn;
 }
 
 - (void)genericButtonPress:(UIButton *)button {

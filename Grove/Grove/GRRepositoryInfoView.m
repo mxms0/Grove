@@ -8,6 +8,7 @@
 
 #import "GRRepositoryInfoView.h"
 #import "GRRepositoryInfoModel.h"
+#import "GRRepositoryInfoViewHeaderView.h"
 
 @implementation GRRepositoryInfoView {
 	UITableView *tableView;
@@ -39,6 +40,17 @@
 	return [(GRRepositoryInfoModel *)model numberOfSections];
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+	GRRepositoryInfoViewHeaderView *header = [[GRRepositoryInfoViewHeaderView alloc] init];
+	NSString *sectionLabel = [model sectionLabelForSection:section];
+	[header setText:sectionLabel];
+	return header;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+	return 30;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)_tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	UITableViewCell *cell = [_tableView dequeueReusableCellWithIdentifier:@"infoCell"];
 	
@@ -47,8 +59,9 @@
 	}
 	
 	switch (indexPath.row) {
-		case 0:
+		case 0: {
 
+		}
 		default:
 			break;
 	}

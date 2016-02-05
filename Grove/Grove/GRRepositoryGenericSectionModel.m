@@ -21,4 +21,8 @@
 	
 }
 
+- (NSString *)sectionLabelForSection:(NSUInteger)section {
+	return nil;
+}
+
 @end

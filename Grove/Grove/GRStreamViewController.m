@@ -30,6 +30,8 @@ static NSString *reuseIdentifier = @"reuseIdentifier";
 		
         [model setDelegate:self];
 		
+		self.tableView.separatorInset = UIEdgeInsetsMake(0, 58, 0, 0);
+		
 		[self.tableView registerClass:[GRStreamEventCell class] forCellReuseIdentifier:reuseIdentifier];
 		
 		refreshControl = [[UIRefreshControl alloc] init];
@@ -37,13 +39,14 @@ static NSString *reuseIdentifier = @"reuseIdentifier";
 		
 		[self setRefreshControl:refreshControl];
 		
-		REGISTER_RELOAD_VIEW(GRStreamViewControllerNotificationKey);
+		GR_REGISTER_RELOAD_VIEW(GRStreamViewControllerNotificationKey);
     }
     return self;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
+	
 	if (!attemptingRefresh) {
 		[refreshControl endRefreshing];
 	}

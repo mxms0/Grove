@@ -11,6 +11,8 @@
 #import "NSAttributedString+GRExtensions.h"
 #import "GRStreamEventCell.h"
 
+// This class needs to be adapted to work without actual GSEvent, for NSCoding purposes.
+
 @implementation GREventCellModel {
 	NSAttributedString *attributedMessage;
 	UIImage *avatar;

@@ -192,6 +192,14 @@
 				error = retError;
 				break;
 			}
+			case 503: {
+				NSDictionary *userInfo = @{
+										   NSLocalizedDescriptionKey: @"Service Unavailable",
+										   };
+				NSError *retError = [NSError errorWithDomain:GSErrorDomain code:503 userInfo:userInfo];
+				error = retError;
+				break;
+			}
 			default:
 				NSLog(@"HTTP Code %ld", (long)[httpResponse statusCode]);
 				GSAssert();

@@ -11,15 +11,21 @@
 #import "GRSessionManager.h"
 #import "GREventCellModel.h"
 
+static NSString *const GRStreamModelStorageKey = @"stream_data"; // i will move away from NSUserDefaults soon. promise.
+
 @interface GRStreamModel ()
-@property (nonatomic, strong) NSArray *eventModels;
+@property (nonatomic, strong) NSMutableOrderedSet *eventModels;
 @end
 
 @implementation GRStreamModel
 
 - (instancetype)init {
 	if ((self = [super init])) {
-		self.eventModels = [NSMutableArray array];
+		self.eventModels = [[NSMutableOrderedSet alloc] init];
+		NSArray *oldEventModels = [[NSUserDefaults standardUserDefaults] objectForKey:GRStreamModelStorageKey];
+		if (oldEventModels) {
+			self.eventModels = [oldEventModels mutableCopy];
+		}
 		[self requestNewData];
 	}
 	return self;
@@ -32,7 +38,7 @@
 }
 
 - (void)handleNewleyArrivedEvents:(NSArray *)events {
-	NSMutableArray *eventModels = [[NSMutableArray alloc] init];
+	NSMutableOrderedSet *eventModels = [[NSMutableOrderedSet alloc] init];
 	for (GSEvent *evt in events) {
 		GREventCellModel *model = [[GREventCellModel alloc] initWithEvent:evt];
 		[eventModels addObject:model];
@@ -40,6 +46,7 @@
 	
 	self.eventModels = eventModels;
 	[self.delegate reloadData];
+	//	[[NSUserDefaults standardUserDefaults] setObject:self.eventModels forKey:GRStreamModelStorageKey];
 }
 
 - (NSInteger)numberOfSections {

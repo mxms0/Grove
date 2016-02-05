@@ -17,5 +17,6 @@
 @interface GRRepositoryGenericSectionModel : NSObject
 @property (nonatomic, weak) id <GRRepositoryGenericSectionModelDelegate> delegate;
 - (instancetype)initWithRepository:(GSRepository *)repo;
+- (NSString *)sectionLabelForSection:(NSUInteger)section;
 - (void)update;
 @end
