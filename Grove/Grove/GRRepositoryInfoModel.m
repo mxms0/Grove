@@ -33,4 +33,17 @@
 	return 4;
 }
 
+- (NSString *)sectionLabelForSection:(NSUInteger)section {
+	NSString *label = nil;
+	switch (section) {
+		case 0:
+			label = GSLocalizedString(@"description", nil, nil);
+			break;
+		case 1:
+			label = GSLocalizedString(@"readme", nil, nil);
+			break;
+	}
+	return [label uppercaseString];
+}
+
 @end

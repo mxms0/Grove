@@ -63,8 +63,12 @@
 		[[NSUserDefaults standardUserDefaults] setObject:tokenDirectoryMap forKey:@"tmpDirectoryMap"];
 		[[NSUserDefaults standardUserDefaults] synchronize];
 	}
+	
+	NSString *filePath = [NSTemporaryDirectory() stringByAppendingString:extension];
+	
+	mkdir([filePath UTF8String], 777);
 
-	return [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingPathComponent:extension]];
+	return [NSURL fileURLWithPath:filePath];
 }
 
 - (NSURL *)_createWorkingDirectoryForToken:(NSString *)token {

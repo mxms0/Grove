@@ -69,7 +69,7 @@
 	
 	leftOffsetUsed += genericHorizontalPadding;
 	
-	const CGFloat avatarSize = 35.0f;
+	const CGFloat avatarSize = 38.0f;
 	
 	[imageView setFrame:CGRectMake(leftOffsetUsed, genericVerticalPadding, avatarSize, avatarSize)];
 	

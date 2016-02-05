@@ -29,14 +29,22 @@ static inline UIColor *GSRandomUIColor() {
 	return color;
 }
 
+#define GSLocalizedString(x,y,z) x
+#define GSLocalizedStringFromTable(x,y,z) NSLocalizedStringFromTable(x,y,z)
+#define GSLocalizedStringWithDefault(key,table,bundle,value,comment) NSLocalizedStringWithDefaultValue(key,table,bundle,value,comment)
+// will replace these later on to find which strings arent localized yet.
+
+extern void _GSAssert(BOOL, NSString *, ...);
+#define GSAssert() _GSAssert(NO, @"(%s) in [%s:%d]", __PRETTY_FUNCTION__, __FILE__, __LINE__)
+
 static NSString *const GRStreamViewControllerNotificationKey = @"GRStreamViewControllerNotificationKey";
 
-#define REGISTER_RELOAD_VIEW(x) \
+#define GR_REGISTER_RELOAD_VIEW(x) \
 	do { \
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_reloadNotification) name:x object:nil]; \
 	} while (0); 
 
-#define RELOAD_VIEW(x) \
+#define GR_RELOAD_VIEW(x) \
 	do { \
 		[[NSNotificationCenter defaultCenter] postNotificationName:x object:nil]; \
 	} while (0);
