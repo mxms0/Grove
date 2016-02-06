@@ -127,16 +127,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)eventsForUser:(GSUser *)user completionHandler:(void (^)(NSArray<GSEvent *> *__nullable events, NSError *__nullable error))handler {
 	[[GSNetworkManager sharedInstance] requestEventsForUser:user.username token:user.token completionHandler:^(id events, NSError *error) {
-		if (error) {
+		
+		GSInsuranceBegin(events, NSArray, error);
+		
+		GSInsuranceError {
 			handler(nil, error);
 		}
-		else if (!events) {
+		
+		GSInsuranceBadData {
 			GSAssert();
-		}
-		else if (![events isKindOfClass:[NSArray class]]) {
 			handler(nil, [NSError errorWithDomain:GSErrorDomain code:1 userInfo:@{NSLocalizedDescriptionKey: events[@"message"]}]);
 		}
-		else {
+		GSInsuranceGoodData {
 			NSMutableArray *serializedEvents = [[NSMutableArray alloc] init];
 			
 			[events enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -147,42 +149,51 @@ NS_ASSUME_NONNULL_BEGIN
 			
 			handler(serializedEvents, nil);
 		}
+		
+		GSInsuranceEnd();
 	}];
 }
 
 - (void)userInformationWithToken:(NSString *)token completionHandler:(void (^)(id __nullable information, NSError *__nullable error))handler {
 	[[GSNetworkManager sharedInstance] requestUserInformationForToken:token completionHandler:^(NSDictionary *info, NSError *error) {
-		if (error) {
+		
+		GSInsuranceBegin(info, NSDictionary, error);
+		
+		GSInsuranceError {
 			handler(nil, error);
 		}
-		else if (!info) {
-			GSAssert();
-		}
-		else if (![info isKindOfClass:[NSDictionary class]]) {
-			// craft new error here.
+		
+		GSInsuranceBadData {
 			GSAssert();
 			handler(nil, error);
 		}
-		else {
+		
+		GSInsuranceGoodData {
 			handler(info, nil);
 		}
+		
+		GSInsuranceEnd();
 	}];
 }
 
 - (void)_userInformationForUsername:(NSString *)username completionHandler:(void (^)(NSDictionary *__nullable info, NSError *__nullable error))handler {
 	[[GSNetworkManager sharedInstance] requestUserInformationForUsername:username token:_activeUser.token completionHandler:^(NSDictionary *__nullable response, NSError * _Nullable error) {
-		if (error) {
+		
+		GSInsuranceBegin(response, NSDictionary, error);
+		
+		GSInsuranceError {
 			handler(nil, error);
 		}
-		else if (!response) {
+		
+		GSInsuranceBadData {
 			GSAssert();
 		}
-		else if (!response || ![response isKindOfClass:[NSDictionary class]]) {
-			GSAssert();
-		}
-		else {
+		
+		GSInsuranceGoodData {
 			handler(response, nil);
 		}
+		
+		GSInsuranceEnd();
 	}];
 }
 
@@ -195,14 +206,23 @@ NS_ASSUME_NONNULL_BEGIN
 	}
 	
 	[self _userInformationForUsername:username completionHandler:^(NSDictionary * _Nullable info, NSError * _Nullable error) {
-		GSUser *user = [[GSUser alloc] initWithDictionary:info];
 		
-		if (error) {
+		GSInsuranceBegin(info, NSDictionary, error);
+		
+		GSInsuranceError {
 			handler(nil, error);
 		}
-		else {
+		
+		GSInsuranceBadData {
+			GSAssert();
+		}
+		
+		GSInsuranceGoodData {
+			GSUser *user = [[GSUser alloc] initWithDictionary:info];
 			handler(user, error);
 		}
+		
+		GSInsuranceEnd();
 	}];
 }
 
@@ -213,13 +233,17 @@ NS_ASSUME_NONNULL_BEGIN
 	
 	[[GSNetworkManager sharedInstance] requestUserNotificationsWithToken:user.token completionHandler:^(NSArray *__nullable notifs, NSError *__nullable error) {
 		
-		if (error) {
+		GSInsuranceBegin(notifs, NSArray, error)
+		
+		GSInsuranceError {
 			handler(nil, error);
 		}
-		else if (!notifs || ![notifs isKindOfClass:[NSArray class]]) {
+		
+		GSInsuranceBadData {
 			GSAssert();
 		}
-		else {
+		
+		GSInsuranceGoodData {
 			NSMutableArray *ret = [[NSMutableArray alloc] init];
 			
 			for (NSDictionary *dict in notifs) {
@@ -229,6 +253,8 @@ NS_ASSUME_NONNULL_BEGIN
 			
 			handler(ret, nil);
 		}
+		
+		GSInsuranceEnd()
 	}];
 }
 
@@ -242,6 +268,8 @@ NS_ASSUME_NONNULL_BEGIN
 	[request setAuthToken:self.activeUser.token];
 	[request setLastModifiedDate:obj.updatedDate];
 	[[GSNetworkManager sharedInstance] sendRequest:request completionHandler:^(GSSerializable * _Nullable serializeable, NSError * _Nullable error) {
+
+		
 		if (error) {
 			handler(nil, error);
 		}
@@ -278,13 +306,17 @@ NS_ASSUME_NONNULL_BEGIN
 	[request setAuthToken:user.token];
 	
 	[[GSNetworkManager sharedInstance] sendRequest:request completionHandler:^(GSSerializable *serializeable, NSError *error) {
-		if (error) {
+		GSInsuranceBegin(serializeable, NSArray, error);
+		
+		GSInsuranceError {
 			handler(nil, error);
 		}
-		else if (!serializeable || ![serializeable isKindOfClass:[NSArray class]]) {
+		
+		GSInsuranceBadData {
 			GSAssert();
 		}
-		else {
+		
+		GSInsuranceGoodData {
 			NSMutableArray *ret = [[NSMutableArray alloc] init];
 			for (NSDictionary *dict in (NSArray *)serializeable) {
 				GSRepository *repo = [[GSRepository alloc] initWithDictionary:dict];
@@ -293,6 +325,8 @@ NS_ASSUME_NONNULL_BEGIN
 			
 			handler((NSArray *)ret, nil);
 		}
+		
+		GSInsuranceEnd();
 	}];
 }
 
@@ -301,13 +335,18 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)repositoriesForUser:(GSUser *)user completionHandler:(void (^)(NSArray<GSRepository *> *__nullable repos, NSError *__nullable error))handler {
 	
 	void (^basicHandler)(NSArray<NSDictionary *>* __nullable repos, NSError *__nullable error) = ^(NSArray<NSDictionary *>* __nullable repos, NSError *__nullable error) {
-		if (error) {
+		
+		GSInsuranceBegin(repos, NSArray, error);
+		
+		GSInsuranceError {
 			handler(nil, error);
 		}
-		else if (!repos || ![repos isKindOfClass:[NSArray class]]) {
+		
+		GSInsuranceBadData {
 			GSAssert();
 		}
-		else {
+		
+		GSInsuranceGoodData {
 			NSMutableArray *serializedRepos = [[NSMutableArray alloc] init];
 			for (NSDictionary *dict in repos) {
 				GSRepository *repository = [[GSRepository alloc] initWithDictionary:dict];
@@ -315,6 +354,8 @@ NS_ASSUME_NONNULL_BEGIN
 			}
 			handler(serializedRepos, nil);
 		}
+		
+		GSInsuranceEnd();
 	};
 	
 	if ([_activeUser isEqual:user] && _activeUser.token) {
@@ -341,33 +382,43 @@ NS_ASSUME_NONNULL_BEGIN
 	
 	if (recurse) {
 		[[GSNetworkManager sharedInstance] recursivelyRequestRepositoryTreeForRepositoryNamed:repo.name repositoryOwner:repo.owner.username treeOrBranch:@"master" token:_activeUser.token completionHandler:^(NSDictionary * _Nullable primitiveTree, NSError * _Nullable error) {
-			if (error) {
+			
+			GSInsuranceBegin(primitiveTree, NSDictionary, error);
+			
+			GSInsuranceError {
 				handler(nil, error);
 			}
-			else if (![primitiveTree isKindOfClass:[NSDictionary class]]) {
+			GSInsuranceBadData {
 				GSAssert();
 				// this should never happen
 			}
-			else {
+			GSInsuranceGoodData {
 				GSRepositoryTree *tree = [[GSRepositoryTree alloc] initWithDictionary:primitiveTree];
 				[tree setRecursive:recurse];
 				handler(tree, nil);
 			}
+			
+			GSInsuranceEnd();
 		}];
 	}
 	else {
 		
 		[[GSNetworkManager sharedInstance] requestRepositoryContentsForRepositoryNamed:repo.name repositoryOwner:repo.owner.username token:_activeUser.token path:path completionHandler:^(NSArray * _Nullable items, NSError * _Nullable error) {
-			if (error) {
+			
+			GSInsuranceBegin(items, NSArray, error);
+			
+			GSInsuranceError {
 				handler(nil, error);
 			}
-			else if (![items isKindOfClass:[NSArray class]]) {
+			GSInsuranceBadData {
 				GSAssert();
 			}
-			else {
+			GSInsuranceGoodData {
 				GSRepositoryTree *tree = [[GSRepositoryTree alloc] initWithRootEntries:items basePath:path];
 				handler(tree, nil);
 			}
+			
+			GSInsuranceEnd();
 		}];
 	}
 }

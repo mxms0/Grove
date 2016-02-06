@@ -21,4 +21,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 NS_ASSUME_NONNULL_END
 
+#define GSInsuranceBegin(obj,type,error) { \
+	Class __gs_c = [type class]; \
+	id __gs_obj = obj; \
+	NSError *__gs_error = error;
+
+#define GSInsuranceError if (__gs_error)
+#define GSInsuranceBadData else if (!__gs_obj || ![__gs_obj isKindOfClass:__gs_c]) 
+#define GSInsuranceGoodData else
+
+#define GSInsuranceEnd() }
+
 #endif /* GSGitHubEngineInternal_h */
