@@ -50,7 +50,7 @@
 	
 	// clean up this mess, soon.
 	// getting all the logic down and finding out what data gets used is fine for now
-	
+	@try {
 	switch (self.event.type) {
 		case GSEventTypeFork: {
 			NSAttributedString *message = [[NSAttributedString alloc] initWithString:@"🍴 Forked " attributes:@{NSFontAttributeName : regularFont}];
@@ -59,6 +59,7 @@
 			break;
 		}
 		case GSEventTypeCommitComment:
+			break;
 		case GSEventTypeCreate:{
 			NSAttributedString *verb = nil;
 			NSAttributedString *subject = nil;
@@ -117,6 +118,7 @@
 		case GSEventTypeGollumEvent:
 		case GSEventTypeIssueComment:
 		case GSEventTypeIssues:
+			break;
 		case GSEventTypeMember: {
 			NSAttributedString *verb = nil;
 			NSAttributedString *person = [[NSAttributedString alloc] initWithString:self.event.member.username attributes:nil];
@@ -145,6 +147,7 @@
 			NSAttributedString *verb = [[NSAttributedString alloc] initWithString:@"Pushed to " attributes:@{NSFontAttributeName: regularFont}];
 			NSAttributedString *branch = [[NSAttributedString alloc] initWithString:self.event.ref attributes:@{NSFontAttributeName : regularFont}];
 			[components addObjectsFromArray:@[verb, branch]];
+			break;
 		}
 		case GSEventTypeRelease:
 		case GSEventTypeRepository:
@@ -162,6 +165,11 @@
 		}
 		case GSEventTypeUnknown:
 			break;
+	}
+	}
+	@catch(id e) {
+		NSLog(@"exc[%@] evt[%@]", e, self.event);
+		abort();
 	}
 	
 	NSAttributedString *string = [NSAttributedString attributedStringWithAttributedStrings:components];
