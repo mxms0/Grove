@@ -29,6 +29,9 @@ static inline UIColor *GSRandomUIColor() {
 	return color;
 }
 
+static CGFloat GRGenericHorizontalPadding = 10.0f;
+static CGFloat GRGenericVerticalPadding = 10.0f;
+
 #define GSLocalizedString(x,y,z) x
 #define GSLocalizedStringFromTable(x,y,z) NSLocalizedStringFromTable(x,y,z)
 #define GSLocalizedStringWithDefault(key,table,bundle,value,comment) NSLocalizedStringWithDefaultValue(key,table,bundle,value,comment)

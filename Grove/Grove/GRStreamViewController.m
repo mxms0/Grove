@@ -16,6 +16,8 @@
 
 static NSString *reuseIdentifier = @"reuseIdentifier";
 
+static const CGFloat GRStreamViewAvatarSize = 38.0f;
+
 @implementation GRStreamViewController {
     GRStreamModel *model;
 	UIRefreshControl *refreshControl;
@@ -30,7 +32,7 @@ static NSString *reuseIdentifier = @"reuseIdentifier";
 		
         [model setDelegate:self];
 		
-		self.tableView.separatorInset = UIEdgeInsetsMake(0, 58, 0, 0);
+		self.tableView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
 		
 		[self.tableView registerClass:[GRStreamEventCell class] forCellReuseIdentifier:reuseIdentifier];
 		
@@ -42,6 +44,24 @@ static NSString *reuseIdentifier = @"reuseIdentifier";
 		GR_REGISTER_RELOAD_VIEW(GRStreamViewControllerNotificationKey);
     }
     return self;
+}
+
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	// Remove seperator inset
+	if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+		[cell setSeparatorInset:UIEdgeInsetsZero];
+	}
+	
+	// Prevent the cell from inheriting the Table View's margin settings
+	if ([cell respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)]) {
+		[cell setPreservesSuperviewLayoutMargins:NO];
+	}
+	
+	// Explictly set your cell's layout margins
+	if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+		[cell setLayoutMargins:UIEdgeInsetsZero];
+	}
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -83,6 +103,9 @@ static NSString *reuseIdentifier = @"reuseIdentifier";
         cell = [[GRStreamEventCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
     }
 	GREventCellModel *cellModel = [model eventCellModelForIndexPath:indexPath];
+	[cellModel setFontSize:13];
+	[cellModel setCellSize:CGSizeMake(aTableView.frame.size.width, 0)];
+	[cellModel setAvatarSize:CGSizeMake(GRStreamViewAvatarSize, GRStreamViewAvatarSize)];
 	[cellModel setTableCell:cell];
     [cell configureWithEventModel:[model eventCellModelForIndexPath:indexPath]];
     return cell;
@@ -91,7 +114,8 @@ static NSString *reuseIdentifier = @"reuseIdentifier";
 #pragma mark - TableView Delegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 55;
+	GREventCellModel *cellModel = [model eventCellModelForIndexPath:indexPath];
+    return [cellModel requiredTableCellHeight];
 }
 
 - (void)tableView:(UITableView *)aTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

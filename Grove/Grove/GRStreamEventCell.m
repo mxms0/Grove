@@ -11,11 +11,12 @@
 
 #import "GRStreamEventCell.h"
 #import "GREventCellModel.h"
+#import "GRLabel.h"
 #import "GSEvent.h"
 
 @implementation GRStreamEventCell {
     UIImageView *imageView;
-    UILabel *titleLabel;
+    GRLabel *titleLabel;
     UILabel *timeLabel;
 	UILabel *usernameLabel;
     
@@ -29,7 +30,7 @@
     if (self) {
         //Initialize Variables
         imageView		= [[UIImageView alloc] initWithFrame:CGRectZero];
-        titleLabel		= [[UILabel alloc] initWithFrame:CGRectZero];
+        titleLabel		= [[GRLabel alloc] initWithFrame:CGRectZero];
         timeLabel		= [[UILabel alloc] initWithFrame:CGRectZero];
         usernameLabel	= [[UILabel alloc] initWithFrame:CGRectZero];
         
@@ -38,9 +39,10 @@
 		[imageView setBackgroundColor:[UIColor whiteColor]];
 		[imageView.layer setCornerRadius:2.0f];
 		[imageView.layer setMasksToBounds:YES];
-        [titleLabel setLineBreakMode:NSLineBreakByWordWrapping];
-        [titleLabel setNumberOfLines:0];
-		[titleLabel setFont:[UIFont systemFontOfSize:13]];
+		
+		[titleLabel setBackgroundColor:[UIColor whiteColor]];
+		
+//        [titleLabel setLineBreakMode:NSLineBreakByWordWrapping];
         [timeLabel setFont:[UIFont systemFontOfSize:11]];
         [timeLabel setTextColor:[UIColor darkGrayColor]];
         [timeLabel setTextAlignment:NSTextAlignmentRight];
@@ -59,43 +61,46 @@
 	[imageView setImage:image];
 }
 
+- (void)setFrame:(CGRect)frame {
+	[super setFrame:frame];
+}
+
 - (void)layoutSubviews {
     [super layoutSubviews];
 	
 	CGFloat leftOffsetUsed = 0.0f;
 	CGFloat verticalOffsetUsed = 0.0f;
-	CGFloat genericHorizontalPadding = 10.0f;
-	CGFloat genericVerticalPadding = 10.0f;
 	
-	leftOffsetUsed += genericHorizontalPadding;
+	leftOffsetUsed += GRGenericHorizontalPadding;
 	
-	const CGFloat avatarSize = 38.0f;
+	const CGFloat avatarSize = eventModel.avatarSize.width;
 	
-	[imageView setFrame:CGRectMake(leftOffsetUsed, genericVerticalPadding, avatarSize, avatarSize)];
+	[imageView setFrame:CGRectMake(leftOffsetUsed, GRGenericVerticalPadding, avatarSize, avatarSize)];
 	
 	leftOffsetUsed += imageView.frame.size.width;
 	
-	leftOffsetUsed += genericHorizontalPadding;
+	leftOffsetUsed += GRGenericHorizontalPadding;
 	
-	verticalOffsetUsed += genericVerticalPadding;
+	verticalOffsetUsed += GRGenericVerticalPadding;
 	
-	[usernameLabel setFrame:CGRectMake(leftOffsetUsed, verticalOffsetUsed, self.frame.size.width - (leftOffsetUsed + genericHorizontalPadding), 13)];
+	[usernameLabel setFrame:CGRectMake(leftOffsetUsed, verticalOffsetUsed, self.frame.size.width - (leftOffsetUsed + GRGenericHorizontalPadding), 13)];
 	
 	verticalOffsetUsed += usernameLabel.frame.size.height;
 	
-	verticalOffsetUsed += floorf(genericVerticalPadding / 2);
+	verticalOffsetUsed += floorf(GRGenericVerticalPadding / 2);
 	
-	[titleLabel setFrame:CGRectMake(leftOffsetUsed, verticalOffsetUsed, self.frame.size.width - (leftOffsetUsed + genericHorizontalPadding), 40)];
-	[titleLabel sizeToFit];
+	[titleLabel setFrame:CGRectMake(leftOffsetUsed, verticalOffsetUsed, self.frame.size.width - (leftOffsetUsed + GRGenericHorizontalPadding), 40)];
+	//[titleLabel sizeToFit];
 	
-	[timeLabel setFrame:CGRectMake((self.frame.size.width - genericHorizontalPadding - 75.0f), genericVerticalPadding, 75.0f, 13)];
+	[timeLabel setFrame:CGRectMake((self.frame.size.width - GRGenericHorizontalPadding - 75.0f), GRGenericVerticalPadding, 75.0f, 13)];
 }
 
 - (void)configureWithEventModel:(GREventCellModel *)event; {
     eventModel = event;
     
     [timeLabel setText:[event dateStringFromEvent]];
-    [titleLabel setAttributedText:[event eventString]];
+    [titleLabel setAttributedString:[event eventString]];
+	[titleLabel setNeedsDisplay];
 	[usernameLabel setText:[event username]];
 	[imageView setImage:[event imageIcon]];
 //	[repoLabel setText:eventModel.event.repository.name];
