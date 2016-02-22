@@ -32,9 +32,9 @@ static inline UIColor *GSRandomUIColor() {
 static CGFloat GRGenericHorizontalPadding = 10.0f;
 static CGFloat GRGenericVerticalPadding = 10.0f;
 
-#define GSLocalizedString(x,y,z) x
-#define GSLocalizedStringFromTable(x,y,z) NSLocalizedStringFromTable(x,y,z)
-#define GSLocalizedStringWithDefault(key,table,bundle,value,comment) NSLocalizedStringWithDefaultValue(key,table,bundle,value,comment)
+#define GRLocalizedString(x,y,z) x
+#define GRLocalizedStringFromTable(x,y,z) NSLocalizedStringFromTable(x,y,z)
+#define GRLocalizedStringWithDefault(key,table,bundle,value,comment) NSLocalizedStringWithDefaultValue(key,table,bundle,value,comment)
 // will replace these later on to find which strings arent localized yet.
 
 extern void _GSAssert(BOOL, NSString *, ...);

@@ -7,19 +7,15 @@
 //
 
 #import "GRRepositoryInfoViewHeaderView.h"
+#import "GRSmallCapsLabel.h"
 
 @implementation GRRepositoryInfoViewHeaderView {
-	UILabel *headerLabel;
+	GRSmallCapsLabel *headerLabel;
 }
 
 - (instancetype)init {
 	if ((self = [super init])) {
-		headerLabel = [[UILabel alloc] init];
-		
-		NSArray *features = @[@{UIFontFeatureTypeIdentifierKey:@(3), UIFontFeatureSelectorIdentifierKey:@(3)}];
-		NSDictionary *fontAttributes = @{UIFontDescriptorFeatureSettingsAttribute:features, UIFontDescriptorNameAttribute:@"Helvetica"};
-		UIFontDescriptor *fontDescriptor = [[UIFontDescriptor alloc] initWithFontAttributes:fontAttributes];
-		[headerLabel setFont:[UIFont fontWithDescriptor:fontDescriptor size:12]];
+		headerLabel = [[GRSmallCapsLabel alloc] init];
 		
 		[self addSubview:headerLabel];
 	}

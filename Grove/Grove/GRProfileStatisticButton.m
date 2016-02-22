@@ -27,7 +27,7 @@
 	text = [[UILabel alloc] init];
 	subText = [[UILabel alloc] init];
 
-	[text setFont:[UIFont boldSystemFontOfSize:24]];
+	[text setFont:[UIFont boldSystemFontOfSize:17]];
 	[text setTextAlignment:NSTextAlignmentCenter];
 	[text setMinimumScaleFactor:0.5];
 	
@@ -51,8 +51,6 @@
 
 - (void)drawRect:(CGRect)rect {
 	[super drawRect:rect];
-	[[UIColor colorWithWhite:.9 alpha:1] set];
-	UIRectFill(CGRectMake(0, 0, (self.frame.size.width - 0), 1));
 }
 
 - (void)layoutSubviews {

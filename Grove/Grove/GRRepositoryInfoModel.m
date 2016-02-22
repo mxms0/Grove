@@ -37,10 +37,10 @@
 	NSString *label = nil;
 	switch (section) {
 		case 0:
-			label = GSLocalizedString(@"description", nil, nil);
+			label = GRLocalizedString(@"description", nil, nil);
 			break;
 		case 1:
-			label = GSLocalizedString(@"readme", nil, nil);
+			label = GRLocalizedString(@"readme", nil, nil);
 			break;
 	}
 	return [label uppercaseString];

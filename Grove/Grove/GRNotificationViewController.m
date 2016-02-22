@@ -10,7 +10,9 @@
 #import <GroveSupport/GroveSupport.h>
 #import "GRSessionManager.h"
 #import "GRNotificationTableViewCell.h"
+#import "GRSmallCapsLabel.h"
 #import "GRNotificationHeaderTableViewCell.h"
+#import "GRNotificationTitleView.h"
 
 @implementation GRNotificationViewController
 
@@ -23,17 +25,24 @@
 		
 		GRApplicationUser *user = [[GRSessionManager sharedInstance] currentUser];
 
-		__weak id weakSelf = self;
-		__weak UITableView *weakTableView = tableView;
 		[[GSGitHubEngine sharedInstance] notificationsForUser:user.user completionHandler:^(NSArray *__nullable notifs, NSError *__nullable error) {
-			
-			[weakSelf sortNewNotifications:notifs];
-			
-			[weakTableView reloadData];
+			// idea: put generic error handler in all models/view controllers to call to
+			if (error) {
+				GSAssert();
+			}
+			[self handleRetrievedNotifications:notifs];
 		}];
 		
     }
     return self;
+}
+
+- (void)handleRetrievedNotifications:(NSArray *)notifs {
+	[self sortNewNotifications:notifs];
+	
+	dispatch_async(dispatch_get_main_queue(), ^	{
+		[tableView reloadData];
+	});
 }
 
 - (void)sortNewNotifications:(NSArray *)newNotifs {
@@ -64,6 +73,10 @@
 	
 	[self.view addSubview:tableView];
 	[tableView setFrame:self.view.bounds];
+	
+	GRNotificationTitleView *headerView = [[GRNotificationTitleView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 45)];
+	
+	[tableView setTableHeaderView:headerView];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -98,7 +111,7 @@
 	}
 	
 	if (isHeaderCell) {
-		cell.textLabel.text = [[notifications allKeys] objectAtIndex:indexPath.section];
+		[cell setText:[[notifications allKeys] objectAtIndex:indexPath.section]];
 	}
 	else {
 		GSNotification *notification = [[notifications objectForKey:[[notifications allKeys] objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row - 1];
@@ -108,21 +121,6 @@
 	[cell setNeedsLayout];
 	
 	return cell;
-}
-
-- (void)tableView:(UITableView *)tableView willDisplayCell:(GRNotificationTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-	GRNotificationTableViewCellPosition position = GRNotificationTableViewCellMiddle;
-	
-	if (indexPath.row == 0) {
-		position |= GRNotificationTableViewCellTop;
-	}
-	
-	if (indexPath.row == [[notifications objectForKey:[notifications allKeys][indexPath.section]] count]) {
-		position |= GRNotificationTableViewCellBottom;
-	}
-	
-	[cell setPosition:position];
-	
 }
 
 @end

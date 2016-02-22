@@ -81,8 +81,6 @@
 		
 		CGFloat properHeight = MIN(textSize.height, self.fontSize * 3);
 		
-		NSLog(@"proper height is %@:%f", [self _generatedEventString].string, properHeight);
-		
 		cachedCellHeight = verticalOffsetUsed + properHeight + GRGenericVerticalPadding;
 		
 		CGFloat minimumCellHeight = self.avatarSize.height + 2 * GRGenericVerticalPadding;

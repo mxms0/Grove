@@ -9,5 +9,5 @@
 #import "GRNotificationTableViewCell.h"
 
 @interface GRNotificationHeaderTableViewCell : GRNotificationTableViewCell
-
+- (void)setText:(NSString *)text;
 @end

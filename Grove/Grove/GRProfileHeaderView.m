@@ -20,6 +20,7 @@
 	UILabel *usernameLabel;
 	UILabel *locationLabel;
 
+	UIView *statisticsView;
 	GRProfileStatisticButton *followersButton;
 	GRProfileStatisticButton *starredButton;
 	GRProfileStatisticButton *followingButton;
@@ -33,16 +34,17 @@
 		[self addSubview:profileImageView];
 		
 		usernameLabel = [[UILabel alloc] init];
-		[usernameLabel setFont:[UIFont boldSystemFontOfSize:20]];
+		[usernameLabel setFont:[UIFont systemFontOfSize:17]];
 		[usernameLabel setTextAlignment:NSTextAlignmentCenter];
 		[self addSubview:usernameLabel];
 		
 		nameLabel = [[UILabel alloc] init];
-		[nameLabel setFont:[UIFont systemFontOfSize:18]];
+		[nameLabel setFont:[UIFont boldSystemFontOfSize:20]];
 		[nameLabel setTextAlignment:NSTextAlignmentCenter];
 		[self addSubview:nameLabel];
 		
 		locationLabel = [[UILabel alloc] init];
+		[locationLabel setTextAlignment:NSTextAlignmentCenter];
 		[self addSubview:locationLabel];
 		
 		followersButton = [[GRProfileStatisticButton alloc] init];
@@ -55,12 +57,15 @@
 		
 		[followingButton setSubText:@"Following"];
 		
+		statisticsView = [[UIView alloc] init];
+		[self addSubview:statisticsView];
+		
 		NSArray *statsButtons = @[followersButton, starredButton, followingButton];
 		
 		for (int i = 0; i < 3; i++) {
 			GRProfileStatisticButton *button = statsButtons[i];
 			[button setBackgroundColor:[UIColor whiteColor]];
-			[self addSubview:button];
+			[statisticsView addSubview:button];
 		}
 	}
 	return self;
@@ -72,26 +77,44 @@
 	const CGFloat genericHorizontalPadding = 10.0f;
 	const CGFloat profilePictureSize = 64.0f;
 	const CGFloat genericVerticalPadding = 5.0f;
+	const CGFloat elementWidth = self.frame.size.width - 2 * genericHorizontalPadding;
 	
-	CGFloat verticalOffsetUsed = 5.0f;
+	CGFloat verticalOffsetUsed = 10.0f;
 	
-	[usernameLabel setFrame:CGRectMake(genericHorizontalPadding, verticalOffsetUsed, self.frame.size.width - 2 * genericHorizontalPadding, 30.0f)];
-	
-	verticalOffsetUsed += usernameLabel.frame.origin.x + usernameLabel.frame.size.height;
-	
-	[profileImageView setFrame:CGRectMake((self.frame.size.width/2 - profilePictureSize/2), verticalOffsetUsed + genericVerticalPadding, profilePictureSize, profilePictureSize)];
+	[profileImageView setFrame:CGRectMake((self.frame.size.width/2 - profilePictureSize/2), verticalOffsetUsed, profilePictureSize, profilePictureSize)];
 	
 	verticalOffsetUsed = profileImageView.frame.origin.y + profileImageView.frame.size.height;
 	
-	[nameLabel setFrame:CGRectMake(genericHorizontalPadding, verticalOffsetUsed + genericVerticalPadding, self.frame.size.width - genericHorizontalPadding * 2, 25)];
+	verticalOffsetUsed += genericVerticalPadding;
+	
+	[nameLabel setFrame:CGRectMake(genericHorizontalPadding, verticalOffsetUsed, elementWidth, 25)];
+	
+	verticalOffsetUsed += nameLabel.frame.size.height;
+	verticalOffsetUsed += genericVerticalPadding;
+	
+	[usernameLabel setFrame:CGRectMake(genericHorizontalPadding, verticalOffsetUsed, elementWidth, 30.0f)];
+	
+	verticalOffsetUsed += usernameLabel.frame.size.height;
+	
+	verticalOffsetUsed += genericVerticalPadding;
 
-	[locationLabel setFrame:CGRectMake(72 + 8 + 8, 8 + 24 + 22 + 2 + 2, (320 - (72 + 8 + 8)), 20)];
+	[locationLabel setFrame:CGRectMake(genericHorizontalPadding, verticalOffsetUsed, elementWidth, 20)];
+	
+	verticalOffsetUsed += locationLabel.frame.size.height;
+	verticalOffsetUsed += genericVerticalPadding;
+//	
+	CGFloat buttonViewWidth = .80 * self.frame.size.width;
+	
+	CGFloat leftOffset = (self.frame.size.width - buttonViewWidth) / 2.0;
+	[statisticsView setFrame:CGRectMake(leftOffset, verticalOffsetUsed, buttonViewWidth, 64)];
 	
 	NSArray *statsButtons = @[followersButton, starredButton, followingButton];
 	
+	CGFloat buttonWidth = buttonViewWidth / 3.0;
+	
 	for (int i = 0; i < 3; i++) {
 		GRProfileStatisticButton *button = statsButtons[i];
-		[button setFrame:CGRectMake(floorf(i * self.frame.size.width / 3), (profileImageView.frame.size.height + profileImageView.frame.origin.y * 2), floorf(self.frame.size.width/3), 64)];
+		[button setFrame:CGRectMake(buttonWidth * i, 0, buttonWidth, 64)];
 	}
 	
 	[self setUser:self.user];
