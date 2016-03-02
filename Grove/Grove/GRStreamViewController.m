@@ -136,4 +136,8 @@ static const CGFloat GRStreamViewAvatarSize = 38.0f;
 	});
 }
 
+- (BOOL)isDismissable {
+	return NO;
+}
+
 @end

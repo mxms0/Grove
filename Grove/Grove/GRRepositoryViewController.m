@@ -12,6 +12,7 @@
 #import "GRRepositoryInfoView.h"
 #import "GRRepositoryIssuesView.h"
 #import "GRRepositoryPullRequestView.h"
+#import "GRRepositoryCommitsView.h"
 
 #import <GroveSupport/GroveSupport.h>
 
@@ -22,6 +23,7 @@ static CGFloat GRHeaderSizeRatio = .10f;
 	GRRepositoryViewSelector *viewSelector;
 	GRRepositoryFileBrowserView *fileBrowser;
 	GRRepositoryInfoView *infoView;
+	GRRepositoryCommitsView *commitsView;
 	GRRepositoryPullRequestView *pullRequestView;
 	GRRepositoryIssuesView *issuesView;
 	GRRepositoryGenericSectionView *currentSectionView;
@@ -48,7 +50,11 @@ static CGFloat GRHeaderSizeRatio = .10f;
 	
 	_repository = newRepository;
 	[_repository addObserver:self forKeyPath:GSUpdatedDateKey options:0 context:NULL];
-	[_repository update];
+	[_repository updateWithCompletionHandler:^(NSError * _Nullable error) {
+		if (error) {
+			[self presentErrorAndDismissIfPossible:error];
+		}
+	}];
 	
 	[infoView setRepository:newRepository];
 	[fileBrowser setRepository:newRepository];
@@ -56,6 +62,10 @@ static CGFloat GRHeaderSizeRatio = .10f;
 	[header setRepositoryOwner:_repository.owner.username];
 }
 
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+	// only case right now should be to dismiss, so let's just dismiss... .-.
+	[self.navigationController popViewControllerAnimated:YES];
+}
 
 - (void)viewSelector:(GRRepositoryViewSelector *)selector didChangeToViewType:(GRRepositoryViewSelectorType)viewType {
 	if (currentViewType == viewType) return;
@@ -74,6 +84,9 @@ static CGFloat GRHeaderSizeRatio = .10f;
 			break;
 		case GRRepositoryViewSelectorTypeIssuesView:
 			viewToSwitch = [self _presentIssuesView];
+			break;
+		case GRRepositoryViewSelectorTypeCommitsView:
+			viewToSwitch = [self _presentCommitsView];
 			break;
 		case GRRepositoryViewSelectorTypePullRequestsView:
 			viewToSwitch = [self _presentPullRequestsView];
@@ -96,6 +109,14 @@ static CGFloat GRHeaderSizeRatio = .10f;
 	}
 	
 	return issuesView;
+}
+
+- (GRRepositoryGenericSectionView *)_presentCommitsView {
+	if (!commitsView) {
+		commitsView = [[GRRepositoryCommitsView alloc] init];
+		[commitsView setRepository:_repository];
+	}
+	return commitsView;
 }
 
 - (GRRepositoryGenericSectionView *)_presentPullRequestsView {

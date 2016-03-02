@@ -16,21 +16,28 @@
 }
 
 - (NSAttributedString *)attributedStringWithText:(NSString *)txt {
+	static UIFont *fontCache = nil;
+	static dispatch_once_t onceToken;
+	// probably isn't necessary anymore.
+	dispatch_once(&onceToken, ^{
+		NSArray *fontFeatureSettings = @[@{UIFontFeatureTypeIdentifierKey:@(kSmallCapsSelector), UIFontFeatureSelectorIdentifierKey:@(kSmallCapsSelector)}];
+		
+		NSDictionary *fontAttributes = @{UIFontDescriptorFeatureSettingsAttribute:fontFeatureSettings, UIFontDescriptorNameAttribute:@"Avenir-Heavy"};
+		// DO NOT NAME FORGET THE '-'
+		// Causes considerable lag when looking up fonts.
+		// between GillSans and AvenirNext-Medium
+		
+		UIFontDescriptor *fontDescriptor = [[UIFontDescriptor alloc] initWithFontAttributes:fontAttributes];
+		
+		fontCache = [UIFont fontWithDescriptor:fontDescriptor size:[self font].pointSize];
+	});
+	
 	NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:[txt uppercaseString]];
-	
-	NSArray *fontFeatureSettings = @[@{UIFontFeatureTypeIdentifierKey:@(kSmallCapsSelector), UIFontFeatureSelectorIdentifierKey:@(kSmallCapsSelector)}];
-	
-	NSDictionary *fontAttributes = @{UIFontDescriptorFeatureSettingsAttribute:fontFeatureSettings, UIFontDescriptorNameAttribute:@"AvenirHeavy"};
-	// between GillSans and AvenirNext-Medium
-	
-	UIFontDescriptor *fontDescriptor = [[UIFontDescriptor alloc] initWithFontAttributes:fontAttributes];
-	
-	UIFont *font = [UIFont fontWithDescriptor:fontDescriptor size:[self font].pointSize];
 	
 	NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
 	style.alignment = NSTextAlignmentCenter;
 	
-	[str addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, txt.length)];
+	[str addAttribute:NSFontAttributeName value:fontCache range:NSMakeRange(0, txt.length)];
 	[str addAttribute:NSKernAttributeName value:@(1.5) range:NSMakeRange(0, txt.length)];
 	
 	return str;

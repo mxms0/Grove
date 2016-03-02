@@ -18,7 +18,7 @@
 }
 
 - (void)commonInit {
-	
+	[self setBackgroundColor:GSRandomUIColor()];
 }
 
 - (Class)designatedModelClass {

@@ -141,7 +141,7 @@
 		GSSerializable *result = nil;
 		NSError *error = nil;
 		
-		NSLog(@"code %ld", [httpResponse statusCode]);
+		NSLog(@"code %ld", (long)[httpResponse statusCode]);
 		
 		switch ([httpResponse statusCode]) {
 			case 0: {
@@ -230,7 +230,7 @@
 				break;
 		}
 		
-		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^ {
+		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^ {
 			if (error) {
 				handler(nil, error);
 			}

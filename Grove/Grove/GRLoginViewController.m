@@ -149,4 +149,8 @@
 	return YES;
 }
 
+- (BOOL)isDismissable {
+	return NO;
+}
+
 @end

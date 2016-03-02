@@ -14,7 +14,7 @@
  [Branch v]
  */
 
-static const GRRepositoryHeaderViewStandardFontSize = 16.0f;
+static const CGFloat GRRepositoryHeaderViewStandardFontSize = 16.0f;
 
 @implementation GRRepositoryHeaderView {
 	NSString *combinedString;

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface GRViewController : UIViewController
-
-
+- (void)presentErrorAndDismissIfPossible:(NSError *)error;
+- (BOOL)isDismissable;
 @end
 

@@ -10,6 +10,6 @@
 #import "GRRepositoryViewSelector.h"
 
 @class GSRepository;
-@interface GRRepositoryViewController : GRViewController <GRRepositoryViewSelectorDelegate>
+@interface GRRepositoryViewController : GRViewController <GRRepositoryViewSelectorDelegate, UIAlertViewDelegate>
 @property (nonatomic, weak) GSRepository *repository;
 @end

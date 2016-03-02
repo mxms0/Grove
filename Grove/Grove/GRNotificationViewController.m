@@ -26,7 +26,6 @@
 		GRApplicationUser *user = [[GRSessionManager sharedInstance] currentUser];
 
 		[[GSGitHubEngine sharedInstance] notificationsForUser:user.user completionHandler:^(NSArray *__nullable notifs, NSError *__nullable error) {
-			// idea: put generic error handler in all models/view controllers to call to
 			if (error) {
 				GSAssert();
 			}
@@ -121,6 +120,10 @@
 	[cell setNeedsLayout];
 	
 	return cell;
+}
+
+- (BOOL)isDismissable {
+	return NO;
 }
 
 @end
