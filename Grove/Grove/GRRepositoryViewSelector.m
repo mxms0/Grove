@@ -12,6 +12,7 @@
 	GRRepositoryViewSelectorType currentViewType;
 	UIButton *infoButton;
 	UIButton *codeButton;
+	UIButton *commitsButton;
 	UIButton *issuesButton;
 	UIButton *pullRequestsButton;
 }
@@ -22,10 +23,11 @@
 
 		infoButton = [self _selectorButtonForViewType:GRRepositoryViewSelectorTypeInfoView];
 		codeButton = [self _selectorButtonForViewType:GRRepositoryViewSelectorTypeCodeView];
+		commitsButton = [self _selectorButtonForViewType:GRRepositoryViewSelectorTypeCommitsView];
 		issuesButton = [self _selectorButtonForViewType:GRRepositoryViewSelectorTypeIssuesView];
 		pullRequestsButton = [self _selectorButtonForViewType:GRRepositoryViewSelectorTypePullRequestsView];
 		
-		for (UIButton *v in @[infoButton, codeButton, issuesButton, pullRequestsButton]) {
+		for (UIButton *v in @[infoButton, codeButton, commitsButton, issuesButton, pullRequestsButton]) {
 			[self addSubview:v];
 		}
 	}
@@ -44,6 +46,9 @@
 			break;
 		case GRRepositoryViewSelectorTypeInfoView:
 			titleString = @"info";
+			break;
+		case GRRepositoryViewSelectorTypeCommitsView:
+			titleString = @"cmts";
 			break;
 		case GRRepositoryViewSelectorTypeIssuesView:
 			titleString = @"issues";
@@ -67,7 +72,7 @@
 - (void)layoutSubviews {
 	[super layoutSubviews];
 	int idx = 0;
-	NSArray *buttons = @[infoButton, codeButton, issuesButton, pullRequestsButton];
+	NSArray *buttons = @[infoButton, codeButton, commitsButton, issuesButton, pullRequestsButton];
 	CGFloat buttonWidth = floorf(self.frame.size.width / [buttons count]);
 	for (UIView *btn in buttons) {
 		[btn setFrame:CGRectMake(buttonWidth * idx, 0, buttonWidth, self.frame.size.height)];
@@ -83,6 +88,9 @@
 			break;
 		case GRRepositoryViewSelectorTypeIssuesView:
 			ret = @"Issues";
+			break;
+		case GRRepositoryViewSelectorTypeCommitsView:
+			ret = @"Commits";
 			break;
 		case GRRepositoryViewSelectorTypePullRequestsView:
 			ret = @"Pull Request";

@@ -334,7 +334,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)repositoriesForUser:(GSUser *)user completionHandler:(void (^)(NSArray<GSRepository *> *__nullable repos, NSError *__nullable error))handler {
 	
-	void (^basicHandler)(NSArray<NSDictionary *>* __nullable repos, NSError *__nullable error) = ^(NSArray<NSDictionary *>* __nullable repos, NSError *__nullable error) {
+	void (^basicHandler)(NSArray<NSDictionary *> *__nullable repos, NSError *__nullable error) = ^(NSArray<NSDictionary *>* __nullable repos, NSError *__nullable error) {
 		
 		GSInsuranceBegin(repos, NSArray, error);
 		

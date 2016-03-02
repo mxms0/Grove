@@ -20,6 +20,7 @@
 		50133F0B1B841496004B5BB8 /* GSRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 50133F091B841496004B5BB8 /* GSRepository.m */; };
 		50133F0E1B84495C004B5BB8 /* GSObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 50133F0C1B84495C004B5BB8 /* GSObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		50133F0F1B84495C004B5BB8 /* GSObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 50133F0D1B84495C004B5BB8 /* GSObject.m */; };
+		50140F571C7C6E6F00A3EBFA /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 50140F561C7C6E6F00A3EBFA /* icon@2x.png */; };
 		501558AB1B854BFD0002254D /* GSCommit.h in Headers */ = {isa = PBXBuildFile; fileRef = 501558A91B854BFD0002254D /* GSCommit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		501558AC1B854BFD0002254D /* GSCommit.m in Sources */ = {isa = PBXBuildFile; fileRef = 501558AA1B854BFD0002254D /* GSCommit.m */; };
 		501558AF1B8553020002254D /* GRSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 501558AE1B8553020002254D /* GRSessionManager.m */; };
@@ -39,6 +40,7 @@
 		501C439E1C41E9A100288901 /* GSRepositoryTree.h in Headers */ = {isa = PBXBuildFile; fileRef = 501C439C1C41E9A100288901 /* GSRepositoryTree.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		501C439F1C41E9A100288901 /* GSRepositoryTree.m in Sources */ = {isa = PBXBuildFile; fileRef = 501C439D1C41E9A100288901 /* GSRepositoryTree.m */; };
 		501C43A21C41ED4100288901 /* GSRepositoryTreeInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = 501C43A11C41ED4100288901 /* GSRepositoryTreeInternal.h */; };
+		501F87071C86751F000C2C53 /* GRSelectableLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 501F87061C86751F000C2C53 /* GRSelectableLabel.m */; };
 		503C595E1BAD17EE003CB50E /* GRSyntaxHighlightedTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 503C595D1BAD17EE003CB50E /* GRSyntaxHighlightedTextView.m */; };
 		50504D9A1BA263D800B87C5F /* GREventCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 50504D991BA263D800B87C5F /* GREventCellModel.m */; };
 		506005BA1BBB5474000F5AFF /* GRActiveUserProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 506005B91BBB5474000F5AFF /* GRActiveUserProfileViewController.m */; };
@@ -192,6 +194,7 @@
 		50133F091B841496004B5BB8 /* GSRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSRepository.m; sourceTree = "<group>"; };
 		50133F0C1B84495C004B5BB8 /* GSObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSObject.h; sourceTree = "<group>"; };
 		50133F0D1B84495C004B5BB8 /* GSObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSObject.m; sourceTree = "<group>"; };
+		50140F561C7C6E6F00A3EBFA /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
 		501558A91B854BFD0002254D /* GSCommit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSCommit.h; sourceTree = "<group>"; };
 		501558AA1B854BFD0002254D /* GSCommit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSCommit.m; sourceTree = "<group>"; };
 		501558AD1B8553020002254D /* GRSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRSessionManager.h; sourceTree = "<group>"; };
@@ -220,6 +223,8 @@
 		501C439C1C41E9A100288901 /* GSRepositoryTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSRepositoryTree.h; sourceTree = "<group>"; };
 		501C439D1C41E9A100288901 /* GSRepositoryTree.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSRepositoryTree.m; sourceTree = "<group>"; };
 		501C43A11C41ED4100288901 /* GSRepositoryTreeInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSRepositoryTreeInternal.h; sourceTree = "<group>"; };
+		501F87051C86751F000C2C53 /* GRSelectableLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRSelectableLabel.h; sourceTree = "<group>"; };
+		501F87061C86751F000C2C53 /* GRSelectableLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRSelectableLabel.m; sourceTree = "<group>"; };
 		503C595C1BAD17EE003CB50E /* GRSyntaxHighlightedTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRSyntaxHighlightedTextView.h; sourceTree = "<group>"; };
 		503C595D1BAD17EE003CB50E /* GRSyntaxHighlightedTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRSyntaxHighlightedTextView.m; sourceTree = "<group>"; };
 		50504D981BA263D800B87C5F /* GREventCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GREventCellModel.h; sourceTree = "<group>"; };
@@ -694,6 +699,7 @@
 				84309A771B845864008EB771 /* Models */,
 				84F524EC1B8325E50077A06C /* Views */,
 				50F081911B82ED6500366161 /* Assets.xcassets */,
+				50140F561C7C6E6F00A3EBFA /* icon@2x.png */,
 				50F081961B82ED6500366161 /* Info.plist */,
 				50E4B5AA1B82F79A0029264A /* Grove.h */,
 				50F081851B82ED6500366161 /* Supporting Files */,
@@ -768,6 +774,8 @@
 				50E781EF1C78D14F00143931 /* GRLabel.m */,
 				50E781F21C78DA7800143931 /* GRSmallCapsLabel.h */,
 				50E781F31C78DA7800143931 /* GRSmallCapsLabel.m */,
+				501F87051C86751F000C2C53 /* GRSelectableLabel.h */,
+				501F87061C86751F000C2C53 /* GRSelectableLabel.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -957,6 +965,7 @@
 			files = (
 				5084207C1BA893C700BD9630 /* Grove.strings in Resources */,
 				50F081921B82ED6500366161 /* Assets.xcassets in Resources */,
+				50140F571C7C6E6F00A3EBFA /* icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1049,6 +1058,7 @@
 				5097B5D11B8C0BC600A72721 /* GRViewModel.m in Sources */,
 				5070D5611C4A04BD00E80AB1 /* GRTableViewController.m in Sources */,
 				503C595E1BAD17EE003CB50E /* GRSyntaxHighlightedTextView.m in Sources */,
+				501F87071C86751F000C2C53 /* GRSelectableLabel.m in Sources */,
 				84309A7D1B854A21008EB771 /* GRLoginViewController.m in Sources */,
 				84A8D0FA1B8D239600B6B4FB /* GREventViewControllerProxy.m in Sources */,
 				84A8D1001B8D311000B6B4FB /* GRIssueCommentCell.m in Sources */,
@@ -1285,10 +1295,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"/Volumes/Storage/Documents/Code/Dependencies/Masonry/build/Debug-iphoneos",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREFIX_HEADER = Grove/Grove.h;
 				GCC_WARN_PEDANTIC = YES;
 				INFOPLIST_FILE = Grove/Info.plist;
@@ -1311,10 +1318,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"/Volumes/Storage/Documents/Code/Dependencies/Masonry/build/Debug-iphoneos",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREFIX_HEADER = Grove/Grove.h;
 				GCC_WARN_PEDANTIC = YES;
 				INFOPLIST_FILE = Grove/Info.plist;

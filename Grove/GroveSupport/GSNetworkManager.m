@@ -11,9 +11,28 @@
 #import "GSUser.h"
 #import "GroveSupportInternal.h"
 #import "GSURLRequest.h"
+#include <libkern/OSAtomic.h>
+
+@interface GSNetworkManager ()
+@property (nonatomic, assign) NSInteger _requestCount;
+@end
 
 @implementation GSNetworkManager {
 	NSURLSession *currentSession;
+}
+
+- (void)set_requestCount:(NSInteger)reqCount {
+	@synchronized(self) {
+		__requestCount = reqCount;
+	}
+#if TARGET_OS_IPHONE
+	if (__requestCount == 1) {
+		[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+	}
+	else if (__requestCount == 0) {
+		[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+	}
+#endif
 }
 
 + (instancetype)sharedInstance {
@@ -104,12 +123,16 @@
 	// placeholder for direction
 	// since there may be a download request
 	// and an upload request too.
+
 	[self sendDataRequest:request completionHandler:^(GSSerializable *response, NSError *error) {
 		handler(response, error);
 	}];
 }
 
 - (void)sendDataRequest:(NSURLRequest *)request completionHandler:(void (^)(GSSerializable *response, NSError *error))handler {
+	__weak GSNetworkManager *weakSelf = self;
+	weakSelf._requestCount = weakSelf._requestCount + 1;
+	
 	void (^dataHandler)(NSData *data, NSURLResponse *response, NSError *error) = ^(NSData *data, NSURLResponse *response, NSError *responseError) {
 #if 1
 		NSLog(@"Request:%@ Response: %@", request, response);
@@ -214,11 +237,13 @@
 			else {
 				handler(result, nil);
 			}
+			weakSelf._requestCount = weakSelf._requestCount - 1;
 		});
 	};
 	
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^ {
 		// this probably isn't necessary anymore.
+		
 		NSURLSessionDataTask *task = [currentSession dataTaskWithRequest:request completionHandler:dataHandler];
 		[task resume];
 	});

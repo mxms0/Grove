@@ -39,9 +39,6 @@ static CGFloat GRHeaderSizeRatio = .10f;
 		infoView = [[GRRepositoryInfoView alloc] init];
 		
 		currentSectionView = infoView;
-		// Notes about this view:
-		// Consider perhaps User/Reponame only when its a reasonable length
-		// otherwise Reponame\n User
 	}
 	return self;
 }

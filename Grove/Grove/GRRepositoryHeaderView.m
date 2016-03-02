@@ -7,76 +7,99 @@
 //
 
 #import "GRRepositoryHeaderView.h"
+#import "GRSelectableLabel.h"
 
-static CGFloat GRRepositoryGenericPadding = 5.0f;
+/*
+ [User] [/] [Repository Name...]
+ [Branch v]
+ */
+
+static const GRRepositoryHeaderViewStandardFontSize = 16.0f;
 
 @implementation GRRepositoryHeaderView {
-	BOOL usesOneLine;
 	NSString *combinedString;
-	UILabel *upperLabel;
-	UILabel *lowerLabel;
+	GRSelectableLabel *usernameLabel;
+	GRSelectableLabel *slashCharacterLabel;
+	GRSelectableLabel *repositoryNameLabel;
+	GRSelectableLabel *branchNameLabel;
+	GRSelectableLabel *branchLabel;
+	
+	CGFloat usernameWidth;
+	CGFloat slashCharacterWidth;
+	CGFloat repositoryNameWidth;
 }
 
 - (instancetype)init {
 	if ((self = [super init])) {
-		upperLabel = [[UILabel alloc] init];
-		lowerLabel = [[UILabel alloc] init];
+		usernameLabel = [self _standardSelectableLabel];
+		repositoryNameLabel = [self _standardSelectableLabel];
+		branchNameLabel = [self _standardSelectableLabel];
+		slashCharacterLabel = [self _standardSelectableLabel];
+		[slashCharacterLabel setText:@"/"];
+		branchLabel = [self _standardSelectableLabel];
+		[branchLabel setText:@"master"];
 		
-		for (UIView *v in @[upperLabel, lowerLabel]) {
+		for (UIView *v in @[usernameLabel, repositoryNameLabel, branchNameLabel, slashCharacterLabel, branchLabel]) {
+			[v setBackgroundColor:GSRandomUIColor()];
 			[self addSubview:v];
 		}
+		
+		slashCharacterWidth = 8.0f; // do actual calculation here with fonts and all
+		
 	}
 	return self;
 }
 
+- (GRSelectableLabel *)_standardSelectableLabel {
+	GRSelectableLabel *label = [[GRSelectableLabel alloc] init];
+	[label setFont:[UIFont systemFontOfSize:GRRepositoryHeaderViewStandardFontSize]];
+	return label;
+}
+
 - (void)setRepositoryOwner:(NSString *)owner {
 	_repositoryOwner = owner;
-	[self recalculateViewProperties];
+	[usernameLabel setText:owner];
 }
 
 - (void)setRepositoryName:(NSString *)name {
 	_repositoryName = name;
-	[self recalculateViewProperties];
+	[repositoryNameLabel setText:name];
 }
 
-- (void)recalculateViewProperties {
-	if (_repositoryOwner && _repositoryName) {
-		combinedString = [NSString stringWithFormat:@"%@ / %@", _repositoryOwner, _repositoryName];
-		CGSize screenSize = [[UIScreen mainScreen] bounds].size;
-		
-		CGRect boundingRect = [combinedString boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:15]} context:nil];
-		
-		usesOneLine = (boundingRect.size.width < (screenSize.width - 2 * GRRepositoryGenericPadding));
-		
-		NSLog(@"View properties: %@:%d:%f", NSStringFromCGRect(boundingRect), usesOneLine, screenSize.width);
-		
-		if (usesOneLine) {
-			[upperLabel setText:combinedString];
-			[lowerLabel setHidden:YES];
-		}
-		
-		else {
-			[lowerLabel setHidden:NO];
-			[upperLabel setText:_repositoryName];
-			[lowerLabel setText:_repositoryOwner];
-		}
-	}
+- (void)setFrame:(CGRect)frame {
+	[super setFrame:frame];
 }
 
 - (void)layoutSubviews {
 	[super layoutSubviews];
 	
-	if (usesOneLine) {
-		[upperLabel setFrame:CGRectMake(GRRepositoryGenericPadding, 0, self.frame.size.width - 2 * GRRepositoryGenericPadding, self.frame.size.height)];
-	}
-	else {
-		CGSize workingSize = self.bounds.size;
-		CGFloat ratio = .65;
-		CGFloat divideLine = ceilf(workingSize.height * ratio);
-		
-		[upperLabel setFrame:CGRectMake(GRRepositoryGenericPadding, 0, workingSize.width - 2 * GRRepositoryGenericPadding, divideLine)];
-		[lowerLabel setFrame:CGRectMake(GRRepositoryGenericPadding, divideLine, workingSize.width - 2 * GRRepositoryGenericPadding, (workingSize.height - divideLine))];
-	}
+	CGFloat horizontalOffsetUsed = 0.0;
+	CGFloat verticalOffsetUsed = floorf(GRGenericVerticalPadding/2);
+	
+	const CGFloat itemPadding = 3.0;
+	
+	const CGFloat labelHeight = 25.0;
+	
+	horizontalOffsetUsed += GRGenericHorizontalPadding;
+	
+	[usernameLabel setFrame:CGRectMake(horizontalOffsetUsed, verticalOffsetUsed, usernameLabel.frame.size.width, labelHeight)];
+	[usernameLabel sizeToFit];
+	
+	horizontalOffsetUsed += usernameLabel.frame.size.width;
+	horizontalOffsetUsed += itemPadding;
+	
+	[slashCharacterLabel setFrame:CGRectMake(horizontalOffsetUsed, verticalOffsetUsed, slashCharacterWidth, labelHeight)];
+	[slashCharacterLabel sizeToFit];
+	
+	horizontalOffsetUsed += slashCharacterLabel.frame.size.width;
+	horizontalOffsetUsed += itemPadding;
+	
+	[repositoryNameLabel setFrame:CGRectMake(horizontalOffsetUsed, verticalOffsetUsed, repositoryNameWidth, labelHeight)];
+	[repositoryNameLabel sizeToFit];
+	
+	verticalOffsetUsed += repositoryNameLabel.frame.size.height + floorf(GRGenericVerticalPadding/2);
+	
+	[branchLabel setFrame:CGRectMake(GRGenericHorizontalPadding, verticalOffsetUsed, self.frame.size.width - 2 * GRGenericHorizontalPadding, self.frame.size.height - verticalOffsetUsed - GRGenericVerticalPadding)];
 }
 
 @end
