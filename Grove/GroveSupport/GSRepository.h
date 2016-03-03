@@ -27,13 +27,13 @@ typedef NS_OPTIONS(NSInteger, GSRepositoryPermissions) {
 @property (nonatomic, readonly, assign) BOOL wikiAvailable;
 @property (nonatomic, readonly, assign) BOOL pagesAvailable;
 @property (nonatomic, readonly, assign) BOOL issuesAvailable;
-@property (nonatomic, readonly, strong) NSURL *browserURL;
-@property (nonatomic, readonly, strong) NSURL *browserHomepageURL;
+@property (nonatomic, readonly, strong) NSURL *browserURL; //https://github.com/...
+@property (nonatomic, readonly, strong) NSURL *browserHomepageURL; // website specified by repo
 @property (nonatomic, readonly, strong) NSURL *sshURL;
 @property (nonatomic, readonly, strong) NSURL *gitURL;
 @property (nonatomic, readonly, strong, getter=pathString) NSString *pathString;
 @property (nonatomic, readonly, strong) NSString *language;
-@property (nonatomic, readonly, strong) NSString *defaultBranch;
+@property (nonatomic, readonly, strong, getter=defaultBranch) NSString *defaultBranch;
 // I really prefer language to be an enum, but then i'd be converting it from string, just so the user could convert it back again...
 // Also I'd need to keep an updated list of all languages..
 @property (nonatomic, readonly, strong) NSString *userDescription;
@@ -43,5 +43,6 @@ typedef NS_OPTIONS(NSInteger, GSRepositoryPermissions) {
 @property (nonatomic, readonly, strong) NSNumber *numberOfStargazers;
 @property (nonatomic, readonly, strong) NSNumber *repositorySize;
 @property (nonatomic, readonly, strong) NSDate *lastPushDate;
+@property (nonatomic, readonly, assign, getter=isFull) BOOL full;
 
 @end

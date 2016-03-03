@@ -103,6 +103,19 @@
 	return [NSString stringWithFormat:@"%@/%@", _owner.username, _name];
 }
 
+- (NSString *)defaultBranchOrMaster {
+	if (!_defaultBranch)
+		return @"master";
+	return _defaultBranch;
+}
+
+- (BOOL)isFull {
+	// need to establish criteriae for this.
+	// If we have the full packet on the first go,
+	// then an update can be backgrounded and not waited on
+	return NO;
+}
+
 - (NSString *)description {
 	return [NSString stringWithFormat:@"<%@: %p; name = %@;>", NSStringFromClass([self class]), self, [self pathString]];
 }

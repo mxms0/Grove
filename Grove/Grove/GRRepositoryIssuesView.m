@@ -8,6 +8,11 @@
 
 #import "GRRepositoryIssuesView.h"
 
+/*
+ Open Issues (Count)
+ 
+ */
+
 @implementation GRRepositoryIssuesView
 
 @end

@@ -21,8 +21,6 @@ static const CGFloat GRRepositoryHeaderViewStandardFontSize = 16.0f;
 	GRSelectableLabel *usernameLabel;
 	GRSelectableLabel *slashCharacterLabel;
 	GRSelectableLabel *repositoryNameLabel;
-	GRSelectableLabel *branchNameLabel;
-	GRSelectableLabel *branchLabel;
 	
 	CGFloat usernameWidth;
 	CGFloat slashCharacterWidth;
@@ -33,13 +31,10 @@ static const CGFloat GRRepositoryHeaderViewStandardFontSize = 16.0f;
 	if ((self = [super init])) {
 		usernameLabel = [self _standardSelectableLabel];
 		repositoryNameLabel = [self _standardSelectableLabel];
-		branchNameLabel = [self _standardSelectableLabel];
 		slashCharacterLabel = [self _standardSelectableLabel];
 		[slashCharacterLabel setText:@"/"];
-		branchLabel = [self _standardSelectableLabel];
-		[branchLabel setText:@"master"];
 		
-		for (UIView *v in @[usernameLabel, repositoryNameLabel, branchNameLabel, slashCharacterLabel, branchLabel]) {
+		for (UIView *v in @[usernameLabel, repositoryNameLabel, slashCharacterLabel]) {
 			[v setBackgroundColor:GSRandomUIColor()];
 			[self addSubview:v];
 		}
@@ -98,8 +93,6 @@ static const CGFloat GRRepositoryHeaderViewStandardFontSize = 16.0f;
 	[repositoryNameLabel sizeToFit];
 	
 	verticalOffsetUsed += repositoryNameLabel.frame.size.height + floorf(GRGenericVerticalPadding/2);
-	
-	[branchLabel setFrame:CGRectMake(GRGenericHorizontalPadding, verticalOffsetUsed, self.frame.size.width - 2 * GRGenericHorizontalPadding, self.frame.size.height - verticalOffsetUsed - GRGenericVerticalPadding)];
 }
 
 @end
