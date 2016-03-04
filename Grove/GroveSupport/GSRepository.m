@@ -21,7 +21,7 @@
 - (void)_configureWithDictionary:(NSDictionary *)dictionary {
 	[super _configureWithDictionary:dictionary];
 	
-#if 1
+#if 0
 	NSLog(@"Repo %@", dictionary);
 #endif
 	
@@ -113,7 +113,8 @@
 	// need to establish criteriae for this.
 	// If we have the full packet on the first go,
 	// then an update can be backgrounded and not waited on
-	return NO;
+	// I've never seen archive_url as null. This'll improve in time.
+	return !!(self.archiveAPIURL);
 }
 
 - (NSString *)description {

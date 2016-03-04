@@ -9,8 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @protocol GRRepositoryGenericSectionModelDelegate <NSObject>
-
-
+- (void)reloadView;
 @end
 
 @class GSRepository;
@@ -18,5 +17,7 @@
 @property (nonatomic, weak) id <GRRepositoryGenericSectionModelDelegate> delegate;
 - (instancetype)initWithRepository:(GSRepository *)repo;
 - (NSString *)sectionLabelForSection:(NSUInteger)section;
+- (NSUInteger)numberOfRowsInSection:(NSUInteger)section;
+- (NSUInteger)numberOfSections;
 - (void)update;
 @end

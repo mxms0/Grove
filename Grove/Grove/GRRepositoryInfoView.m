@@ -32,6 +32,10 @@
 	model = [[GRRepositoryInfoModel alloc] initWithRepository:repository];
 }
 
+- (void)reloadView {
+	[tableView reloadData];
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 	return [(GRRepositoryInfoModel *)model numberOfRowsInSection:section];
 }

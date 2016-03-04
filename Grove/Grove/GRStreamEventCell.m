@@ -10,7 +10,7 @@
 #import "NSAttributedString+GRExtensions.h"
 
 #import "GRStreamEventCell.h"
-#import "GREventCellModel.h"
+#import "GRStreamCellModel.h"
 #import "GRLabel.h"
 #import "GSEvent.h"
 
@@ -20,7 +20,7 @@
     UILabel *timeLabel;
 	UILabel *usernameLabel;
     
-    GREventCellModel *eventModel;
+    GRStreamCellModel *eventModel;
 }
 
 #pragma mark Initializers
@@ -95,7 +95,7 @@
 	[timeLabel setFrame:CGRectMake((self.frame.size.width - GRGenericHorizontalPadding - 75.0f), GRGenericVerticalPadding, 75.0f, 13)];
 }
 
-- (void)configureWithEventModel:(GREventCellModel *)event; {
+- (void)configureWithEventModel:(GRStreamCellModel *)event; {
     eventModel = event;
     
     [timeLabel setText:[event dateStringFromEvent]];

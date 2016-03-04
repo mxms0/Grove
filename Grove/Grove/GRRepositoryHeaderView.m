@@ -10,11 +10,12 @@
 #import "GRSelectableLabel.h"
 
 /*
- [User] [/] [Repository Name...]
- [Branch v]
+ [User]
+ [Owner]
  */
 
 static const CGFloat GRRepositoryHeaderViewStandardFontSize = 16.0f;
+//static const CGFloat GRRepositoryHeaderViewTopLevelSizeRatio = .60f; // I'm not sorry for the verbosity of these
 
 @implementation GRRepositoryHeaderView {
 	NSString *combinedString;

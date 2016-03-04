@@ -10,7 +10,7 @@
 
 #import "GSEvent.h"
 
-@interface GREventViewControllerProxy : GRViewController
+@interface GRStreamViewControllerProxy : GRViewController
 
 - (instancetype)initWithEvent:(GSEvent *)event;
 

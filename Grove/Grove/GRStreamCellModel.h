@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @class GSEvent, GRStreamEventCell;
-@interface GREventCellModel : NSObject
+@interface GRStreamCellModel : NSObject <NSCoding> // NSSecureCoding?
 @property (nonatomic, assign) CGSize cellSize;
 @property (nonatomic, assign) CGSize avatarSize;
 @property (nonatomic, assign) CGFloat fontSize;

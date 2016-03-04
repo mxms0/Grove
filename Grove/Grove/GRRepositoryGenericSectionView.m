@@ -35,4 +35,8 @@
 	[model update];
 }
 
+- (void)reloadView {
+	
+}
+
 @end

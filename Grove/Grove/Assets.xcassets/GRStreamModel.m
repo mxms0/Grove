@@ -9,7 +9,7 @@
 #import "GRStreamModel.h"
 #import "GSGitHubEngine.h"
 #import "GRSessionManager.h"
-#import "GREventCellModel.h"
+#import "GRStreamCellModel.h"
 
 static NSString *const GRStreamModelStorageKey = @"stream_data"; // i will move away from NSUserDefaults soon. promise.
 
@@ -19,12 +19,17 @@ static NSString *const GRStreamModelStorageKey = @"stream_data"; // i will move 
 
 @implementation GRStreamModel
 
-- (instancetype)init {
+- (instancetype)initWithDelegate:(id <GRViewModelDelegate>)del {
 	if ((self = [super init])) {
+		self.delegate = del;
 		self.eventModels = [[NSMutableOrderedSet alloc] init];
-		NSArray *oldEventModels = [[NSUserDefaults standardUserDefaults] objectForKey:GRStreamModelStorageKey];
-		if (oldEventModels) {
-			self.eventModels = [oldEventModels mutableCopy];
+		NSData *cachedEventData = [[NSUserDefaults standardUserDefaults] objectForKey:GRStreamModelStorageKey];
+		if (cachedEventData) {
+			NSArray *ret = [NSKeyedUnarchiver unarchiveObjectWithData:cachedEventData];
+			if ([ret isKindOfClass:[NSOrderedSet class]]) {
+				self.eventModels = [ret mutableCopy];
+				[del reloadData];
+			}
 		}
 		[self requestNewData];
 	}
@@ -40,13 +45,18 @@ static NSString *const GRStreamModelStorageKey = @"stream_data"; // i will move 
 - (void)handleNewleyArrivedEvents:(NSArray *)events {
 	NSMutableOrderedSet *eventModels = [[NSMutableOrderedSet alloc] init];
 	for (GSEvent *evt in events) {
-		GREventCellModel *model = [[GREventCellModel alloc] initWithEvent:evt];
+		GRStreamCellModel *model = [[GRStreamCellModel alloc] initWithEvent:evt];
 		[eventModels addObject:model];
+		(void)[model eventString];
+		(void)[model requiredTableCellHeight];
 	}
 	
 	self.eventModels = eventModels;
 	[self.delegate reloadData];
-	//	[[NSUserDefaults standardUserDefaults] setObject:self.eventModels forKey:GRStreamModelStorageKey];
+	
+	NSData *root = [NSKeyedArchiver archivedDataWithRootObject:self.eventModels];
+	
+	[[NSUserDefaults standardUserDefaults] setObject:root forKey:GRStreamModelStorageKey];
 }
 
 - (NSInteger)numberOfSections {
@@ -57,7 +67,7 @@ static NSString *const GRStreamModelStorageKey = @"stream_data"; // i will move 
 	return self.eventModels.count;
 }
 
-- (GREventCellModel *)eventCellModelForIndexPath:(NSIndexPath *)indexPath {
+- (GRStreamCellModel *)eventCellModelForIndexPath:(NSIndexPath *)indexPath {
 	if (indexPath.row < self.eventModels.count) {
 		return self.eventModels[indexPath.row];
 	}

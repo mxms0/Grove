@@ -25,4 +25,12 @@
 	return nil;
 }
 
+- (NSUInteger)numberOfRowsInSection:(NSUInteger)section {
+	return 0;
+}
+
+- (NSUInteger)numberOfSections {
+	return 0;
+}
+
 @end

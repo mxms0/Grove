@@ -9,8 +9,8 @@
 #import <Masonry/Masonry.h>
 
 #import "GRStreamViewController.h"
-#import "GREventViewControllerProxy.h"
-#import "GREventCellModel.h"
+#import "GRStreamViewControllerProxy.h"
+#import "GRStreamCellModel.h"
 #import "GRStreamEventCell.h"
 #import "GRStreamModel.h"
 
@@ -27,11 +27,7 @@ static const CGFloat GRStreamViewAvatarSize = 38.0f;
 #pragma mark - Initializers
 
 - (instancetype)init {
-	if ((self = [super init])) {		
-        model = [[GRStreamModel alloc] init];
-		
-        [model setDelegate:self];
-		
+	if ((self = [super init])) {
 		self.tableView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
 		
 		[self.tableView registerClass:[GRStreamEventCell class] forCellReuseIdentifier:reuseIdentifier];
@@ -42,12 +38,13 @@ static const CGFloat GRStreamViewAvatarSize = 38.0f;
 		[self setRefreshControl:refreshControl];
 		
 		GR_REGISTER_RELOAD_VIEW(GRStreamViewControllerNotificationKey);
+		
+		model = [[GRStreamModel alloc] initWithDelegate:self];
     }
     return self;
 }
 
--(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
 	// Remove seperator inset
 	if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
 		[cell setSeparatorInset:UIEdgeInsetsZero];
@@ -102,7 +99,7 @@ static const CGFloat GRStreamViewAvatarSize = 38.0f;
     if (!cell) {
         cell = [[GRStreamEventCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
     }
-	GREventCellModel *cellModel = [model eventCellModelForIndexPath:indexPath];
+	GRStreamCellModel *cellModel = [model eventCellModelForIndexPath:indexPath];
 	[cellModel setFontSize:13];
 	[cellModel setCellSize:CGSizeMake(aTableView.frame.size.width, 0)];
 	[cellModel setAvatarSize:CGSizeMake(GRStreamViewAvatarSize, GRStreamViewAvatarSize)];
@@ -114,12 +111,12 @@ static const CGFloat GRStreamViewAvatarSize = 38.0f;
 #pragma mark - TableView Delegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-	GREventCellModel *cellModel = [model eventCellModelForIndexPath:indexPath];
+	GRStreamCellModel *cellModel = [model eventCellModelForIndexPath:indexPath];
     return [cellModel requiredTableCellHeight];
 }
 
 - (void)tableView:(UITableView *)aTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    GREventViewControllerProxy *viewController = [[GREventViewControllerProxy alloc] initWithEvent:[model eventCellModelForIndexPath:indexPath].event];
+    GRStreamViewControllerProxy *viewController = [[GRStreamViewControllerProxy alloc] initWithEvent:[model eventCellModelForIndexPath:indexPath].event];
     [aTableView deselectRowAtIndexPath:indexPath animated:YES];
     [self.navigationController pushViewController:viewController animated:YES];
 }

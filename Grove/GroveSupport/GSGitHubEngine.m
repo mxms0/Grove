@@ -461,5 +461,5 @@ NS_ASSUME_NONNULL_END
 NSString *const GSDomain = @"com.RickSupport.morty";
 NSString *const GSErrorDomain = @"MortiestMorty";
 NSString *const GSUpdatedDateKey = @"updatedDate";
-NSString *const GSRequires2FAErrorKey = @"requires2FA";
-NSString *const GSAuthCriteria = @"authCriteria";
+NSString *const GSRequires2FAErrorKey = @"Requires2FA";
+NSString *const GSAuthCriteria = @"AuthCriteria";

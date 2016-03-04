@@ -82,6 +82,7 @@
 			[sections addObject:row];
 		}
 	}
+	[self.delegate reloadView];
 }
 
 - (NSUInteger)numberOfSections {
@@ -89,7 +90,7 @@
 }
 
 - (NSUInteger)numberOfRowsInSection:(NSUInteger)section {
-	return 4;
+	return [sectionsAvailable count];
 }
 
 - (NSString *)sectionLabelForSection:(NSUInteger)section {

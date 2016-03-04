@@ -9,11 +9,12 @@
 #import <Foundation/Foundation.h>
 #import "GRViewModel.h"
 
-@class GSEvent, GREventCellModel;
+@class GSEvent, GRStreamCellModel;
 
 @interface GRStreamModel : GRViewModel
+- (instancetype)initWithDelegate:(id <GRViewModelDelegate>)del;
 - (void)requestNewData;
 - (NSInteger)numberOfSections;
 - (NSInteger)numberOfRowsInSection:(NSInteger)section;
-- (GREventCellModel *)eventCellModelForIndexPath:(NSIndexPath *)indexPath;
+- (GRStreamCellModel *)eventCellModelForIndexPath:(NSIndexPath *)indexPath;
 @end

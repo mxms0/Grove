@@ -24,8 +24,7 @@ static NSString *reuseIdetentifier = @"reuseIdentifier";
 #pragma mark - Initializers
 
 - (instancetype)initWithEvent:(GSEvent *)event {
-    self = [super init];
-    if (self) {
+	if ((self = [super init])) {
         self.view.backgroundColor = [UIColor lightGrayColor];
         
         //Initialize Views
@@ -48,6 +47,7 @@ static NSString *reuseIdetentifier = @"reuseIdentifier";
         for (UIView *view in @[imageView, messageView, infoLabel]) {
             [titleView addSubview:view];
         }
+		
         for (UIView *view in @[titleView, tableView]) {
             [self.view addSubview:view];
         }
