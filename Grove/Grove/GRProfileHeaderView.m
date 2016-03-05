@@ -12,8 +12,6 @@
 #import "GRProfileStatisticButton.h"
 #import <GroveSupport/GroveSupport.h>
 
-#define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
-
 @implementation GRProfileHeaderView {
 	UIImageView *profileImageView;
 	UILabel *nameLabel;
@@ -102,7 +100,7 @@
 	
 	verticalOffsetUsed += locationLabel.frame.size.height;
 	verticalOffsetUsed += genericVerticalPadding;
-//	
+
 	CGFloat buttonViewWidth = .80 * self.frame.size.width;
 	
 	CGFloat leftOffset = (self.frame.size.width - buttonViewWidth) / 2.0;

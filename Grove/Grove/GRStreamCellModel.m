@@ -29,6 +29,7 @@ static NSString *const GRStreamCellModelStorageCreatedDateKey = @"CreatedDate";
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
 	if ((self = [super init])) {
+		// should probably cache more information about the event
 		if ([aDecoder containsValueForKey:GRStreamCellModelStorageAttributedStringKey]) {
 			attributedMessage = [aDecoder decodeObjectForKey:GRStreamCellModelStorageAttributedStringKey];
 		}
@@ -44,7 +45,6 @@ static NSString *const GRStreamCellModelStorageCreatedDateKey = @"CreatedDate";
 		if ([aDecoder containsValueForKey:GRStreamCellModelStorageCreatedDateKey]) {
 			createdDate = [aDecoder decodeObjectForKey:GRStreamCellModelStorageCreatedDateKey];
 		}
-		
 	}
 	return self;
 }
@@ -132,6 +132,8 @@ static NSString *const GRStreamCellModelStorageCreatedDateKey = @"CreatedDate";
 		CGFloat minimumCellHeight = self.avatarSize.height + 2 * GRGenericVerticalPadding;
 		
 		cachedCellHeight = MAX(minimumCellHeight, cachedCellHeight);
+		
+		cachedCellHeight = ceilf(cachedCellHeight);
 		
 		frameDirty = NO;
 	}
@@ -297,52 +299,32 @@ static NSString *const GRStreamCellModelStorageCreatedDateKey = @"CreatedDate";
 	return string;
 }
 
+- (NSUInteger)hash {
+	return [[self username] hash] ^ (int)[createdDate timeIntervalSince1970];
+	// this is probably a very bad hashing algorithm
+}
+
+- (BOOL)isEqual:(id)object {
+	if (self == object) return YES;
+	
+	if ([object isKindOfClass:[object class]]) {
+		return NO;
+	}
+	
+	if (![[object username] isEqualToString:[self username]]) {
+		return NO;
+	}
+	
+	// need one more check here..
+	// otherwise not very valid
+	
+	return YES;
+}
+
 #pragma mark - Parsers
 
 - (NSString *)dateStringFromEvent {
-	unsigned int unitFlags = NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitDay | NSCalendarUnitMonth;
-	NSDateComponents *conversionInfo = [[NSCalendar currentCalendar] components:unitFlags fromDate:createdDate toDate:[NSDate date] options:0];
-	
-	NSInteger months = [conversionInfo month];
-	NSInteger days = [conversionInfo day];
-	NSInteger hours = [conversionInfo hour];
-	NSInteger minutes = [conversionInfo minute];
-	
-	NSString *dateString = nil;
-	if (months > 0) {
-		if (months == 1) {
-			dateString = @"1 Month";
-		}
-		else {
-			dateString = [NSString stringWithFormat:@"%li Months", (long)months];
-		}
-	}
-	else if (days > 0) {
-		if (days == 1) {
-			dateString = @"1 Day";
-		}
-		else {
-			dateString = [NSString stringWithFormat:@"%li Days", (long)days];
-		}
-	}
-	else if (hours > 0) {
-		if (hours == 1) {
-			dateString = @"1 Hour";
-		}
-		else {
-			dateString = [NSString stringWithFormat:@"%li Hours", (long)hours];
-		}
-	}
-	else if (minutes > 0) {
-		if (minutes == 1) {
-			dateString = @"1 Minute";
-		}
-		else {
-			dateString = [NSString stringWithFormat:@"%li Minutes", (long)minutes];
-		}
-	}
-	
-	return dateString;
+	return GRRelativeDateStringFromDate(createdDate);
 }
 
 @end

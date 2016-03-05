@@ -16,7 +16,7 @@
 
 #import <GroveSupport/GroveSupport.h>
 
-static CGFloat GRHeaderSizeRatio = .10f;
+static const CGFloat GRHeaderSizeRatio = .10f;
 
 @implementation GRRepositoryViewController {
 	GRRepositoryHeaderView *header;

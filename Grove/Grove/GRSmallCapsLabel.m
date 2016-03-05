@@ -9,7 +9,7 @@
 #import "GRSmallCapsLabel.h"
 #import <CoreText/CoreText.h>
 
-static CGFloat GRSmallCapsLabelFontSize = 12.0;
+static const CGFloat GRSmallCapsLabelFontSize = 12.0;
 
 @implementation GRSmallCapsLabel
 

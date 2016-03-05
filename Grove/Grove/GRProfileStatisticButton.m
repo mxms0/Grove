@@ -55,7 +55,7 @@
 
 - (void)layoutSubviews {
 	[super layoutSubviews];
-	CGFloat divisionFactor = 0.60;
+	const CGFloat divisionFactor = 0.60;
 	[text setFrame:CGRectMake(0, 5, self.frame.size.width, floorf(divisionFactor * self.frame.size.height))];
 	[subText setFrame:CGRectMake(0, floorf(divisionFactor * self.frame.size.height), self.frame.size.width, self.frame.size.height - (floorf(divisionFactor * self.frame.size.height)))];
 }

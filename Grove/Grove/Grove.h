@@ -11,6 +11,8 @@
 
 #import <Masonry/Masonry.h>
 
+#define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
+
 static inline UIColor *GRColorFromRGB(unsigned long long rgb) {
 	return [UIColor colorWithRed:((float)((rgb & 0xFF0000) >> 16))/255.0 green:((float)((rgb & 0xFF00) >> 8))/255.0 blue:((float)(rgb & 0xFF))/255.0 alpha:1.0];
 }
@@ -29,8 +31,54 @@ static inline UIColor *GSRandomUIColor() {
 	return color;
 }
 
-static CGFloat GRGenericHorizontalPadding = 10.0f;
-static CGFloat GRGenericVerticalPadding = 10.0f;
+static inline NSString *GRRelativeDateStringFromDate(NSDate *date) {
+	unsigned int unitFlags = NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitDay | NSCalendarUnitMonth;
+	NSDateComponents *conversionInfo = [[NSCalendar currentCalendar] components:unitFlags fromDate:date toDate:[NSDate date] options:0];
+	
+	NSInteger months = [conversionInfo month];
+	NSInteger days = [conversionInfo day];
+	NSInteger hours = [conversionInfo hour];
+	NSInteger minutes = [conversionInfo minute];
+	
+	NSString *dateString = nil;
+	if (months > 0) {
+		if (months == 1) {
+			dateString = @"1 Month";
+		}
+		else {
+			dateString = [NSString stringWithFormat:@"%li Months", (long)months];
+		}
+	}
+	else if (days > 0) {
+		if (days == 1) {
+			dateString = @"1 Day";
+		}
+		else {
+			dateString = [NSString stringWithFormat:@"%li Days", (long)days];
+		}
+	}
+	else if (hours > 0) {
+		if (hours == 1) {
+			dateString = @"1 Hour";
+		}
+		else {
+			dateString = [NSString stringWithFormat:@"%li Hours", (long)hours];
+		}
+	}
+	else if (minutes > 0) {
+		if (minutes == 1) {
+			dateString = @"1 Minute";
+		}
+		else {
+			dateString = [NSString stringWithFormat:@"%li Minutes", (long)minutes];
+		}
+	}
+	
+	return dateString;
+}
+
+static const CGFloat GRGenericHorizontalPadding = 10.0f;
+static const CGFloat GRGenericVerticalPadding = 10.0f;
 
 #define GRLocalizedString(x,y,z) x
 #define GRLocalizedStringFromTable(x,y,z) NSLocalizedStringFromTable(x,y,z)

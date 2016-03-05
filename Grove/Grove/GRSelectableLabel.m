@@ -37,9 +37,9 @@
 }
 
 - (void)sizeToFit {
-	CGFloat fontSize = [[[self titleLabel] font] pointSize];
+	const CGFloat fontSize = [[[self titleLabel] font] pointSize];
 	
-	CGFloat padding = floorf((fontSize / 14) * 3.0);
+	const CGFloat padding = floorf((fontSize / 14) * 3.0);
 	
 	CGSize stringSize = [[[self titleLabel] text] boundingRectWithSize:CGSizeMake(self.frame.size.width, self.frame.size.height) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [[self titleLabel] font]} context:nil].size;
 	

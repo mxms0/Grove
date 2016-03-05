@@ -108,7 +108,7 @@
 }
 
 - (NSString *)titleForSection:(NSInteger)section {
-    NSString *ret = @"undef";
+    NSString *ret = @"UNDEF";
     switch (section) {
         case 0:
             break;

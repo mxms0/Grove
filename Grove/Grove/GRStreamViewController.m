@@ -14,7 +14,7 @@
 #import "GRStreamEventCell.h"
 #import "GRStreamModel.h"
 
-static NSString *reuseIdentifier = @"reuseIdentifier";
+static NSString *const reuseIdentifier = @"reuseIdentifier";
 
 static const CGFloat GRStreamViewAvatarSize = 38.0f;
 
@@ -96,15 +96,18 @@ static const CGFloat GRStreamViewAvatarSize = 38.0f;
 
 - (UITableViewCell *)tableView:(UITableView *)aTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     GRStreamEventCell *cell = [aTableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
+	
     if (!cell) {
         cell = [[GRStreamEventCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
     }
+	
 	GRStreamCellModel *cellModel = [model eventCellModelForIndexPath:indexPath];
 	[cellModel setFontSize:13];
 	[cellModel setCellSize:CGSizeMake(aTableView.frame.size.width, 0)];
 	[cellModel setAvatarSize:CGSizeMake(GRStreamViewAvatarSize, GRStreamViewAvatarSize)];
 	[cellModel setTableCell:cell];
     [cell configureWithEventModel:[model eventCellModelForIndexPath:indexPath]];
+	
     return cell;
 }
 

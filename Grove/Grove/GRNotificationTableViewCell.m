@@ -8,9 +8,7 @@
 
 #import "GRNotificationTableViewCell.h"
 
-@implementation GRNotificationTableViewCell {
-
-}
+@implementation GRNotificationTableViewCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
 	if ((self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])) {
