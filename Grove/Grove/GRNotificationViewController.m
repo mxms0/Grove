@@ -13,8 +13,11 @@
 #import "GRSmallCapsLabel.h"
 #import "GRNotificationHeaderTableViewCell.h"
 #import "GRNotificationTitleView.h"
+#import "GRNotificationModel.h"
 
-@implementation GRNotificationViewController
+@implementation GRNotificationViewController {
+	GRNotificationModel *model;
+}
 
 - (instancetype)init {
 	if ((self = [super init])) {

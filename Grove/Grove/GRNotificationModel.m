@@ -10,4 +10,8 @@
 
 @implementation GRNotificationModel
 
+- (void)prepareForTeardown {
+	[super prepareForTeardown];
+}
+
 @end

@@ -29,6 +29,8 @@ static NSString *const GRStreamCellModelStorageCreatedDateKey = @"CreatedDate";
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
 	if ((self = [super init])) {
+		// This is borked when you try to tap on these events, since they contain no event types
+		// Consider copying everything over, or putting encodings in GroveSupport
 		// should probably cache more information about the event
 		if ([aDecoder containsValueForKey:GRStreamCellModelStorageAttributedStringKey]) {
 			attributedMessage = [aDecoder decodeObjectForKey:GRStreamCellModelStorageAttributedStringKey];
@@ -169,8 +171,19 @@ static NSString *const GRStreamCellModelStorageCreatedDateKey = @"CreatedDate";
 			[components addObjectsFromArray:@[message, cp1]];
 			break;
 		}
-		case GSEventTypeCommitComment:
+		case GSEventTypeCommitComment: {
+			NSAttributedString *verb = [[NSAttributedString alloc] initWithString:@"✏️ Commented on Commit " attributes:defaultAttributes];
+			NSString *destinationString = self.event.repository.pathString;
+			NSString *commitHash = self.event.comment.commitIdentifier;
+			if (commitHash && [commitHash length] >= 10) {
+				commitHash = [commitHash substringToIndex:10];
+				destinationString = [destinationString stringByAppendingFormat:@"@%@", commitHash];
+			}
+			NSAttributedString *dest = [[NSAttributedString alloc] initWithString:destinationString attributes:defaultAttributes];
+			[components addObjectsFromArray:@[verb, dest]];
+			
 			break;
+		}
 		case GSEventTypeCreate:{
 			NSAttributedString *verb = nil;
 			NSAttributedString *subject = nil;

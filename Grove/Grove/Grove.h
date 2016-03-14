@@ -89,15 +89,26 @@ extern void _GSAssert(BOOL, NSString *, ...);
 #define GSAssert() _GSAssert(NO, @"(%s) in [%s:%d]", __PRETTY_FUNCTION__, __FILE__, __LINE__)
 
 static NSString *const GRStreamViewControllerNotificationKey = @"GRStreamViewControllerNotificationKey";
+static NSString *const GRApplicationStateNotificationTeardownKey = @"GRApplicationStateNotificationTeardownKey";
 
-#define GR_REGISTER_RELOAD_VIEW(x) \
+#define GR_RELOAD_VIEW_REGISTER(x,sel) \
 	do { \
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_reloadNotification) name:x object:nil]; \
+		[[NSNotificationCenter defaultCenter] addObserver:x selector:sel name:GRStreamViewControllerNotificationKey object:nil]; \
 	} while (0); 
 
-#define GR_RELOAD_VIEW(x) \
+#define GR_RELOAD_VIEW() \
 	do { \
-		[[NSNotificationCenter defaultCenter] postNotificationName:x object:nil]; \
+		[[NSNotificationCenter defaultCenter] postNotificationName:GRStreamViewControllerNotificationKey object:nil]; \
+	} while (0);
+
+#define GR_TEARDOWN_REGISTER(x,sel) \
+	do { \
+		[[NSNotificationCenter defaultCenter] addObserver:x selector:sel name:GRApplicationStateNotificationTeardownKey object:nil]; \
+	} while (0);
+
+#define GR_TEARDOWN_NOTIFY() \
+	do { \
+		[[NSNotificationCenter defaultCenter] postNotificationName:GRApplicationStateNotificationTeardownKey object:nil]; \
 	} while (0);
 
 #endif

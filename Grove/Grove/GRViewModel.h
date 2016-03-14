@@ -17,4 +17,5 @@
 - (NSInteger)numberOfSections;
 - (NSInteger)numberOfRowsInSection:(NSInteger)section;
 - (NSString *)titleForSection:(NSInteger)section;
+- (void)prepareForTeardown;
 @end

@@ -36,6 +36,11 @@ static NSString *const GRStreamModelStorageKey = @"stream_data"; // i will move 
 	return self;
 }
 
+- (void)prepareForTeardown {
+	[super prepareForTeardown];
+	// save application data here.
+}
+
 - (void)requestNewData {
 	[[GSGitHubEngine sharedInstance] eventsForUser:[[[GRSessionManager sharedInstance] currentUser] user] completionHandler:^(NSArray *events, NSError *error) {
 		[self handleNewleyArrivedEvents:events];
@@ -49,6 +54,7 @@ static NSString *const GRStreamModelStorageKey = @"stream_data"; // i will move 
 		[eventModels addObject:model];
 		(void)[model eventString];
 		(void)[model requiredTableCellHeight];
+		// Perhaps call these methods when the app is about to close, and then save in cache.
 	}
 	
 	self.eventModels = eventModels;

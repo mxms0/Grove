@@ -478,6 +478,8 @@
 		5060631E1C7ADF5100E1674A /* Notification View */ = {
 			isa = PBXGroup;
 			children = (
+				5097B5CB1B8C0BBB00A72721 /* GRNotificationModel.h */,
+				5097B5CC1B8C0BBB00A72721 /* GRNotificationModel.m */,
 				84F524F01B8326D60077A06C /* GRNotificationViewController.h */,
 				84F524F11B8326D60077A06C /* GRNotificationViewController.m */,
 				506063181C7ADEF300E1674A /* GRNotificationHeaderLabel.h */,
@@ -751,8 +753,6 @@
 			children = (
 				501558B31B8553D70002254D /* GRApplicationUser.h */,
 				501558B41B8553D70002254D /* GRApplicationUser.m */,
-				5097B5CB1B8C0BBB00A72721 /* GRNotificationModel.h */,
-				5097B5CC1B8C0BBB00A72721 /* GRNotificationModel.m */,
 				5097B5CF1B8C0BC600A72721 /* GRViewModel.h */,
 				5097B5D01B8C0BC600A72721 /* GRViewModel.m */,
 			);

@@ -37,7 +37,7 @@ static const CGFloat GRStreamViewAvatarSize = 38.0f;
 		
 		[self setRefreshControl:refreshControl];
 		
-		GR_REGISTER_RELOAD_VIEW(GRStreamViewControllerNotificationKey);
+		GR_RELOAD_VIEW_REGISTER(self, @selector(_reloadNotification));
 		
 		model = [[GRStreamModel alloc] initWithDelegate:self];
     }
