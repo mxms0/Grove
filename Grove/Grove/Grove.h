@@ -31,6 +31,7 @@ static inline UIColor *GSRandomUIColor() {
 }
 
 static inline NSString *GRRelativeDateStringFromDate(NSDate *date) {
+	// XXX: this isn't perfect. I'll clean it up soon.
 	unsigned int unitFlags = NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitDay | NSCalendarUnitMonth;
 	NSDateComponents *conversionInfo = [[NSCalendar currentCalendar] components:unitFlags fromDate:date toDate:[NSDate date] options:0];
 	

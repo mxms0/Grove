@@ -1,5 +1,5 @@
 //
-//  GRGenericConversationModel.m
+//  GRCommitCommentConversationModel.h
 //  Grove
 //
 //  Created by Max Shavrick on 3/16/16.
@@ -8,6 +8,6 @@
 
 #import "GRGenericConversationModel.h"
 
-@implementation GRGenericConversationModel
+@interface GRCommitCommentConversationModel : GRGenericConversationModel
 
 @end
