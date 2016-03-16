@@ -9,9 +9,8 @@
 #ifndef Grove_Grove_h
 #define Grove_Grove_h
 
-#import <Masonry/Masonry.h>
 
-#define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
+#import <Masonry/Masonry.h>
 
 static inline UIColor *GRColorFromRGB(unsigned long long rgb) {
 	return [UIColor colorWithRed:((float)((rgb & 0xFF0000) >> 16))/255.0 green:((float)((rgb & 0xFF00) >> 8))/255.0 blue:((float)(rgb & 0xFF))/255.0 alpha:1.0];
@@ -80,6 +79,9 @@ static inline NSString *GRRelativeDateStringFromDate(NSDate *date) {
 static const CGFloat GRGenericHorizontalPadding = 10.0f;
 static const CGFloat GRGenericVerticalPadding = 10.0f;
 
+#define GRMaxf(x,y) ((x) > (y) ? (x) : (y))
+#define GRMinf(x,y) ((x) < (y) ? (x) : (y))
+
 #define GRLocalizedString(x,y,z) x
 #define GRLocalizedStringFromTable(x,y,z) NSLocalizedStringFromTable(x,y,z)
 #define GRLocalizedStringWithDefault(key,table,bundle,value,comment) NSLocalizedStringWithDefaultValue(key,table,bundle,value,comment)
@@ -90,6 +92,7 @@ extern void _GSAssert(BOOL, NSString *, ...);
 
 static NSString *const GRStreamViewControllerNotificationKey = @"GRStreamViewControllerNotificationKey";
 static NSString *const GRApplicationStateNotificationTeardownKey = @"GRApplicationStateNotificationTeardownKey";
+static NSString *const GRHighlightAttribute = @"GRHighlightAttribute";
 
 #define GR_RELOAD_VIEW_REGISTER(x,sel) \
 	do { \

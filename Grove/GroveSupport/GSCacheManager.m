@@ -64,7 +64,14 @@
 		[[NSUserDefaults standardUserDefaults] synchronize];
 	}
 	
-	NSString *filePath = [NSTemporaryDirectory() stringByAppendingString:extension];
+	NSArray *cacheDirectories = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+	if ([cacheDirectories count] == 0) {
+		GSAssert();
+	}
+	
+	NSString *cachePath = [cacheDirectories objectAtIndex:0];
+	
+	NSString *filePath = [cachePath stringByAppendingPathComponent:extension];
 	
 	mkdir([filePath UTF8String], 777);
 
@@ -72,8 +79,17 @@
 }
 
 - (NSURL *)_createWorkingDirectoryForToken:(NSString *)token {
-	NSString *tempPath = NSTemporaryDirectory();
-	NSString *pathTempl = [tempPath stringByAppendingFormat:@"%@XXXXXX", GSDomain];
+	NSArray *cacheDirectories = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+	if ([cacheDirectories count] == 0) {
+		GSAssert();
+	}
+	
+	NSString *cachePath = [cacheDirectories objectAtIndex:0];
+	
+	NSString *pathTarget = [NSString stringWithFormat:@"%@XXXXXX", GSDomain];
+	
+	NSString *pathTempl = [cachePath stringByAppendingPathComponent:pathTarget];
+
 	char *pathRes = mkdtemp((char *)[pathTempl UTF8String]);
 	
 	NSString *finalPath = [NSString stringWithUTF8String:pathRes];

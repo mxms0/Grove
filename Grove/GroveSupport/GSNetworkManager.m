@@ -134,14 +134,13 @@
 	weakSelf._requestCount = weakSelf._requestCount + 1;
 	
 	void (^dataHandler)(NSData *data, NSURLResponse *response, NSError *error) = ^(NSData *data, NSURLResponse *response, NSError *responseError) {
-#if 1
+#if 0
+		NSLog(@"code %ld", (long)[httpResponse statusCode]);
 		NSLog(@"Request:%@ Response: %@", request, response);
 #endif
 		NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response; // put safety checks here. albeit unlikely
 		GSSerializable *result = nil;
 		NSError *error = nil;
-		
-		NSLog(@"code %ld", (long)[httpResponse statusCode]);
 		
 		switch ([httpResponse statusCode]) {
 			case 0: {
@@ -354,7 +353,6 @@
 - (void)requestRepositoryContentsForRepositoryNamed:(NSString *)repoName repositoryOwner:(NSString *)username token:(NSString *)token path:(NSString *)path completionHandler:(void (^)(NSArray *__nullable items, NSError *__nullable error))handler {
 	
 	NSURL *requestURL  = GSAPIURLComplex(GSAPIEndpointRepos, username, repoName, @"contents", path, nil);
-		NSLog(@"fff %@:%@", path, requestURL);
 	GSURLRequest *request = [[GSURLRequest alloc] initWithURL:requestURL];
 	[request setAuthToken:token];
 	

@@ -42,7 +42,8 @@ static NSString *const GRStreamModelStorageKey = @"stream_data"; // i will move 
 }
 
 - (void)requestNewData {
-	[[GSGitHubEngine sharedInstance] eventsForUser:[[[GRSessionManager sharedInstance] currentUser] user] completionHandler:^(NSArray *events, NSError *error) {
+	GSUser *targetUser = [[[GRSessionManager sharedInstance] currentUser] user];
+	[[GSGitHubEngine sharedInstance] eventsForUser:targetUser completionHandler:^(NSArray *events, NSError *error) {
 		[self handleNewleyArrivedEvents:events];
 	}];
 }

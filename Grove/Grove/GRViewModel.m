@@ -13,12 +13,12 @@
 - (instancetype)init {
 	if ((self = [super init])) {
 		[self populateCachedData];
-		GR_TEARDOWN_REGISTER(self, @selector(prepareForTearDown));
+		GR_TEARDOWN_REGISTER(self, @selector(prepareForTeardown));
 	}
 	return self;
 }
 
-- (void)prepareForTearDown {
+- (void)prepareForTeardown {
 	
 }
 

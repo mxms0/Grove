@@ -22,4 +22,9 @@
 - (nonnull UIImage *)imageIcon;
 - (nonnull NSString *)dateStringFromEvent;
 - (CGFloat)requiredTableCellHeight;
+- (CGFloat)subCellHeight;
+- (CGFloat)safeTextHeight;
+- (nullable NSString *)subText;
+- (nullable UIImage *)subImage;
+- (BOOL)requiresSubCell;
 @end

@@ -21,10 +21,15 @@ static NSString *const GRStreamCellModelStorageCreatedDateKey = @"CreatedDate";
 @implementation GRStreamCellModel {
 	NSAttributedString *attributedMessage;
 	NSString *cachedUsername;
+	NSString *cachedSubCellText;
 	UIImage *avatar;
-	BOOL frameDirty;
-	CGFloat cachedCellHeight;
+
 	NSDate *createdDate;
+
+	BOOL frameDirty;
+	BOOL requiresSubCell;
+	CGFloat cachedCellHeight;
+	CGFloat safeTextHeight;
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
@@ -94,6 +99,10 @@ static NSString *const GRStreamCellModelStorageCreatedDateKey = @"CreatedDate";
 	return avatar;
 }
 
+- (CGFloat)safeTextHeight {
+	return safeTextHeight;
+}
+
 - (void)setCellSize:(CGSize)cellSize {
 	if (CGSizeEqualToSize(self.cellSize, cellSize)) return;
 	frameDirty = YES;
@@ -126,18 +135,24 @@ static NSString *const GRStreamCellModelStorageCreatedDateKey = @"CreatedDate";
 		
 		CGSize textSize = [[self eventString] boundingRectWithSize:CGSizeMake(self.cellSize.width - (leftOffsetUsed + GRGenericHorizontalPadding), CGFLOAT_MAX) options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading) context:NULL].size;
 		
+		CGFloat properHeight = GRMinf(textSize.height, self.fontSize * 3);
 		
-		CGFloat properHeight = MIN(textSize.height, self.fontSize * 3);
+		safeTextHeight = properHeight;
 		
 		cachedCellHeight = verticalOffsetUsed + properHeight + GRGenericVerticalPadding;
 		
 		CGFloat minimumCellHeight = self.avatarSize.height + 2 * GRGenericVerticalPadding;
 		
-		cachedCellHeight = MAX(minimumCellHeight, cachedCellHeight);
+		cachedCellHeight = GRMaxf(minimumCellHeight, cachedCellHeight);
 		
 		cachedCellHeight = ceilf(cachedCellHeight);
 		
 		frameDirty = NO;
+		
+		if (self.requiresSubCell) {
+			cachedCellHeight += [self subCellHeight];
+			cachedCellHeight += GRGenericVerticalPadding;
+		}
 	}
 	
 	return cachedCellHeight;
@@ -152,6 +167,22 @@ static NSString *const GRStreamCellModelStorageCreatedDateKey = @"CreatedDate";
 	return attributedMessage;
 }
 
+- (CGFloat)subCellHeight {
+	return 58.0;
+}
+
+- (NSString *)subText {
+	return cachedSubCellText;
+}
+
+- (UIImage *)subImage {
+	return nil;
+}
+
+- (BOOL)requiresSubCell {
+	return requiresSubCell;
+}
+
 - (NSAttributedString *)_generatedEventString {
 //	UIColor *blue = [UIColor colorWithRed:0.2627 green:0.4784 blue:0.7451 alpha:1.0];
 //	UIFont *boldFont = [UIFont boldSystemFontOfSize:18];
@@ -160,6 +191,7 @@ static NSString *const GRStreamCellModelStorageCreatedDateKey = @"CreatedDate";
 	NSMutableArray *components = [[NSMutableArray alloc] init];
 	
 	NSDictionary *defaultAttributes = @{NSFontAttributeName : regularFont};
+	NSDictionary *highlightedAttributes = @{NSFontAttributeName : regularFont, GRHighlightAttribute: @(YES) };
 	
 	// clean up this mess, soon.
 	// getting all the logic down and finding out what data gets used is fine for now
@@ -179,8 +211,12 @@ static NSString *const GRStreamCellModelStorageCreatedDateKey = @"CreatedDate";
 				commitHash = [commitHash substringToIndex:10];
 				destinationString = [destinationString stringByAppendingFormat:@"@%@", commitHash];
 			}
-			NSAttributedString *dest = [[NSAttributedString alloc] initWithString:destinationString attributes:defaultAttributes];
+			NSAttributedString *dest = [[NSAttributedString alloc] initWithString:destinationString attributes:highlightedAttributes];
 			[components addObjectsFromArray:@[verb, dest]];
+			
+			requiresSubCell = YES;
+			
+			cachedSubCellText = [self.event.comment body];
 			
 			break;
 		}
@@ -279,8 +315,9 @@ static NSString *const GRStreamCellModelStorageCreatedDateKey = @"CreatedDate";
 		case GSEventTypePullRequestReviewComment:
 			break;
 		case GSEventTypePush: {
-			NSAttributedString *verb = [[NSAttributedString alloc] initWithString:@"👞 Pushed to " attributes:defaultAttributes];
-			NSAttributedString *branch = [[NSAttributedString alloc] initWithString:self.event.ref attributes:defaultAttributes];
+			NSAttributedString *verb = [[NSAttributedString alloc] initWithString:@"👞 Pushed to  " attributes:defaultAttributes];
+			NSString *perhapsBranch = [self.event.ref lastPathComponent];
+			NSAttributedString *branch = [[NSAttributedString alloc] initWithString:perhapsBranch attributes:highlightedAttributes];
 			[components addObjectsFromArray:@[verb, branch]];
 			break;
 		}
