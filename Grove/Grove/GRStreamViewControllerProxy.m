@@ -109,7 +109,11 @@
             break;
         }
         case GSEventTypePush: {
-            
+			self = (GRStreamViewControllerProxy *)[[GRRepositoryViewController alloc] init];
+			GSRepository *repository = [event repository];
+			[(GRRepositoryViewController *)self setRepository:repository];
+			// Consider then from here, telling the repository to jump to specified branch.
+			// Also: maybe this should jump to the commit instead.
             break;
         }
         case GSEventTypeRelease: {

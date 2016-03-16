@@ -18,6 +18,8 @@
 - (instancetype)initWithFrame:(CGRect)frame {
 	if ((self = [super initWithFrame:frame])) {
 		[self commonInit];
+		// XXX: the accounting for the re-sizability of this view does not exist.
+		// It will always be sized for the case where there is 3+ lines of text. 
 	}
 	return self;
 }
