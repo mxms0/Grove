@@ -84,3 +84,8 @@ NSString *GSRFC2616DTimestampFromDate(NSDate *date) {
 	
 	return [formatter stringFromDate:date];
 }
+
+NSString *GSStringFromBase64String(NSString *str) {
+	NSData *encodedData = [[NSData alloc] initWithBase64EncodedString:str options:(NSDataBase64DecodingOptions)0];
+	return [[NSString alloc] initWithData:encodedData encoding:NSUTF8StringEncoding];
+}

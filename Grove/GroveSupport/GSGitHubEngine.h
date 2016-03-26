@@ -44,6 +44,7 @@ typedef NS_ENUM(NSInteger, GSTwoFactorAuthMethod) {
 - (void)collaboratorsForRepositoryNamed:(NSString *)repoName owner:(NSString *)owner completionHandler:(void (^)(NSArray *__nullable collabs, NSError *__nullable error))error;
 - (void)branchesForRepository:(GSRepository *)repo completionHandler:(void (^)(NSArray *, NSError *))handler;
 - (void)repositoryContentsForRepository:(GSRepository *)repo atPath:(NSString *__nullable)path recurse:(BOOL)recurse completionHandler:(nonnull void (^)(GSRepositoryTree *_Nullable, NSError *_Nullable))handler;
+- (void)readmeForRepository:(GSRepository *)repo completionHandler:(void (^)(NSString *__nullable contents, NSError *__nullable error))handler;
 
 // Starring
 - (void)starRepository:(GSRepository *)repo completionHandler:(void (^)(BOOL success, NSError *__nullable error))handler;

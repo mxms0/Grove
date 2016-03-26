@@ -9,6 +9,10 @@
 #import "GRRepositoryInfoView.h"
 #import "GRRepositoryInfoModel.h"
 #import "GRRepositoryInfoViewHeaderView.h"
+#import "GRRepositoryReadMeCell.h"
+
+static NSString *const GRRepositoryInfoReadMeCellIdentifier = @"readMeCell";
+static NSString *const GRRepositoryInfoRegularCellIdentifier = @"infoCell";
 
 @implementation GRRepositoryInfoView {
 	UITableView *tableView;
@@ -17,7 +21,11 @@
 
 - (void)commonInit {
 	[super commonInit];
-	tableView = [[UITableView alloc] init];
+	tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+	
+	[tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:GRRepositoryInfoRegularCellIdentifier];
+	[tableView registerClass:[GRRepositoryReadMeCell class] forCellReuseIdentifier:GRRepositoryInfoReadMeCellIdentifier];
+	
 	[tableView setDelegate:self];
 	[tableView setDataSource:self];
 	[self addSubview:tableView];
@@ -29,7 +37,12 @@
 }
 
 - (void)setRepository:(GSRepository *)repository {
-	model = [[GRRepositoryInfoModel alloc] initWithRepository:repository];
+	if (!repository) {
+		model = nil;
+	}
+	else {
+		model = [[GRRepositoryInfoModel alloc] initWithRepository:repository];
+	}
 }
 
 - (void)reloadView {
@@ -44,33 +57,39 @@
 	return [(GRRepositoryInfoModel *)model numberOfSections];
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-	GRRepositoryInfoViewHeaderView *header = [[GRRepositoryInfoViewHeaderView alloc] init];
-	NSString *sectionLabel = [model sectionLabelForSection:section];
-	[header setText:sectionLabel];
-	return header;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-	return 30;
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+	if (indexPath.section == 1) {
+		return 95.0f;
+	}
+	return 44.0f;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)_tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-	UITableViewCell *cell = [_tableView dequeueReusableCellWithIdentifier:@"infoCell"];
+	BOOL isReadMeCell = (indexPath.section == 1);
+	
+	NSString *reuseIdentifier = GRRepositoryInfoRegularCellIdentifier;
+	
+	if (isReadMeCell) {
+		reuseIdentifier = GRRepositoryInfoReadMeCellIdentifier;
+	}
+	
+	UITableViewCell *cell = [_tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
 	
 	if (!cell) {
-		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"infoCell"];
+		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
 	}
 	
-	switch (indexPath.row) {
-		case 0: {
-
-		}
-		default:
-			break;
+	if (isReadMeCell) {
+		[model setReadMeCell:(GRRepositoryReadMeCell *)cell];
 	}
+	
 	
 	return cell;
+}
+
+- (void)tableView:(UITableView *)_tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+	[_tableView deselectRowAtIndexPath:indexPath animated:YES];
+	// expand README cellc
 }
 
 @end

@@ -35,6 +35,8 @@ static const CGFloat GRHeaderSizeRatio = .10f;
 		header = [[GRRepositoryHeaderView alloc] init];
 		[header setBackgroundColor:GSRandomUIColor()];
 		
+		self.edgesForExtendedLayout = UIRectEdgeNone;
+		
 		viewSelector = [[GRRepositoryViewSelector alloc] init];
 		[viewSelector setDelegate:self];
 		

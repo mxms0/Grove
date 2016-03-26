@@ -56,6 +56,7 @@
 		506005BA1BBB5474000F5AFF /* GRActiveUserProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 506005B91BBB5474000F5AFF /* GRActiveUserProfileViewController.m */; };
 		5060631A1C7ADEF300E1674A /* GRNotificationHeaderLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 506063191C7ADEF300E1674A /* GRNotificationHeaderLabel.m */; };
 		506063231C7AE6B200E1674A /* GRNotificationTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 506063221C7AE6B200E1674A /* GRNotificationTitleView.m */; };
+		506E1E2E1CA73BD6008EAE7B /* GRRepositoryReadMeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 506E1E2D1CA73BD6008EAE7B /* GRRepositoryReadMeCell.m */; };
 		5070D55B1C495C7A00E80AB1 /* GRRepositoryViewSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = 5070D55A1C495C7A00E80AB1 /* GRRepositoryViewSelector.m */; };
 		5070D5611C4A04BD00E80AB1 /* GRTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5070D5601C4A04BD00E80AB1 /* GRTableViewController.m */; };
 		5070D5641C4A5C8300E80AB1 /* GRRepositoryInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5070D5631C4A5C8300E80AB1 /* GRRepositoryInfoView.m */; };
@@ -264,6 +265,8 @@
 		506063191C7ADEF300E1674A /* GRNotificationHeaderLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRNotificationHeaderLabel.m; sourceTree = "<group>"; };
 		506063211C7AE6B200E1674A /* GRNotificationTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRNotificationTitleView.h; sourceTree = "<group>"; };
 		506063221C7AE6B200E1674A /* GRNotificationTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRNotificationTitleView.m; sourceTree = "<group>"; };
+		506E1E2C1CA73BD6008EAE7B /* GRRepositoryReadMeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRRepositoryReadMeCell.h; sourceTree = "<group>"; };
+		506E1E2D1CA73BD6008EAE7B /* GRRepositoryReadMeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRRepositoryReadMeCell.m; sourceTree = "<group>"; };
 		5070D5591C495C7A00E80AB1 /* GRRepositoryViewSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRRepositoryViewSelector.h; sourceTree = "<group>"; };
 		5070D55A1C495C7A00E80AB1 /* GRRepositoryViewSelector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRRepositoryViewSelector.m; sourceTree = "<group>"; };
 		5070D55F1C4A04BD00E80AB1 /* GRTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRTableViewController.h; sourceTree = "<group>"; };
@@ -608,6 +611,8 @@
 				5070D5681C4A619D00E80AB1 /* GRRepositoryInfoModel.m */,
 				50C766AD1C649AE400DB63B3 /* GRRepositoryInfoViewHeaderView.h */,
 				50C766AE1C649AE400DB63B3 /* GRRepositoryInfoViewHeaderView.m */,
+				506E1E2C1CA73BD6008EAE7B /* GRRepositoryReadMeCell.h */,
+				506E1E2D1CA73BD6008EAE7B /* GRRepositoryReadMeCell.m */,
 			);
 			name = Information;
 			sourceTree = "<group>";
@@ -1140,6 +1145,7 @@
 				501558B51B8553D70002254D /* GRApplicationUser.m in Sources */,
 				5070D5701C4A649300E80AB1 /* GRRepositoryGenericSectionView.m in Sources */,
 				505C58E51C995ABA00D5F37C /* GRCommitCommentConversationModel.m in Sources */,
+				506E1E2E1CA73BD6008EAE7B /* GRRepositoryReadMeCell.m in Sources */,
 				50ED2ADD1B8B135200DFF146 /* GRProfileHeaderView.m in Sources */,
 				5009A34C1BB6751600DE19DF /* GRNotificationTableViewCell.m in Sources */,
 				84F524EF1B83269E0077A06C /* GRStreamViewController.m in Sources */,

@@ -84,9 +84,11 @@
 	
 //	self.tabBarController.tabBar.items[0].image = [UIImage imageNamed:@"icon@2x"];
 	
-    [UIView transitionWithView:self.window duration:0.5 options: UIViewAnimationOptionTransitionCrossDissolve animations:^{
-        [self.window setRootViewController:self.tabBarController];
-    } completion:nil];
+	self.window.rootViewController = self.tabBarController;
+	
+//    [UIView transitionWithView:self.window duration:0.5 options: UIViewAnimationOptionTransitionCrossDissolve animations:^{
+//        [self.window setRootViewController:self.tabBarController];
+//    } completion:nil];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

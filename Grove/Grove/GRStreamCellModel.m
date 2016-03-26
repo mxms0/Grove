@@ -30,6 +30,7 @@ static NSString *const GRStreamCellModelStorageCreatedDateKey = @"CreatedDate";
 	BOOL requiresSubCell;
 	CGFloat cachedCellHeight;
 	CGFloat safeTextHeight;
+	CGFloat subCellHeight;
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
@@ -150,6 +151,14 @@ static NSString *const GRStreamCellModelStorageCreatedDateKey = @"CreatedDate";
 		frameDirty = NO;
 		
 		if (self.requiresSubCell) {
+			
+			CGSize subCellSize = CGSizeMake(self.cellSize.width - (leftOffsetUsed + GRGenericHorizontalPadding * 3), CGFLOAT_MAX);
+			
+			CGSize subCellTextSize = [[self subText] boundingRectWithSize:subCellSize options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading) attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12]} context:NULL].size;
+			
+			subCellHeight = subCellTextSize.height;
+			subCellHeight += GRGenericVerticalPadding * (3.0 / 2.0);
+			
 			cachedCellHeight += [self subCellHeight];
 			cachedCellHeight += GRGenericVerticalPadding;
 		}
@@ -167,8 +176,12 @@ static NSString *const GRStreamCellModelStorageCreatedDateKey = @"CreatedDate";
 	return attributedMessage;
 }
 
+- (CGSize)subCellSize {
+	return CGSizeZero;
+}
+
 - (CGFloat)subCellHeight {
-	return 58.0;
+	return GRMinf(subCellHeight, 58.0);
 }
 
 - (NSString *)subText {
@@ -176,7 +189,7 @@ static NSString *const GRStreamCellModelStorageCreatedDateKey = @"CreatedDate";
 }
 
 - (UIImage *)subImage {
-	return nil;
+	return nil; // Likely won't be used.
 }
 
 - (BOOL)requiresSubCell {
@@ -204,7 +217,7 @@ static NSString *const GRStreamCellModelStorageCreatedDateKey = @"CreatedDate";
 			break;
 		}
 		case GSEventTypeCommitComment: {
-			NSAttributedString *verb = [[NSAttributedString alloc] initWithString:@"✏️ Commented on Commit " attributes:defaultAttributes];
+			NSAttributedString *verb = [[NSAttributedString alloc] initWithString:@"✏️ Commented on Commit  " attributes:defaultAttributes];
 			NSString *destinationString = self.event.repository.pathString;
 			NSString *commitHash = self.event.comment.commitIdentifier;
 			if (commitHash && [commitHash length] >= 10) {
@@ -220,7 +233,7 @@ static NSString *const GRStreamCellModelStorageCreatedDateKey = @"CreatedDate";
 			
 			break;
 		}
-		case GSEventTypeCreate:{
+		case GSEventTypeCreate: {
 			NSAttributedString *verb = nil;
 			NSAttributedString *subject = nil;
 			// Could be created repository, unsure what other "created" events there are.
@@ -228,11 +241,11 @@ static NSString *const GRStreamCellModelStorageCreatedDateKey = @"CreatedDate";
 			switch ([self.event refType]) {
 				case GSEventRefTypeBranch:
 					verb = [[NSAttributedString alloc] initWithString:@"💡 Created branch " attributes:defaultAttributes];
-					subject = [[NSAttributedString alloc] initWithString:self.event.ref attributes:defaultAttributes];
+					subject = [[NSAttributedString alloc] initWithString:self.event.ref attributes:highlightedAttributes];
 					break;
 				case GSEventRefTypeRepository:
 					verb = [[NSAttributedString alloc] initWithString:@"💡 Created repository " attributes:defaultAttributes];
-					subject = [[NSAttributedString alloc] initWithString:self.event.repository.pathString attributes:defaultAttributes];
+					subject = [[NSAttributedString alloc] initWithString:self.event.repository.pathString attributes:highlightedAttributes];
 					break;
 				case GSEventRefTypeTag:
 				case GSEventRefTypeUnknown:
@@ -246,15 +259,15 @@ static NSString *const GRStreamCellModelStorageCreatedDateKey = @"CreatedDate";
 			break;
 		}
 		case GSEventTypeDelete: {
-			NSAttributedString *msg = [[NSAttributedString alloc] initWithString:@"💔 Deleted " attributes:defaultAttributes];
+			NSAttributedString *msg = [[NSAttributedString alloc] initWithString:@"💔 Deleted  " attributes:defaultAttributes];
 			NSAttributedString *target1 = nil;
-			NSAttributedString *thing = [[NSAttributedString alloc] initWithString:@" at " attributes:defaultAttributes];
+			NSAttributedString *thing = [[NSAttributedString alloc] initWithString:@"  at  " attributes:defaultAttributes];
 			NSAttributedString *target2 = nil;
 			
 			switch ([[self event] refType]) {
 				case GSEventRefTypeBranch:
-					target1 = [[NSAttributedString alloc] initWithString:self.event.ref attributes:defaultAttributes];
-					target2 = [[NSAttributedString alloc] initWithString:self.event.repository.pathString attributes:defaultAttributes];
+					target1 = [[NSAttributedString alloc] initWithString:self.event.ref attributes:highlightedAttributes];
+					target2 = [[NSAttributedString alloc] initWithString:self.event.repository.pathString attributes:highlightedAttributes];
 					break;
 				case GSEventRefTypeTag:
 				case GSEventRefTypeRepository:

@@ -9,6 +9,7 @@
 #import "GRRepositoryInfoModel.h"
 
 #import <GroveSupport/GSRepository.h>
+#import <GroveSupport/GSGitHubEngine.h>
 #include <objc/message.h>
 
 /*
@@ -26,6 +27,8 @@
 @implementation GRRepositoryInfoModel {
 	GSRepository *repository;
 	NSArray *sectionsAvailable;
+	NSString *readMeString;
+	__weak GRRepositoryReadMeCell *_readMeCell;
 }
 
 - (instancetype)initWithRepository:(GSRepository *)repo {
@@ -40,6 +43,28 @@
 				[self reloadView];
 			}];
 		}
+		
+		[[GSGitHubEngine sharedInstance] readmeForRepository:repo completionHandler:^(NSString * _Nullable contents, NSError * _Nullable error) {
+			if (error) {
+				switch (error.code) {
+					case 404:
+						break;
+					default:
+						NSLog(@"May need to try again. For readme");
+						break;
+				}
+			}
+			else {
+				readMeString = contents;
+				dispatch_async(dispatch_get_main_queue(), ^ {
+					if (self.readMeCell) {
+						NSLog(@"readme %@", readMeString);
+						[self.readMeCell setReadMeString:readMeString];
+						// set contents
+					}
+				});
+			}
+		}];
 	}
 	return self;
 }
@@ -85,12 +110,20 @@
 	[self.delegate reloadView];
 }
 
+- (void)setReadMeCell:(GRRepositoryReadMeCell *)readMeCell_ {
+	_readMeCell = readMeCell_;
+	if (readMeString) {
+		[_readMeCell setReadMeString:readMeString];
+	}
+}
+
 - (NSUInteger)numberOfSections {
-	return 1;
+	return 2;
 }
 
 - (NSUInteger)numberOfRowsInSection:(NSUInteger)section {
-	return [sectionsAvailable count];
+//	return [sectionsAvailable count];
+	return 1;
 }
 
 - (NSString *)sectionLabelForSection:(NSUInteger)section {

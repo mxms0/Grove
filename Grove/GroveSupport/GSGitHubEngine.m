@@ -427,6 +427,35 @@ NS_ASSUME_NONNULL_BEGIN
 	}
 }
 
+- (void)readmeForRepository:(GSRepository *)repo completionHandler:(void (^)(NSString *__nullable contents, NSError *__nullable error))handler {
+	NSURL *destination = GSAPIURLComplex(GSAPIEndpointRepos, repo.owner.username, repo.name, @"readme", nil);
+	
+	GSURLRequest *request = [[GSURLRequest alloc] initWithURL:destination];
+	[request setAuthToken:_activeUser.token];
+	
+	[[GSNetworkManager sharedInstance] sendRequest:request completionHandler:^(GSSerializable * _Nullable serializeable, NSError * _Nullable error) {
+		
+		GSInsuranceBegin(serializeable, NSDictionary, error);
+		
+		GSInsuranceError {
+			handler(nil, error);
+		}
+		
+		GSInsuranceBadData {
+			GSAssert();
+		}
+		
+		GSInsuranceGoodData {
+			NSString *contents = [(NSDictionary *)serializeable objectForKey:@"content"];
+			contents = [contents stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+			NSString *decoded = GSStringFromBase64String(contents);
+			handler(decoded, nil);
+		}
+		
+		GSInsuranceEnd();
+	}];
+}
+
 #pragma mark Gists
 
 - (void)gistsForUser:(GSUser *)user completionHandler:(void (^)(NSArray *__nullable gists, NSError *__nullable))handler {
