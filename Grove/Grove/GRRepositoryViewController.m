@@ -16,7 +16,7 @@
 
 #import <GroveSupport/GroveSupport.h>
 
-static const CGFloat GRHeaderSizeRatio = .10f;
+static const CGFloat GRHeaderHeight = 36.0f;
 
 @implementation GRRepositoryViewController {
 	GRRepositoryHeaderView *header;
@@ -164,7 +164,7 @@ static const CGFloat GRHeaderSizeRatio = .10f;
 	
 	CGFloat verticalOffsetUsed = GRStatusBarHeight();
 	
-	[header setFrame:CGRectMake(0, verticalOffsetUsed, self.view.frame.size.width, ceilf(self.view.frame.size.height * GRHeaderSizeRatio))];
+	[header setFrame:CGRectMake(0, verticalOffsetUsed, self.view.frame.size.width, GRHeaderHeight)];
 	
 	verticalOffsetUsed += header.frame.size.height;
 	

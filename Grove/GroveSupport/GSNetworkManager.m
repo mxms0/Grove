@@ -135,8 +135,8 @@
 	
 	void (^dataHandler)(NSData *data, NSURLResponse *response, NSError *error) = ^(NSData *data, NSURLResponse *response, NSError *responseError) {
 #if 0
-		NSLog(@"code %ld", (long)[httpResponse statusCode]);
-		NSLog(@"Request:%@ Response: %@", request, response);
+		NSLog(@"code %ld", (long)[(NSHTTPURLResponse *)response statusCode]);
+		NSLog(@"Request:%@ Response: %@ [%@]", request, response, data);
 #endif
 		NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response; // put safety checks here. albeit unlikely
 		GSSerializable *result = nil;
@@ -207,9 +207,21 @@
 #if 0
 				NSLog(@"Not Found %@:%@:%@", data, response, request);
 #endif
-				NSDictionary *userInfo = @{
-										   NSLocalizedDescriptionKey: @"Not Found",
-										   };
+				NSDictionary *userInfo = nil;
+				
+				NSError *serializationError = nil;
+				NSDictionary *packet = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+				if (serializationError) {
+					userInfo = @{
+					  NSLocalizedDescriptionKey: @"Not Found",
+					  };
+				}
+				else {
+					userInfo = @{
+								 NSLocalizedDescriptionKey : packet[@"message"]
+								 };
+				}
+				
 				NSError *retError = [NSError errorWithDomain:GSErrorDomain code:404 userInfo:userInfo];
 				error = retError;
 				break;

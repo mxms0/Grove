@@ -69,6 +69,10 @@
 	return self;
 }
 
+- (NSString *)repositoryDescription {
+	return repository.userDescription ? repository.userDescription : @"No description";
+}
+
 - (void)reloadView {
 	NSArray *defaultFormat = @[
 							   @{ @"localizationKey" : @"description", @"selector" : @"userDescription", @"type" : @"@" },

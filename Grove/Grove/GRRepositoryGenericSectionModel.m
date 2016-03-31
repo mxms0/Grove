@@ -11,6 +11,7 @@
 @implementation GRRepositoryGenericSectionModel
 
 - (instancetype)initWithRepository:(GSRepository *)repo {
+	if (!repo) return nil;
 	if ((self = [super init])) {
 		
 	}

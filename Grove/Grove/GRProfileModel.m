@@ -18,6 +18,7 @@
 }
 
 - (instancetype)initWithUser:(GRApplicationUser *)user {
+	if (!user) return nil;
 	if ((self = [super init])) {
 		visibleUser = user;
 		

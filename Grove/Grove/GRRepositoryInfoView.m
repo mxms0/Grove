@@ -57,6 +57,25 @@ static NSString *const GRRepositoryInfoRegularCellIdentifier = @"infoCell";
 	return [(GRRepositoryInfoModel *)model numberOfSections];
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+	if (section != 0) return nil;
+	
+	UIView *base = [[UIView alloc] init];
+	
+	UILabel *label = [[UILabel alloc] init];
+	[label setText:[model repositoryDescription]];
+	
+	[label setFrame:CGRectMake(GRGenericHorizontalPadding, GRGenericVerticalPadding, self.frame.size.width - 2 * GRGenericHorizontalPadding, 45 - 2 * GRGenericVerticalPadding)];
+	
+	[base addSubview:label];
+	
+	return base;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+	return 45.0;
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 	if (indexPath.section == 1) {
 		return 95.0f;
@@ -89,7 +108,7 @@ static NSString *const GRRepositoryInfoRegularCellIdentifier = @"infoCell";
 
 - (void)tableView:(UITableView *)_tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	[_tableView deselectRowAtIndexPath:indexPath animated:YES];
-	// expand README cellc
+	// expand README cell
 }
 
 @end

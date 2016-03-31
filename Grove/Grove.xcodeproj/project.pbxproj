@@ -87,6 +87,7 @@
 		50AB97A71C373B3100FBD254 /* GroveSupportStrings.h in Headers */ = {isa = PBXBuildFile; fileRef = 50AB97A61C373B3100FBD254 /* GroveSupportStrings.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		50AB97A91C373BA600FBD254 /* GroveSupportInternalStrings.h in Headers */ = {isa = PBXBuildFile; fileRef = 50AB97A81C373BA600FBD254 /* GroveSupportInternalStrings.h */; };
 		50C766AF1C649AE400DB63B3 /* GRRepositoryInfoViewHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 50C766AE1C649AE400DB63B3 /* GRRepositoryInfoViewHeaderView.m */; };
+		50D910201CADBC8B00BABC9A /* GRMessageFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 50D9101F1CADBC8B00BABC9A /* GRMessageFormat.m */; };
 		50E4B58F1B82F6D60029264A /* GroveSupport.h in Headers */ = {isa = PBXBuildFile; fileRef = 50E4B58E1B82F6D60029264A /* GroveSupport.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		50E4B5951B82F6D60029264A /* GroveSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50E4B58A1B82F6D60029264A /* GroveSupport.framework */; };
 		50E4B59E1B82F6D60029264A /* GroveSupportTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 50E4B59D1B82F6D60029264A /* GroveSupportTests.m */; };
@@ -317,6 +318,7 @@
 		50AB97A81C373BA600FBD254 /* GroveSupportInternalStrings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroveSupportInternalStrings.h; sourceTree = "<group>"; };
 		50C766AD1C649AE400DB63B3 /* GRRepositoryInfoViewHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRRepositoryInfoViewHeaderView.h; sourceTree = "<group>"; };
 		50C766AE1C649AE400DB63B3 /* GRRepositoryInfoViewHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRRepositoryInfoViewHeaderView.m; sourceTree = "<group>"; };
+		50D9101F1CADBC8B00BABC9A /* GRMessageFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRMessageFormat.m; sourceTree = "<group>"; };
 		50E4B58A1B82F6D60029264A /* GroveSupport.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GroveSupport.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		50E4B58D1B82F6D60029264A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		50E4B58E1B82F6D60029264A /* GroveSupport.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GroveSupport.h; sourceTree = "<group>"; };
@@ -539,6 +541,7 @@
 				84F524EE1B83269E0077A06C /* GRStreamViewController.m */,
 				50055A741C99269E0041765C /* GRStreamSubCellView.h */,
 				50055A751C99269E0041765C /* GRStreamSubCellView.m */,
+				50D9101F1CADBC8B00BABC9A /* GRMessageFormat.m */,
 			);
 			name = "Stream View";
 			sourceTree = "<group>";
@@ -736,8 +739,8 @@
 				5097B5D81B8D28A400A72721 /* Caching */,
 				501558C61B8725EE0002254D /* Private */,
 				501558C51B8725D80002254D /* Public */,
-				50A974111B831456009CD3E4 /* Utilities */,
 				5097B5E81B8D821500A72721 /* Data Structures */,
+				50A974111B831456009CD3E4 /* Utilities */,
 				50E4B58C1B82F6D60029264A /* Supporting Files */,
 			);
 			path = GroveSupport;
@@ -1158,6 +1161,7 @@
 				84309A7D1B854A21008EB771 /* GRLoginViewController.m in Sources */,
 				84A8D0FA1B8D239600B6B4FB /* GRStreamViewControllerProxy.m in Sources */,
 				84A8D1001B8D311000B6B4FB /* GRIssueCommentCell.m in Sources */,
+				50D910201CADBC8B00BABC9A /* GRMessageFormat.m in Sources */,
 				5097B5CD1B8C0BBB00A72721 /* GRNotificationModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

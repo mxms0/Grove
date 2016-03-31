@@ -13,4 +13,5 @@
 @class GSRepository;
 @interface GRRepositoryInfoModel : GRRepositoryGenericSectionModel
 @property (nonatomic, weak) GRRepositoryReadMeCell *readMeCell;
+- (NSString *)repositoryDescription;
 @end

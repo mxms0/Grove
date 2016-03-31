@@ -13,6 +13,7 @@
 - (instancetype)init {
 	if ((self = [super init])) {
 		[self commonInit];
+
 	}
 	return self;
 }
@@ -25,7 +26,13 @@
 }
 
 - (void)commonInit {
+	self.lineBreakMode = NSLineBreakByTruncatingTail;
 	
+	[[self titleLabel] setTextAlignment:NSTextAlignmentLeft];
+	// literally nothing anywhere about what to use instead
+	// except NSAttributedString with paragraph styles
+	self.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+	// what is this API...
 }
 
 - (void)setFont:(UIFont *)font {

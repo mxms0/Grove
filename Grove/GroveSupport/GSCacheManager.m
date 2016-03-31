@@ -164,6 +164,10 @@
 	}
 }
 
+- (void)findAvatarForActorNamed:(NSString *__nonnull)name downloadIfNecessary:(BOOL)nec completionHandler:(void (^__nonnull)(UIImage *__nullable image, NSError *__nullable error))handler {
+	GSAssert();
+}
+
 - (void)findAvatarForActor:(GSActor *__nonnull)user downloadIfNecessary:(BOOL)necessary completionHandler:(void (^__nonnull)(UIImage *__nullable image, NSError *__nullable error))handler {
 	
 	NSURL *avatarURL = user.avatarURL;

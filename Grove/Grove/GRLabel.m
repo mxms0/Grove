@@ -61,13 +61,13 @@
 			double typographicBounds = CTRunGetTypographicBounds(run, CFRangeMake(0, 0), &ascent, &descent, &leading);
 			
 			CGFloat xOffset = CTLineGetOffsetForStringIndex(line, stringRange.location, nil);
-			CGContextSetTextPosition(context, point.x, point.y + descent);
+			CGContextSetTextPosition(context, point.x, point.y + descent - 5);
 			
 			CGFloat currentLineHeight = ascent + descent + leading;
 			
 			lineHeight = GRMaxf(lineHeight, currentLineHeight);
 			
-			CGRect runBounds = CGRectMake(point.x + xOffset - 3, point.y - 2, (CGFloat)(typographicBounds) + 6, ascent + descent + 4);
+			CGRect runBounds = CGRectMake(point.x + xOffset - 3, point.y - 8, (CGFloat)(typographicBounds) + 6, ascent + descent + 4);
 			
 			NSDictionary *attributes = (__bridge NSDictionary *)CTRunGetAttributes(run);
 			

@@ -36,7 +36,7 @@ static const CGFloat GRRepositoryHeaderViewStandardFontSize = 16.0f;
 		[slashCharacterLabel setText:@"/"];
 		
 		for (UIView *v in @[usernameLabel, repositoryNameLabel, slashCharacterLabel]) {
-			[v setBackgroundColor:GSRandomUIColor()];
+//			[v setBackgroundColor:GSRandomUIColor()];
 			[self addSubview:v];
 		}
 		
@@ -92,6 +92,8 @@ static const CGFloat GRRepositoryHeaderViewStandardFontSize = 16.0f;
 	
 	[repositoryNameLabel setFrame:CGRectMake(horizontalOffsetUsed, verticalOffsetUsed, repositoryNameWidth, labelHeight)];
 	[repositoryNameLabel sizeToFit];
+	
+	[repositoryNameLabel setFrame:CGRectMake(horizontalOffsetUsed, verticalOffsetUsed, self.frame.size.width - horizontalOffsetUsed - GRGenericHorizontalPadding, labelHeight)];
 	
 	verticalOffsetUsed += repositoryNameLabel.frame.size.height + floorf(GRGenericVerticalPadding/2);
 }

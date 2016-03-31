@@ -11,9 +11,33 @@
 
 @implementation GSRepository
 
+static NSMutableDictionary *cachedRepos = nil;
+
++ (GSRepository *)cachedRepositoryWithPath:(NSString *)path {
+	static dispatch_once_t token;
+	
+	dispatch_once(&token, ^ {
+		cachedRepos = [[NSMutableDictionary alloc] init];
+	});
+	
+	GSRepository *repo = nil;
+	@synchronized(cachedRepos) {
+		repo = cachedRepos[path];
+	}
+	
+	return repo;
+}
+
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary {
 	if ((self = [super initWithDictionary:dictionary])) {
-
+		GSRepository *cachedSelf = [GSRepository cachedRepositoryWithPath:[self pathString]];
+		if (cachedSelf) {
+			return cachedSelf;
+		}
+		
+		@synchronized(cachedRepos) {
+			cachedRepos[self.pathString] = self;
+		}
 	}
 	return self;
 }
@@ -60,6 +84,7 @@
 	GSURLAssign(dictionary, @"git_url", _gitURL);
 	GSAssign(dictionary, @"language", _language);
 	GSAssign(dictionary, @"description", _userDescription);
+	NSLog(@"DESCRIPTION %@", _userDescription);
 	GSAssign(dictionary, @"open_issues_count", _numberOfOpenIssues);
 	GSAssign(dictionary, @"watchers_count", _numberOfWatchers);
 	GSAssign(dictionary, @"stargazers_count", _numberOfStargazers);
