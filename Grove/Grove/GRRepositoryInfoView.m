@@ -17,6 +17,7 @@ static NSString *const GRRepositoryInfoRegularCellIdentifier = @"infoCell";
 @implementation GRRepositoryInfoView {
 	UITableView *tableView;
 	GRRepositoryInfoModel *model;
+	BOOL hasDescription;
 }
 
 - (void)commonInit {
@@ -43,9 +44,11 @@ static NSString *const GRRepositoryInfoRegularCellIdentifier = @"infoCell";
 	else {
 		model = [[GRRepositoryInfoModel alloc] initWithRepository:repository];
 	}
+	hasDescription = !!([model repositoryDescription]);
 }
 
 - (void)reloadView {
+	hasDescription = !!([model repositoryDescription]);
 	[tableView reloadData];
 }
 
@@ -58,7 +61,7 @@ static NSString *const GRRepositoryInfoRegularCellIdentifier = @"infoCell";
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-	if (section != 0) return nil;
+	if (!hasDescription || section != 0) return nil;
 	
 	UIView *base = [[UIView alloc] init];
 	
@@ -73,7 +76,9 @@ static NSString *const GRRepositoryInfoRegularCellIdentifier = @"infoCell";
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-	return 45.0;
+	if (hasDescription)
+		return 45.0;
+	return 0.0;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

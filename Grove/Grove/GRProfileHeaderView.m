@@ -27,6 +27,7 @@
 - (instancetype)init {
 	if ((self = [super init])) {
 		[self setBackgroundColor:GRColorFromRGB(0xFFFFFF)];
+		
 		profileImageView = [[UIImageView alloc] init];
 		[profileImageView setBackgroundColor:[UIColor whiteColor]];
 		[self addSubview:profileImageView];

@@ -13,7 +13,7 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
 	if ((self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])) {
 		
-		[self setBackgroundColor:[UIColor clearColor]];
+		[self setBackgroundColor:[UIColor whiteColor]];
 		self.separatorInset = UIEdgeInsetsMake(0, 20.0f, 0, 20.0f);
 		self.selectionStyle = UITableViewCellSelectionStyleNone;
 

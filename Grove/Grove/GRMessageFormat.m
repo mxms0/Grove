@@ -19,7 +19,7 @@ NSAttributedString *GRFormattedMessageWithEvent(GSEvent *event, BOOL *requiresSu
 	NSMutableArray *components = [[NSMutableArray alloc] init];
 	
 	NSDictionary *defaultAttributes = @{NSFontAttributeName : regularFont};
-	NSDictionary *highlightedAttributes = @{NSFontAttributeName : regularFont, GRHighlightAttribute: @(YES) };
+	NSDictionary *highlightedAttributes = @{NSFontAttributeName : regularFont, GRHighlightAttribute: @(YES)};
 
 	// clean up this mess, soon.
 	// getting all the logic down and finding out what data gets used is fine for now
@@ -27,7 +27,7 @@ NSAttributedString *GRFormattedMessageWithEvent(GSEvent *event, BOOL *requiresSu
 		switch (event.type) {
 			case GSEventTypeFork: {
 				NSAttributedString *message = [[NSAttributedString alloc] initWithString:@"Forked  " attributes:defaultAttributes];
-				NSAttributedString *cp1 = [[NSAttributedString alloc] initWithString:event.repository.pathString attributes:defaultAttributes];
+				NSAttributedString *cp1 = [[NSAttributedString alloc] initWithString:event.repository.pathString attributes:highlightedAttributes];
 				[components addObjectsFromArray:@[message, cp1]];
 				break;
 			}
@@ -113,10 +113,10 @@ NSAttributedString *GRFormattedMessageWithEvent(GSEvent *event, BOOL *requiresSu
 				NSAttributedString *verb = nil;
 				NSAttributedString *person = [[NSAttributedString alloc] initWithString:event.member.username attributes:defaultAttributes];
 				NSAttributedString *prep = nil;
-				NSAttributedString *destination = [[NSAttributedString alloc] initWithString:event.repository.pathString attributes:defaultAttributes];
+				NSAttributedString *destination = [[NSAttributedString alloc] initWithString:event.repository.pathString attributes:highlightedAttributes];
 				switch ([event action]) {
 					case GSEventActionAdded:
-						verb = [[NSAttributedString alloc] initWithString:@"Added to " attributes:defaultAttributes];
+						verb = [[NSAttributedString alloc] initWithString:@"Added " attributes:defaultAttributes];
 						prep = [[NSAttributedString alloc] initWithString:@" to " attributes:defaultAttributes];
 						break;
 					default:
@@ -148,7 +148,9 @@ NSAttributedString *GRFormattedMessageWithEvent(GSEvent *event, BOOL *requiresSu
 				NSAttributedString *verb = [[NSAttributedString alloc] initWithString:@"Pushed to  " attributes:defaultAttributes];
 				NSString *perhapsBranch = [event.ref lastPathComponent];
 				NSAttributedString *branch = [[NSAttributedString alloc] initWithString:perhapsBranch attributes:highlightedAttributes];
-				[components addObjectsFromArray:@[verb, branch]];
+				NSAttributedString *prep = [[NSAttributedString alloc] initWithString:@"  at  " attributes:defaultAttributes];
+				NSAttributedString *repo = [[NSAttributedString alloc] initWithString:[event.repository pathString] attributes:highlightedAttributes];
+				[components addObjectsFromArray:@[verb, branch, prep, repo]];
 				break;
 			}
 			case GSEventTypeRelease:

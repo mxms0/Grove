@@ -167,7 +167,7 @@
 //#endif
 
 - (NSString *)description {
-	return [NSString stringWithFormat:@"<%@: %p; id = %@; type = %@;>", NSStringFromClass([self class]), self, self.identifier, [self stringForEventType:self.type]];
+	return [NSString stringWithFormat:@"<%@: %p; id = %@; type = %@;>", NSStringFromClass([self class]), (void *)self, self.identifier, [self stringForEventType:self.type]];
 }
 
 @end

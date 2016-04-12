@@ -53,6 +53,8 @@
 		
 		subCellView = [[GRStreamSubCellView alloc] init];
 		
+		[self setBackgroundColor:[UIColor clearColor]];
+		
 		for (UIView *view in @[imageView, titleLabel, usernameLabel, timeLabel]) {
 			[self.contentView addSubview:view];
 		}

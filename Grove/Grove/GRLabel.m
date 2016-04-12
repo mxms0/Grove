@@ -13,7 +13,8 @@
 
 - (instancetype)initWithFrame:(CGRect)frame {
 	if ((self = [super initWithFrame:frame])) {
-		[self setBackgroundColor:[UIColor clearColor]];
+		[self setClearsContextBeforeDrawing:YES];
+		[self setBackgroundColor:[UIColor whiteColor]];
 	}
 	return self;
 }
@@ -29,6 +30,10 @@
 
 	NSAttributedString *string = self.attributedString;
 	CGContextRef context = UIGraphicsGetCurrentContext();
+	
+	CGFloat color[4] = {1.0, 1.0, 1.0, 1.0};
+	CGContextSetFillColor(context, color);;
+	CGContextFillRect(context, rect);
 	
 	CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((__bridge CFAttributedStringRef)string);
 	CGPathRef path = CGPathCreateWithRect(CGRectMake(0, 0, rect.size.width, rect.size.height - 1), NULL);
@@ -67,7 +72,7 @@
 			
 			lineHeight = GRMaxf(lineHeight, currentLineHeight);
 			
-			CGRect runBounds = CGRectMake(point.x + xOffset - 3, point.y - 8, (CGFloat)(typographicBounds) + 6, ascent + descent + 4);
+			CGRect runBounds = CGRectMake(point.x + xOffset - 3, point.y - 7, (CGFloat)(typographicBounds) + 6, ascent + descent + 4);
 			
 			NSDictionary *attributes = (__bridge NSDictionary *)CTRunGetAttributes(run);
 			

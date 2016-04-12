@@ -26,6 +26,8 @@
 		[tableView setDataSource:self];
 		[tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
 		
+		[tableView setBackgroundColor:[UIColor clearColor]];
+		
 		GRApplicationUser *user = [[GRSessionManager sharedInstance] currentUser];
 
 		[[GSGitHubEngine sharedInstance] notificationsForUser:user.user completionHandler:^(NSArray *__nullable notifs, NSError *__nullable error) {
@@ -70,8 +72,6 @@
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
-
-	[tableView setBackgroundColor:[UIColor clearColor]];
 	
 	[self.view addSubview:tableView];
 	[tableView setFrame:self.view.bounds];

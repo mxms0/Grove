@@ -84,7 +84,6 @@ static NSMutableDictionary *cachedRepos = nil;
 	GSURLAssign(dictionary, @"git_url", _gitURL);
 	GSAssign(dictionary, @"language", _language);
 	GSAssign(dictionary, @"description", _userDescription);
-	NSLog(@"DESCRIPTION %@", _userDescription);
 	GSAssign(dictionary, @"open_issues_count", _numberOfOpenIssues);
 	GSAssign(dictionary, @"watchers_count", _numberOfWatchers);
 	GSAssign(dictionary, @"stargazers_count", _numberOfStargazers);
@@ -143,7 +142,7 @@ static NSMutableDictionary *cachedRepos = nil;
 }
 
 - (NSString *)description {
-	return [NSString stringWithFormat:@"<%@: %p; name = %@;>", NSStringFromClass([self class]), self, [self pathString]];
+	return [NSString stringWithFormat:@"<%@: %p; name = %@;>", NSStringFromClass([self class]), (void *)self, [self pathString]];
 }
 
 @end
