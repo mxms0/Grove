@@ -110,7 +110,14 @@
 - (void)requestNewData {
 	[[GSGitHubEngine sharedInstance] repositoryContentsForRepository:repository atPath:[self _currentDirectoryAsString] recurse:NO completionHandler:^(GSRepositoryTree *_Nullable tree, NSError * _Nullable error) {
 		if (error) {
-			GSAssert();
+			NSString *message = [error userInfo][NSLocalizedDescriptionKey];
+			if ([message isEqualToString:@"This repository is empty."]) {
+				// I hate this. Thanks github
+				[self presentEmptyRepositoryMessage];
+			}
+			else {
+				GSAssert();
+			}
 		}
 		else {
 			contents = [tree rootEntries];
@@ -118,6 +125,10 @@
 			[self updateViewWithNewData];
 		}
 	}];
+}
+
+- (void)presentEmptyRepositoryMessage {
+	NSLog(@"Empty repository");
 }
 
 - (void)updateViewWithNewData {

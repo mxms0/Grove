@@ -63,13 +63,33 @@
 		[[NSUserDefaults standardUserDefaults] setObject:tokenDirectoryMap forKey:@"tmpDirectoryMap"];
 		[[NSUserDefaults standardUserDefaults] synchronize];
 	}
+	
+	NSArray *cacheDirectories = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+	if ([cacheDirectories count] == 0) {
+		GSAssert();
+	}
+	
+	NSString *cachePath = [cacheDirectories objectAtIndex:0];
+	
+	NSString *filePath = [cachePath stringByAppendingPathComponent:extension];
+	
+	mkdir([filePath UTF8String], 777);
 
-	return [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingPathComponent:extension]];
+	return [NSURL fileURLWithPath:filePath];
 }
 
 - (NSURL *)_createWorkingDirectoryForToken:(NSString *)token {
-	NSString *tempPath = NSTemporaryDirectory();
-	NSString *pathTempl = [tempPath stringByAppendingFormat:@"%@XXXXXX", GSDomain];
+	NSArray *cacheDirectories = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+	if ([cacheDirectories count] == 0) {
+		GSAssert();
+	}
+	
+	NSString *cachePath = [cacheDirectories objectAtIndex:0];
+	
+	NSString *pathTarget = [NSString stringWithFormat:@"%@XXXXXX", GSDomain];
+	
+	NSString *pathTempl = [cachePath stringByAppendingPathComponent:pathTarget];
+
 	char *pathRes = mkdtemp((char *)[pathTempl UTF8String]);
 	
 	NSString *finalPath = [NSString stringWithUTF8String:pathRes];
@@ -142,6 +162,10 @@
 			}];
 		}
 	}
+}
+
+- (void)findAvatarForActorNamed:(NSString *__nonnull)name downloadIfNecessary:(BOOL)nec completionHandler:(void (^__nonnull)(UIImage *__nullable image, NSError *__nullable error))handler {
+	GSAssert();
 }
 
 - (void)findAvatarForActor:(GSActor *__nonnull)user downloadIfNecessary:(BOOL)necessary completionHandler:(void (^__nonnull)(UIImage *__nullable image, NSError *__nullable error))handler {

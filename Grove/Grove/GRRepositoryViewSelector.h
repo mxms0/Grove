@@ -11,6 +11,7 @@
 typedef NS_ENUM(NSInteger, GRRepositoryViewSelectorType) {
 	GRRepositoryViewSelectorTypeInfoView,
 	GRRepositoryViewSelectorTypeCodeView,
+	GRRepositoryViewSelectorTypeCommitsView,
 	GRRepositoryViewSelectorTypeIssuesView,
 	GRRepositoryViewSelectorTypePullRequestsView,
 };

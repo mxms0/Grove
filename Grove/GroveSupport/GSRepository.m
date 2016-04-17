@@ -11,9 +11,33 @@
 
 @implementation GSRepository
 
+static NSMutableDictionary *cachedRepos = nil;
+
++ (GSRepository *)cachedRepositoryWithPath:(NSString *)path {
+	static dispatch_once_t token;
+	
+	dispatch_once(&token, ^ {
+		cachedRepos = [[NSMutableDictionary alloc] init];
+	});
+	
+	GSRepository *repo = nil;
+	@synchronized(cachedRepos) {
+		repo = cachedRepos[path];
+	}
+	
+	return repo;
+}
+
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary {
 	if ((self = [super initWithDictionary:dictionary])) {
-
+		GSRepository *cachedSelf = [GSRepository cachedRepositoryWithPath:[self pathString]];
+		if (cachedSelf) {
+			return cachedSelf;
+		}
+		
+		@synchronized(cachedRepos) {
+			cachedRepos[self.pathString] = self;
+		}
 	}
 	return self;
 }
@@ -21,7 +45,7 @@
 - (void)_configureWithDictionary:(NSDictionary *)dictionary {
 	[super _configureWithDictionary:dictionary];
 	
-#if 1
+#if 0
 	NSLog(@"Repo %@", dictionary);
 #endif
 	
@@ -103,8 +127,22 @@
 	return [NSString stringWithFormat:@"%@/%@", _owner.username, _name];
 }
 
+- (NSString *)defaultBranchOrMaster {
+	if (!_defaultBranch)
+		return @"master";
+	return _defaultBranch;
+}
+
+- (BOOL)isFull {
+	// need to establish criteriae for this.
+	// If we have the full packet on the first go,
+	// then an update can be backgrounded and not waited on
+	// I've never seen archive_url as null. This'll improve in time.
+	return !!(self.archiveAPIURL);
+}
+
 - (NSString *)description {
-	return [NSString stringWithFormat:@"<%@: %p; name = %@;>", NSStringFromClass([self class]), self, [self pathString]];
+	return [NSString stringWithFormat:@"<%@: %p; name = %@;>", NSStringFromClass([self class]), (void *)self, [self pathString]];
 }
 
 @end

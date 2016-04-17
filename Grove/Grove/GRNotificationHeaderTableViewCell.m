@@ -7,15 +7,30 @@
 //
 
 #import "GRNotificationHeaderTableViewCell.h"
+#import "GRNotificationHeaderLabel.h"
 
-@implementation GRNotificationHeaderTableViewCell
+@implementation GRNotificationHeaderTableViewCell {
+	GRNotificationHeaderLabel *textLabel;
+}
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
 	if ((self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])) {
-		[[self contentView] setBackgroundColor:GRColorFromRGB(0xf5f5f5)];
-		[self.textLabel setFont:[UIFont systemFontOfSize:15]];
+		textLabel = [[GRNotificationHeaderLabel alloc] init];
+		[textLabel setFont:[UIFont systemFontOfSize:12]];
+		[textLabel setTextColor:[UIColor darkGrayColor]];
+		[self addSubview:textLabel];
+		[self.textLabel removeFromSuperview];
 	}
 	return self;
+}
+
+- (void)layoutSubviews {
+	[super layoutSubviews];
+	[textLabel setFrame:CGRectMake(15, 0, self.frame.size.width - 30, self.frame.size.height)];
+}
+
+- (void)setText:(NSString *)text {
+	[textLabel setText:text];
 }
 
 @end

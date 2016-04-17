@@ -18,4 +18,8 @@
 	return self;
 }
 
+- (BOOL)isDismissable {
+	return NO;
+}
+
 @end

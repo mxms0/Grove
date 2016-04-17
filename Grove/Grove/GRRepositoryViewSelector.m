@@ -12,6 +12,7 @@
 	GRRepositoryViewSelectorType currentViewType;
 	UIButton *infoButton;
 	UIButton *codeButton;
+	UIButton *commitsButton;
 	UIButton *issuesButton;
 	UIButton *pullRequestsButton;
 }
@@ -20,27 +21,47 @@
 	if ((self = [super init])) {
 		currentViewType = GRRepositoryViewSelectorTypeInfoView;
 
-		infoButton = [[UIButton alloc] init];
-		codeButton = [[UIButton alloc] init];
-		issuesButton = [[UIButton alloc] init];
-		pullRequestsButton = [[UIButton alloc] init];
+		infoButton = [self _selectorButtonForViewType:GRRepositoryViewSelectorTypeInfoView];
+		codeButton = [self _selectorButtonForViewType:GRRepositoryViewSelectorTypeCodeView];
+		commitsButton = [self _selectorButtonForViewType:GRRepositoryViewSelectorTypeCommitsView];
+		issuesButton = [self _selectorButtonForViewType:GRRepositoryViewSelectorTypeIssuesView];
+		pullRequestsButton = [self _selectorButtonForViewType:GRRepositoryViewSelectorTypePullRequestsView];
 		
-		[infoButton setTitle:@"info" forState:UIControlStateNormal];
-		[infoButton setTag:GRRepositoryViewSelectorTypeInfoView];
-		[codeButton setTitle:@"code" forState:UIControlStateNormal];
-		[codeButton setTag:GRRepositoryViewSelectorTypeCodeView];
-		[issuesButton setTitle:@"issues" forState:UIControlStateNormal];
-		[issuesButton setTag:GRRepositoryViewSelectorTypeIssuesView];
-		[pullRequestsButton setTitle:@"pr" forState:UIControlStateNormal];
-		[pullRequestsButton setTag:GRRepositoryViewSelectorTypePullRequestsView];
-		
-		for (UIButton *v in @[infoButton, codeButton, issuesButton, pullRequestsButton]) {
-			[v setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-			[v addTarget:self action:@selector(genericButtonPress:) forControlEvents:UIControlEventTouchUpInside];
+		for (UIButton *v in @[infoButton, codeButton, commitsButton, issuesButton, pullRequestsButton]) {
 			[self addSubview:v];
 		}
 	}
 	return self;
+}
+
+- (UIButton *)_selectorButtonForViewType:(GRRepositoryViewSelectorType)tp {
+	UIButton *btn = [[UIButton alloc] init];
+	[btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+	[btn addTarget:self action:@selector(genericButtonPress:) forControlEvents:UIControlEventTouchUpInside];
+	[btn setTag:tp];
+	NSString *titleString = nil;
+	switch (tp) {
+		case GRRepositoryViewSelectorTypeCodeView:
+			titleString = @"code";
+			break;
+		case GRRepositoryViewSelectorTypeInfoView:
+			titleString = @"info";
+			break;
+		case GRRepositoryViewSelectorTypeCommitsView:
+			titleString = @"cmts";
+			break;
+		case GRRepositoryViewSelectorTypeIssuesView:
+			titleString = @"issues";
+			break;
+		case GRRepositoryViewSelectorTypePullRequestsView:
+			titleString = @"pr";
+			break;
+		default:
+			GSAssert();
+			break;
+	}
+	[btn setTitle:titleString forState:UIControlStateNormal];
+	return btn;
 }
 
 - (void)genericButtonPress:(UIButton *)button {
@@ -51,7 +72,7 @@
 - (void)layoutSubviews {
 	[super layoutSubviews];
 	int idx = 0;
-	NSArray *buttons = @[infoButton, codeButton, issuesButton, pullRequestsButton];
+	NSArray *buttons = @[infoButton, codeButton, commitsButton, issuesButton, pullRequestsButton];
 	CGFloat buttonWidth = floorf(self.frame.size.width / [buttons count]);
 	for (UIView *btn in buttons) {
 		[btn setFrame:CGRectMake(buttonWidth * idx, 0, buttonWidth, self.frame.size.height)];
@@ -68,9 +89,14 @@
 		case GRRepositoryViewSelectorTypeIssuesView:
 			ret = @"Issues";
 			break;
+		case GRRepositoryViewSelectorTypeCommitsView:
+			ret = @"Commits";
+			break;
 		case GRRepositoryViewSelectorTypePullRequestsView:
 			ret = @"Pull Request";
 			break;
+		case GRRepositoryViewSelectorTypeInfoView:
+			ret = @"Info";
 		default:
 			ret = @"Unknown";
 			break;

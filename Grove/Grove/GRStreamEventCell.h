@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@class GSEvent, GREventCellModel;
+@class GSEvent, GRStreamCellModel;
 @interface GRStreamEventCell : UITableViewCell
-- (void)configureWithEventModel:(GREventCellModel *)event;
+- (void)configureWithEventModel:(GRStreamCellModel *)event;
 - (void)setAvatar:(UIImage *)image;
 @end

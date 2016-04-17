@@ -11,9 +11,28 @@
 #import "GSUser.h"
 #import "GroveSupportInternal.h"
 #import "GSURLRequest.h"
+#include <libkern/OSAtomic.h>
+
+@interface GSNetworkManager ()
+@property (nonatomic, assign) NSInteger _requestCount;
+@end
 
 @implementation GSNetworkManager {
 	NSURLSession *currentSession;
+}
+
+- (void)set_requestCount:(NSInteger)reqCount {
+	@synchronized(self) {
+		__requestCount = reqCount;
+	}
+#if TARGET_OS_IPHONE
+	if (__requestCount == 1) {
+		[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+	}
+	else if (__requestCount == 0) {
+		[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+	}
+#endif
 }
 
 + (instancetype)sharedInstance {
@@ -104,21 +123,24 @@
 	// placeholder for direction
 	// since there may be a download request
 	// and an upload request too.
+
 	[self sendDataRequest:request completionHandler:^(GSSerializable *response, NSError *error) {
 		handler(response, error);
 	}];
 }
 
 - (void)sendDataRequest:(NSURLRequest *)request completionHandler:(void (^)(GSSerializable *response, NSError *error))handler {
+	__weak GSNetworkManager *weakSelf = self;
+	weakSelf._requestCount = weakSelf._requestCount + 1;
+	
 	void (^dataHandler)(NSData *data, NSURLResponse *response, NSError *error) = ^(NSData *data, NSURLResponse *response, NSError *responseError) {
-#if 1
-		NSLog(@"Request:%@ Response: %@", request, response);
+#if 0
+		NSLog(@"code %ld", (long)[(NSHTTPURLResponse *)response statusCode]);
+		NSLog(@"Request:%@ Response: %@ [%@]", request, response, data);
 #endif
 		NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response; // put safety checks here. albeit unlikely
 		GSSerializable *result = nil;
 		NSError *error = nil;
-		
-		NSLog(@"code %ld", [httpResponse statusCode]);
 		
 		switch ([httpResponse statusCode]) {
 			case 0: {
@@ -185,10 +207,30 @@
 #if 0
 				NSLog(@"Not Found %@:%@:%@", data, response, request);
 #endif
-				NSDictionary *userInfo = @{
-										   NSLocalizedDescriptionKey: @"Not Found",
-										   };
+				NSDictionary *userInfo = nil;
+				
+				NSError *serializationError = nil;
+				NSDictionary *packet = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+				if (serializationError) {
+					userInfo = @{
+					  NSLocalizedDescriptionKey: @"Not Found",
+					  };
+				}
+				else {
+					userInfo = @{
+								 NSLocalizedDescriptionKey : packet[@"message"]
+								 };
+				}
+				
 				NSError *retError = [NSError errorWithDomain:GSErrorDomain code:404 userInfo:userInfo];
+				error = retError;
+				break;
+			}
+			case 503: {
+				NSDictionary *userInfo = @{
+										   NSLocalizedDescriptionKey: @"Service Unavailable",
+										   };
+				NSError *retError = [NSError errorWithDomain:GSErrorDomain code:503 userInfo:userInfo];
 				error = retError;
 				break;
 			}
@@ -199,18 +241,20 @@
 				break;
 		}
 		
-		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^ {
+		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^ {
 			if (error) {
 				handler(nil, error);
 			}
 			else {
 				handler(result, nil);
 			}
+			weakSelf._requestCount = weakSelf._requestCount - 1;
 		});
 	};
 	
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^ {
 		// this probably isn't necessary anymore.
+		
 		NSURLSessionDataTask *task = [currentSession dataTaskWithRequest:request completionHandler:dataHandler];
 		[task resume];
 	});
@@ -321,7 +365,6 @@
 - (void)requestRepositoryContentsForRepositoryNamed:(NSString *)repoName repositoryOwner:(NSString *)username token:(NSString *)token path:(NSString *)path completionHandler:(void (^)(NSArray *__nullable items, NSError *__nullable error))handler {
 	
 	NSURL *requestURL  = GSAPIURLComplex(GSAPIEndpointRepos, username, repoName, @"contents", path, nil);
-		NSLog(@"fff %@:%@", path, requestURL);
 	GSURLRequest *request = [[GSURLRequest alloc] initWithURL:requestURL];
 	[request setAuthToken:token];
 	

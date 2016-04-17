@@ -9,12 +9,14 @@
 #import <Masonry/Masonry.h>
 
 #import "GRStreamViewController.h"
-#import "GREventViewControllerProxy.h"
-#import "GREventCellModel.h"
+#import "GRStreamViewControllerProxy.h"
+#import "GRStreamCellModel.h"
 #import "GRStreamEventCell.h"
 #import "GRStreamModel.h"
 
-static NSString *reuseIdentifier = @"reuseIdentifier";
+static NSString *const reuseIdentifier = @"reuseIdentifier";
+
+static const CGFloat GRStreamViewAvatarSize = 38.0f;
 
 @implementation GRStreamViewController {
     GRStreamModel *model;
@@ -26,9 +28,7 @@ static NSString *reuseIdentifier = @"reuseIdentifier";
 
 - (instancetype)init {
 	if ((self = [super init])) {
-        model = [[GRStreamModel alloc] init];
-		
-        [model setDelegate:self];
+		self.tableView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
 		
 		[self.tableView registerClass:[GRStreamEventCell class] forCellReuseIdentifier:reuseIdentifier];
 		
@@ -37,13 +37,30 @@ static NSString *reuseIdentifier = @"reuseIdentifier";
 		
 		[self setRefreshControl:refreshControl];
 		
-		REGISTER_RELOAD_VIEW(GRStreamViewControllerNotificationKey);
+		GR_RELOAD_VIEW_REGISTER(self, @selector(_reloadNotification));
+		
+		model = [[GRStreamModel alloc] initWithDelegate:self];
     }
     return self;
 }
 
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+	if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+		[cell setSeparatorInset:UIEdgeInsetsZero];
+	}
+	
+	if ([cell respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)]) {
+		[cell setPreservesSuperviewLayoutMargins:NO];
+	}
+	
+	if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+		[cell setLayoutMargins:UIEdgeInsetsZero];
+	}
+}
+
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
+	
 	if (!attemptingRefresh) {
 		[refreshControl endRefreshing];
 	}
@@ -76,23 +93,33 @@ static NSString *reuseIdentifier = @"reuseIdentifier";
 
 - (UITableViewCell *)tableView:(UITableView *)aTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     GRStreamEventCell *cell = [aTableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
+	
     if (!cell) {
         cell = [[GRStreamEventCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
-    }
-	GREventCellModel *cellModel = [model eventCellModelForIndexPath:indexPath];
+		// Cell is never actually null... ?_?
+	}
+	
+	cell.selectionStyle = UITableViewCellSelectionStyleNone;
+	
+	GRStreamCellModel *cellModel = [model eventCellModelForIndexPath:indexPath];
+	[cellModel setFontSize:13];
+	[cellModel setCellSize:CGSizeMake(aTableView.frame.size.width, 0)];
+	[cellModel setAvatarSize:CGSizeMake(GRStreamViewAvatarSize, GRStreamViewAvatarSize)];
 	[cellModel setTableCell:cell];
     [cell configureWithEventModel:[model eventCellModelForIndexPath:indexPath]];
+	
     return cell;
 }
 
 #pragma mark - TableView Delegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 55;
+	GRStreamCellModel *cellModel = [model eventCellModelForIndexPath:indexPath];
+    return [cellModel requiredTableCellHeight];
 }
 
 - (void)tableView:(UITableView *)aTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    GREventViewControllerProxy *viewController = [[GREventViewControllerProxy alloc] initWithEvent:[model eventCellModelForIndexPath:indexPath].event];
+    GRStreamViewControllerProxy *viewController = [[GRStreamViewControllerProxy alloc] initWithEvent:[model eventCellModelForIndexPath:indexPath].event];
     [aTableView deselectRowAtIndexPath:indexPath animated:YES];
     [self.navigationController pushViewController:viewController animated:YES];
 }
@@ -107,6 +134,10 @@ static NSString *reuseIdentifier = @"reuseIdentifier";
 		[refreshControl endRefreshing];
 		[self.tableView reloadData];
 	});
+}
+
+- (BOOL)isDismissable {
+	return NO;
 }
 
 @end

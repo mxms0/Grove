@@ -14,7 +14,7 @@
 - (void)_configureWithDictionary:(NSDictionary *)dictionary {
 	[super _configureWithDictionary:dictionary];
 	
-#if 0
+#if 1
 	NSLog(@"Event information %@", dictionary);
 #endif
 	
@@ -133,7 +133,7 @@
 	return mapping[string] ? [mapping[string] intValue] : GSEventTypeUnknown;
 }
 
-#if DEBUG
+//#if DEBUG
 - (NSString *)stringForEventType:(GSEventType)type {
 	NSDictionary *const mapping = @{
 									@"CommitCommentEvent"			:@(GSEventTypeCommitComment),
@@ -164,10 +164,10 @@
 									};
 	return [[mapping allKeysForObject:@(type)] firstObject];
 }
-#endif
+//#endif
 
 - (NSString *)description {
-	return [NSString stringWithFormat:@"<%@: %p; id = %@; type = %@;>", NSStringFromClass([self class]), self, self.identifier, [self stringForEventType:self.type]];
+	return [NSString stringWithFormat:@"<%@: %p; id = %@; type = %@;>", NSStringFromClass([self class]), (void *)self, self.identifier, [self stringForEventType:self.type]];
 }
 
 @end

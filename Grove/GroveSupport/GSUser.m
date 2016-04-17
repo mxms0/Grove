@@ -192,7 +192,7 @@ static NSMutableDictionary *cachedUsers = nil;
 }
 
 - (NSString *)description {
-	return [NSString stringWithFormat:@"<%@: %p; username = %@; admin = %d;>", NSStringFromClass([self class]), self, self.username, self.isAdmin];
+	return [NSString stringWithFormat:@"<%@: %p; username = %@; admin = %d;>", NSStringFromClass([self class]), (void *)self, self.username, self.isAdmin];
 }
 
 @end

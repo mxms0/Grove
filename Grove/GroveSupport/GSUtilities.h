@@ -14,5 +14,5 @@
 NSString *GSMD5HashFromString(NSString *string);
 NSString *GSMD5HashFromFile(NSURL *filePath);
 NSString *GSRFC2616DTimestampFromDate(NSDate *date);
-
+NSString *GSStringFromBase64String(NSString *str);
 #endif /* defined(__Grove__GSUtilities__) */

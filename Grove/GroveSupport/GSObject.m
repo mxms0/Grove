@@ -94,7 +94,6 @@
 		self.updating = YES;
 		[[GSGitHubEngine sharedInstance] _dirtyRequestWithObject:self completionHandler:^(NSDictionary *ret, NSError *error) {
 			if (error) {
-				_GSAssert(NO, [error description]);
 				GSSafeHandlerCall(handler, error);
 			}
 			else if (!ret) {

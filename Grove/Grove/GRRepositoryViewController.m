@@ -10,17 +10,23 @@
 #import "GRRepositoryHeaderView.h"
 #import "GRRepositoryFileBrowserView.h"
 #import "GRRepositoryInfoView.h"
+#import "GRRepositoryIssuesView.h"
+#import "GRRepositoryPullRequestView.h"
+#import "GRRepositoryCommitsView.h"
 
 #import <GroveSupport/GroveSupport.h>
 
-static CGFloat GRHeaderSizeRatio = .10f;
+static const CGFloat GRHeaderHeight = 36.0f;
 
 @implementation GRRepositoryViewController {
 	GRRepositoryHeaderView *header;
 	GRRepositoryViewSelector *viewSelector;
 	GRRepositoryFileBrowserView *fileBrowser;
 	GRRepositoryInfoView *infoView;
-	UIView *currentSectionView;
+	GRRepositoryCommitsView *commitsView;
+	GRRepositoryPullRequestView *pullRequestView;
+	GRRepositoryIssuesView *issuesView;
+	GRRepositoryGenericSectionView *currentSectionView;
 	GRRepositoryViewSelectorType currentViewType;
 }
 
@@ -29,15 +35,14 @@ static CGFloat GRHeaderSizeRatio = .10f;
 		header = [[GRRepositoryHeaderView alloc] init];
 		[header setBackgroundColor:GSRandomUIColor()];
 		
+		self.edgesForExtendedLayout = UIRectEdgeNone;
+		
 		viewSelector = [[GRRepositoryViewSelector alloc] init];
 		[viewSelector setDelegate:self];
 		
 		infoView = [[GRRepositoryInfoView alloc] init];
 		
 		currentSectionView = infoView;
-		// Notes about this view:
-		// Consider perhaps User/Reponame only when its a reasonable length
-		// otherwise Reponame\n User
 	}
 	return self;
 }
@@ -47,7 +52,11 @@ static CGFloat GRHeaderSizeRatio = .10f;
 	
 	_repository = newRepository;
 	[_repository addObserver:self forKeyPath:GSUpdatedDateKey options:0 context:NULL];
-	[_repository update];
+	[_repository updateWithCompletionHandler:^(NSError * _Nullable error) {
+		if (error) {
+			[self presentErrorAndDismissIfPossible:error];
+		}
+	}];
 	
 	[infoView setRepository:newRepository];
 	[fileBrowser setRepository:newRepository];
@@ -55,42 +64,88 @@ static CGFloat GRHeaderSizeRatio = .10f;
 	[header setRepositoryOwner:_repository.owner.username];
 }
 
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+	// only case right now should be to dismiss, so let's just dismiss... .-.
+	[self.navigationController popViewControllerAnimated:YES];
+}
+
 - (void)viewSelector:(GRRepositoryViewSelector *)selector didChangeToViewType:(GRRepositoryViewSelectorType)viewType {
 	if (currentViewType == viewType) return;
 	currentViewType = viewType;
+	
+	[currentSectionView removeFromSuperview];
+	
+	GRRepositoryGenericSectionView *viewToSwitch = nil;
+	
 	switch (viewType) {
 		case GRRepositoryViewSelectorTypeCodeView:
-			[self _presentCodeView];
+			viewToSwitch = [self _presentCodeView];
 			break;
 		case GRRepositoryViewSelectorTypeInfoView:
-			[self _presentInfoView];
+			viewToSwitch = [self _presentInfoView];
 			break;
 		case GRRepositoryViewSelectorTypeIssuesView:
+			viewToSwitch = [self _presentIssuesView];
+			break;
+		case GRRepositoryViewSelectorTypeCommitsView:
+			viewToSwitch = [self _presentCommitsView];
 			break;
 		case GRRepositoryViewSelectorTypePullRequestsView:
+			viewToSwitch = [self _presentPullRequestsView];
 			break;
 		default:
 			break;
 	}
+	
+	currentSectionView = viewToSwitch;
+	
+	[self.view addSubview:currentSectionView];
+	
 	[self properLayoutSubviews];
 }
 
-- (void)_presentInfoView {
-	[currentSectionView removeFromSuperview];
-	currentSectionView = nil;
-	currentSectionView = [[GRRepositoryInfoView alloc] init];
-	[(GRRepositoryInfoView *)currentSectionView setRepository:_repository];
+- (GRRepositoryGenericSectionView *)_presentIssuesView {
+	if (!issuesView) {
+		issuesView = [[GRRepositoryIssuesView alloc] init];
+		[issuesView setRepository:_repository];
+	}
 	
-	[self.view addSubview:currentSectionView];
+	return issuesView;
 }
 
-- (void)_presentCodeView {
-	[currentSectionView removeFromSuperview];
-	currentSectionView = nil;
-	currentSectionView = [[GRRepositoryFileBrowserView alloc] init];
-	[(GRRepositoryFileBrowserView *)currentSectionView setRepository:_repository];
+- (GRRepositoryGenericSectionView *)_presentCommitsView {
+	if (!commitsView) {
+		commitsView = [[GRRepositoryCommitsView alloc] init];
+		[commitsView setRepository:_repository];
+	}
+	return commitsView;
+}
+
+- (GRRepositoryGenericSectionView *)_presentPullRequestsView {
+	if (!pullRequestView) {
+		pullRequestView = [[GRRepositoryPullRequestView alloc] init];
+		[pullRequestView setRepository:_repository];
+	}
+
+	return pullRequestView;
+}
+
+- (GRRepositoryGenericSectionView *)_presentInfoView {
+	if (!infoView) {
+		infoView = [[GRRepositoryInfoView alloc] init];
+		[infoView setRepository:_repository];
+	}
 	
-	[self.view addSubview:currentSectionView];
+	return infoView;
+}
+
+- (GRRepositoryGenericSectionView *)_presentCodeView {
+	if (!fileBrowser) {
+		fileBrowser = [[GRRepositoryFileBrowserView alloc] init];
+		[fileBrowser setRepository:_repository];
+	}
+	
+	return fileBrowser;
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
@@ -109,7 +164,7 @@ static CGFloat GRHeaderSizeRatio = .10f;
 	
 	CGFloat verticalOffsetUsed = GRStatusBarHeight();
 	
-	[header setFrame:CGRectMake(0, verticalOffsetUsed, self.view.frame.size.width, ceilf(self.view.frame.size.height * GRHeaderSizeRatio))];
+	[header setFrame:CGRectMake(0, verticalOffsetUsed, self.view.frame.size.width, GRHeaderHeight)];
 	
 	verticalOffsetUsed += header.frame.size.height;
 	

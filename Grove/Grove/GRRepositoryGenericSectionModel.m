@@ -11,6 +11,7 @@
 @implementation GRRepositoryGenericSectionModel
 
 - (instancetype)initWithRepository:(GSRepository *)repo {
+	if (!repo) return nil;
 	if ((self = [super init])) {
 		
 	}
@@ -19,6 +20,18 @@
 
 - (void)update {
 	
+}
+
+- (NSString *)sectionLabelForSection:(NSUInteger)section {
+	return nil;
+}
+
+- (NSUInteger)numberOfRowsInSection:(NSUInteger)section {
+	return 0;
+}
+
+- (NSUInteger)numberOfSections {
+	return 0;
 }
 
 @end

@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Milo. All rights reserved.
 //
 
-#import "GREventViewControllerProxy.h"
+#import "GRStreamViewControllerProxy.h"
 
 @interface GREventIssueViewController : GRViewController
 - (instancetype)initWithEvent:(GSEvent *)event;

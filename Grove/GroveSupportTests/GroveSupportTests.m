@@ -27,7 +27,7 @@
 }
 
 static NSString *globalUserName = @"Maximus-";
-static NSString *globalPassword = @"!Rocky&Hugo68";
+static NSString *globalPassword = @"null";
 
 - (void)testExample {
 	

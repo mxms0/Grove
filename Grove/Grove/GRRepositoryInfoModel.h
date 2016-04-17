@@ -8,9 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "GRRepositoryGenericSectionModel.h"
+#import "GRRepositoryReadMeCell.h"
 
 @class GSRepository;
 @interface GRRepositoryInfoModel : GRRepositoryGenericSectionModel
-- (NSUInteger)numberOfSections;
-- (NSUInteger)numberOfRowsInSection:(NSUInteger)section;
+@property (nonatomic, weak) GRRepositoryReadMeCell *readMeCell;
+- (NSString *)repositoryDescription;
 @end

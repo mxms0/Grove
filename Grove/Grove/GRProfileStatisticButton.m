@@ -27,7 +27,7 @@
 	text = [[UILabel alloc] init];
 	subText = [[UILabel alloc] init];
 
-	[text setFont:[UIFont boldSystemFontOfSize:24]];
+	[text setFont:[UIFont boldSystemFontOfSize:17]];
 	[text setTextAlignment:NSTextAlignmentCenter];
 	[text setMinimumScaleFactor:0.5];
 	
@@ -51,13 +51,11 @@
 
 - (void)drawRect:(CGRect)rect {
 	[super drawRect:rect];
-	[[UIColor colorWithWhite:.9 alpha:1] set];
-	UIRectFill(CGRectMake(0, 0, (self.frame.size.width - 0), 1));
 }
 
 - (void)layoutSubviews {
 	[super layoutSubviews];
-	CGFloat divisionFactor = 0.60;
+	const CGFloat divisionFactor = 0.60;
 	[text setFrame:CGRectMake(0, 5, self.frame.size.width, floorf(divisionFactor * self.frame.size.height))];
 	[subText setFrame:CGRectMake(0, floorf(divisionFactor * self.frame.size.height), self.frame.size.width, self.frame.size.height - (floorf(divisionFactor * self.frame.size.height)))];
 }

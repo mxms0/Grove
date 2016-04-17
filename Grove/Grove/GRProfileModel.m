@@ -18,6 +18,7 @@
 }
 
 - (instancetype)initWithUser:(GRApplicationUser *)user {
+	if (!user) return nil;
 	if ((self = [super init])) {
 		visibleUser = user;
 		
@@ -108,7 +109,7 @@
 }
 
 - (NSString *)titleForSection:(NSInteger)section {
-    NSString *ret = @"undef";
+    NSString *ret = @"UNDEF";
     switch (section) {
         case 0:
             break;

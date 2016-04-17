@@ -1,4 +1,4 @@
-//
+ //
 //  GSUtilities.m
 //  GroveSupport
 //
@@ -83,4 +83,9 @@ NSString *GSRFC2616DTimestampFromDate(NSDate *date) {
 	[formatter setDateFormat:@"EEE',' dd' 'MMM' 'yyyy HH':'mm':'ss zzz"];
 	
 	return [formatter stringFromDate:date];
+}
+
+NSString *GSStringFromBase64String(NSString *str) {
+	NSData *encodedData = [[NSData alloc] initWithBase64EncodedString:str options:(NSDataBase64DecodingOptions)0];
+	return [[NSString alloc] initWithData:encodedData encoding:NSUTF8StringEncoding];
 }

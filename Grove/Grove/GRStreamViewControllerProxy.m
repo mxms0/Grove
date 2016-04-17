@@ -6,16 +6,14 @@
 //  Copyright (c) 2015 Milo. All rights reserved.
 //
 
-#import "GREventViewControllerProxy.h"
+#import "GRStreamViewControllerProxy.h"
 
 #import "GREventIssueViewController.h"
 #import "GRRepositoryViewController.h"
 
-@implementation GREventViewControllerProxy
+@implementation GRStreamViewControllerProxy
 
 - (instancetype)initWithEvent:(GSEvent *)event {
-	// this whole thing is bad practice.
-	// what is happening here Rocky?
 	// Why do we have a view controller that actually isn't anything?
 	// And why subclass it? That'll put us in a loop...
 	// I corrected that issue, this thing should be removed however.
@@ -25,7 +23,7 @@
             break;
         }
         case GSEventTypeCreate: {
-			self = (GREventViewControllerProxy *)[[GRRepositoryViewController alloc] init];
+			self = (GRStreamViewControllerProxy *)[[GRRepositoryViewController alloc] init];
 			GSRepository *repository = [event repository];
 			[(GRRepositoryViewController *)self setRepository:repository];
 			
@@ -58,7 +56,7 @@
             break;
         }
         case GSEventTypeFork: {
-			self = (GREventViewControllerProxy *)[[GRRepositoryViewController alloc] init];
+			self = (GRStreamViewControllerProxy *)[[GRRepositoryViewController alloc] init];
 			GSRepository *repository = [event forkee];
 			[(GRRepositoryViewController *)self setRepository:repository];
 			
@@ -77,15 +75,15 @@
             break;
         }
         case GSEventTypeIssueComment: {
-            self = (GREventViewControllerProxy *)[[GREventIssueViewController alloc] initWithEvent:event];
+            self = (GRStreamViewControllerProxy *)[[GREventIssueViewController alloc] initWithEvent:event];
             break;
         }
         case GSEventTypeIssues: {
-            self = (GREventViewControllerProxy *)[[GREventIssueViewController alloc] initWithEvent:event];
+            self = (GRStreamViewControllerProxy *)[[GREventIssueViewController alloc] initWithEvent:event];
             break;
         }
         case GSEventTypeMember: {
-			self = (GREventViewControllerProxy *)[[GRRepositoryViewController alloc] init];
+			self = (GRStreamViewControllerProxy *)[[GRRepositoryViewController alloc] init];
 			GSRepository *repository = [event repository];
 			[(GRRepositoryViewController *)self setRepository:repository];
             break;
@@ -111,7 +109,11 @@
             break;
         }
         case GSEventTypePush: {
-            
+			self = (GRStreamViewControllerProxy *)[[GRRepositoryViewController alloc] init];
+			GSRepository *repository = [event repository];
+			[(GRRepositoryViewController *)self setRepository:repository];
+			// Consider then from here, telling the repository to jump to specified branch.
+			// Also: maybe this should jump to the commit instead.
             break;
         }
         case GSEventTypeRelease: {
@@ -130,7 +132,7 @@
             break;
         }
         case GSEventTypeStar: {
-			self = (GREventViewControllerProxy *)[[GRRepositoryViewController alloc] init];
+			self = (GRStreamViewControllerProxy *)[[GRRepositoryViewController alloc] init];
 			GSRepository *repository = [event repository];
 			[(GRRepositoryViewController *)self setRepository:repository];
 			
@@ -142,16 +144,12 @@
             break;
         }
         default: {
-            self = [super init];
-			NSLog(@"Allocating bad vc. !");
+			GSAssert();
             break;
         }
     }
-    if (self) {
-        
-    }
-    else {
-        self = [super init];
+    if (!self) {
+		self = [super init];
     }
     return self;
 }

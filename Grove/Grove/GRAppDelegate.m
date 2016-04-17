@@ -81,10 +81,14 @@
     
     self.tabBarController = [[GRTabBarController alloc] init];
     self.tabBarController.viewControllers = @[streamNavigationController, notificationNavigationController, profileNavigationController];
-    
-    [UIView transitionWithView:self.window duration:0.5 options: UIViewAnimationOptionTransitionCrossDissolve animations:^{
-        [self.window setRootViewController:self.tabBarController];
-    } completion:nil];
+	
+//	self.tabBarController.tabBar.items[0].image = [UIImage imageNamed:@"icon@2x"];
+	
+	self.window.rootViewController = self.tabBarController;
+	
+//    [UIView transitionWithView:self.window duration:0.5 options: UIViewAnimationOptionTransitionCrossDissolve animations:^{
+//        [self.window setRootViewController:self.tabBarController];
+//    } completion:nil];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -112,6 +116,7 @@
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
+	GR_TEARDOWN_NOTIFY();
 	// Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 

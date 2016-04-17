@@ -18,7 +18,7 @@
 }
 
 - (void)commonInit {
-	
+	[self setBackgroundColor:GSRandomUIColor()];
 }
 
 - (Class)designatedModelClass {
@@ -33,6 +33,10 @@
 	model = [[[self designatedModelClass] alloc] initWithRepository:repo];
 	[model setDelegate:self];
 	[model update];
+}
+
+- (void)reloadView {
+	
 }
 
 @end
