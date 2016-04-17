@@ -131,13 +131,13 @@ NSAttributedString *GRFormattedMessageWithEvent(GSEvent *event, BOOL *requiresSu
 			case GSEventTypePageBuild:
 				break;
 			case GSEventTypePublic: {
-				NSAttributedString *verb = [[NSAttributedString alloc] initWithString:@"Made " attributes:defaultAttributes];
-				NSAttributedString *target = [[NSAttributedString alloc] initWithString:event.repository.pathString attributes:defaultAttributes];
+				NSAttributedString *verb = [[NSAttributedString alloc] initWithString:@"Made  " attributes:defaultAttributes];
+				NSAttributedString *target = [[NSAttributedString alloc] initWithString:event.repository.pathString attributes:highlightedAttributes];
 				// right now I'm confident no notification gets pushed to users if someone makes a repo private.. so
 				if (!event.publicallyAvailable) {
 					NSLog(@"THIS EVENT IS BEHAVING STRANGELY. %@", event);
 				}
-				NSAttributedString *destination = [[NSAttributedString alloc] initWithString:@" public" attributes:defaultAttributes];
+				NSAttributedString *destination = [[NSAttributedString alloc] initWithString:@"  public" attributes:defaultAttributes];
 				[components addObjectsFromArray:@[verb, target, destination]];
 				break;
 			}

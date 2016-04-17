@@ -55,7 +55,6 @@
 		505C58EE1C9965DB00D5F37C /* applicationIconLarge@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 505C58ED1C9965DB00D5F37C /* applicationIconLarge@2x.png */; };
 		506005BA1BBB5474000F5AFF /* GRActiveUserProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 506005B91BBB5474000F5AFF /* GRActiveUserProfileViewController.m */; };
 		5060631A1C7ADEF300E1674A /* GRNotificationHeaderLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 506063191C7ADEF300E1674A /* GRNotificationHeaderLabel.m */; };
-		506063231C7AE6B200E1674A /* GRNotificationTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 506063221C7AE6B200E1674A /* GRNotificationTitleView.m */; };
 		506E1E2E1CA73BD6008EAE7B /* GRRepositoryReadMeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 506E1E2D1CA73BD6008EAE7B /* GRRepositoryReadMeCell.m */; };
 		5070D55B1C495C7A00E80AB1 /* GRRepositoryViewSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = 5070D55A1C495C7A00E80AB1 /* GRRepositoryViewSelector.m */; };
 		5070D5611C4A04BD00E80AB1 /* GRTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5070D5601C4A04BD00E80AB1 /* GRTableViewController.m */; };
@@ -113,6 +112,8 @@
 		50F081921B82ED6500366161 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50F081911B82ED6500366161 /* Assets.xcassets */; };
 		50F0819E1B82EE5400366161 /* GRNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50F0819D1B82EE5400366161 /* GRNavigationController.m */; };
 		50F081A11B82EF0B00366161 /* GRNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 50F081A01B82EF0B00366161 /* GRNavigationBar.m */; };
+		50FB177A1CC3233B00A8E607 /* GRStreamTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 50FB17791CC3233B00A8E607 /* GRStreamTitleView.m */; };
+		50FB177B1CC3235100A8E607 /* GRNotificationTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 506063221C7AE6B200E1674A /* GRNotificationTitleView.m */; };
 		84309A7A1B845B49008EB771 /* GRStreamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84309A791B845B49008EB771 /* GRStreamModel.m */; };
 		84309A7D1B854A21008EB771 /* GRLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84309A7C1B854A21008EB771 /* GRLoginViewController.m */; };
 		849872FE1B85A42100D1C6FD /* NSAttributedString+GRExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 849872FD1B85A42100D1C6FD /* NSAttributedString+GRExtensions.m */; };
@@ -357,6 +358,8 @@
 		50F0819D1B82EE5400366161 /* GRNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRNavigationController.m; sourceTree = "<group>"; };
 		50F0819F1B82EF0B00366161 /* GRNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRNavigationBar.h; sourceTree = "<group>"; };
 		50F081A01B82EF0B00366161 /* GRNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRNavigationBar.m; sourceTree = "<group>"; };
+		50FB17781CC3233B00A8E607 /* GRStreamTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRStreamTitleView.h; sourceTree = "<group>"; };
+		50FB17791CC3233B00A8E607 /* GRStreamTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRStreamTitleView.m; sourceTree = "<group>"; };
 		84309A781B845B48008EB771 /* GRStreamModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GRStreamModel.h; path = Assets.xcassets/GRStreamModel.h; sourceTree = "<group>"; };
 		84309A791B845B49008EB771 /* GRStreamModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GRStreamModel.m; path = Assets.xcassets/GRStreamModel.m; sourceTree = "<group>"; };
 		84309A7B1B854A21008EB771 /* GRLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRLoginViewController.h; sourceTree = "<group>"; };
@@ -529,19 +532,21 @@
 		5060631D1C7ADF2100E1674A /* Stream View */ = {
 			isa = PBXGroup;
 			children = (
+				50FB17781CC3233B00A8E607 /* GRStreamTitleView.h */,
+				50FB17791CC3233B00A8E607 /* GRStreamTitleView.m */,
 				84F524F81B832A7E0077A06C /* GRStreamEventCell.h */,
 				84F524F91B832A7E0077A06C /* GRStreamEventCell.m */,
 				50504D981BA263D800B87C5F /* GRStreamCellModel.h */,
 				50504D991BA263D800B87C5F /* GRStreamCellModel.m */,
 				84309A781B845B48008EB771 /* GRStreamModel.h */,
 				84309A791B845B49008EB771 /* GRStreamModel.m */,
+				50055A741C99269E0041765C /* GRStreamSubCellView.h */,
+				50055A751C99269E0041765C /* GRStreamSubCellView.m */,
+				50D9101F1CADBC8B00BABC9A /* GRMessageFormat.m */,
 				84A8D0F81B8D239600B6B4FB /* GRStreamViewControllerProxy.h */,
 				84A8D0F91B8D239600B6B4FB /* GRStreamViewControllerProxy.m */,
 				84F524ED1B83269E0077A06C /* GRStreamViewController.h */,
 				84F524EE1B83269E0077A06C /* GRStreamViewController.m */,
-				50055A741C99269E0041765C /* GRStreamSubCellView.h */,
-				50055A751C99269E0041765C /* GRStreamSubCellView.m */,
-				50D9101F1CADBC8B00BABC9A /* GRMessageFormat.m */,
 			);
 			name = "Stream View";
 			sourceTree = "<group>";
@@ -551,8 +556,6 @@
 			children = (
 				5097B5CB1B8C0BBB00A72721 /* GRNotificationModel.h */,
 				5097B5CC1B8C0BBB00A72721 /* GRNotificationModel.m */,
-				84F524F01B8326D60077A06C /* GRNotificationViewController.h */,
-				84F524F11B8326D60077A06C /* GRNotificationViewController.m */,
 				506063181C7ADEF300E1674A /* GRNotificationHeaderLabel.h */,
 				506063191C7ADEF300E1674A /* GRNotificationHeaderLabel.m */,
 				500001571BB73411001564E7 /* GRNotificationHeaderTableViewCell.h */,
@@ -561,6 +564,8 @@
 				5009A34B1BB6751600DE19DF /* GRNotificationTableViewCell.m */,
 				506063211C7AE6B200E1674A /* GRNotificationTitleView.h */,
 				506063221C7AE6B200E1674A /* GRNotificationTitleView.m */,
+				84F524F01B8326D60077A06C /* GRNotificationViewController.h */,
+				84F524F11B8326D60077A06C /* GRNotificationViewController.m */,
 			);
 			name = "Notification View";
 			sourceTree = "<group>";
@@ -1100,6 +1105,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				50FB177B1CC3235100A8E607 /* GRNotificationTitleView.m in Sources */,
 				505C58EC1C995C0500D5F37C /* GRIssuesConversationViewController.m in Sources */,
 				50F0819E1B82EE5400366161 /* GRNavigationController.m in Sources */,
 				50F081A11B82EF0B00366161 /* GRNavigationBar.m in Sources */,
@@ -1116,6 +1122,7 @@
 				50F0818A1B82ED6500366161 /* GRAppDelegate.m in Sources */,
 				50ED2AD91B8B106F00DFF146 /* GRProfileModel.m in Sources */,
 				501BA7ED1C3D1AA6005C5524 /* GRRepositoryPathBar.m in Sources */,
+				50FB177A1CC3233B00A8E607 /* GRStreamTitleView.m in Sources */,
 				501558AF1B8553020002254D /* GRSessionManager.m in Sources */,
 				5071EFFF1C5971690095ACA0 /* GRRepositoryPullRequestModel.m in Sources */,
 				501F870C1C868E51000C2C53 /* GRRepositoryCommitsView.m in Sources */,
@@ -1124,7 +1131,6 @@
 				50504D9A1BA263D800B87C5F /* GRStreamCellModel.m in Sources */,
 				5060631A1C7ADEF300E1674A /* GRNotificationHeaderLabel.m in Sources */,
 				849FF2121B884DC20077DE06 /* UITabBar+GRExtension.m in Sources */,
-				506063231C7AE6B200E1674A /* GRNotificationTitleView.m in Sources */,
 				84F524F51B8326E40077A06C /* GRProfileViewController.m in Sources */,
 				500001591BB73411001564E7 /* GRNotificationHeaderTableViewCell.m in Sources */,
 				5070D55B1C495C7A00E80AB1 /* GRRepositoryViewSelector.m in Sources */,
@@ -1342,7 +1348,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1379,7 +1385,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;

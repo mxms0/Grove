@@ -1,15 +1,15 @@
 //
-//  GRNotificationTitleView.m
+//  GRStreamTitleView.m
 //  Grove
 //
-//  Created by Max Shavrick on 2/22/16.
+//  Created by Max Shavrick on 4/16/16.
 //  Copyright © 2016 Milo. All rights reserved.
 //
 
-#import "GRNotificationTitleView.h"
+#import "GRStreamTitleView.h"
 #import "GRSmallCapsLabel.h"
 
-@implementation GRNotificationTitleView {
+@implementation GRStreamTitleView {
 	GRSmallCapsLabel *label;
 }
 
@@ -17,7 +17,7 @@
 	if ((self = [super initWithFrame:frame])) {
 		[self setBackgroundColor:[UIColor clearColor]];
 		label = [[GRSmallCapsLabel alloc] init];
-		[label setText:GRLocalizedString(@"notifications", nil, nil)];
+		[label setText:GRLocalizedString(@"activity", nil, nil)];
 		[self addSubview:label];
 	}
 	return self;
@@ -30,7 +30,6 @@
 
 - (void)drawRect:(CGRect)rect {
 	[super drawRect:rect];
-
 }
 
 @end

@@ -58,7 +58,6 @@
 				readMeString = contents;
 				dispatch_async(dispatch_get_main_queue(), ^ {
 					if (self.readMeCell) {
-						NSLog(@"readme %@", readMeString);
 						[self.readMeCell setReadMeString:readMeString];
 						// set contents
 					}
@@ -70,7 +69,7 @@
 }
 
 - (NSString *)repositoryDescription {
-	return repository.userDescription ? repository.userDescription : @"No description";
+	return repository.userDescription ? repository.userDescription : @"No description provided";
 }
 
 - (void)reloadView {

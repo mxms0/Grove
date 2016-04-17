@@ -17,26 +17,26 @@
 
 @implementation GRNotificationViewController {
 	GRNotificationModel *model;
+	NSDictionary *notifications;
 }
 
-- (instancetype)init {
-	if ((self = [super init])) {
-		tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
-		[tableView setDelegate:self];
-		[tableView setDataSource:self];
-		[tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-		
-		[tableView setBackgroundColor:[UIColor clearColor]];
-		
+- (instancetype)initWithStyle:(UITableViewStyle)style {
+	if ((self = [super initWithStyle:UITableViewStyleGrouped])) {
 		GRApplicationUser *user = [[GRSessionManager sharedInstance] currentUser];
-
+		
 		[[GSGitHubEngine sharedInstance] notificationsForUser:user.user completionHandler:^(NSArray *__nullable notifs, NSError *__nullable error) {
 			if (error) {
 				GSAssert();
 			}
 			[self handleRetrievedNotifications:notifs];
 		}];
-		
+	}
+	return self;
+}
+
+- (instancetype)init {
+	if ((self = [super init])) {
+
     }
     return self;
 }
@@ -45,7 +45,8 @@
 	[self sortNewNotifications:notifs];
 	
 	dispatch_async(dispatch_get_main_queue(), ^	{
-		[tableView reloadData];
+		// dont forget to weakref
+		[self.tableView reloadData];
 	});
 }
 
@@ -72,13 +73,12 @@
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
+
+	[self.tableView setFrame:self.view.bounds];
 	
-	[self.view addSubview:tableView];
-	[tableView setFrame:self.view.bounds];
+	GRNotificationTitleView *headerView = [[GRNotificationTitleView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, 45)];
 	
-	GRNotificationTitleView *headerView = [[GRNotificationTitleView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 45)];
-	
-	[tableView setTableHeaderView:headerView];
+	[self.tableView setTableHeaderView:headerView];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

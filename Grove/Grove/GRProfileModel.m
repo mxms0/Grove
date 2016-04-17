@@ -129,7 +129,7 @@
 }
 
 - (CGFloat)heightForProfileHeader {
-	return 240.0f;
+	return 210.0f;
 }
 
 - (CGFloat)cellHeightForRowAtIndexPath:(NSIndexPath *)indexPath {

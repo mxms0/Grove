@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface GRTabBarController : UITabBarController
+@interface GRTabBarController : UITabBarController <UITabBarControllerDelegate>
 
 - (void)didPushViewController:(UINavigationController *)navigationController;
 - (void)didPopViewController:(UINavigationController *)navigationController;

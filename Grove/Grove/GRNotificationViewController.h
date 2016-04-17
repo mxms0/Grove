@@ -6,12 +6,9 @@
 //  Copyright (c) 2015 Milo. All rights reserved.
 //
 
-#import "GRViewController.h"
+#import "GRTableViewController.h"
 #import "GRSyntaxHighlightedTextView.h"
 
-@interface GRNotificationViewController : GRViewController <UITableViewDataSource, UITableViewDelegate> {
-	UITableView *tableView;
-	NSDictionary *notifications;
-}
+@interface GRNotificationViewController : GRTableViewController <UITableViewDataSource, UITableViewDelegate> 
 
 @end

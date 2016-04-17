@@ -13,6 +13,7 @@
 #import "GRStreamCellModel.h"
 #import "GRStreamEventCell.h"
 #import "GRStreamModel.h"
+#import "GRStreamTitleView.h"
 
 static NSString *const reuseIdentifier = @"reuseIdentifier";
 
@@ -79,6 +80,14 @@ static const CGFloat GRStreamViewAvatarSize = 38.0f;
 
 - (void)_reloadNotification {
 	[self.tableView reloadData];
+}
+
+- (void)viewDidLoad {
+	[super viewDidLoad];
+	
+	GRStreamTitleView *headerView = [[GRStreamTitleView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, 45)];
+	
+	[self.tableView setTableHeaderView:headerView];
 }
 
 #pragma mark - TableView Datasource
