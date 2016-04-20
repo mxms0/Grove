@@ -106,7 +106,7 @@ static const CGFloat GRTabBarMenuDrawerHeight = 200.0f;
 	}
 	
 	items = [(id <GRDrawerMenuViewDataSource>)targetViewController drawerMenuItems];
-
+	
 	[drawer setMenuItems:items];
 }
 

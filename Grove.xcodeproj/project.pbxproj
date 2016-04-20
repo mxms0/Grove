@@ -103,7 +103,6 @@
 		50E781F41C78DA7800143931 /* GRSmallCapsLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 50E781F31C78DA7800143931 /* GRSmallCapsLabel.m */; };
 		50E9DF121CC70CA100EDDE0F /* GRDrawerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 50E9DF111CC70CA100EDDE0F /* GRDrawerView.m */; };
 		50E9DF151CC7356400EDDE0F /* tb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 50E9DF141CC7356400EDDE0F /* tb@2x.png */; };
-		50E9DF1D1CC73A0300EDDE0F /* TabBarBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 50E9DF1C1CC73A0300EDDE0F /* TabBarBackground.png */; };
 		50E9DF231CC73C4C00EDDE0F /* UITabBar+GRExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 50E9DF221CC73C4C00EDDE0F /* UITabBar+GRExtension.m */; };
 		50E9DF261CC73D9700EDDE0F /* GRTabBarLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 50E9DF251CC73D9700EDDE0F /* GRTabBarLayer.m */; };
 		50E9F8701B832BF70007212E /* GSNetworkManagerHelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = 50E9F86E1B832BF70007212E /* GSNetworkManagerHelpers.h */; };
@@ -324,7 +323,6 @@
 		50E9DF101CC70CA100EDDE0F /* GRDrawerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRDrawerView.h; sourceTree = "<group>"; };
 		50E9DF111CC70CA100EDDE0F /* GRDrawerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRDrawerView.m; sourceTree = "<group>"; };
 		50E9DF141CC7356400EDDE0F /* tb@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tb@2x.png"; sourceTree = "<group>"; };
-		50E9DF1C1CC73A0300EDDE0F /* TabBarBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TabBarBackground.png; sourceTree = "<group>"; };
 		50E9DF211CC73C4C00EDDE0F /* UITabBar+GRExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITabBar+GRExtension.h"; sourceTree = "<group>"; };
 		50E9DF221CC73C4C00EDDE0F /* UITabBar+GRExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBar+GRExtension.m"; sourceTree = "<group>"; };
 		50E9DF241CC73D9700EDDE0F /* GRTabBarLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRTabBarLayer.h; sourceTree = "<group>"; };
@@ -792,7 +790,6 @@
 				849872F81B85A3CB00D1C6FD /* Extensions */,
 				84F524EC1B8325E50077A06C /* Views */,
 				50F081911B82ED6500366161 /* Assets.xcassets */,
-				50E9DF1C1CC73A0300EDDE0F /* TabBarBackground.png */,
 				50140F561C7C6E6F00A3EBFA /* icon@2x.png */,
 				505C58ED1C9965DB00D5F37C /* applicationIconLarge@2x.png */,
 				50F081961B82ED6500366161 /* Info.plist */,
@@ -1022,7 +1019,6 @@
 				5084207C1BA893C700BD9630 /* Grove.strings in Resources */,
 				50F081921B82ED6500366161 /* Assets.xcassets in Resources */,
 				50140F571C7C6E6F00A3EBFA /* icon@2x.png in Resources */,
-				50E9DF1D1CC73A0300EDDE0F /* TabBarBackground.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

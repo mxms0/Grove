@@ -41,6 +41,13 @@
 	return c;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+	GRDrawerMenuItem *item = [self.menuItems objectAtIndex:indexPath.row];
+	id target = [item target];
+	SEL selector = [item selector];
+	[target performSelector:selector withObject:item];
+}
+
 - (void)setMenuItems:(NSArray<GRDrawerMenuItem *> *)menuItems {
 	NSLog(@"ffffff %@", menuItems);
 	_menuItems = menuItems;

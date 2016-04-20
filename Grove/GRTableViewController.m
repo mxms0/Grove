@@ -18,11 +18,12 @@
 }
 
 - (NSArray<GRDrawerMenuItem *> *)drawerMenuItems {
-	static dispatch_once_t token;
-	dispatch_once(&token, ^ {
-		drawerMenuItems = [self _generateDrawerMenuItems];
-	});
-	
+	@synchronized (drawerMenuItems) {
+		if (!drawerMenuItems) {
+			drawerMenuItems = [self _generateDrawerMenuItems];
+		}
+	}
+
 	return drawerMenuItems;
 }
 
