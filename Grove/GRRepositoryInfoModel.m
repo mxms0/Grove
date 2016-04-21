@@ -30,6 +30,7 @@
 	NSString *readMeString;
 	__weak GRRepositoryReadMeCell *_readMeCell;
 }
+@dynamic delegate;
 
 - (instancetype)initWithRepository:(GSRepository *)repo {
 	if ((self = [super init])) {
@@ -55,17 +56,29 @@
 				}
 			}
 			else {
-				readMeString = contents;
-				dispatch_async(dispatch_get_main_queue(), ^ {
-					if (self.readMeCell) {
-						[self.readMeCell setReadMeString:readMeString];
-						// set contents
-					}
-				});
+				[self receivedReadMeString:contents];
+
 			}
 		}];
 	}
 	return self;
+}
+
+- (void)receivedReadMeString:(NSString *)readme {
+	readMeString = readme;
+	
+	CGSize size = [readme boundingRectWithSize:CGSizeMake([self.delegate allottedWidthForReadMeLabel], CGFLOAT_MAX) options:(NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin) attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13]} context:nil].size;
+	
+
+	
+	dispatch_async(dispatch_get_main_queue(), ^ {
+		NSLog(@"5ff %@", NSStringFromCGSize(size));
+		[self.delegate setReadmeCellHeight:size.height];
+		if (self.readMeCell) {
+			[self.readMeCell setReadMeString:readMeString];
+			// set contents
+		}
+	});
 }
 
 - (NSString *)repositoryDescription {

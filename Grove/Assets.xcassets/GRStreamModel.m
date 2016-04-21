@@ -23,14 +23,16 @@ static NSString *const GRStreamModelStorageKey = @"stream_data"; // i will move 
 	if ((self = [super init])) {
 		self.delegate = del;
 		self.eventModels = [[NSMutableOrderedSet alloc] init];
-		NSData *cachedEventData = [[NSUserDefaults standardUserDefaults] objectForKey:GRStreamModelStorageKey];
-		if (cachedEventData) {
-			NSArray *ret = [NSKeyedUnarchiver unarchiveObjectWithData:cachedEventData];
-			if ([ret isKindOfClass:[NSOrderedSet class]]) {
-				self.eventModels = [ret mutableCopy];
-				[del reloadData];
-			}
-		}
+//		NSData *cachedEventData = [[NSUserDefaults standardUserDefaults] objectForKey:GRStreamModelStorageKey];
+	
+//		if (cachedEventData) {
+//			NSArray *ret = [NSKeyedUnarchiver unarchiveObjectWithData:cachedEventData];
+//			if ([ret isKindOfClass:[NSOrderedSet class]]) {
+//				[self handleNewleyArrivedEvents:ret];
+				//				self.eventModels = [ret mutableCopy];
+//				[del reloadData];
+//			}
+//		}
 		[self requestNewData];
 	}
 	return self;
@@ -61,7 +63,7 @@ static NSString *const GRStreamModelStorageKey = @"stream_data"; // i will move 
 	self.eventModels = eventModels;
 	[self.delegate reloadData];
 	
-	NSData *root = [NSKeyedArchiver archivedDataWithRootObject:self.eventModels];
+	NSData *root = [NSKeyedArchiver archivedDataWithRootObject:events];
 	
 	[[NSUserDefaults standardUserDefaults] setObject:root forKey:GRStreamModelStorageKey];
 }

@@ -15,6 +15,7 @@ static NSString *const GRStreamCellModelStorageAvatarKey = @"AvatarImage";
 static NSString *const GRStreamCellModelStorageCellHeightKey = @"CellHeight";
 static NSString *const GRStreamCellModelStorageUsernameKey = @"Username";
 static NSString *const GRStreamCellModelStorageCreatedDateKey = @"CreatedDate";
+static NSString *const GRStreamCellModelStorageGSEvent = @"EventObject";
 
 NSAttributedString *GRFormattedMessageWithEvent(GSEvent *event, BOOL *requiresSubCell, NSString **subCellText);
 // This class needs to be adapted to work without actual GSEvent, for NSCoding purposes.
@@ -36,21 +37,34 @@ NSAttributedString *GRFormattedMessageWithEvent(GSEvent *event, BOOL *requiresSu
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
 	if ((self = [super init])) {
+		
+		if ([aDecoder containsValueForKey:GRStreamCellModelStorageGSEvent]) {
+			GSEvent *evt = [aDecoder decodeObjectForKey:GRStreamCellModelStorageGSEvent];
+			if (!evt) {
+				GSAssert();
+			}
+			
+			GRStreamCellModel *model = [[GRStreamCellModel alloc] initWithEvent:evt];
+			return model;
+		}
+		
 		// This is borked when you try to tap on these events, since they contain no event types
 		// Consider copying everything over, or putting encodings in GroveSupport
 		// should probably cache more information about the event
-		if ([aDecoder containsValueForKey:GRStreamCellModelStorageAttributedStringKey]) {
-			attributedMessage = [aDecoder decodeObjectForKey:GRStreamCellModelStorageAttributedStringKey];
-		}
-		if ([aDecoder containsValueForKey:GRStreamCellModelStorageCellHeightKey]) {
-			cachedCellHeight = [aDecoder decodeFloatForKey:GRStreamCellModelStorageCellHeightKey];
-		}
-		if ([aDecoder containsValueForKey:GRStreamCellModelStorageUsernameKey]) {
-			cachedUsername = [aDecoder decodeObjectForKey:GRStreamCellModelStorageUsernameKey];
-		}
-		if ([aDecoder containsValueForKey:GRStreamCellModelStorageCreatedDateKey]) {
-			createdDate = [aDecoder decodeObjectForKey:GRStreamCellModelStorageCreatedDateKey];
-		}
+//		if ([aDecoder containsValueForKey:GRStreamCellModelStorageAttributedStringKey]) {
+//			attributedMessage = [aDecoder decodeObjectForKey:GRStreamCellModelStorageAttributedStringKey];
+//		}
+//		if ([aDecoder containsValueForKey:GRStreamCellModelStorageCellHeightKey]) {
+//			cachedCellHeight = [aDecoder decodeFloatForKey:GRStreamCellModelStorageCellHeightKey];
+//		}
+//		if ([aDecoder containsValueForKey:GRStreamCellModelStorageUsernameKey]) {
+//			cachedUsername = [aDecoder decodeObjectForKey:GRStreamCellModelStorageUsernameKey];
+//		}
+//		if ([aDecoder containsValueForKey:GRStreamCellModelStorageCreatedDateKey]) {
+//			createdDate = [aDecoder decodeObjectForKey:GRStreamCellModelStorageCreatedDateKey];
+//		}
+		
+
 //		
 //		[[GSGitHubEngine sharedInstance] userForUsername:cachedUsername completionHandler:^(GSUser * _Nullable user, NSError * _Nullable error) {
 //			if (user) {
@@ -68,10 +82,11 @@ NSAttributedString *GRFormattedMessageWithEvent(GSEvent *event, BOOL *requiresSu
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
-	[aCoder encodeObject:attributedMessage forKey:GRStreamCellModelStorageAttributedStringKey];
-	[aCoder encodeObject:cachedUsername forKey:GRStreamCellModelStorageUsernameKey];
-	[aCoder encodeObject:createdDate forKey:GRStreamCellModelStorageCreatedDateKey];
-	[aCoder encodeFloat:cachedCellHeight forKey:GRStreamCellModelStorageCellHeightKey];
+	[aCoder encodeObject:_event forKey:GRStreamCellModelStorageGSEvent];
+//	[aCoder encodeObject:attributedMessage forKey:GRStreamCellModelStorageAttributedStringKey];
+//	[aCoder encodeObject:cachedUsername forKey:GRStreamCellModelStorageUsernameKey];
+//	[aCoder encodeObject:createdDate forKey:GRStreamCellModelStorageCreatedDateKey];
+//	[aCoder encodeFloat:cachedCellHeight forKey:GRStreamCellModelStorageCellHeightKey];
 }
 
 - (nonnull instancetype)initWithEvent:(GSEvent *__nonnull)event {

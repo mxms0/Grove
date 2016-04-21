@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "GRRepositoryGenericSectionView.h"
+#import "GRRepositoryInfoModel.h"
 
-@interface GRRepositoryInfoView : GRRepositoryGenericSectionView <UITableViewDataSource, UITableViewDelegate>
+@interface GRRepositoryInfoView : GRRepositoryGenericSectionView <GRRepositoryInfoViewDelegate, UITableViewDataSource, UITableViewDelegate>
 @end

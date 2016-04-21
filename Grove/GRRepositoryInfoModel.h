@@ -10,8 +10,14 @@
 #import "GRRepositoryGenericSectionModel.h"
 #import "GRRepositoryReadMeCell.h"
 
+@protocol GRRepositoryInfoViewDelegate <GRRepositoryGenericSectionModelDelegate>
+- (CGFloat)allottedWidthForReadMeLabel;
+- (void)setReadmeCellHeight:(CGFloat)height;
+@end
+
 @class GSRepository;
 @interface GRRepositoryInfoModel : GRRepositoryGenericSectionModel
+@property (nonatomic, weak) id <GRRepositoryInfoViewDelegate> delegate;
 @property (nonatomic, weak) GRRepositoryReadMeCell *readMeCell;
 - (NSString *)repositoryDescription;
 @end

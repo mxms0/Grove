@@ -133,7 +133,7 @@
 	return mapping[string] ? [mapping[string] intValue] : GSEventTypeUnknown;
 }
 
-//#if DEBUG
+// this can be removed in prod
 - (NSString *)stringForEventType:(GSEventType)type {
 	NSDictionary *const mapping = @{
 									@"CommitCommentEvent"			:@(GSEventTypeCommitComment),
@@ -162,9 +162,21 @@
 									@"TeamAddEvent"					:@(GSEventTypeTeamAdd),
 									@"WatchEvent"					:@(GSEventTypeStar)
 									};
+	
 	return [[mapping allKeysForObject:@(type)] firstObject];
 }
-//#endif
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+	[super encodeWithCoder:aCoder];
+	[aCoder encodeObject:self.createdDate forKey:@"CreatedDate"];
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+	if ((self = [super initWithCoder:aDecoder])) {
+		[aDecoder decodeObjectForKey:@"CreatedDate"];
+	}
+	return self;
+}
 
 - (NSString *)description {
 	return [NSString stringWithFormat:@"<%@: %p; id = %@; type = %@;>", NSStringFromClass([self class]), (void *)self, self.identifier, [self stringForEventType:self.type]];

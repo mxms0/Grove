@@ -7,7 +7,6 @@
 //
 
 #import "GRRepositoryInfoView.h"
-#import "GRRepositoryInfoModel.h"
 #import "GRRepositoryInfoViewHeaderView.h"
 #import "GRRepositoryReadMeCell.h"
 
@@ -18,6 +17,7 @@ static NSString *const GRRepositoryInfoRegularCellIdentifier = @"infoCell";
 	UITableView *tableView;
 	GRRepositoryInfoModel *model;
 	BOOL hasDescription;
+	CGFloat readMeCellHeight;
 }
 
 - (void)commonInit {
@@ -37,6 +37,15 @@ static NSString *const GRRepositoryInfoRegularCellIdentifier = @"infoCell";
 	[tableView setFrame:self.bounds];
 }
 
+- (CGFloat)allottedWidthForReadMeLabel {
+	return self.frame.size.width - 2 * GRGenericHorizontalPadding;
+}
+
+- (void)setReadmeCellHeight:(CGFloat)height {
+	readMeCellHeight = height;
+	[tableView reloadData];
+}
+
 - (void)setRepository:(GSRepository *)repository {
 	if (!repository) {
 		model = nil;
@@ -44,6 +53,7 @@ static NSString *const GRRepositoryInfoRegularCellIdentifier = @"infoCell";
 	else {
 		model = [[GRRepositoryInfoModel alloc] initWithRepository:repository];
 	}
+	[model setDelegate:self];
 	hasDescription = !!([model repositoryDescription]);
 }
 
@@ -83,7 +93,7 @@ static NSString *const GRRepositoryInfoRegularCellIdentifier = @"infoCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 	if (indexPath.section == 1) {
-		return 95.0f;
+		return (readMeCellHeight == 0.0 ? 45.0f : readMeCellHeight + GRGenericVerticalPadding * 2 + 5); // readmeString height + header label
 	}
 	return 44.0f;
 }

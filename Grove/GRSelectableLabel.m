@@ -35,6 +35,34 @@
 	// what is this API...
 }
 
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+	[self setNeedsDisplay];
+	[super touchesBegan:touches withEvent:event];
+}
+
+- (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+	[self setNeedsDisplay];
+	[super touchesMoved:touches withEvent:event];
+}
+
+- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+	[self setNeedsDisplay];
+	[super touchesEnded:touches withEvent:event];
+}
+
+- (void)touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+	[self setNeedsDisplay];
+	[super touchesCancelled:touches withEvent:event];
+}
+
+- (void)drawRect:(CGRect)rect {
+	[super drawRect:rect];
+	if (self.state & (UIControlStateHighlighted | UIControlStateSelected)) {
+		[[UIColor blackColor] setFill];
+		UIRectFill(rect);
+	}
+}
+
 - (void)setFont:(UIFont *)font {
 	[[self titleLabel] setFont:font];
 }

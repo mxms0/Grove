@@ -25,7 +25,7 @@
 		
 		readmeLabel = [[UILabel alloc] init];
 		[readmeLabel setFont:[UIFont systemFontOfSize:13]];
-		[readmeLabel setNumberOfLines:3];
+		[readmeLabel setNumberOfLines:0];
 		
 		for (UIView *v in @[activityIndicator, readmeLabel]) {
 			[self addSubview:v];
