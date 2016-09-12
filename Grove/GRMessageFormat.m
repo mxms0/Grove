@@ -67,7 +67,7 @@ NSAttributedString *GRFormattedMessageWithEvent(GSEvent *event, BOOL *requiresSu
 					case GSEventRefTypeTag:
 					case GSEventRefTypeUnknown:
 					default:
-						GSAssert();
+						//GSAssert();
 						break;
 				}
 				
@@ -173,7 +173,7 @@ NSAttributedString *GRFormattedMessageWithEvent(GSEvent *event, BOOL *requiresSu
 	}
 	@catch(id e) {
 		NSLog(@"exc[%@] evt[%@]", e, event);
-		abort();
+//		abort();
 	}
 	
 	NSAttributedString *string = [NSAttributedString attributedStringWithAttributedStrings:components];

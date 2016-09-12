@@ -139,7 +139,7 @@
 			cellHeight = 44.0;
 			break;
 		case 1:
-			cellHeight = 44.0;
+			cellHeight = 60.0;
 			break;
 		case 2:
 			cellHeight = 22.0;

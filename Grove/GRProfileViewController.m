@@ -95,6 +95,7 @@
 - (UITableViewCell *)tableView:(UITableView *)_tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	NSString *reuseIdentifier = @"stupidCell";
 	NSString *textContent = nil;
+    NSString *secondaryTextContent = nil;
 	switch (indexPath.section) {
 		case 0:
 			break;
@@ -102,6 +103,7 @@
 			reuseIdentifier = @"repositoryCell";
 			GSRepository *repo = [model repositoryForIndex:indexPath.row];
 			textContent = repo.name;
+            secondaryTextContent = repo.userDescription;
 			break;
 		}
 		case 2:
@@ -111,9 +113,14 @@
 	}
 	UITableViewCell *cell = [_tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
 	if (!cell) {
-		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
+		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseIdentifier];
 	}
+    
+    //configure the cell
+    cell.detailTextLabel.textColor = [UIColor grayColor];
+    
 	cell.textLabel.text = textContent;
+    cell.detailTextLabel.text = secondaryTextContent;
 	return cell;
 }
 
