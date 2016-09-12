@@ -15,11 +15,11 @@
 
 @implementation GRProfileHeaderView {
 	UIImageView *profileImageView;
-    UIImageView *backgroundImageView;
+	UIImageView *backgroundImageView;
 	UILabel *nameLabel;
 	UILabel *usernameLabel;
 	UILabel *locationLabel;
-
+	
 	UIView *statisticsView;
 	GRProfileStatisticButton *followersButton;
 	GRProfileStatisticButton *starredButton;
@@ -33,10 +33,10 @@
 		profileImageView = [[UIImageView alloc] init];
 		[profileImageView setBackgroundColor:[UIColor whiteColor]];
 		[self addSubview:profileImageView];
-        
-        backgroundImageView = [[UIImageView alloc] init];
-        [backgroundImageView setBackgroundColor:[UIColor whiteColor]];
-        [self insertSubview:backgroundImageView belowSubview:profileImageView];
+		
+		backgroundImageView = [[UIImageView alloc] init];
+		[backgroundImageView setBackgroundColor:[UIColor whiteColor]];
+		[self insertSubview:backgroundImageView belowSubview:profileImageView];
 		
 		usernameLabel = [[UILabel alloc] init];
 		[usernameLabel setFont:[UIFont systemFontOfSize:14]];
@@ -89,8 +89,8 @@
 	const CGFloat locationHeight = 17.0f;
 	
 	[profileImageView setFrame:CGRectMake((self.frame.size.width/2 - profilePictureSize/2), verticalOffsetUsed, profilePictureSize, profilePictureSize)];
-    
-    [backgroundImageView setFrame:self.bounds];
+	
+	[backgroundImageView setFrame:self.bounds];
 	
 	verticalOffsetUsed = profileImageView.frame.origin.y + profileImageView.frame.size.height;
 	
@@ -106,12 +106,12 @@
 	verticalOffsetUsed += usernameLabel.frame.size.height;
 	
 	verticalOffsetUsed += GRGenericVerticalPadding;
-
+	
 	[locationLabel setFrame:CGRectMake(GRGenericHorizontalPadding, verticalOffsetUsed, elementWidth, locationHeight)];
 	
 	verticalOffsetUsed += locationLabel.frame.size.height;
 	verticalOffsetUsed += GRGenericVerticalPadding / 2;
-
+	
 	CGFloat buttonViewWidth = .80 * self.frame.size.width;
 	
 	CGFloat leftOffset = (self.frame.size.width - buttonViewWidth) / 2.0;
@@ -134,7 +134,7 @@
 	[usernameLabel setText:[@"@" stringByAppendingString:[user.user username]]];
 	[nameLabel setText:[user.user fullName]];
 	[locationLabel setText:[user.user location]];
-
+	
 	[starredButton setText:[[user numberOfStarredRepositories] stringValue]];
 	[followingButton setText:[[user.user followingCount] stringValue]];
 	[followersButton setText:[[user.user followersCount] stringValue]];
