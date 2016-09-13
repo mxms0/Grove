@@ -16,17 +16,20 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
 	if ((self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])) {
 		textLabel = [[GRNotificationHeaderLabel alloc] init];
+        
 		[textLabel setFont:[UIFont systemFontOfSize:12]];
 		[textLabel setTextColor:[UIColor darkGrayColor]];
+        
 		[self addSubview:textLabel];
 		[self.textLabel removeFromSuperview];
+        
+        [textLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(self).offset(-15);
+            make.left.equalTo(self).offset(15);
+            make.top.bottom.equalTo(self);
+        }];
 	}
 	return self;
-}
-
-- (void)layoutSubviews {
-	[super layoutSubviews];
-	[textLabel setFrame:CGRectMake(15, 0, self.frame.size.width - 30, self.frame.size.height)];
 }
 
 - (void)setText:(NSString *)text {
