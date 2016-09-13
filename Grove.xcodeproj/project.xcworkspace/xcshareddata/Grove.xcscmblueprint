@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "62838D759CA9762401C2933F72BB0D5B126BC51E",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "6FC4832245A6A8E50F2A782F20A8B58A46BD1FEB" : 0,
+    "62838D759CA9762401C2933F72BB0D5B126BC51E" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "391A7257-0438-487E-9D42-BA46429583B6",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "6FC4832245A6A8E50F2A782F20A8B58A46BD1FEB" : "Grove\/Masonry\/",
+    "62838D759CA9762401C2933F72BB0D5B126BC51E" : "Grove\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Grove",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Grove.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Maximus-\/Grove",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "62838D759CA9762401C2933F72BB0D5B126BC51E"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/SnapKit\/Masonry.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "6FC4832245A6A8E50F2A782F20A8B58A46BD1FEB"
+    }
+  ]
+}

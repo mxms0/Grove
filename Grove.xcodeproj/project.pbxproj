@@ -126,6 +126,8 @@
 		84A8D1001B8D311000B6B4FB /* GRIssueCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A8D0FF1B8D311000B6B4FB /* GRIssueCommentCell.m */; };
 		84A8D10A1B8D6F0C00B6B4FB /* GSIssue.h in Headers */ = {isa = PBXBuildFile; fileRef = 84A8D1081B8D6F0C00B6B4FB /* GSIssue.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84A8D10B1B8D6F0C00B6B4FB /* GSIssue.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A8D1091B8D6F0C00B6B4FB /* GSIssue.m */; };
+		84DDA1D51D889DF900E87E26 /* Masonry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84DDA1D41D889DF900E87E26 /* Masonry.framework */; };
+		84DDA1D61D889DF900E87E26 /* Masonry.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 84DDA1D41D889DF900E87E26 /* Masonry.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		84F524EF1B83269E0077A06C /* GRStreamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F524EE1B83269E0077A06C /* GRStreamViewController.m */; };
 		84F524F21B8326D60077A06C /* GRNotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F524F11B8326D60077A06C /* GRNotificationViewController.m */; };
 		84F524F51B8326E40077A06C /* GRProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F524F41B8326E40077A06C /* GRProfileViewController.m */; };
@@ -163,6 +165,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				84DDA1D61D889DF900E87E26 /* Masonry.framework in Embed Frameworks */,
 				50E4B5A21B82F6D60029264A /* GroveSupport.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -364,6 +367,7 @@
 		84A8D0FF1B8D311000B6B4FB /* GRIssueCommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRIssueCommentCell.m; sourceTree = "<group>"; };
 		84A8D1081B8D6F0C00B6B4FB /* GSIssue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSIssue.h; sourceTree = "<group>"; };
 		84A8D1091B8D6F0C00B6B4FB /* GSIssue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSIssue.m; sourceTree = "<group>"; };
+		84DDA1D41D889DF900E87E26 /* Masonry.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = Masonry.framework; path = "/Users/Admin/Library/Developer/Xcode/DerivedData/Grove-fclckuoyljympzgddbgzriorsmdr/Build/Products/Debug-iphonesimulator/Masonry.framework"; sourceTree = "<absolute>"; };
 		84F524ED1B83269E0077A06C /* GRStreamViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRStreamViewController.h; sourceTree = "<group>"; };
 		84F524EE1B83269E0077A06C /* GRStreamViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRStreamViewController.m; sourceTree = "<group>"; };
 		84F524F01B8326D60077A06C /* GRNotificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRNotificationViewController.h; sourceTree = "<group>"; };
@@ -394,6 +398,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84DDA1D51D889DF900E87E26 /* Masonry.framework in Frameworks */,
 				50E4B5A11B82F6D60029264A /* GroveSupport.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -763,6 +768,7 @@
 				50E4B58B1B82F6D60029264A /* GroveSupport */,
 				50E4B59A1B82F6D60029264A /* GroveSupportTests */,
 				50F081831B82ED6500366161 /* Products */,
+				84DDA1BC1D88979200E87E26 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -821,6 +827,14 @@
 				50E9DF251CC73D9700EDDE0F /* GRTabBarLayer.m */,
 			);
 			name = Extensions;
+			sourceTree = "<group>";
+		};
+		84DDA1BC1D88979200E87E26 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				84DDA1D41D889DF900E87E26 /* Masonry.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		84F524EB1B8325D80077A06C /* Controllers */ = {
@@ -1358,7 +1372,10 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Masonry/build/Debug-iphoneos",
+				);
 				GCC_PREFIX_HEADER = Grove/Grove.h;
 				GCC_WARN_PEDANTIC = YES;
 				INFOPLIST_FILE = Grove/Info.plist;
@@ -1381,7 +1398,10 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Masonry/build/Debug-iphoneos",
+				);
 				GCC_PREFIX_HEADER = Grove/Grove.h;
 				GCC_WARN_PEDANTIC = YES;
 				INFOPLIST_FILE = Grove/Info.plist;
