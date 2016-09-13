@@ -9,6 +9,6 @@
 #import "GRTableViewController.h"
 #import "GRSyntaxHighlightedTextView.h"
 
-@interface GRNotificationViewController : GRTableViewController <UITableViewDataSource, UITableViewDelegate> 
+@interface GRNotificationViewController : GRTableViewController 
 
 @end

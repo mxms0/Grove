@@ -800,7 +800,7 @@
 				5060631C1C7ADF1B00E1674A /* Profile View */,
 				501BA7DF1C3D0AE8005C5524 /* Repository View */,
 				849872F81B85A3CB00D1C6FD /* Extensions */,
-				84F524EC1B8325E50077A06C /* Views */,
+				84F524EC1B8325E50077A06C /* Shared Views */,
 				50F081911B82ED6500366161 /* Assets.xcassets */,
 				50140F561C7C6E6F00A3EBFA /* icon@2x.png */,
 				505C58ED1C9965DB00D5F37C /* applicationIconLarge@2x.png */,
@@ -862,7 +862,7 @@
 			name = Controllers;
 			sourceTree = "<group>";
 		};
-		84F524EC1B8325E50077A06C /* Views */ = {
+		84F524EC1B8325E50077A06C /* Shared Views */ = {
 			isa = PBXGroup;
 			children = (
 				503C595C1BAD17EE003CB50E /* GRSyntaxHighlightedTextView.h */,
@@ -876,7 +876,7 @@
 				501F87051C86751F000C2C53 /* GRSelectableLabel.h */,
 				501F87061C86751F000C2C53 /* GRSelectableLabel.m */,
 			);
-			name = Views;
+			name = "Shared Views";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
