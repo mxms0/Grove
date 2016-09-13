@@ -111,6 +111,7 @@
 			token = response[@"token"];
 		}
 		else {
+			NSLog(@"packet %@:%@", response, error);
 			GSAssert();
 			// grab error message and pass it on
 		}
@@ -197,6 +198,7 @@
 					// check X-RateLimit-Remaining HTTP header.
 					NSLog(@"[403] %@", data);
 					// this is most likely API rate limit exceeded... ;_; make new error
+					error = [NSError errorWithDomain:GSErrorDomain code:22222 userInfo:@{NSLocalizedDescriptionKey: @"Maximum login attempts reached."}];
 				}
 				else {
 					error = responseError;
