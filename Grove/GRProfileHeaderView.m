@@ -6,21 +6,25 @@
 //  Copyright (c) 2015 Milo. All rights reserved.
 //
 
+#import <GroveSupport/GroveSupport.h>
+
 #import "GRProfileHeaderView.h"
 #import "GSUser.h"
 #import "Grove.h"
 #import "GRApplicationUser.h"
 #import "GRProfileStatisticButton.h"
-#import <GroveSupport/GroveSupport.h>
 
 @implementation GRProfileHeaderView {
 	UIImageView *profileImageView;
 	UIImageView *backgroundImageView;
+    
+    UIStackView *statisticsView;
+    UIStackView *titlesView;
+    
 	UILabel *nameLabel;
 	UILabel *usernameLabel;
 	UILabel *locationLabel;
 	
-	UIView *statisticsView;
 	GRProfileStatisticButton *followersButton;
 	GRProfileStatisticButton *starredButton;
 	GRProfileStatisticButton *followingButton;
@@ -29,103 +33,67 @@
 - (instancetype)init {
 	if ((self = [super init])) {
 		[self setBackgroundColor:[UIColor whiteColor]];
-		
-		profileImageView = [[UIImageView alloc] init];
+        
+        statisticsView      = [[UIStackView alloc] init];
+        titlesView          = [[UIStackView alloc] init];
+        profileImageView    = [[UIImageView alloc] init];
+        backgroundImageView = [[UIImageView alloc] init];
+        usernameLabel       = [[UILabel alloc] init];
+        nameLabel           = [[UILabel alloc] init];
+        locationLabel       = [[UILabel alloc] init];
+        followersButton     = [[GRProfileStatisticButton alloc] init];
+        starredButton       = [[GRProfileStatisticButton alloc] init];
+        followingButton     = [[GRProfileStatisticButton alloc] init];
+        
 		[profileImageView setBackgroundColor:[UIColor whiteColor]];
-		[self addSubview:profileImageView];
-		
-		backgroundImageView = [[UIImageView alloc] init];
 		[backgroundImageView setBackgroundColor:[UIColor whiteColor]];
-		[self insertSubview:backgroundImageView belowSubview:profileImageView];
-		
-		usernameLabel = [[UILabel alloc] init];
 		[usernameLabel setFont:[UIFont systemFontOfSize:14]];
 		[usernameLabel setTextAlignment:NSTextAlignmentCenter];
-		[self addSubview:usernameLabel];
-		
-		nameLabel = [[UILabel alloc] init];
 		[nameLabel setFont:[UIFont boldSystemFontOfSize:16]];
 		[nameLabel setTextAlignment:NSTextAlignmentCenter];
-		[self addSubview:nameLabel];
-		
-		locationLabel = [[UILabel alloc] init];
 		[locationLabel setTextAlignment:NSTextAlignmentCenter];
-		[self addSubview:locationLabel];
-		
-		followersButton = [[GRProfileStatisticButton alloc] init];
-		starredButton = [[GRProfileStatisticButton alloc] init];
-		followingButton = [[GRProfileStatisticButton alloc] init];
-		
 		[followersButton setSubText:@"Followers"];
-		
 		[starredButton setSubText:@"Starred"];
-		
 		[followingButton setSubText:@"Following"];
-		
-		statisticsView = [[UIView alloc] init];
-		[statisticsView setBackgroundColor:[UIColor clearColor]];
-		[self addSubview:statisticsView];
-		
-		NSArray *statsButtons = @[followersButton, starredButton, followingButton];
-		
-		for (int i = 0; i < 3; i++) {
-			GRProfileStatisticButton *button = statsButtons[i];
-			[button setBackgroundColor:[UIColor whiteColor]];
-			[statisticsView addSubview:button];
-		}
+        [titlesView setDistribution:UIStackViewDistributionFillEqually];
+        [titlesView setBackgroundColor:[UIColor clearColor]];
+        [titlesView setAxis:UILayoutConstraintAxisVertical];
+        [titlesView setSpacing:4];
+        [statisticsView setDistribution:UIStackViewDistributionFillEqually];
+        [statisticsView setBackgroundColor:[UIColor clearColor]];
+        [statisticsView setAxis:UILayoutConstraintAxisHorizontal];
+        
+        for (GRProfileStatisticButton *button in @[followersButton, starredButton, followingButton]) {
+            [button setBackgroundColor:[UIColor whiteColor]];
+        }
+        
+        [titlesView addArrangedSubviews:@[nameLabel, usernameLabel, locationLabel]];
+        [statisticsView addArrangedSubviews:@[followersButton, starredButton, followingButton]];
+        [self addSubviews:@[backgroundImageView, profileImageView, titlesView, statisticsView]];
+        
+        [profileImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self).offset(GRGenericVerticalPadding);
+            make.height.width.equalTo(@(64));
+            make.centerX.equalTo(self);
+        }];
+        [titlesView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.height.equalTo(@(65));
+            make.top.equalTo(profileImageView.mas_bottom).offset(5);
+            make.left.equalTo(self).offset(GRGenericHorizontalPadding);
+            make.right.equalTo(self).offset(-GRGenericHorizontalPadding);
+        }];
+        [statisticsView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.equalTo(self).offset(-GRGenericVerticalPadding);
+            make.centerX.equalTo(self);
+            make.height.equalTo(@(50));
+            make.width.equalTo(@(300));
+        }];
 	}
 	return self;
 }
 
 - (void)layoutSubviews {
 	[super layoutSubviews];
-	
-	const CGFloat profilePictureSize = 64.0f;
-	const CGFloat elementWidth = self.frame.size.width - 2 * GRGenericHorizontalPadding;
-	
-	CGFloat verticalOffsetUsed = 10.0f;
-	const CGFloat realNameHeight = 18.0f;
-	const CGFloat userNameHeight = 17.0f;
-	const CGFloat locationHeight = 17.0f;
-	
-	[profileImageView setFrame:CGRectMake((self.frame.size.width/2 - profilePictureSize/2), verticalOffsetUsed, profilePictureSize, profilePictureSize)];
-	
-	[backgroundImageView setFrame:self.bounds];
-	
-	verticalOffsetUsed = profileImageView.frame.origin.y + profileImageView.frame.size.height;
-	
-	verticalOffsetUsed += GRGenericVerticalPadding / 2;
-	
-	[nameLabel setFrame:CGRectMake(GRGenericHorizontalPadding, verticalOffsetUsed, elementWidth, realNameHeight)];
-	
-	verticalOffsetUsed += nameLabel.frame.size.height;
-	verticalOffsetUsed += GRGenericVerticalPadding / 2;
-	
-	[usernameLabel setFrame:CGRectMake(GRGenericHorizontalPadding, verticalOffsetUsed, elementWidth, userNameHeight)];
-	
-	verticalOffsetUsed += usernameLabel.frame.size.height;
-	
-	verticalOffsetUsed += GRGenericVerticalPadding;
-	
-	[locationLabel setFrame:CGRectMake(GRGenericHorizontalPadding, verticalOffsetUsed, elementWidth, locationHeight)];
-	
-	verticalOffsetUsed += locationLabel.frame.size.height;
-	verticalOffsetUsed += GRGenericVerticalPadding / 2;
-	
-	CGFloat buttonViewWidth = .80 * self.frame.size.width;
-	
-	CGFloat leftOffset = (self.frame.size.width - buttonViewWidth) / 2.0;
-	[statisticsView setFrame:CGRectMake(leftOffset, verticalOffsetUsed, buttonViewWidth, 50)];
-	
-	NSArray *statsButtons = @[followersButton, starredButton, followingButton];
-	
-	CGFloat buttonWidth = buttonViewWidth / 3.0;
-	
-	for (int i = 0; i < 3; i++) {
-		GRProfileStatisticButton *button = statsButtons[i];
-		[button setFrame:CGRectMake(buttonWidth * i, 0, buttonWidth, 50)];
-	}
-	
 	[self setUser:self.user];
 }
 
