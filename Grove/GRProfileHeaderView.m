@@ -11,11 +11,12 @@
 #import "Grove.h"
 #import "GRApplicationUser.h"
 #import "GRProfileStatisticButton.h"
+#import "GRBlurryImageView.h"
 #import <GroveSupport/GroveSupport.h>
 
 @implementation GRProfileHeaderView {
 	UIImageView *profileImageView;
-	UIImageView *backgroundImageView;
+	GRBlurryImageView *backgroundImageView;
 	UILabel *nameLabel;
 	UILabel *usernameLabel;
 	UILabel *locationLabel;
@@ -34,7 +35,8 @@
 		[profileImageView setBackgroundColor:[UIColor whiteColor]];
 		[self addSubview:profileImageView];
 		
-		backgroundImageView = [[UIImageView alloc] init];
+		backgroundImageView = [[GRBlurryImageView alloc] init];
+		backgroundImageView.blurRadius = 5.f;
 		[backgroundImageView setBackgroundColor:[UIColor whiteColor]];
 		[self insertSubview:backgroundImageView belowSubview:profileImageView];
 		
@@ -143,6 +145,7 @@
 - (void)setProfileImage:(UIImage *)profileImage {
 	_profileImage = profileImage;
 	[profileImageView setImage:profileImage];
+	[backgroundImageView setImage:profileImage];
 }
 
 @end
