@@ -19,6 +19,10 @@
 @implementation GRProfileHeaderView {
 	UIImageView *profileImageView;
 	GRBlurryImageView *backgroundImageView;
+    
+    UIStackView *statisticsView;
+    UIStackView *titlesView;
+    
 	UILabel *nameLabel;
 	UILabel *usernameLabel;
 	UILabel *locationLabel;
