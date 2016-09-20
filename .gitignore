@@ -13,8 +13,8 @@ profile
 *.moved-aside
 .DS_Store
 .DS_Store
-Masonry
 # Thumbnails
+Pods
 ._*
 # Files that might appear on external disk
 .Spotlight-V100
