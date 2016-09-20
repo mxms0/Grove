@@ -18,6 +18,7 @@
 
 @implementation GRLoginViewController {
     UIActivityIndicatorView *activityIndicator;
+    UIStackView *stackView;
 	UITextField *username;
 	UITextField *password;
 	UITextField *tfa;
@@ -29,62 +30,64 @@
 
 - (instancetype)init {
 	if ((self = [super init])) {
-		applicationIcon = [[UIImageView alloc] init];
-		[applicationIcon setImage:[UIImage imageNamed:@"applicationIconLarge"]];
+        self.view.backgroundColor = [UIColor whiteColor];
 		
 		//Initialize Variables
         activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-		username = [[UITextField alloc] initWithFrame:CGRectZero];
-		password = [[UITextField alloc] initWithFrame:CGRectZero];
-		tfa		 = [[UITextField alloc] initWithFrame:CGRectZero];
-		login    = [[UIButton alloc] initWithFrame:CGRectZero];
+        applicationIcon   = [[UIImageView alloc] init];
+        stackView         = [[UIStackView alloc] init];
+        username          = [[UITextField alloc] initWithFrame:CGRectZero];
+        password          = [[UITextField alloc] initWithFrame:CGRectZero];
+        tfa               = [[UITextField alloc] initWithFrame:CGRectZero];
+        login             = [[UIButton alloc] initWithFrame:CGRectZero];
+        
+        //Set Attributes
+        [applicationIcon setImage:[UIImage imageNamed:@"applicationIconLarge"]];
+        [stackView setDistribution:UIStackViewDistributionFillEqually];
+        [stackView setAxis:UILayoutConstraintAxisVertical];
+        [stackView setSpacing:10];
+        [username setPlaceholder:@"Username"];
+        [password setPlaceholder:@"Password"];
+        [password setSecureTextEntry:YES];
+        [tfa setPlaceholder:@"Two Factor Authentication"];
+        [tfa setHidden:YES];
+        [login setBackgroundColor:[UIColor colorWithRed:0.2627 green:0.4784 blue:0.7451 alpha:1.0]];
+        [login setTitle:@"Login" forState:UIControlStateNormal];
+        [login setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [login addTarget:self action:@selector(attemptLogin) forControlEvents:UIControlEventTouchUpInside];
 		
 		for (UIView *rounding in @[username, password, tfa, applicationIcon]) {
 			[rounding.layer setCornerRadius:3.0];
 		}
-		
-		//Set Attributes
-		[username setPlaceholder:@"Username"];
-		[password setPlaceholder:@"Password"];
-		[password setSecureTextEntry:YES];
-		[tfa setPlaceholder:@"Two Factor Authentication"];
-		[tfa setHidden:YES];
-		[login setBackgroundColor:[UIColor colorWithRed:0.2627 green:0.4784 blue:0.7451 alpha:1.0]];
-		[login setTitle:@"Login" forState:UIControlStateNormal];
-		[login setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-		[login addTarget:self action:@selector(attemptLogin) forControlEvents:UIControlEventTouchUpInside];
-
+        for (UIView *view in @[applicationIcon, username, password, login, activityIndicator, tfa]) {
+            if ([view isKindOfClass:[UITextField class]]) {
+                [(UITextField *)view setTextAlignment:NSTextAlignmentCenter];
+                [(UITextField *)view setDelegate:self];
+                [(UITextField *)view setBackgroundColor:GRColorFromRGB(0xD9D9D9)];
+            }
+        }
+        
+        //Add Subviews
+        [stackView addArrangedSubviews:@[username, password]];
+        [self.view addSubviews:@[applicationIcon, stackView, login, activityIndicator, tfa]];
+        
+        //Add Constraints
+        [applicationIcon mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.view).offset(15);
+            make.centerX.equalTo(self.view);
+        }];
+        [stackView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(applicationIcon.mas_bottom).offset(10);
+            make.right.equalTo(self.view).offset(-30);
+            make.left.equalTo(self.view).offset(30);
+            make.height.equalTo(@(120));
+        }];
+        [login mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.bottom.equalTo(self.view);
+            make.height.equalTo(@(50));
+        }];
 	}
 	return self;
-}
-
-- (void)viewDidLoad {
-	[super viewDidLoad];
-	
-	self.view.backgroundColor = [UIColor whiteColor];
-	
-	//Add Subviews
-	for (UIView *view in @[applicationIcon, username, password, login, activityIndicator, tfa]) {
-		if ([view isKindOfClass:[UITextField class]]) {
-			[(UITextField *)view setTextAlignment:NSTextAlignmentCenter];
-			[(UITextField *)view setDelegate:self];
-			[(UITextField *)view setBackgroundColor:GRColorFromRGB(0xD9D9D9)];
-		}
-		[self.view addSubview:view];
-	}
-	
-	CGFloat constraintPadding = 115.0f;
-	CGFloat iconWidth = self.view.frame.size.width - constraintPadding * 2;
-	
-	[applicationIcon setFrame:CGRectMake((self.view.frame.size.width/2 - iconWidth/2), 30, iconWidth, iconWidth)];
-	
-	[username setFrame:CGRectMake(70, applicationIcon.frame.origin.y + applicationIcon.frame.size.height + 20, 250, 50)];
-	
-	[password setFrame:CGRectMake(70, username.frame.origin.y + username.frame.size.height + 15, 250, 50)];
-
-	[tfa setFrame:CGRectMake(70, password.frame.origin.y + password.frame.size.height + 15, 250, 50)];
-	
-	[login setFrame:CGRectMake(0, self.view.frame.size.height - 90, self.view.frame.size.width, 90)];
 }
 
 #pragma mark - Actions
@@ -154,10 +157,6 @@
 - (BOOL)becomeFirstResponder {
 	[self shiftViewContents];
 	return [super becomeFirstResponder];
-}
-
-- (BOOL)resignFirstResponder {
-	return [super resignFirstResponder];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {

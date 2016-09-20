@@ -19,44 +19,60 @@
     GRLabel *titleLabel;
     UILabel *timeLabel;
 	UILabel *usernameLabel;
-	
 	GRStreamSubCellView *subCellView;
-	
-    GRStreamCellModel *eventModel;
 	
 	BOOL hasSubcell;
 	CGFloat subCellHeight;
+    GRStreamCellModel *eventModel;
 }
 
 #pragma mark Initializers
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
 	if ((self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])) {
-		imageView		= [[UIImageView alloc] initWithFrame:CGRectZero];
-		titleLabel		= [[GRLabel alloc] initWithFrame:CGRectZero];
-		timeLabel		= [[UILabel alloc] initWithFrame:CGRectZero];
-		usernameLabel	= [[UILabel alloc] initWithFrame:CGRectZero];
+        [self setBackgroundColor:[UIColor clearColor]];
+        
+        imageView     = [[UIImageView alloc] initWithFrame:CGRectZero];
+        titleLabel    = [[GRLabel alloc] initWithFrame:CGRectZero];
+        timeLabel     = [[UILabel alloc] initWithFrame:CGRectZero];
+        usernameLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        subCellView   = [[GRStreamSubCellView alloc] init];
 		
 		[imageView setContentMode:UIViewContentModeScaleAspectFit];
 		[imageView setBackgroundColor:[UIColor whiteColor]];
 		[imageView.layer setCornerRadius:2.0f];
 		[imageView.layer setMasksToBounds:YES];
-		
 		[titleLabel setBackgroundColor:[UIColor whiteColor]];
-		
 		[timeLabel setFont:[UIFont systemFontOfSize:11]];
 		[timeLabel setTextColor:[UIColor darkGrayColor]];
 		[timeLabel setTextAlignment:NSTextAlignmentRight];
+        [usernameLabel setFont:[UIFont boldSystemFontOfSize:13]];
 		
-		[usernameLabel setFont:[UIFont boldSystemFontOfSize:13]];
-		
-		subCellView = [[GRStreamSubCellView alloc] init];
-		
-		[self setBackgroundColor:[UIColor clearColor]];
-		
-		for (UIView *view in @[imageView, titleLabel, usernameLabel, timeLabel]) {
-			[self.contentView addSubview:view];
-		}
+        [self.contentView addSubviews:@[imageView, titleLabel, usernameLabel, timeLabel]];
+        
+        [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.width.height.equalTo(@(eventModel.avatarSize.width));
+            make.top.equalTo(self.contentView).offset(GRGenericVerticalPadding);
+            make.left.equalTo(self.contentView).offset(GRGenericHorizontalPadding);
+        }];
+        [usernameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(imageView.mas_right).offset(GRGenericHorizontalPadding);
+            make.right.equalTo(timeLabel.mas_left);
+            make.top.equalTo(imageView);
+            make.height.equalTo(@(13));
+        }];
+        [timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(self.contentView).offset(-GRGenericHorizontalPadding);
+            make.top.height.equalTo(usernameLabel);
+            make.width.equalTo(@(75));
+        }];
+        [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(usernameLabel.mas_bottom).offset(3);
+            make.left.equalTo(usernameLabel);
+            make.right.equalTo(timeLabel);
+            make.height.greaterThanOrEqualTo(@(25));
+        }];
+
 	}
 	return self;
 }
@@ -71,38 +87,26 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
+    
+    [imageView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.width.height.equalTo(@(eventModel.avatarSize.width));
+    }];
 	
-	CGFloat leftOffsetUsed = 0.0f;
-	CGFloat verticalOffsetUsed = 0.0f;
+    CGFloat leftOffsetUsed     = 0.0f;
+    CGFloat verticalOffsetUsed = 0.0f;
 	
 	leftOffsetUsed += GRGenericHorizontalPadding;
-	
-	const CGFloat avatarSize = eventModel.avatarSize.width;
-	
-	[imageView setFrame:CGRectMake(leftOffsetUsed, GRGenericVerticalPadding, avatarSize, avatarSize)];
-	
 	leftOffsetUsed += imageView.frame.size.width;
-	
 	leftOffsetUsed += GRGenericHorizontalPadding;
 	
 	verticalOffsetUsed += GRGenericVerticalPadding;
-	
-	[usernameLabel setFrame:CGRectMake(leftOffsetUsed, verticalOffsetUsed, self.frame.size.width - (leftOffsetUsed + GRGenericHorizontalPadding), 13)];
-	
 	verticalOffsetUsed += usernameLabel.frame.size.height;
-	
 	verticalOffsetUsed += 2;
 	
-	CGFloat textHeight = [eventModel safeTextHeight];
-	
-	[titleLabel setFrame:CGRectMake(leftOffsetUsed, verticalOffsetUsed, self.frame.size.width - (leftOffsetUsed + GRGenericHorizontalPadding), textHeight + 10)];
-	
-	[timeLabel setFrame:CGRectMake((self.frame.size.width - GRGenericHorizontalPadding - 75.0f), GRGenericVerticalPadding, 75.0f, 13)];
-	
 	verticalOffsetUsed += GRGenericVerticalPadding;
+	verticalOffsetUsed += [eventModel safeTextHeight] + 2;
 	
-	verticalOffsetUsed += textHeight + 2;
-	
+    //TODO: Figure out what the hell this is and how to autolayout
 	if (subCellView.superview) {
 		[subCellView setFrame:CGRectMake(leftOffsetUsed, verticalOffsetUsed, self.frame.size.width - (leftOffsetUsed + GRGenericHorizontalPadding), subCellHeight)];
 	}

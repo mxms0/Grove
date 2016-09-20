@@ -15,22 +15,27 @@
 
 - (instancetype)initWithFrame:(CGRect)frame {
 	if ((self = [super initWithFrame:frame])) {
-		[self setBackgroundColor:[UIColor clearColor]];
+        self.backgroundColor = [UIColor clearColor];
+        
 		label = [[GRSmallCapsLabel alloc] init];
 		[label setText:GRLocalizedString(@"notifications", nil, nil)];
+        
 		[self addSubview:label];
+        [label mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self).offset(10);
+            make.left.right.equalTo(self);
+            make.height.equalTo(@(15));
+        }];
 	}
 	return self;
 }
 
-- (void)layoutSubviews {
-	[super layoutSubviews];
-	[label setFrame:CGRectMake(0, 10, self.frame.size.width, 15)];
+- (instancetype)init {
+    return [self initWithFrame:CGRectZero];
 }
 
-- (void)drawRect:(CGRect)rect {
-	[super drawRect:rect];
-
+- (CGSize)intrinsicContentSize {
+    return CGSizeMake(UIViewNoIntrinsicMetric, 45);
 }
 
 @end

@@ -14,8 +14,7 @@
 #import "GRStreamTitleView.h"
 #import "GRDrawerMenuItem.h"
 
-static NSString *const reuseIdentifier = @"reuseIdentifier";
-
+static NSString *const reuseIdentifier      = @"reuseIdentifier";
 static const CGFloat GRStreamViewAvatarSize = 38.0f;
 
 @implementation GRStreamViewController {
@@ -29,10 +28,8 @@ static const CGFloat GRStreamViewAvatarSize = 38.0f;
 - (instancetype)init {
 	if ((self = [super init])) {
 		
-		self.tabBarItem = [[UITabBarItem alloc] initWithTitle:GRLocalizedString(@"Stream", nil, nil) image:[UIImage imageNamed:@"tb@2x"] tag:0];
-		
-		self.tableView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
-		
+        self.tabBarItem               = [[UITabBarItem alloc] initWithTitle:GRLocalizedString(@"Stream", nil, nil) image:[UIImage imageNamed:@"tb@2x"] tag:0];
+        self.tableView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
 		[self.tableView registerClass:[GRStreamEventCell class] forCellReuseIdentifier:reuseIdentifier];
 		
 		refreshControl = [[UIRefreshControl alloc] init];

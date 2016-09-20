@@ -28,12 +28,10 @@
 	
 	[self setBackgroundColor:GRColorFromRGB(0xF3F3F3)];
 	
-	label = [[GRLabel alloc] init];
-	imageView = [[UIImageView alloc] init];
+    label     = [[GRLabel alloc] init];
+    imageView = [[UIImageView alloc] init];
 	
-	for (UIView *v in @[label, imageView]) {
-		[self addSubview:v];
-	}
+    [self addSubviews:@[label, imageView]];
 	
 	self.layer.mask = [[CAShapeLayer alloc] init];
 }
@@ -52,7 +50,6 @@
 	[super setFrame:frame];
 	
 	CAShapeLayer *shapeLayer = (CAShapeLayer *)self.layer.mask;
-	
 	shapeLayer.path = [UIBezierPath bezierPathWithRoundedRect:self.bounds byRoundingCorners:(UIRectCornerAllCorners) cornerRadii:CGSizeMake(3.0, 3.0)].CGPath;
 }
 

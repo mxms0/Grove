@@ -20,6 +20,8 @@
 	NSDictionary *notifications;
 }
 
+#pragma mark - Initializers
+
 - (instancetype)initWithStyle:(UITableViewStyle)style {
 	if ((self = [super initWithStyle:UITableViewStyleGrouped])) {
 		
@@ -28,10 +30,14 @@
 		GRApplicationUser *user = [[GRSessionManager sharedInstance] currentUser];
 		
 		[[GSGitHubEngine sharedInstance] notificationsForUser:user.user completionHandler:^(NSArray *__nullable notifs, NSError *__nullable error) {
-			if (error) {
-				GSAssert();
-			}
-			[self handleRetrievedNotifications:notifs];
+			if (error) GSAssert();
+            
+            [self sortNewNotifications:notifs];
+            
+            dispatch_async(dispatch_get_main_queue(), ^	{
+                //TODO: dont forget to weakref
+                [self.tableView reloadData];
+            });
 		}];
 	}
 	return self;
@@ -39,50 +45,34 @@
 
 - (instancetype)init {
 	if ((self = [super init])) {
-
+        GRNotificationTitleView *headerView = [[GRNotificationTitleView alloc] initWithFrame:CGRectWithContentSize(headerView.intrinsicContentSize)];
+        [self.tableView setTableHeaderView:headerView];
     }
     return self;
 }
 
-- (void)handleRetrievedNotifications:(NSArray *)notifs {
-	[self sortNewNotifications:notifs];
-	
-	dispatch_async(dispatch_get_main_queue(), ^	{
-		// dont forget to weakref
-		[self.tableView reloadData];
-	});
-}
+#pragma mark - Helpers
 
 - (void)sortNewNotifications:(NSArray *)newNotifs {
 	NSMutableDictionary *repositoryNotificationMap = [[NSMutableDictionary alloc] init];
-	
+    
 	for (GSNotification *notification in newNotifs) {
 		GSRepository *relevantRepository = [notification repository];
-		
 		NSMutableArray *associatedNotifications = repositoryNotificationMap[[relevantRepository pathString]];
 		
 		if (associatedNotifications) {
 			[associatedNotifications addObject:notification];
 		}
-		
 		else {
 			NSMutableArray *notificationBucket = [[NSMutableArray alloc] initWithObjects:notification, nil];
 			repositoryNotificationMap[[relevantRepository pathString]] = notificationBucket;
 		}
 	}
-	
+    
 	notifications = repositoryNotificationMap;
 }
 
-- (void)viewDidLoad {
-	[super viewDidLoad];
-
-	[self.tableView setFrame:self.view.bounds];
-	
-	GRNotificationTitleView *headerView = [[GRNotificationTitleView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, 45)];
-	
-	[self.tableView setTableHeaderView:headerView];
-}
+#pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 	return [[notifications allKeys] count];
@@ -93,40 +83,33 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)_tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-	static NSString *reuseIdentifier = @"notificationCell";
-	static NSString *headerReuseIdentifier = @"notificationHeaderCell";
-	
-	NSString *activeIdentifier = reuseIdentifier;
-	
-	BOOL isHeaderCell = (indexPath.row == 0);
-	
+    static NSString *reuseIdentifier       = @"notificationCell";
+    static NSString *headerReuseIdentifier = @"notificationHeaderCell";
+    NSString *activeIdentifier             = reuseIdentifier;
+    BOOL isHeaderCell                      = (indexPath.row == 0);
+    Class cellClass                        = [GRNotificationTableViewCell class];
+    
 	if (isHeaderCell) {
-		activeIdentifier = headerReuseIdentifier;
+        activeIdentifier = headerReuseIdentifier;
+        cellClass        = [GRNotificationHeaderTableViewCell class];
 	}
 	
 	GRNotificationTableViewCell *cell = (GRNotificationTableViewCell *)[_tableView dequeueReusableCellWithIdentifier:activeIdentifier];
-
-	if (!cell) {
-		Class cellClass = [GRNotificationTableViewCell class];
-		
-		if (isHeaderCell) {
-			cellClass = [GRNotificationHeaderTableViewCell class];
-		}
-		cell = [[cellClass alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:activeIdentifier];
-	}
+	if (!cell) cell = [[cellClass alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:activeIdentifier];
 	
 	if (isHeaderCell) {
 		[cell setText:[[notifications allKeys] objectAtIndex:indexPath.section]];
 	}
 	else {
-		GSNotification *notification = [[notifications objectForKey:[[notifications allKeys] objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row - 1];
-		cell.textLabel.text = [notification title];
+        GSNotification *notification = [[notifications objectForKey:[[notifications allKeys] objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row - 1];
+        cell.textLabel.text          = [notification title];
 	}
-	
 	[cell setNeedsLayout];
 	
 	return cell;
 }
+
+#pragma mark - GRTableViewController
 
 - (BOOL)isDismissable {
 	return NO;

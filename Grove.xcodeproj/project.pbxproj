@@ -127,6 +127,10 @@
 		84A8D1001B8D311000B6B4FB /* GRIssueCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A8D0FF1B8D311000B6B4FB /* GRIssueCommentCell.m */; };
 		84A8D10A1B8D6F0C00B6B4FB /* GSIssue.h in Headers */ = {isa = PBXBuildFile; fileRef = 84A8D1081B8D6F0C00B6B4FB /* GSIssue.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84A8D10B1B8D6F0C00B6B4FB /* GSIssue.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A8D1091B8D6F0C00B6B4FB /* GSIssue.m */; };
+		84DDA1D51D889DF900E87E26 /* Masonry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84DDA1D41D889DF900E87E26 /* Masonry.framework */; };
+		84DDA1D61D889DF900E87E26 /* Masonry.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 84DDA1D41D889DF900E87E26 /* Masonry.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		84DDA1D91D88A22000E87E26 /* UIStackView+GRExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DDA1D81D88A22000E87E26 /* UIStackView+GRExtension.m */; };
+		84DDA1DC1D88A2E300E87E26 /* UIView+GRExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DDA1DB1D88A2E300E87E26 /* UIView+GRExtension.m */; };
 		84F524EF1B83269E0077A06C /* GRStreamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F524EE1B83269E0077A06C /* GRStreamViewController.m */; };
 		84F524F21B8326D60077A06C /* GRNotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F524F11B8326D60077A06C /* GRNotificationViewController.m */; };
 		84F524F51B8326E40077A06C /* GRProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F524F41B8326E40077A06C /* GRProfileViewController.m */; };
@@ -164,6 +168,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				84DDA1D61D889DF900E87E26 /* Masonry.framework in Embed Frameworks */,
 				50E4B5A21B82F6D60029264A /* GroveSupport.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -367,6 +372,11 @@
 		84A8D0FF1B8D311000B6B4FB /* GRIssueCommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRIssueCommentCell.m; sourceTree = "<group>"; };
 		84A8D1081B8D6F0C00B6B4FB /* GSIssue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSIssue.h; sourceTree = "<group>"; };
 		84A8D1091B8D6F0C00B6B4FB /* GSIssue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSIssue.m; sourceTree = "<group>"; };
+		84DDA1D41D889DF900E87E26 /* Masonry.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = Masonry.framework; path = "/Users/Admin/Library/Developer/Xcode/DerivedData/Grove-fclckuoyljympzgddbgzriorsmdr/Build/Products/Debug-iphonesimulator/Masonry.framework"; sourceTree = "<absolute>"; };
+		84DDA1D71D88A22000E87E26 /* UIStackView+GRExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIStackView+GRExtension.h"; sourceTree = "<group>"; };
+		84DDA1D81D88A22000E87E26 /* UIStackView+GRExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIStackView+GRExtension.m"; sourceTree = "<group>"; };
+		84DDA1DA1D88A2E300E87E26 /* UIView+GRExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+GRExtension.h"; sourceTree = "<group>"; };
+		84DDA1DB1D88A2E300E87E26 /* UIView+GRExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+GRExtension.m"; sourceTree = "<group>"; };
 		84F524ED1B83269E0077A06C /* GRStreamViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRStreamViewController.h; sourceTree = "<group>"; };
 		84F524EE1B83269E0077A06C /* GRStreamViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRStreamViewController.m; sourceTree = "<group>"; };
 		84F524F01B8326D60077A06C /* GRNotificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRNotificationViewController.h; sourceTree = "<group>"; };
@@ -397,6 +407,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84DDA1D51D889DF900E87E26 /* Masonry.framework in Frameworks */,
 				50E4B5A11B82F6D60029264A /* GroveSupport.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -766,6 +777,7 @@
 				50E4B58B1B82F6D60029264A /* GroveSupport */,
 				50E4B59A1B82F6D60029264A /* GroveSupportTests */,
 				50F081831B82ED6500366161 /* Products */,
+				84DDA1BC1D88979200E87E26 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -791,7 +803,7 @@
 				5060631C1C7ADF1B00E1674A /* Profile View */,
 				501BA7DF1C3D0AE8005C5524 /* Repository View */,
 				849872F81B85A3CB00D1C6FD /* Extensions */,
-				84F524EC1B8325E50077A06C /* Views */,
+				84F524EC1B8325E50077A06C /* Shared Views */,
 				50F081911B82ED6500366161 /* Assets.xcassets */,
 				50140F561C7C6E6F00A3EBFA /* icon@2x.png */,
 				505C58ED1C9965DB00D5F37C /* applicationIconLarge@2x.png */,
@@ -822,8 +834,20 @@
 				507931E81B8EC4730080C894 /* UIImage+GRExtensions.m */,
 				50E9DF241CC73D9700EDDE0F /* GRTabBarLayer.h */,
 				50E9DF251CC73D9700EDDE0F /* GRTabBarLayer.m */,
+				84DDA1D71D88A22000E87E26 /* UIStackView+GRExtension.h */,
+				84DDA1D81D88A22000E87E26 /* UIStackView+GRExtension.m */,
+				84DDA1DA1D88A2E300E87E26 /* UIView+GRExtension.h */,
+				84DDA1DB1D88A2E300E87E26 /* UIView+GRExtension.m */,
 			);
 			name = Extensions;
+			sourceTree = "<group>";
+		};
+		84DDA1BC1D88979200E87E26 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				84DDA1D41D889DF900E87E26 /* Masonry.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		84F524EB1B8325D80077A06C /* Controllers */ = {
@@ -841,7 +865,7 @@
 			name = Controllers;
 			sourceTree = "<group>";
 		};
-		84F524EC1B8325E50077A06C /* Views */ = {
+		84F524EC1B8325E50077A06C /* Shared Views */ = {
 			isa = PBXGroup;
 			children = (
 				381EF64F1D88A684000828A8 /* GRBlurryImageView.h */,
@@ -857,7 +881,7 @@
 				501F87051C86751F000C2C53 /* GRSelectableLabel.h */,
 				501F87061C86751F000C2C53 /* GRSelectableLabel.m */,
 			);
-			name = Views;
+			name = "Shared Views";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1097,6 +1121,7 @@
 				5060631A1C7ADEF300E1674A /* GRNotificationHeaderLabel.m in Sources */,
 				84F524F51B8326E40077A06C /* GRProfileViewController.m in Sources */,
 				500001591BB73411001564E7 /* GRNotificationHeaderTableViewCell.m in Sources */,
+				84DDA1D91D88A22000E87E26 /* UIStackView+GRExtension.m in Sources */,
 				5070D55B1C495C7A00E80AB1 /* GRRepositoryViewSelector.m in Sources */,
 				501BA7F61C3E7378005C5524 /* GRRepositoryFileBrowserEntryCell.m in Sources */,
 				501BA7E61C3D0B16005C5524 /* GRRepositoryFileBrowserModel.m in Sources */,
@@ -1105,6 +1130,7 @@
 				84F524FA1B832A7E0077A06C /* GRStreamEventCell.m in Sources */,
 				5070ECB61C2BC2F90021093F /* GRRepositoryHeaderView.m in Sources */,
 				501F870F1C868E63000C2C53 /* GRRepositoryCommitsModel.m in Sources */,
+				84DDA1DC1D88A2E300E87E26 /* UIView+GRExtension.m in Sources */,
 				84A8D0FD1B8D262900B6B4FB /* GREventIssueViewController.m in Sources */,
 				50E781F41C78DA7800143931 /* GRSmallCapsLabel.m in Sources */,
 				5070D5691C4A619D00E80AB1 /* GRRepositoryInfoModel.m in Sources */,
@@ -1364,7 +1390,10 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Masonry/build/Debug-iphoneos",
+				);
 				GCC_PREFIX_HEADER = Grove/Grove.h;
 				GCC_WARN_PEDANTIC = YES;
 				INFOPLIST_FILE = Grove/Info.plist;
@@ -1387,7 +1416,10 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Masonry/build/Debug-iphoneos",
+				);
 				GCC_PREFIX_HEADER = Grove/Grove.h;
 				GCC_WARN_PEDANTIC = YES;
 				INFOPLIST_FILE = Grove/Info.plist;
