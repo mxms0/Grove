@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		16835F390081F498D3ACBD48 /* libPods-GroveSupport.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F44BB57537B7BDBE1D254C53 /* libPods-GroveSupport.a */; };
 		381EF6511D88A684000828A8 /* GRBlurryImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 381EF6501D88A684000828A8 /* GRBlurryImageView.m */; };
+		4AFF78719E87757B1D344FE8 /* libPods-GroveSupportTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D7EE4952FB635BE7F459140 /* libPods-GroveSupportTests.a */; };
 		500001591BB73411001564E7 /* GRNotificationHeaderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 500001581BB73411001564E7 /* GRNotificationHeaderTableViewCell.m */; };
 		5000015D1BB778A0001564E7 /* GRRepositoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5000015C1BB778A0001564E7 /* GRRepositoryViewController.m */; };
 		50019B321B9A21DC004EDC8A /* GSURLRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 50019B301B9A21DC004EDC8A /* GSURLRequest.h */; };
@@ -127,14 +129,13 @@
 		84A8D1001B8D311000B6B4FB /* GRIssueCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A8D0FF1B8D311000B6B4FB /* GRIssueCommentCell.m */; };
 		84A8D10A1B8D6F0C00B6B4FB /* GSIssue.h in Headers */ = {isa = PBXBuildFile; fileRef = 84A8D1081B8D6F0C00B6B4FB /* GSIssue.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84A8D10B1B8D6F0C00B6B4FB /* GSIssue.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A8D1091B8D6F0C00B6B4FB /* GSIssue.m */; };
-		84DDA1D51D889DF900E87E26 /* Masonry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84DDA1D41D889DF900E87E26 /* Masonry.framework */; };
-		84DDA1D61D889DF900E87E26 /* Masonry.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 84DDA1D41D889DF900E87E26 /* Masonry.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		84DDA1D91D88A22000E87E26 /* UIStackView+GRExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DDA1D81D88A22000E87E26 /* UIStackView+GRExtension.m */; };
 		84DDA1DC1D88A2E300E87E26 /* UIView+GRExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DDA1DB1D88A2E300E87E26 /* UIView+GRExtension.m */; };
 		84F524EF1B83269E0077A06C /* GRStreamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F524EE1B83269E0077A06C /* GRStreamViewController.m */; };
 		84F524F21B8326D60077A06C /* GRNotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F524F11B8326D60077A06C /* GRNotificationViewController.m */; };
 		84F524F51B8326E40077A06C /* GRProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F524F41B8326E40077A06C /* GRProfileViewController.m */; };
 		84F524FA1B832A7E0077A06C /* GRStreamEventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F524F91B832A7E0077A06C /* GRStreamEventCell.m */; };
+		F86C3856A9FE31B703367C42 /* libPods-Grove.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D33A9F3257F07463A2DE20A0 /* libPods-Grove.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -168,7 +169,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				84DDA1D61D889DF900E87E26 /* Masonry.framework in Embed Frameworks */,
 				50E4B5A21B82F6D60029264A /* GroveSupport.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -177,8 +177,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		05E83E4AD71F579DC5456E51 /* Pods-GroveSupportTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GroveSupportTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GroveSupportTests/Pods-GroveSupportTests.debug.xcconfig"; sourceTree = "<group>"; };
+		06D4E5EBED800F508AAEF336 /* Pods-GroveSupportTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GroveSupportTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-GroveSupportTests/Pods-GroveSupportTests.release.xcconfig"; sourceTree = "<group>"; };
+		10874AF9C580393C2C932E2C /* Pods-GroveSupport.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GroveSupport.release.xcconfig"; path = "Pods/Target Support Files/Pods-GroveSupport/Pods-GroveSupport.release.xcconfig"; sourceTree = "<group>"; };
 		381EF64F1D88A684000828A8 /* GRBlurryImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRBlurryImageView.h; sourceTree = "<group>"; };
 		381EF6501D88A684000828A8 /* GRBlurryImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRBlurryImageView.m; sourceTree = "<group>"; };
+		4D7EE4952FB635BE7F459140 /* libPods-GroveSupportTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GroveSupportTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		500001571BB73411001564E7 /* GRNotificationHeaderTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRNotificationHeaderTableViewCell.h; sourceTree = "<group>"; };
 		500001581BB73411001564E7 /* GRNotificationHeaderTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRNotificationHeaderTableViewCell.m; sourceTree = "<group>"; };
 		5000015B1BB778A0001564E7 /* GRRepositoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRRepositoryViewController.h; sourceTree = "<group>"; };
@@ -385,6 +389,11 @@
 		84F524F41B8326E40077A06C /* GRProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRProfileViewController.m; sourceTree = "<group>"; };
 		84F524F81B832A7E0077A06C /* GRStreamEventCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRStreamEventCell.h; sourceTree = "<group>"; };
 		84F524F91B832A7E0077A06C /* GRStreamEventCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRStreamEventCell.m; sourceTree = "<group>"; };
+		A71582DAE5C6FA2BC31D819B /* Pods-GroveSupport.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GroveSupport.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GroveSupport/Pods-GroveSupport.debug.xcconfig"; sourceTree = "<group>"; };
+		C88CA82FA8DEF56A92F5B741 /* Pods-Grove.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Grove.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Grove/Pods-Grove.debug.xcconfig"; sourceTree = "<group>"; };
+		CA1A906159034A901DF56A78 /* Pods-Grove.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Grove.release.xcconfig"; path = "Pods/Target Support Files/Pods-Grove/Pods-Grove.release.xcconfig"; sourceTree = "<group>"; };
+		D33A9F3257F07463A2DE20A0 /* libPods-Grove.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Grove.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F44BB57537B7BDBE1D254C53 /* libPods-GroveSupport.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GroveSupport.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -392,6 +401,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				16835F390081F498D3ACBD48 /* libPods-GroveSupport.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -400,6 +410,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				50E4B5951B82F6D60029264A /* GroveSupport.framework in Frameworks */,
+				4AFF78719E87757B1D344FE8 /* libPods-GroveSupportTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -407,14 +418,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84DDA1D51D889DF900E87E26 /* Masonry.framework in Frameworks */,
 				50E4B5A11B82F6D60029264A /* GroveSupport.framework in Frameworks */,
+				F86C3856A9FE31B703367C42 /* libPods-Grove.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3AC43CBDF14F6E7739AC358E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C88CA82FA8DEF56A92F5B741 /* Pods-Grove.debug.xcconfig */,
+				CA1A906159034A901DF56A78 /* Pods-Grove.release.xcconfig */,
+				A71582DAE5C6FA2BC31D819B /* Pods-GroveSupport.debug.xcconfig */,
+				10874AF9C580393C2C932E2C /* Pods-GroveSupport.release.xcconfig */,
+				05E83E4AD71F579DC5456E51 /* Pods-GroveSupportTests.debug.xcconfig */,
+				06D4E5EBED800F508AAEF336 /* Pods-GroveSupportTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		501558C51B8725D80002254D /* Public */ = {
 			isa = PBXGroup;
 			children = (
@@ -778,6 +802,7 @@
 				50E4B59A1B82F6D60029264A /* GroveSupportTests */,
 				50F081831B82ED6500366161 /* Products */,
 				84DDA1BC1D88979200E87E26 /* Frameworks */,
+				3AC43CBDF14F6E7739AC358E /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -846,6 +871,9 @@
 			isa = PBXGroup;
 			children = (
 				84DDA1D41D889DF900E87E26 /* Masonry.framework */,
+				D33A9F3257F07463A2DE20A0 /* libPods-Grove.a */,
+				F44BB57537B7BDBE1D254C53 /* libPods-GroveSupport.a */,
+				4D7EE4952FB635BE7F459140 /* libPods-GroveSupportTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -928,10 +956,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 50E4B5A31B82F6D60029264A /* Build configuration list for PBXNativeTarget "GroveSupport" */;
 			buildPhases = (
+				67A1EE08C5AC88C76240746F /* [CP] Check Pods Manifest.lock */,
 				50E4B5851B82F6D60029264A /* Sources */,
 				50E4B5861B82F6D60029264A /* Frameworks */,
 				50E4B5871B82F6D60029264A /* Headers */,
 				50E4B5881B82F6D60029264A /* Resources */,
+				B082CA26012B7D9675B03718 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -946,9 +976,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 50E4B5A71B82F6D60029264A /* Build configuration list for PBXNativeTarget "GroveSupportTests" */;
 			buildPhases = (
+				E784A22B88B4D7F6FEBB4BE2 /* [CP] Check Pods Manifest.lock */,
 				50E4B5901B82F6D60029264A /* Sources */,
 				50E4B5911B82F6D60029264A /* Frameworks */,
 				50E4B5921B82F6D60029264A /* Resources */,
+				91FDA9624511DADB8ADB7272 /* [CP] Embed Pods Frameworks */,
+				012C2C77F573783C8064ED4C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -965,10 +998,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 50F081991B82ED6500366161 /* Build configuration list for PBXNativeTarget "Grove" */;
 			buildPhases = (
+				3853781EDFBD1C41C9E2F811 /* [CP] Check Pods Manifest.lock */,
 				50F0817E1B82ED6500366161 /* Sources */,
 				50F0817F1B82ED6500366161 /* Frameworks */,
 				50F081801B82ED6500366161 /* Resources */,
 				50E4B5A61B82F6D60029264A /* Embed Frameworks */,
+				E11DAE02EDF8F42DD5D7909F /* [CP] Embed Pods Frameworks */,
+				12D468748A243B83C0D2845F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1052,6 +1088,129 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		012C2C77F573783C8064ED4C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GroveSupportTests/Pods-GroveSupportTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		12D468748A243B83C0D2845F /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Grove/Pods-Grove-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3853781EDFBD1C41C9E2F811 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		67A1EE08C5AC88C76240746F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		91FDA9624511DADB8ADB7272 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GroveSupportTests/Pods-GroveSupportTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B082CA26012B7D9675B03718 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GroveSupport/Pods-GroveSupport-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E11DAE02EDF8F42DD5D7909F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Grove/Pods-Grove-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E784A22B88B4D7F6FEBB4BE2 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		50E4B5851B82F6D60029264A /* Sources */ = {
@@ -1201,6 +1360,7 @@
 /* Begin XCBuildConfiguration section */
 		50E4B5A41B82F6D60029264A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A71582DAE5C6FA2BC31D819B /* Pods-GroveSupport.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CLANG_ANALYZER_OBJC_RETAIN_COUNT = YES;
@@ -1236,6 +1396,7 @@
 		};
 		50E4B5A51B82F6D60029264A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 10874AF9C580393C2C932E2C /* Pods-GroveSupport.release.xcconfig */;
 			buildSettings = {
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CLANG_ANALYZER_OBJC_RETAIN_COUNT = YES;
@@ -1265,6 +1426,7 @@
 		};
 		50E4B5A81B82F6D60029264A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 05E83E4AD71F579DC5456E51 /* Pods-GroveSupportTests.debug.xcconfig */;
 			buildSettings = {
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1287,6 +1449,7 @@
 		};
 		50E4B5A91B82F6D60029264A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 06D4E5EBED800F508AAEF336 /* Pods-GroveSupportTests.release.xcconfig */;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -1383,6 +1546,7 @@
 		};
 		50F0819A1B82ED6500366161 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C88CA82FA8DEF56A92F5B741 /* Pods-Grove.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1390,16 +1554,13 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Masonry/build/Debug-iphoneos",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREFIX_HEADER = Grove/Grove.h;
 				GCC_WARN_PEDANTIC = YES;
 				INFOPLIST_FILE = Grove/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_CFLAGS = "";
+				OTHER_CFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rickandmorty.www.rickand.com.Grove;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -1409,6 +1570,7 @@
 		};
 		50F0819B1B82ED6500366161 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CA1A906159034A901DF56A78 /* Pods-Grove.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1416,16 +1578,13 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Masonry/build/Debug-iphoneos",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREFIX_HEADER = Grove/Grove.h;
 				GCC_WARN_PEDANTIC = YES;
 				INFOPLIST_FILE = Grove/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_CFLAGS = "";
+				OTHER_CFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rickandmorty.www.rickand.com.Grove;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

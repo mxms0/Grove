@@ -39,7 +39,7 @@
         statisticsView      = [[UIStackView alloc] init];
         titlesView          = [[UIStackView alloc] init];
         profileImageView    = [[UIImageView alloc] init];
-        backgroundImageView = [[UIImageView alloc] init];
+        backgroundImageView = [[GRBlurryImageView alloc] init];
         usernameLabel       = [[UILabel alloc] init];
         nameLabel           = [[UILabel alloc] init];
         locationLabel       = [[UILabel alloc] init];
