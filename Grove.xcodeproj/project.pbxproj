@@ -47,6 +47,10 @@
 		501F87071C86751F000C2C53 /* GRSelectableLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 501F87061C86751F000C2C53 /* GRSelectableLabel.m */; };
 		501F870C1C868E51000C2C53 /* GRRepositoryCommitsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 501F870B1C868E51000C2C53 /* GRRepositoryCommitsView.m */; };
 		501F870F1C868E63000C2C53 /* GRRepositoryCommitsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 501F870E1C868E63000C2C53 /* GRRepositoryCommitsModel.m */; };
+		5020E8591DA44E350090D5E6 /* GSUserGitHubEngine.h in Headers */ = {isa = PBXBuildFile; fileRef = 5020E8571DA44E350090D5E6 /* GSUserGitHubEngine.h */; };
+		5020E85A1DA44E350090D5E6 /* GSUserGitHubEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 5020E8581DA44E350090D5E6 /* GSUserGitHubEngine.m */; };
+		5020E85D1DA452870090D5E6 /* GSRepositoryGitHubEngine.h in Headers */ = {isa = PBXBuildFile; fileRef = 5020E85B1DA452870090D5E6 /* GSRepositoryGitHubEngine.h */; };
+		5020E85E1DA452870090D5E6 /* GSRepositoryGitHubEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 5020E85C1DA452870090D5E6 /* GSRepositoryGitHubEngine.m */; };
 		503C595E1BAD17EE003CB50E /* GRSyntaxHighlightedTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 503C595D1BAD17EE003CB50E /* GRSyntaxHighlightedTextView.m */; };
 		50504D9A1BA263D800B87C5F /* GRStreamCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 50504D991BA263D800B87C5F /* GRStreamCellModel.m */; };
 		505C58DB1C99587300D5F37C /* GRGenericConversationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 505C58DA1C99587300D5F37C /* GRGenericConversationViewController.m */; };
@@ -236,6 +240,10 @@
 		501F870B1C868E51000C2C53 /* GRRepositoryCommitsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRRepositoryCommitsView.m; sourceTree = "<group>"; };
 		501F870D1C868E63000C2C53 /* GRRepositoryCommitsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRRepositoryCommitsModel.h; sourceTree = "<group>"; };
 		501F870E1C868E63000C2C53 /* GRRepositoryCommitsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRRepositoryCommitsModel.m; sourceTree = "<group>"; };
+		5020E8571DA44E350090D5E6 /* GSUserGitHubEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSUserGitHubEngine.h; sourceTree = "<group>"; };
+		5020E8581DA44E350090D5E6 /* GSUserGitHubEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSUserGitHubEngine.m; sourceTree = "<group>"; };
+		5020E85B1DA452870090D5E6 /* GSRepositoryGitHubEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSRepositoryGitHubEngine.h; sourceTree = "<group>"; };
+		5020E85C1DA452870090D5E6 /* GSRepositoryGitHubEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSRepositoryGitHubEngine.m; sourceTree = "<group>"; };
 		503C595C1BAD17EE003CB50E /* GRSyntaxHighlightedTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRSyntaxHighlightedTextView.h; sourceTree = "<group>"; };
 		503C595D1BAD17EE003CB50E /* GRSyntaxHighlightedTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRSyntaxHighlightedTextView.m; sourceTree = "<group>"; };
 		50504D981BA263D800B87C5F /* GRStreamCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRStreamCellModel.h; sourceTree = "<group>"; };
@@ -445,6 +453,10 @@
 				50803EFD1C06AE2B00D3A284 /* GSGitHubEngineInternal.h */,
 				50E4B5AB1B82F8E50029264A /* GSGitHubEngine.h */,
 				50E4B5AC1B82F8E50029264A /* GSGitHubEngine.m */,
+				5020E8571DA44E350090D5E6 /* GSUserGitHubEngine.h */,
+				5020E8581DA44E350090D5E6 /* GSUserGitHubEngine.m */,
+				5020E85B1DA452870090D5E6 /* GSRepositoryGitHubEngine.h */,
+				5020E85C1DA452870090D5E6 /* GSRepositoryGitHubEngine.m */,
 			);
 			name = Public;
 			sourceTree = "<group>";
@@ -920,6 +932,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				501C042F1BAB78B400DC66C8 /* GSGistInternal.h in Headers */,
+				5020E85D1DA452870090D5E6 /* GSRepositoryGitHubEngine.h in Headers */,
 				50133F0A1B841496004B5BB8 /* GSRepository.h in Headers */,
 				50E4B5B11B82FABA0029264A /* GSNetworkManager.h in Headers */,
 				501C04301BAB78B400DC66C8 /* GSGist.h in Headers */,
@@ -932,6 +945,7 @@
 				50133F061B841470004B5BB8 /* GSActor.h in Headers */,
 				50E4B5AD1B82F8E50029264A /* GSGitHubEngine.h in Headers */,
 				5097B5EC1B8D91C200A72721 /* GSComment.h in Headers */,
+				5020E8591DA44E350090D5E6 /* GSUserGitHubEngine.h in Headers */,
 				501BA7F01C3DFBC0005C5524 /* GSRepositoryEntry.h in Headers */,
 				501558C11B86F2910002254D /* GSNotification.h in Headers */,
 				50133F021B8413F7004B5BB8 /* GSEvent.h in Headers */,
@@ -1219,6 +1233,7 @@
 			files = (
 				50E9F8711B832BF70007212E /* GSNetworkManagerHelpers.m in Sources */,
 				50E4B5B21B82FABA0029264A /* GSNetworkManager.m in Sources */,
+				5020E85A1DA44E350090D5E6 /* GSUserGitHubEngine.m in Sources */,
 				5097B5F21B8D95C100A72721 /* GSOrganization.m in Sources */,
 				501C042E1BAB78B400DC66C8 /* GSGist.m in Sources */,
 				50E4B5B61B8303710029264A /* GSUser.m in Sources */,
@@ -1229,6 +1244,7 @@
 				50019B331B9A21DC004EDC8A /* GSURLRequest.m in Sources */,
 				501558C21B86F2910002254D /* GSNotification.m in Sources */,
 				50133F071B841470004B5BB8 /* GSActor.m in Sources */,
+				5020E85E1DA452870090D5E6 /* GSRepositoryGitHubEngine.m in Sources */,
 				50E4B5BA1B8306040029264A /* NSString+GSUtilities.m in Sources */,
 				501558AC1B854BFD0002254D /* GSCommit.m in Sources */,
 				50133F031B8413F7004B5BB8 /* GSEvent.m in Sources */,
