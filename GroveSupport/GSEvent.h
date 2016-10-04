@@ -74,7 +74,6 @@ typedef NS_ENUM(NSInteger, GSEventRefType) {
 @property (nonatomic, readonly, strong) GSActor *actor;
 @property (nonatomic, readonly, strong) GSActor *member;
 @property (nonatomic, readonly, strong) GSRepository *repository;
-@property (nonatomic, readonly, strong) NSDate *createdDate;
 @property (nonatomic, readonly) GSEventType type;
 @property (nonatomic, readonly) BOOL publicallyAvailable;
 @property (nonatomic, readonly, strong) GSOrganization *organization;

@@ -55,6 +55,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, nullable, readonly) NSURL *directAPIURL;
 @property (nonatomic, nullable, readonly) NSNumber *identifier;
 @property (atomic, nullable, readwrite, strong) NSDate *updatedDate;
+@property (atomic, nullable, readwrite, strong) NSDate *createdDate;
 @property (atomic, assign) BOOL updating;
 - (nonnull instancetype)initWithDictionary:(NSDictionary *)dictionary;
 - (nullable NSDate *)dateFromISO8601String:(NSString *)string;
