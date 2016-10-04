@@ -7,9 +7,7 @@
 //
 
 #import "GSRepositoryGitHubEngine.h"
-
 #import "GSNetworkManager.h"
-#import "GSEvent.h"
 #import "GroveSupportInternal.h"
 #import "GSURLRequest.h"
 

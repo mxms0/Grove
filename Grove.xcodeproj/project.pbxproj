@@ -51,6 +51,8 @@
 		5020E85A1DA44E350090D5E6 /* GSUserGitHubEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 5020E8581DA44E350090D5E6 /* GSUserGitHubEngine.m */; };
 		5020E85D1DA452870090D5E6 /* GSRepositoryGitHubEngine.h in Headers */ = {isa = PBXBuildFile; fileRef = 5020E85B1DA452870090D5E6 /* GSRepositoryGitHubEngine.h */; };
 		5020E85E1DA452870090D5E6 /* GSRepositoryGitHubEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 5020E85C1DA452870090D5E6 /* GSRepositoryGitHubEngine.m */; };
+		5020E8611DA458970090D5E6 /* GSGistGitHubEngine.h in Headers */ = {isa = PBXBuildFile; fileRef = 5020E85F1DA458970090D5E6 /* GSGistGitHubEngine.h */; };
+		5020E8621DA458970090D5E6 /* GSGistGitHubEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 5020E8601DA458970090D5E6 /* GSGistGitHubEngine.m */; };
 		503C595E1BAD17EE003CB50E /* GRSyntaxHighlightedTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 503C595D1BAD17EE003CB50E /* GRSyntaxHighlightedTextView.m */; };
 		50504D9A1BA263D800B87C5F /* GRStreamCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 50504D991BA263D800B87C5F /* GRStreamCellModel.m */; };
 		505C58DB1C99587300D5F37C /* GRGenericConversationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 505C58DA1C99587300D5F37C /* GRGenericConversationViewController.m */; };
@@ -244,6 +246,8 @@
 		5020E8581DA44E350090D5E6 /* GSUserGitHubEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSUserGitHubEngine.m; sourceTree = "<group>"; };
 		5020E85B1DA452870090D5E6 /* GSRepositoryGitHubEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSRepositoryGitHubEngine.h; sourceTree = "<group>"; };
 		5020E85C1DA452870090D5E6 /* GSRepositoryGitHubEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSRepositoryGitHubEngine.m; sourceTree = "<group>"; };
+		5020E85F1DA458970090D5E6 /* GSGistGitHubEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSGistGitHubEngine.h; sourceTree = "<group>"; };
+		5020E8601DA458970090D5E6 /* GSGistGitHubEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSGistGitHubEngine.m; sourceTree = "<group>"; };
 		503C595C1BAD17EE003CB50E /* GRSyntaxHighlightedTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRSyntaxHighlightedTextView.h; sourceTree = "<group>"; };
 		503C595D1BAD17EE003CB50E /* GRSyntaxHighlightedTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRSyntaxHighlightedTextView.m; sourceTree = "<group>"; };
 		50504D981BA263D800B87C5F /* GRStreamCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRStreamCellModel.h; sourceTree = "<group>"; };
@@ -457,6 +461,8 @@
 				5020E8581DA44E350090D5E6 /* GSUserGitHubEngine.m */,
 				5020E85B1DA452870090D5E6 /* GSRepositoryGitHubEngine.h */,
 				5020E85C1DA452870090D5E6 /* GSRepositoryGitHubEngine.m */,
+				5020E85F1DA458970090D5E6 /* GSGistGitHubEngine.h */,
+				5020E8601DA458970090D5E6 /* GSGistGitHubEngine.m */,
 			);
 			name = Public;
 			sourceTree = "<group>";
@@ -956,6 +962,7 @@
 				5097B5E21B8D2D9800A72721 /* GSUtilities.h in Headers */,
 				501BA7F31C3E029E005C5524 /* GSRepositoryEntryInternal.h in Headers */,
 				50133F0E1B84495C004B5BB8 /* GSObject.h in Headers */,
+				5020E8611DA458970090D5E6 /* GSGistGitHubEngine.h in Headers */,
 				50E4B5B91B8306040029264A /* NSString+GSUtilities.h in Headers */,
 				50E4B5B51B8303710029264A /* GSUser.h in Headers */,
 				501558AB1B854BFD0002254D /* GSCommit.h in Headers */,
@@ -1247,6 +1254,7 @@
 				5020E85E1DA452870090D5E6 /* GSRepositoryGitHubEngine.m in Sources */,
 				50E4B5BA1B8306040029264A /* NSString+GSUtilities.m in Sources */,
 				501558AC1B854BFD0002254D /* GSCommit.m in Sources */,
+				5020E8621DA458970090D5E6 /* GSGistGitHubEngine.m in Sources */,
 				50133F031B8413F7004B5BB8 /* GSEvent.m in Sources */,
 				5097B5DD1B8D29F400A72721 /* GSCacheManager.m in Sources */,
 				84A8D10B1B8D6F0C00B6B4FB /* GSIssue.m in Sources */,

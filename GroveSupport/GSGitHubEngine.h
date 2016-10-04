@@ -36,12 +36,6 @@ typedef NS_ENUM(NSInteger, GSTwoFactorAuthMethod) {
 //- (void)followUser:(GSUser *__nonnull)user fromUser:(GSUser *__nonnull)us completionHandler:(void (^__nonnull)(BOOL success, NSError *__nullable error))handler;
 //- (void)unfollowUser:(GSUser *__nonnull)user fromUser:(GSUser *__nonnull)us completionHandler:(void (^__nonnull)(BOOL success, NSError *__nullable error))handler;
 
-// Gists
-- (void)gistsForUser:(GSUser *)user completionHandler:(void (^)(NSArray *__nullable gists, NSError *__nullable))handler;
-- (void)commentsForGist:(GSGist *)gist completionHandler:(void (^)(NSArray *__nullable comments, NSError *__nullable))handler;
-- (void)commentOnGist:(GSGist *)gist withMessage:(NSString *)message attachments:(NSArray *__nullable)attachments completionHandler:(void (^)(__nullable id comment, NSError *__nullable error))handler;
-- (void)editComent:(id)comment gist:(id)gist newMessage:(NSString *)message completionHandler:(void (^)(__nullable id comment, NSError *__nullable error))handler;
-- (void)deleteComment:(id)comment gist:(id)gist completionHandler:(void (^)(BOOL success, NSError *__nullable error))handler;
 @end
 
 NS_ASSUME_NONNULL_END
