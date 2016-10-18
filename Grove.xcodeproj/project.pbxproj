@@ -47,11 +47,11 @@
 		501F87071C86751F000C2C53 /* GRSelectableLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 501F87061C86751F000C2C53 /* GRSelectableLabel.m */; };
 		501F870C1C868E51000C2C53 /* GRRepositoryCommitsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 501F870B1C868E51000C2C53 /* GRRepositoryCommitsView.m */; };
 		501F870F1C868E63000C2C53 /* GRRepositoryCommitsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 501F870E1C868E63000C2C53 /* GRRepositoryCommitsModel.m */; };
-		5020E8591DA44E350090D5E6 /* GSUserGitHubEngine.h in Headers */ = {isa = PBXBuildFile; fileRef = 5020E8571DA44E350090D5E6 /* GSUserGitHubEngine.h */; };
+		5020E8591DA44E350090D5E6 /* GSUserGitHubEngine.h in Headers */ = {isa = PBXBuildFile; fileRef = 5020E8571DA44E350090D5E6 /* GSUserGitHubEngine.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5020E85A1DA44E350090D5E6 /* GSUserGitHubEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 5020E8581DA44E350090D5E6 /* GSUserGitHubEngine.m */; };
-		5020E85D1DA452870090D5E6 /* GSRepositoryGitHubEngine.h in Headers */ = {isa = PBXBuildFile; fileRef = 5020E85B1DA452870090D5E6 /* GSRepositoryGitHubEngine.h */; };
+		5020E85D1DA452870090D5E6 /* GSRepositoryGitHubEngine.h in Headers */ = {isa = PBXBuildFile; fileRef = 5020E85B1DA452870090D5E6 /* GSRepositoryGitHubEngine.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5020E85E1DA452870090D5E6 /* GSRepositoryGitHubEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 5020E85C1DA452870090D5E6 /* GSRepositoryGitHubEngine.m */; };
-		5020E8611DA458970090D5E6 /* GSGistGitHubEngine.h in Headers */ = {isa = PBXBuildFile; fileRef = 5020E85F1DA458970090D5E6 /* GSGistGitHubEngine.h */; };
+		5020E8611DA458970090D5E6 /* GSGistGitHubEngine.h in Headers */ = {isa = PBXBuildFile; fileRef = 5020E85F1DA458970090D5E6 /* GSGistGitHubEngine.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5020E8621DA458970090D5E6 /* GSGistGitHubEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 5020E8601DA458970090D5E6 /* GSGistGitHubEngine.m */; };
 		503C595E1BAD17EE003CB50E /* GRSyntaxHighlightedTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 503C595D1BAD17EE003CB50E /* GRSyntaxHighlightedTextView.m */; };
 		50504D9A1BA263D800B87C5F /* GRStreamCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 50504D991BA263D800B87C5F /* GRStreamCellModel.m */; };
@@ -1044,7 +1044,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = GR;
-				LastUpgradeCheck = 0710;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = Milo;
 				TargetAttributes = {
 					50E4B5891B82F6D60029264A = {
@@ -1390,7 +1390,7 @@
 				CLANG_ANALYZER_OBJC_RETAIN_COUNT = YES;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
@@ -1426,7 +1426,7 @@
 				CLANG_ANALYZER_OBJC_RETAIN_COUNT = YES;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -1501,8 +1501,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -1544,8 +1546,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
