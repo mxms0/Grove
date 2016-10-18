@@ -53,6 +53,7 @@
 		5020E85E1DA452870090D5E6 /* GSRepositoryGitHubEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 5020E85C1DA452870090D5E6 /* GSRepositoryGitHubEngine.m */; };
 		5020E8611DA458970090D5E6 /* GSGistGitHubEngine.h in Headers */ = {isa = PBXBuildFile; fileRef = 5020E85F1DA458970090D5E6 /* GSGistGitHubEngine.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5020E8621DA458970090D5E6 /* GSGistGitHubEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 5020E8601DA458970090D5E6 /* GSGistGitHubEngine.m */; };
+		5031C18B1DB6C35200C7EF36 /* GRMarkdownView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5031C18A1DB6C35200C7EF36 /* GRMarkdownView.m */; };
 		503C595E1BAD17EE003CB50E /* GRSyntaxHighlightedTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 503C595D1BAD17EE003CB50E /* GRSyntaxHighlightedTextView.m */; };
 		50504D9A1BA263D800B87C5F /* GRStreamCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 50504D991BA263D800B87C5F /* GRStreamCellModel.m */; };
 		505C58DB1C99587300D5F37C /* GRGenericConversationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 505C58DA1C99587300D5F37C /* GRGenericConversationViewController.m */; };
@@ -248,6 +249,8 @@
 		5020E85C1DA452870090D5E6 /* GSRepositoryGitHubEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSRepositoryGitHubEngine.m; sourceTree = "<group>"; };
 		5020E85F1DA458970090D5E6 /* GSGistGitHubEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSGistGitHubEngine.h; sourceTree = "<group>"; };
 		5020E8601DA458970090D5E6 /* GSGistGitHubEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSGistGitHubEngine.m; sourceTree = "<group>"; };
+		5031C1891DB6C35200C7EF36 /* GRMarkdownView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRMarkdownView.h; sourceTree = "<group>"; };
+		5031C18A1DB6C35200C7EF36 /* GRMarkdownView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRMarkdownView.m; sourceTree = "<group>"; };
 		503C595C1BAD17EE003CB50E /* GRSyntaxHighlightedTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRSyntaxHighlightedTextView.h; sourceTree = "<group>"; };
 		503C595D1BAD17EE003CB50E /* GRSyntaxHighlightedTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRSyntaxHighlightedTextView.m; sourceTree = "<group>"; };
 		50504D981BA263D800B87C5F /* GRStreamCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRStreamCellModel.h; sourceTree = "<group>"; };
@@ -926,6 +929,8 @@
 				50E781F31C78DA7800143931 /* GRSmallCapsLabel.m */,
 				501F87051C86751F000C2C53 /* GRSelectableLabel.h */,
 				501F87061C86751F000C2C53 /* GRSelectableLabel.m */,
+				5031C1891DB6C35200C7EF36 /* GRMarkdownView.h */,
+				5031C18A1DB6C35200C7EF36 /* GRMarkdownView.m */,
 			);
 			name = "Shared Views";
 			sourceTree = "<group>";
@@ -1303,6 +1308,7 @@
 				50504D9A1BA263D800B87C5F /* GRStreamCellModel.m in Sources */,
 				5060631A1C7ADEF300E1674A /* GRNotificationHeaderLabel.m in Sources */,
 				84F524F51B8326E40077A06C /* GRProfileViewController.m in Sources */,
+				5031C18B1DB6C35200C7EF36 /* GRMarkdownView.m in Sources */,
 				500001591BB73411001564E7 /* GRNotificationHeaderTableViewCell.m in Sources */,
 				84DDA1D91D88A22000E87E26 /* UIStackView+GRExtension.m in Sources */,
 				5070D55B1C495C7A00E80AB1 /* GRRepositoryViewSelector.m in Sources */,
