@@ -24,6 +24,7 @@ FOUNDATION_EXPORT const unsigned char GroveSupportVersionString[];
 #import <GroveSupport/GSRepository.h>
 #import <GroveSupport/GSEvent.h>
 #import <GroveSupport/GSCommit.h>
+#import <GroveSupport/GSIssue.h>
 #import <GroveSupport/GSCacheManager.h>
 #import <GroveSupport/GSNotification.h>
 #import <GroveSupport/GSComment.h>
