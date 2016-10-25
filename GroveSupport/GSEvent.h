@@ -9,10 +9,6 @@
 #import <Foundation/Foundation.h>
 
 #import "GSActor.h"
-#import "GSRepository.h"
-#import "GSOrganization.h"
-#import "GSComment.h"
-#import "GSIssue.h"
 
 typedef NS_ENUM(NSInteger, GSEventType) {
 	GSEventTypeUnknown,
@@ -70,11 +66,12 @@ typedef NS_ENUM(NSInteger, GSEventRefType) {
 	GSEventRefTypeTag,
 };
 
+@class GSIssue, GSComment, GSOrganization, GSRepository;
+
 @interface GSEvent : GSObject
 @property (nonatomic, readonly, strong) GSActor *actor;
 @property (nonatomic, readonly, strong) GSActor *member;
 @property (nonatomic, readonly, strong) GSRepository *repository;
-@property (nonatomic, readonly, strong) NSDate *createdDate;
 @property (nonatomic, readonly) GSEventType type;
 @property (nonatomic, readonly) BOOL publicallyAvailable;
 @property (nonatomic, readonly, strong) GSOrganization *organization;

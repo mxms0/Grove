@@ -17,10 +17,14 @@ FOUNDATION_EXPORT const unsigned char GroveSupportVersionString[];
 #import <GroveSupport/GroveSupportStrings.h>
 #import <GroveSupport/GSUser.h>
 #import <GroveSupport/GSGitHubEngine.h>
+#import <GroveSupport/GSUserGitHubEngine.h>
+#import <GroveSupport/GSRepositoryGitHubEngine.h>
+#import <GroveSupport/GSGistGitHubEngine.h>
 #import <GroveSupport/GSActor.h>
 #import <GroveSupport/GSRepository.h>
 #import <GroveSupport/GSEvent.h>
 #import <GroveSupport/GSCommit.h>
+#import <GroveSupport/GSIssue.h>
 #import <GroveSupport/GSCacheManager.h>
 #import <GroveSupport/GSNotification.h>
 #import <GroveSupport/GSComment.h>

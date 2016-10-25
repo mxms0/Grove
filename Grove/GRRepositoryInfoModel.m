@@ -9,7 +9,7 @@
 #import "GRRepositoryInfoModel.h"
 
 #import <GroveSupport/GSRepository.h>
-#import <GroveSupport/GSGitHubEngine.h>
+#import <GroveSupport/GSRepositoryGitHubEngine.h>
 #include <objc/message.h>
 
 /*

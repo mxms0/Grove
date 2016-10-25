@@ -21,7 +21,6 @@
 	GSObjectAssign(dictionary, @"actor", _actor, GSActor);
 	GSObjectAssign(dictionary, @"repo", _repository, GSRepository);
 	
-	_createdDate = [self dateFromISO8601String:dictionary[@"created_at"]];
 	_publicallyAvailable = [dictionary[@"public"] boolValue];
 	_type = [self notificationEventTypeFromString:dictionary[@"type"]];
 	

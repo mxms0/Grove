@@ -25,6 +25,13 @@
 #if 0
 	NSLog(@"[%@] Packet %@", NSStringFromClass([self class]), dictionary);
 #endif
+    
+    if ([dictionary.allKeys containsObject:GSKCreatedAt]) {
+        self.createdDate = [self dateFromISO8601String:dictionary[GSKCreatedAt]];
+    }
+    if ([dictionary.allKeys containsObject:GSKUpdatedAt]) {
+        self.updatedDate = [self dateFromISO8601String:dictionary[GSKUpdatedAt]];
+    }
 	
 	if (dictionary) {
 		[self _configureWithDictionary:dictionary];

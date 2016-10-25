@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "NSAttributedString+GRExtensions.h"
 #import <GroveSupport/GSEvent.h>
+#import <GroveSupport/GSRepository.h>
+#import <GroveSupport/GSComment.h>
 
 NSAttributedString *GRFormattedMessageWithEvent(GSEvent *event, BOOL *requiresSubCell, NSString **subCellText) {
 	
