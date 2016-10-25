@@ -81,7 +81,6 @@ typedef NS_OPTIONS(NSInteger, GRMarkdownLineStyle) {
 	
 	GRMarkdownLineStyle style = [self bestGuessLineStyleFromLine:line];
 	
-	
 	return style;
 }
 
