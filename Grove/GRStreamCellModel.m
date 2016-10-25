@@ -9,6 +9,7 @@
 #import "GRStreamCellModel.h"
 #import "GSEvent.h"
 #import "GRStreamEventCell.h"
+#import <GroveSupport/GSCacheManager.h>
 
 static NSString *const GRStreamCellModelStorageAttributedStringKey = @"AttributedString";
 static NSString *const GRStreamCellModelStorageAvatarKey = @"AvatarImage";

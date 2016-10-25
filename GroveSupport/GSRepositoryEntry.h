@@ -6,7 +6,7 @@
 //  Copyright (c) 2016 Milo. All rights reserved.
 //
 
-#import <GroveSupport/GroveSupport.h>
+#import "GSObject.h"
 
 typedef NS_ENUM(NSInteger, GSRepositoryEntryType) {
 	GSRepositoryEntryTypeFile, // blob

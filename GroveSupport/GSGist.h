@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Milo. All rights reserved.
 //
 
-#import <GroveSupport/GroveSupport.h>
+#import "GSObject.h"
 
 @interface GSGist : GSObject
 @property (nonatomic, strong) NSString *stringDescription;
