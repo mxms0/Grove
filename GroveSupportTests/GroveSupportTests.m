@@ -26,14 +26,21 @@
     [super tearDown];
 }
 
-static NSString *globalUserName = @"Maximus-";
-static NSString *globalPassword = @"null";
+static NSString *globalUserName = @"TestAccount000";
+static NSString *globalPassword = @"testpassword01";
 
 - (void)testExample {
+    // This is an example of a functional test case.
+    XCTAssert(YES, @"Pass");
+}
+
+- (void)testUserFunctionality {
+	
+	[self setContinueAfterFailure:NO];
 	
 	[[GSGitHubEngine sharedInstance] authenticateUserWithUsername:globalUserName password:globalPassword completionHandler:^(GSUser * __nullable user, NSError * __nullable error) {
 		if (error) {
-			NSLog(@"error occured. %@", error);
+			XCTAssertNil(error, "Couldn't properly auth. [%@]", error);
 		}
 		
 		[[GSGitHubEngine sharedInstance] setActiveUser:user];
@@ -42,18 +49,19 @@ static NSString *globalPassword = @"null";
 			NSLog(@"Events %@", events);
 		}];
 		
-		[[GSCacheManager sharedInstance] findImageAssetWithURL:user.avatarURL loggedInUser:user downloadIfNecessary:YES completionHandler:^(UIImage *image, NSError *error) {
-			NSLog(@"Image %p:%@", image, error);
-		}];
+		//		[[GSCacheManager sharedInstance] findImageAssetWithURL:user.avatarURL loggedInUser:user downloadIfNecessary:YES completionHandler:^(UIImage *image, NSError *error) {
+		//			NSLog(@"Image %p:%@", image, error);
+		//		}];
 		
 		[[GSGitHubEngine sharedInstance] repositoriesStarredByUser:user completionHandler:^(NSArray * _Nullable repos, NSError * _Nullable error) {
 			NSLog(@"Starred %@:%@", repos, error);
 		}];
 	}];
+	
+	// have to put locks around async methods so tests can actually finish
+	
 	dispatch_main();
 	
-    // This is an example of a functional test case.
-    XCTAssert(YES, @"Pass");
 }
 
 - (void)testPerformanceExample {
