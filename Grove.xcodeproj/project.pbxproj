@@ -450,17 +450,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		385AD4381DA44C37001CB947 /* Engines */ = {
-			isa = PBXGroup;
-			children = (
-				50E4B5AB1B82F8E50029264A /* GSGitHubEngine.h */,
-				50E4B5AC1B82F8E50029264A /* GSGitHubEngine.m */,
-				385AD4391DA44CEE001CB947 /* GSProjectGitHubEngine.h */,
-				385AD43A1DA44CEE001CB947 /* GSProjectGitHubEngine.m */,
-			);
-			name = Engines;
-			sourceTree = "<group>";
-		};
 		3AC43CBDF14F6E7739AC358E /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -478,7 +467,14 @@
 			isa = PBXGroup;
 			children = (
 				50803EFD1C06AE2B00D3A284 /* GSGitHubEngineInternal.h */,
-				385AD4381DA44C37001CB947 /* Engines */,
+				50E4B5AB1B82F8E50029264A /* GSGitHubEngine.h */,
+				50E4B5AC1B82F8E50029264A /* GSGitHubEngine.m */,
+				5020E8571DA44E350090D5E6 /* GSUserGitHubEngine.h */,
+				5020E8581DA44E350090D5E6 /* GSUserGitHubEngine.m */,
+				5020E85B1DA452870090D5E6 /* GSRepositoryGitHubEngine.h */,
+				5020E85C1DA452870090D5E6 /* GSRepositoryGitHubEngine.m */,
+				5020E85F1DA458970090D5E6 /* GSGistGitHubEngine.h */,
+				5020E8601DA458970090D5E6 /* GSGistGitHubEngine.m */,
 			);
 			name = Public;
 			sourceTree = "<group>";
