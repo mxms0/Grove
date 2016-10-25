@@ -21,8 +21,6 @@ typedef NS_ENUM(NSInteger, GSTwoFactorAuthMethod) {
 @interface GSGitHubEngine : NSObject
 @property (nonatomic, strong, nullable) GSUser *activeUser;
 + (instancetype)sharedInstance;
-- (void)authenticateUserWithUsername:(NSString *)username password:(NSString *)password completionHandler:(void (^__nullable)(GSUser *__nullable, NSError *__nullable))handler;
-- (void)authenticateUserWithUsername:(NSString *)username password:(NSString *)password twoFactorToken:(NSString *__nullable)twoFa completionHandler:(void (^__nullable)(GSUser *__nullable, NSError *__nullable))handler;
 - (void)eventsForUser:(GSUser *)user completionHandler:(void (^)(NSArray<GSEvent *> *__nullable events, NSError *__nullable error))handler;
 - (void)notificationsForUser:(GSUser *)user completionHandler:(void (^)(NSArray<GSNotification *> *__nullable notifications, NSError *__nullable error))handler;
 // Users
@@ -32,7 +30,8 @@ typedef NS_ENUM(NSInteger, GSTwoFactorAuthMethod) {
 //- (void)removeEmailAddressForUser:(GSUser *__nonnull)user completionHandler:(void (^__nonnull)(NSArray *__nullable emails, NSError *__nullable error))handler;
 //- (void)followersForUser:(GSUser *__nonnull)user completionHandler:(void (^__nonnull)(NSArray *__nullable followers, NSError *__nullable error))handler;
 //- (void)followingUsersForUser:(GSUser *__nonnull)user completionHandler:(void (^__nonnull)(NSArray *__nullable following, NSError *__nullable error))handler;
-// - (void)isUser:(GSUser *__nonnull)user followingUser:(GSUser *__nonnull)followee completionHandler:(void (^__nonnull)(BOOL isFollowing, NSError *__nullable error))handler;
+
+//
 //- (void)followUser:(GSUser *__nonnull)user fromUser:(GSUser *__nonnull)us completionHandler:(void (^__nonnull)(BOOL success, NSError *__nullable error))handler;
 //- (void)unfollowUser:(GSUser *__nonnull)user fromUser:(GSUser *__nonnull)us completionHandler:(void (^__nonnull)(BOOL success, NSError *__nullable error))handler;
 

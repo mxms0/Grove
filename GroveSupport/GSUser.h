@@ -24,7 +24,6 @@
 @property (nonatomic, nullable, readonly, strong) NSNumber *followingCount;
 @property (nonatomic, nullable, readonly, strong) NSNumber *publicRepoCount;
 @property (nonatomic, nullable, readonly, strong) NSNumber *publicGistCount;
-@property (nonatomic, nullable, readonly, strong) NSDate *createdDate;
 @property (nonatomic, nullable, readonly, strong) NSNumber *privateGistsCount;
 @property (nonatomic, nullable, readonly, strong) NSNumber *totalPrivateRepoCount;
 @property (nonatomic, nullable, readonly, strong) NSNumber *ownedPrivateRepoCount;
@@ -40,4 +39,5 @@
  }
  */
 + (nullable GSUser *)cachedUserWithUsername:(NSString *__nonnull)username;
+- (void)isFollowingUser:(GSUser *__nonnull)user completionHandler:(void (^__nonnull)(BOOL isFollowing, NSError *__nullable error))handler;
 @end
