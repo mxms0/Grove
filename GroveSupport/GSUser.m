@@ -195,4 +195,8 @@ static NSMutableDictionary *cachedUsers = nil;
 	return [NSString stringWithFormat:@"<%@: %p; username = %@; admin = %d;>", NSStringFromClass([self class]), (void *)self, self.username, self.isAdmin];
 }
 
+- (void)isFollowingUser:(GSUser *__nonnull)user completionHandler:(void (^__nonnull)(BOOL isFollowing, NSError *__nullable error))handler {
+	[[GSGitHubEngine sharedInstance] _isUser:self followingUser:user completionHandler:handler];
+}
+
 @end

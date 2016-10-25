@@ -58,6 +58,10 @@ static NSMutableDictionary *cachedRepos = nil;
 	// sometimes "name" just represents RepoName
 	// full_name variable also exists, sometimes.
 	
+	if (!_name) {
+		NSLog(@"%@", dictionary);
+	}
+	
 	NSRange inconsistencyFix = [_name rangeOfString:@"/"];
 	
 	if (!_owner) {

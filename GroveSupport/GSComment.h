@@ -21,7 +21,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly, strong) NSString *originalCommitIdentifier;
 @property (nonatomic, readonly, strong) GSUser *user;
 @property (nonatomic, readonly, strong) NSString *body;
-@property (nonatomic, readonly, strong) NSDate *createdDate;
 @property (nonatomic, readonly, strong) NSURL *browserURL;
 @end
 

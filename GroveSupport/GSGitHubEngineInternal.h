@@ -14,7 +14,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface GSGitHubEngine ()
-
+- (void)_isUser:(GSUser *__nonnull)user followingUser:(GSUser *__nonnull)followee completionHandler:(void (^__nonnull)(BOOL isFollowing, NSError *__nullable error))handler;
 - (void)_dirtyRequestWithObject:(GSObject *)obj completionHandler:(void (^)(NSDictionary *__nullable ret, NSError *__nullable error))handler;
 @end
 
