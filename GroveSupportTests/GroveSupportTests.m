@@ -10,7 +10,9 @@
 #import <XCTest/XCTest.h>
 #import <GroveSupport/GroveSupport.h>
 
-@interface GroveSupportTests : XCTestCase
+@interface GroveSupportTests : XCTestCase {
+	GSUser *workingUser;
+}
 
 @end
 
@@ -34,33 +36,80 @@ static NSString *globalPassword = @"testpassword01";
     XCTAssert(YES, @"Pass");
 }
 
+- (void)waitWithWait:(dispatch_semaphore_t)wait {
+	while (dispatch_semaphore_wait(wait, DISPATCH_TIME_NOW)) {
+		[[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:10]];
+	}
+	
+}
+
+#define GenericFetchNotNilFail(arg) \
+	do { \
+		XCTAssertNotNil(arg, @"Couldn't fetch "@#arg); \
+	} while (0);
+
+#define GenericFetchNilFail(arg) \
+	do { \
+		XCTAssertNil(arg, @"Couldn't fetch "@#arg); \
+	} while (0);
+
+
+
+- (void)testA {
+	
+	[self setContinueAfterFailure:NO];
+	
+	__block GSUser *tmpUser = nil;
+	
+	dispatch_semaphore_t wait = dispatch_semaphore_create(0);
+	
+	[[GSGitHubEngine sharedInstance] authenticateUserWithUsername:globalUserName password:globalPassword completionHandler:^(GSUser * __nullable user, NSError * __nullable error) {
+		tmpUser = user;
+		
+		GenericFetchNotNilFail(user);
+		
+		dispatch_semaphore_signal(wait);
+	}];
+	
+	[self waitWithWait:wait];
+	
+	[[GSGitHubEngine sharedInstance] setActiveUser:workingUser];
+	
+	workingUser = tmpUser;
+	
+	// hey hopefully this runs early.
+}
+
 - (void)testUserFunctionality {
 	
 	[self setContinueAfterFailure:NO];
 	
-	[[GSGitHubEngine sharedInstance] authenticateUserWithUsername:globalUserName password:globalPassword completionHandler:^(GSUser * __nullable user, NSError * __nullable error) {
-		if (error) {
-			XCTAssertNil(error, "Couldn't properly auth. [%@]", error);
-		}
-		
-		[[GSGitHubEngine sharedInstance] setActiveUser:user];
-		
-		[[GSGitHubEngine sharedInstance] eventsForUser:user completionHandler:^(id __nullable events, NSError * __nullable error) {
-			NSLog(@"Events %@", events);
-		}];
-		
-		//		[[GSCacheManager sharedInstance] findImageAssetWithURL:user.avatarURL loggedInUser:user downloadIfNecessary:YES completionHandler:^(UIImage *image, NSError *error) {
-		//			NSLog(@"Image %p:%@", image, error);
-		//		}];
-		
-		[[GSGitHubEngine sharedInstance] repositoriesStarredByUser:user completionHandler:^(NSArray * _Nullable repos, NSError * _Nullable error) {
-			NSLog(@"Starred %@:%@", repos, error);
-		}];
+	[[GSGitHubEngine sharedInstance] eventsForUser:workingUser completionHandler:^(id __nullable events, NSError * __nullable error) {
+		GenericFetchNotNilFail(events);
+		GenericFetchNilFail(error);
+		NSLog(@"Events %@", events);
 	}];
+	
+	[[GSGitHubEngine sharedInstance] repositoriesForUser:workingUser completionHandler:^(NSArray<GSRepository *> * _Nullable repos, NSError * _Nullable error) {
+		GenericFetchNilFail(error);
+		GenericFetchNotNilFail(repos);
+		NSLog(@"Repositories %@", repos);
+	}];
+	
+	
+//
+//		//		[[GSCacheManager sharedInstance] findImageAssetWithURL:user.avatarURL loggedInUser:user downloadIfNecessary:YES completionHandler:^(UIImage *image, NSError *error) {
+//		//			NSLog(@"Image %p:%@", image, error);
+//		//		}];
+//		
+//		[[GSGitHubEngine sharedInstance] repositoriesStarredByUser:user completionHandler:^(NSArray * _Nullable repos, NSError * _Nullable error) {
+//			NSLog(@"Starred %@:%@", repos, error);
+//		}];
+//	
 	
 	// have to put locks around async methods so tests can actually finish
 	
-	dispatch_main();
+//	dispatch_main();
 	
 }
 
