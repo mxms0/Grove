@@ -11,6 +11,7 @@
 		381EF6511D88A684000828A8 /* GRBlurryImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 381EF6501D88A684000828A8 /* GRBlurryImageView.m */; };
 		3857A62B1DC0124F0045394F /* GSProjectGitHubEngine.h in Headers */ = {isa = PBXBuildFile; fileRef = 3857A6291DC0124F0045394F /* GSProjectGitHubEngine.h */; };
 		3857A62C1DC0124F0045394F /* GSProjectGitHubEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 3857A62A1DC0124F0045394F /* GSProjectGitHubEngine.m */; };
+		3857A6311DC032120045394F /* GRSectionHeaderFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3857A6301DC032120045394F /* GRSectionHeaderFooterView.m */; };
 		385AD43B1DA44CEE001CB947 /* GSProjectGitHubEngine.h in Headers */ = {isa = PBXBuildFile; fileRef = 385AD4391DA44CEE001CB947 /* GSProjectGitHubEngine.h */; };
 		4AFF78719E87757B1D344FE8 /* libPods-GroveSupportTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D7EE4952FB635BE7F459140 /* libPods-GroveSupportTests.a */; };
 		500001591BB73411001564E7 /* GRNotificationHeaderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 500001581BB73411001564E7 /* GRNotificationHeaderTableViewCell.m */; };
@@ -197,6 +198,8 @@
 		3857A6291DC0124F0045394F /* GSProjectGitHubEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSProjectGitHubEngine.h; sourceTree = "<group>"; };
 		3857A62A1DC0124F0045394F /* GSProjectGitHubEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSProjectGitHubEngine.m; sourceTree = "<group>"; };
 		3857A62E1DC014220045394F /* GSProject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = GSProject.m; path = GroveSupport/GSProject.m; sourceTree = "<group>"; };
+		3857A62F1DC032120045394F /* GRSectionHeaderFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRSectionHeaderFooterView.h; sourceTree = "<group>"; };
+		3857A6301DC032120045394F /* GRSectionHeaderFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRSectionHeaderFooterView.m; sourceTree = "<group>"; };
 		385AD4391DA44CEE001CB947 /* GSProjectGitHubEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSProjectGitHubEngine.h; sourceTree = "<group>"; };
 		4D7EE4952FB635BE7F459140 /* libPods-GroveSupportTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GroveSupportTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		500001571BB73411001564E7 /* GRNotificationHeaderTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRNotificationHeaderTableViewCell.h; sourceTree = "<group>"; };
@@ -579,6 +582,8 @@
 				50ED2AD81B8B106F00DFF146 /* GRProfileModel.m */,
 				50ED2ADB1B8B135200DFF146 /* GRProfileHeaderView.h */,
 				50ED2ADC1B8B135200DFF146 /* GRProfileHeaderView.m */,
+				3857A62F1DC032120045394F /* GRSectionHeaderFooterView.h */,
+				3857A6301DC032120045394F /* GRSectionHeaderFooterView.m */,
 				507931EA1B8EE28C0080C894 /* GRProfileStatisticButton.h */,
 				507931EB1B8EE28C0080C894 /* GRProfileStatisticButton.m */,
 				506005B81BBB5474000F5AFF /* GRActiveUserProfileViewController.h */,
@@ -1367,6 +1372,7 @@
 				5097B5D11B8C0BC600A72721 /* GRViewModel.m in Sources */,
 				5070D5611C4A04BD00E80AB1 /* GRTableViewController.m in Sources */,
 				50E9DF231CC73C4C00EDDE0F /* UITabBar+GRExtension.m in Sources */,
+				3857A6311DC032120045394F /* GRSectionHeaderFooterView.m in Sources */,
 				503C595E1BAD17EE003CB50E /* GRSyntaxHighlightedTextView.m in Sources */,
 				50E9DF261CC73D9700EDDE0F /* GRTabBarLayer.m in Sources */,
 				501F87071C86751F000C2C53 /* GRSelectableLabel.m in Sources */,

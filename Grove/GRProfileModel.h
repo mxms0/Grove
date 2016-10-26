@@ -18,5 +18,7 @@
 - (CGFloat)cellHeightForRowAtIndexPath:(NSIndexPath *)indexPath;
 - (GRApplicationUser *)visibleUser;
 - (CGFloat)heightForProfileHeader;
+- (CGFloat)heightForSectionHeader;
+- (CGFloat)heightForSectionFooter;
 - (GSRepository *)repositoryForIndex:(NSUInteger)index;
 @end

@@ -11,6 +11,7 @@
 #import "GRProfileHeaderView.h"
 #import "GRSessionManager.h"
 #import "GRRepositoryViewController.h"
+#import "GRSectionHeaderFooterView.h"
 
 #import <GroveSupport/GSGitHubEngine.h>
 #import <GroveSupport/GroveSupport.h>
@@ -78,8 +79,15 @@
 		[header setUser:[model visibleUser]];
 		[header setProfileImage:[model profileImage]];
 		return header;
+	} else {
+		return [[GRSectionHeaderFooterView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.bounds.size.width, [model heightForSectionHeader])
+														   mode:GRSectionHeaderMode];
 	}
-	return nil;
+}
+
+- (UIView*)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+	return [[GRSectionHeaderFooterView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.bounds.size.width, 100)
+													   mode:GRSectionFooterMode];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -93,7 +101,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)_tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-	NSString *reuseIdentifier = @"stupidCell";
+	NSString *reuseIdentifier = @"stupidCell"; // Hey, Max! Don't do this.
 	NSString *textContent = nil;
     NSString *secondaryTextContent = nil;
 	switch (indexPath.section) {

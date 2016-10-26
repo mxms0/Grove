@@ -132,6 +132,14 @@
 	return 210.0f;
 }
 
+- (CGFloat)heightForSectionHeader {
+	return 100.0f;
+}
+
+- (CGFloat)heightForSectionFooter {
+	return [self heightForSectionHeader];
+}
+
 - (CGFloat)cellHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
 	CGFloat cellHeight = 0;
 	switch (indexPath.section) {
