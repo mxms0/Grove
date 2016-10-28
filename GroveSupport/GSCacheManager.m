@@ -157,7 +157,8 @@
 					}
 				}
 				else {
-					GSAssert();
+					// maybe add extra handling here.
+					handler(nil, error);
 				}
 			}];
 		}

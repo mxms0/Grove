@@ -17,7 +17,6 @@
 
 @implementation GRProfileViewController {
 	GRProfileModel *model;
-	UITableView *tableView;
 }
 
 - (instancetype)initWithUsername:(NSString *)usernanme {
@@ -39,6 +38,12 @@
 		self.tabBarItem = [[UITabBarItem alloc] initWithTitle:GRLocalizedString(@"Profile", nil, nil) image:[UIImage imageNamed:@"tb@2x"] tag:0];
     }
     return self;
+}
+
+- (void)viewDidLoad {
+	[super viewDidLoad];
+	
+	[self reloadData];
 }
 
 - (NSArray<GRDrawerMenuItem *> *)_generateDrawerMenuItems {
@@ -66,8 +71,8 @@
 }
 
 - (void)reloadData {
-	[tableView reloadData];
-	[(GRProfileHeaderView *)[tableView headerViewForSection:0] setUser:[model visibleUser]];
+	[self.tableView reloadData];
+	[(GRProfileHeaderView *)[self.tableView headerViewForSection:0] setUser:[model visibleUser]];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)_tableView {

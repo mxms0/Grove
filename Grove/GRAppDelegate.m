@@ -64,10 +64,12 @@
 	[self.window makeKeyAndVisible];
 	
 #if GRDebugTarget != 0
+	
 	[self initializeViewForDebug];
 	return;
 	
 #else
+	
 	[[UITabBar appearance] setBarTintColor:[UIColor clearColor]];
 	[[UITabBar appearance] setBackgroundImage:[UIImage new]];
 	
