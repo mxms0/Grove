@@ -14,7 +14,7 @@
 #define GRDebugTargetNotificationsView 3
 #define GRDebugTargetLoginView 4
 
-#define GRDebugTarget GRDebugTargetProfileView
+#define GRDebugTarget 0
 
 @interface GRAppDelegate : UIResponder <UIApplicationDelegate>
 @property (strong, nonatomic) UIWindow *window;
