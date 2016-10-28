@@ -26,10 +26,48 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 	// Override point for customization after application launch.
 	[[GRSessionManager sharedInstance] unpack];
+
+	[self initializeApplicationInterface];
+	
+	return YES;
+}
+
+- (void)initializeViewForDebug {
+	GRNavigationController *navigation = [[GRNavigationController alloc] init];
+	
+	UIViewController *viewController = nil;
+	
+#if GRDebugTarget == GRDebugTargetProfileView 
+	viewController = [[GRProfileViewController alloc] initWithUsername:@"Maximus-"];
+	
+#elif GRDebugTarget == GRDebugTargetRepositoryView
+	
+#elif GRDebugTarget == GRDebugTargetNotificationsView
+	
+#elif GRDebugTargetLoginView
+	
+#endif
+	
+	if (!viewController) {
+		NSLog(@"Debug target specified to invalid selection. No view.");
+		return;
+	}
+	
+	navigation.viewControllers = @[viewController];
+	
+	self.window.rootViewController = navigation;
+}
+
+- (void)initializeApplicationInterface {
 	
 	self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 	[self.window makeKeyAndVisible];
 	
+#if GRDebugTarget != 0
+	[self initializeViewForDebug];
+	return;
+	
+#else
 	[[UITabBar appearance] setBarTintColor:[UIColor clearColor]];
 	[[UITabBar appearance] setBackgroundImage:[UIImage new]];
 	
@@ -38,14 +76,14 @@
 		GRLoginViewController *loginViewController = [[GRLoginViewController alloc] init];
 		
 		self.window.rootViewController = loginViewController;
-
-        [[UITabBar appearance] setBarTintColor:[UIColor whiteColor]];
-        [[UITabBar appearance] setBackgroundImage:[UIImage new]];
-        [[UITabBar appearance] setShadowImage:[UIImage new]];
-    
+		
+		[[UITabBar appearance] setBarTintColor:[UIColor whiteColor]];
+		[[UITabBar appearance] setBackgroundImage:[UIImage new]];
+		[[UITabBar appearance] setShadowImage:[UIImage new]];
+		
 	}
 	else {
-
+		
 		[self presentTabBar];
 	}
 	
@@ -55,7 +93,7 @@
 	// data present? - [ present login view controller
 	//				   [ load data
 	
-	return YES;
+#endif
 }
 
 - (void)presentLogin {

@@ -196,7 +196,6 @@
 		381EF6501D88A684000828A8 /* GRBlurryImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRBlurryImageView.m; sourceTree = "<group>"; };
 		3857A6291DC0124F0045394F /* GSProjectGitHubEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSProjectGitHubEngine.h; sourceTree = "<group>"; };
 		3857A62A1DC0124F0045394F /* GSProjectGitHubEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSProjectGitHubEngine.m; sourceTree = "<group>"; };
-		3857A62E1DC014220045394F /* GSProject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = GSProject.m; path = GroveSupport/GSProject.m; sourceTree = "<group>"; };
 		385AD4391DA44CEE001CB947 /* GSProjectGitHubEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSProjectGitHubEngine.h; sourceTree = "<group>"; };
 		4D7EE4952FB635BE7F459140 /* libPods-GroveSupportTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GroveSupportTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		500001571BB73411001564E7 /* GRNotificationHeaderTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRNotificationHeaderTableViewCell.h; sourceTree = "<group>"; };
@@ -835,7 +834,6 @@
 		50F081791B82ED6500366161 = {
 			isa = PBXGroup;
 			children = (
-				3857A62E1DC014220045394F /* GSProject.m */,
 				50F081841B82ED6500366161 /* Grove */,
 				50E4B58B1B82F6D60029264A /* GroveSupport */,
 				50E4B59A1B82F6D60029264A /* GroveSupportTests */,

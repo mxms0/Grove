@@ -20,6 +20,20 @@
 	UITableView *tableView;
 }
 
+- (instancetype)initWithUsername:(NSString *)usernanme {
+	if ((self = [super initWithStyle:UITableViewStyleGrouped])) {
+		
+		__weak id weakSelf = self;
+		[[GSGitHubEngine sharedInstance] userForUsername:usernanme completionHandler:^(GSUser * _Nullable user, NSError * _Nullable error) {
+			dispatch_async(dispatch_get_main_queue(), ^ {
+				[weakSelf setUser:user];
+				[weakSelf reloadData];
+			});
+		}];
+	}
+	return self;
+}
+
 - (instancetype)initWithStyle:(UITableViewStyle)style {
 	if ((self = [super initWithStyle:UITableViewStyleGrouped])) {
 		self.tabBarItem = [[UITabBarItem alloc] initWithTitle:GRLocalizedString(@"Profile", nil, nil) image:[UIImage imageNamed:@"tb@2x"] tag:0];

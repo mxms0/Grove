@@ -53,8 +53,6 @@ static NSString *globalPassword = @"testpassword01";
 		XCTAssertNil(arg, @"Couldn't fetch "@#arg); \
 	} while (0);
 
-
-
 - (void)testA {
 	
 	[self setContinueAfterFailure:NO];
