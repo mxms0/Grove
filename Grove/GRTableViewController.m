@@ -7,24 +7,7 @@
 //
 
 #import "GRTableViewController.h"
-#import "GRDrawerMenuItem.h"
 
-@implementation GRTableViewController {
-	__block NSArray *drawerMenuItems;
-}
-
-- (NSArray<GRDrawerMenuItem *> *)_generateDrawerMenuItems {
-	return nil;
-}
-
-- (NSArray<GRDrawerMenuItem *> *)drawerMenuItems {
-	@synchronized (drawerMenuItems) {
-		if (!drawerMenuItems) {
-			drawerMenuItems = [self _generateDrawerMenuItems];
-		}
-	}
-
-	return drawerMenuItems;
-}
+@implementation GRTableViewController 
 
 @end
