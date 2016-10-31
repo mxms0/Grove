@@ -16,8 +16,7 @@ static float animationDuration = 0.4f;
 
 - (instancetype)init {
 	if ((self = [super init])) {
-        self.tabBarController = [[GRTabBarController alloc] init];
-        [self setNavigationBarHidden:YES];
+		[self setNavigationBarHidden:YES];
 		
 		[self commonInit];
     }
@@ -47,7 +46,6 @@ static float animationDuration = 0.4f;
 
 - (instancetype)initWithRootViewController:(UIViewController *)rootViewController {
 	if ((self = [super initWithRootViewController:rootViewController])) {
-		self.tabBarController = [[GRTabBarController alloc] init];
         [self setNavigationBarHidden:YES];
 		[self commonInit];
     }
@@ -56,7 +54,6 @@ static float animationDuration = 0.4f;
 
 - (instancetype)initWithNavigationBarClass:(Class)navigationBarClass toolbarClass:(Class)toolbarClass {
 	if ((self = [super initWithNavigationBarClass:navigationBarClass toolbarClass:toolbarClass])) {
-		self.tabBarController = [[GRTabBarController alloc] init];
 		[self setNavigationBarHidden:YES];
 		[self commonInit];
     }
