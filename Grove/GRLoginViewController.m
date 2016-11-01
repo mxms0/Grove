@@ -21,6 +21,7 @@
     UIStackView *stackView;
 	UITextField *username;
 	UITextField *password;
+    UIView* tfa_placeholder;
 	UITextField *tfa;
 	UIButton *login;
 	UIImageView *applicationIcon;
@@ -38,6 +39,7 @@
         stackView         = [[UIStackView alloc] init];
         username          = [[UITextField alloc] initWithFrame:CGRectZero];
         password          = [[UITextField alloc] initWithFrame:CGRectZero];
+        tfa_placeholder   = [[UIView alloc] initWithFrame:CGRectZero];
         tfa               = [[UITextField alloc] initWithFrame:CGRectZero];
         login             = [[UIButton alloc] initWithFrame:CGRectZero];
         
@@ -56,7 +58,7 @@
         [login setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [login addTarget:self action:@selector(attemptLogin) forControlEvents:UIControlEventTouchUpInside];
 		
-		for (UIView *rounding in @[username, password, tfa, applicationIcon]) {
+		for (UIView *rounding in @[username, password, tfa, tfa_placeholder, applicationIcon]) {
 			[rounding.layer setCornerRadius:3.0];
 		}
         for (UIView *view in @[applicationIcon, username, password, login, activityIndicator, tfa]) {
@@ -68,10 +70,15 @@
         }
         
         //Add Subviews
-        [stackView addArrangedSubviews:@[username, password]];
-        [self.view addSubviews:@[applicationIcon, stackView, login, activityIndicator, tfa]];
+        [tfa_placeholder addSubview:tfa];
+        [stackView addArrangedSubviews:@[username, password, tfa_placeholder]];
+        [self.view addSubviews:@[applicationIcon, stackView, login, activityIndicator]];
         
         //Add Constraints
+        [tfa mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.equalTo(tfa_placeholder);
+        }];
+        
         [applicationIcon mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.view).offset(15);
             make.centerX.equalTo(self.view);
@@ -80,7 +87,7 @@
             make.top.equalTo(applicationIcon.mas_bottom).offset(10);
             make.right.equalTo(self.view).offset(-30);
             make.left.equalTo(self.view).offset(30);
-            make.height.equalTo(@(120));
+            make.height.equalTo(@(180));
         }];
         [login mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.bottom.equalTo(self.view);

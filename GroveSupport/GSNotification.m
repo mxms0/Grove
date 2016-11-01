@@ -14,6 +14,8 @@
 - (void)_configureWithDictionary:(NSDictionary *)dictionary {
 	[super _configureWithDictionary:dictionary];
 	
+	NSLog(@"NOTIF: %@", dictionary);
+	
 	GSObjectAssign(dictionary, @"repository", _repository, GSRepository);
 	GSURLAssign(dictionary, @"subscription_url", _subscriptionAPIURL);
 	

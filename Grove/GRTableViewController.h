@@ -8,12 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@class GRDrawerMenuItem;
-@protocol GRDrawerMenuViewDataSource <NSObject>
-@required
-- (NSArray<GRDrawerMenuItem *> *)drawerMenuItems;
-@end
-
-@interface GRTableViewController : UITableViewController <GRDrawerMenuViewDataSource>
+@interface GRTableViewController : UITableViewController
 
 @end

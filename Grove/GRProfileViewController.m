@@ -40,6 +40,7 @@
     return self;
 }
 
+<<<<<<< HEAD
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	
@@ -50,6 +51,8 @@
 	return nil;
 }
 
+=======
+>>>>>>> 5fcacfd0743ad62ac7da3cf8bcd7e3679597d1a8
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
 	NSLog(@"user has new data %@:%@:%@", object, keyPath, change);
 }
