@@ -10,23 +10,19 @@
 
 @implementation GRSectionHeaderFooterView {
 	GRSectionHeaderFooterMode mode;
-//	NSString* text;
 	UILabel* label;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame mode:(GRSectionHeaderFooterMode)_mode text:(NSString*)_text
 {
 	mode = _mode;
-//	text = _text;
 	
 	label = [[UILabel alloc] init];
-	[label setText:_text];
+	[label setText: [@"  " stringByAppendingString:_text]];
 	[label setBackgroundColor:[UIColor whiteColor]];
 	
 	self = [super initWithFrame:frame];
 	if (self) {
-		[self setBackgroundColor:[UIColor whiteColor]];
-		
 		[self addSubview:label];
 	}
 	return self;
@@ -35,9 +31,15 @@
 -(void)setFrame:(CGRect)frame {
 	[super setFrame:frame];
 	[self setClipsToBounds:YES];
-	[self setBackgroundColor:[UIColor whiteColor]];
 	
-	[label setFrame:CGRectMake(0, self.bounds.size.height/2.0, self.bounds.size.width/2.0, self.bounds.size.height/2.0)];
+	CGFloat y = 0;
+	CGFloat ratio = .8;
+	
+	if(mode == GRSectionHeaderMode) {
+		y = self.bounds.size.height*(1.0-ratio);
+	}
+	
+	[label setFrame:CGRectMake(0, y, self.bounds.size.width, self.bounds.size.height*ratio)];
 	
 	UIRectCorner rc = (mode == GRSectionHeaderMode ? UIRectCornerTopLeft | UIRectCornerTopRight : UIRectCornerBottomLeft | UIRectCornerBottomRight);
 	
