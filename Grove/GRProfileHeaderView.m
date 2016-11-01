@@ -35,6 +35,7 @@
 - (instancetype)init {
 	if ((self = [super init])) {
 		[self setBackgroundColor:[UIColor whiteColor]];
+		[self.layer setCornerRadius:10];
         
         statisticsView      = [[UIStackView alloc] init];
         titlesView          = [[UIStackView alloc] init];
@@ -78,16 +79,18 @@
         [self addSubviews:@[backgroundImageView, profileImageView, titlesView, statisticsView]];
         
         [profileImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self).offset(GRGenericVerticalPadding);
+            make.left.equalTo(self).offset(4*GRGenericVerticalPadding);
             make.height.width.equalTo(@(64));
-            make.centerX.equalTo(self);
+			make.centerY.equalTo(titlesView);
         }];
+		
         [titlesView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.height.equalTo(@(65));
-            make.top.equalTo(profileImageView.mas_bottom).offset(5);
-            make.left.equalTo(self).offset(GRGenericHorizontalPadding);
+            make.left.equalTo(profileImageView.mas_right).offset(GRGenericHorizontalPadding);
+            make.bottom.equalTo(statisticsView.mas_top).offset(-GRGenericVerticalPadding);
             make.right.equalTo(self).offset(-GRGenericHorizontalPadding);
         }];
+		
         [statisticsView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.bottom.equalTo(self).offset(-GRGenericVerticalPadding);
             make.centerX.equalTo(self);
