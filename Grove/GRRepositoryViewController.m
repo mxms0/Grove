@@ -47,6 +47,14 @@ static const CGFloat GRHeaderHeight = 36.0f;
 	return self;
 }
 
+- (instancetype)initWithRepositoryName:(NSString *)name owner:(NSString *)owner {
+	if ((self = [self init])) {
+		NSLog(@"%s NOT IMPLEMENTED.", __PRETTY_FUNCTION__);
+	}
+	
+	return self;
+}
+
 - (void)setRepository:(GSRepository *)newRepository {
 	[_repository removeObserver:self forKeyPath:GSUpdatedDateKey];
 	
