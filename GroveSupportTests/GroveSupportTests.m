@@ -10,37 +10,29 @@
 #import <XCTest/XCTest.h>
 #import <GroveSupport/GroveSupport.h>
 
-@interface GroveSupportTests : XCTestCase {
-	GSUser *workingUser;
-}
-
+@interface GroveSupportTests : XCTestCase {}
 @end
 
 @implementation GroveSupportTests
 
 - (void)setUp {
-    [super setUp];
-    // Put setup code here. This method is called before the invocation of each test method in the class.
+	[super setUp];
+	// Put setup code here. This method is called before the invocation of each test method in the class.
 }
 
 - (void)tearDown {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
-    [super tearDown];
+	// Put teardown code here. This method is called after the invocation of each test method in the class.
+	[super tearDown];
 }
 
 static NSString *globalUserName = @"TestAccount000";
 static NSString *globalPassword = @"testpassword01";
-
-- (void)testExample {
-    // This is an example of a functional test case.
-    XCTAssert(YES, @"Pass");
-}
+static GSUser *workingUser = nil;
 
 - (void)waitWithWait:(dispatch_semaphore_t)wait {
 	while (dispatch_semaphore_wait(wait, DISPATCH_TIME_NOW)) {
 		[[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:10]];
 	}
-	
 }
 
 #define GenericFetchNotNilFail(arg) \
@@ -53,9 +45,13 @@ static NSString *globalPassword = @"testpassword01";
 		XCTAssertNil(arg, @"Couldn't fetch "@#arg); \
 	} while (0);
 
-- (void)testA {
-	
-	[self setContinueAfterFailure:NO];
+#define GRTest(x, y) \
+void (^x)(id self) = ^ void (id self) y;
+
+#define GRRunTest(x) x(self);
+
+// implicit self
+GRTest(testRegistration, {
 	
 	__block GSUser *tmpUser = nil;
 	
@@ -74,13 +70,9 @@ static NSString *globalPassword = @"testpassword01";
 	[[GSGitHubEngine sharedInstance] setActiveUser:workingUser];
 	
 	workingUser = tmpUser;
-	
-	// hey hopefully this runs early.
-}
+});
 
-- (void)testUserFunctionality {
-	
-	[self setContinueAfterFailure:NO];
+GRTest(testUserFunctionality, {
 	
 	[[GSGitHubEngine sharedInstance] eventsForUser:workingUser completionHandler:^(id __nullable events, NSError * __nullable error) {
 		GenericFetchNotNilFail(events);
@@ -94,28 +86,46 @@ static NSString *globalPassword = @"testpassword01";
 		NSLog(@"Repositories %@", repos);
 	}];
 	
+	//	[[GSCacheManager sharedInstance] findImageAssetWithURL:user.avatarURL loggedInUser:user downloadIfNecessary:YES completionHandler:^(UIImage *image, NSError *error) {
+	//		NSLog(@"Image %p:%@", image, error);
+	//	}];
+	//
+	//	[[GSGitHubEngine sharedInstance] repositoriesStarredByUser:user completionHandler:^(NSArray * _Nullable repos, NSError * _Nullable error) {
+	//		NSLog(@"Starred %@:%@", repos, error);
+	//	}];
+	//
+});
+
+GRTest(testRepositoryFunctionality, {
 	
-//
-//		//		[[GSCacheManager sharedInstance] findImageAssetWithURL:user.avatarURL loggedInUser:user downloadIfNecessary:YES completionHandler:^(UIImage *image, NSError *error) {
-//		//			NSLog(@"Image %p:%@", image, error);
-//		//		}];
-//		
-//		[[GSGitHubEngine sharedInstance] repositoriesStarredByUser:user completionHandler:^(NSArray * _Nullable repos, NSError * _Nullable error) {
-//			NSLog(@"Starred %@:%@", repos, error);
-//		}];
-//	
+});
+
+
+GRTest(testCacheFunctionality, {
 	
-	// have to put locks around async methods so tests can actually finish
+});
+
+GRTest(testProjectFunctionality, {
 	
-//	dispatch_main();
+});
+
+- (void)test__lead {
+	[self setContinueAfterFailure:NO];
 	
+	// may consider putting registration test inside setup
+	// then letting tests go anywhere from there.
+	// does it matter?
+	
+	GRRunTest(testRegistration);
+	
+	GRRunTest(testUserFunctionality);
+	GRRunTest(testRepositoryFunctionality);
+	GRRunTest(testCacheFunctionality);
+	GRRunTest(testProjectFunctionality);
 }
 
 - (void)testPerformanceExample {
-    // This is an example of a performance test case.
-    [self measureBlock:^{
-        // Put the code you want to measure the time of here.
-    }];
+	[self measureBlock:^{}];
 }
 
 @end
