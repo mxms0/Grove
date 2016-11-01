@@ -37,8 +37,6 @@
 - (instancetype)initWithStyle:(UITableViewStyle)style {
 	if ((self = [super initWithStyle:UITableViewStyleGrouped])) {
 		self.tabBarItem = [[UITabBarItem alloc] initWithTitle:GRLocalizedString(@"Profile", nil, nil) image:[UIImage imageNamed:@"tb@2x"] tag:0];
-		
-//		self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
     return self;
 }
