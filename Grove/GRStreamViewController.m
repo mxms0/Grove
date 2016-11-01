@@ -12,7 +12,6 @@
 #import "GRStreamEventCell.h"
 #import "GRStreamModel.h"
 #import "GRStreamTitleView.h"
-#import "GRDrawerMenuItem.h"
 
 static NSString *const reuseIdentifier      = @"reuseIdentifier";
 static const CGFloat GRStreamViewAvatarSize = 38.0f;
@@ -117,16 +116,6 @@ static const CGFloat GRStreamViewAvatarSize = 38.0f;
     [cell configureWithEventModel:[model eventCellModelForIndexPath:indexPath]];
 	
     return cell;
-}
-
-- (void)presentGistComposeView:(id)a {
-	
-}
-
-- (NSArray<GRDrawerMenuItem *> *)_generateDrawerMenuItems {
-	return @[
-			 [GRDrawerMenuItem drawerMenuItemWithText:@"Compose Gist" icon:nil target:self selector:@selector(presentGistComposeView:)],
-			 ];
 }
 
 #pragma mark - TableView Delegate

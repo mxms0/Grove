@@ -28,10 +28,6 @@
     return self;
 }
 
-- (NSArray<GRDrawerMenuItem *> *)_generateDrawerMenuItems {
-	return nil;
-}
-
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
 	NSLog(@"user has new data %@:%@:%@", object, keyPath, change);
 }

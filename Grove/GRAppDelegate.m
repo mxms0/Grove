@@ -51,7 +51,7 @@
 	
 	// this isn't the correct solution for this. only temporary.
 	// Correct pattern should be as follows:
-	// Application launches to loading screen everytime
+	// Application launches to loading screen everytimea
 	// data present? - [ present login view controller
 	//				   [ load data
 	

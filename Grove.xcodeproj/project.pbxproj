@@ -83,7 +83,6 @@
 		5071F0051C5971920095ACA0 /* GRRepositoryIssuesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5071F0041C5971920095ACA0 /* GRRepositoryIssuesModel.m */; };
 		507931E91B8EC4730080C894 /* UIImage+GRExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 507931E81B8EC4730080C894 /* UIImage+GRExtensions.m */; };
 		507931EC1B8EE28C0080C894 /* GRProfileStatisticButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 507931EB1B8EE28C0080C894 /* GRProfileStatisticButton.m */; };
-		507B499E1CC47D93007A4EA5 /* GRDrawerMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 507B499D1CC47D93007A4EA5 /* GRDrawerMenuItem.m */; };
 		50803EFE1C06AE2B00D3A284 /* GSGitHubEngineInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = 50803EFD1C06AE2B00D3A284 /* GSGitHubEngineInternal.h */; };
 		5084207C1BA893C700BD9630 /* Grove.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5084207E1BA893C700BD9630 /* Grove.strings */; };
 		5097B5CD1B8C0BBB00A72721 /* GRNotificationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5097B5CC1B8C0BBB00A72721 /* GRNotificationModel.m */; };
@@ -116,7 +115,6 @@
 		50E4B5BA1B8306040029264A /* NSString+GSUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 50E4B5B81B8306040029264A /* NSString+GSUtilities.m */; };
 		50E781F01C78D14F00143931 /* GRLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 50E781EF1C78D14F00143931 /* GRLabel.m */; };
 		50E781F41C78DA7800143931 /* GRSmallCapsLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 50E781F31C78DA7800143931 /* GRSmallCapsLabel.m */; };
-		50E9DF121CC70CA100EDDE0F /* GRDrawerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 50E9DF111CC70CA100EDDE0F /* GRDrawerView.m */; };
 		50E9DF151CC7356400EDDE0F /* tb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 50E9DF141CC7356400EDDE0F /* tb@2x.png */; };
 		50E9DF231CC73C4C00EDDE0F /* UITabBar+GRExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 50E9DF221CC73C4C00EDDE0F /* UITabBar+GRExtension.m */; };
 		50E9DF261CC73D9700EDDE0F /* GRTabBarLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 50E9DF251CC73D9700EDDE0F /* GRTabBarLayer.m */; };
@@ -315,8 +313,6 @@
 		507931E81B8EC4730080C894 /* UIImage+GRExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+GRExtensions.m"; sourceTree = "<group>"; };
 		507931EA1B8EE28C0080C894 /* GRProfileStatisticButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRProfileStatisticButton.h; sourceTree = "<group>"; };
 		507931EB1B8EE28C0080C894 /* GRProfileStatisticButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRProfileStatisticButton.m; sourceTree = "<group>"; };
-		507B499C1CC47D93007A4EA5 /* GRDrawerMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRDrawerMenuItem.h; sourceTree = "<group>"; };
-		507B499D1CC47D93007A4EA5 /* GRDrawerMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRDrawerMenuItem.m; sourceTree = "<group>"; };
 		50803EFD1C06AE2B00D3A284 /* GSGitHubEngineInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSGitHubEngineInternal.h; sourceTree = "<group>"; };
 		5084207D1BA893C700BD9630 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Grove.strings; sourceTree = "<group>"; };
 		5084207F1BA893CE00BD9630 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Grove.strings; sourceTree = "<group>"; };
@@ -361,8 +357,6 @@
 		50E781EF1C78D14F00143931 /* GRLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRLabel.m; sourceTree = "<group>"; };
 		50E781F21C78DA7800143931 /* GRSmallCapsLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRSmallCapsLabel.h; sourceTree = "<group>"; };
 		50E781F31C78DA7800143931 /* GRSmallCapsLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRSmallCapsLabel.m; sourceTree = "<group>"; };
-		50E9DF101CC70CA100EDDE0F /* GRDrawerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRDrawerView.h; sourceTree = "<group>"; };
-		50E9DF111CC70CA100EDDE0F /* GRDrawerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRDrawerView.m; sourceTree = "<group>"; };
 		50E9DF141CC7356400EDDE0F /* tb@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tb@2x.png"; sourceTree = "<group>"; };
 		50E9DF211CC73C4C00EDDE0F /* UITabBar+GRExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITabBar+GRExtension.h"; sourceTree = "<group>"; };
 		50E9DF221CC73C4C00EDDE0F /* UITabBar+GRExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBar+GRExtension.m"; sourceTree = "<group>"; };
@@ -647,10 +641,6 @@
 		506063201C7ADF9A00E1674A /* Application */ = {
 			isa = PBXGroup;
 			children = (
-				50E9DF101CC70CA100EDDE0F /* GRDrawerView.h */,
-				50E9DF111CC70CA100EDDE0F /* GRDrawerView.m */,
-				507B499C1CC47D93007A4EA5 /* GRDrawerMenuItem.h */,
-				507B499D1CC47D93007A4EA5 /* GRDrawerMenuItem.m */,
 				501558B31B8553D70002254D /* GRApplicationUser.h */,
 				501558B41B8553D70002254D /* GRApplicationUser.m */,
 				84F524EB1B8325D80077A06C /* Controllers */,
@@ -1324,7 +1314,6 @@
 				849FF21B1B8AD3710077DE06 /* GRTabBarController.m in Sources */,
 				50F0818A1B82ED6500366161 /* GRAppDelegate.m in Sources */,
 				50ED2AD91B8B106F00DFF146 /* GRProfileModel.m in Sources */,
-				50E9DF121CC70CA100EDDE0F /* GRDrawerView.m in Sources */,
 				501BA7ED1C3D1AA6005C5524 /* GRRepositoryPathBar.m in Sources */,
 				50FB177A1CC3233B00A8E607 /* GRStreamTitleView.m in Sources */,
 				501558AF1B8553020002254D /* GRSessionManager.m in Sources */,
@@ -1352,7 +1341,6 @@
 				50E781F41C78DA7800143931 /* GRSmallCapsLabel.m in Sources */,
 				5070D5691C4A619D00E80AB1 /* GRRepositoryInfoModel.m in Sources */,
 				507931E91B8EC4730080C894 /* UIImage+GRExtensions.m in Sources */,
-				507B499E1CC47D93007A4EA5 /* GRDrawerMenuItem.m in Sources */,
 				381EF6511D88A684000828A8 /* GRBlurryImageView.m in Sources */,
 				50E781F01C78D14F00143931 /* GRLabel.m in Sources */,
 				5071F0021C5971860095ACA0 /* GRRepositoryIssuesView.m in Sources */,
