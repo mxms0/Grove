@@ -125,11 +125,19 @@
         default:
             break;
     }
-    return ret;
+    return ret.uppercaseString;
 }
 
 - (CGFloat)heightForProfileHeader {
-	return 210.0f;
+	return 160.0f;
+}
+
+- (CGFloat)heightForSectionHeader {
+	return 60.0f;
+}
+
+- (CGFloat)heightForSectionFooter {
+	return 30.0f;
 }
 
 - (CGFloat)cellHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
