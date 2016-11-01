@@ -15,6 +15,6 @@ typedef enum : NSUInteger {
 
 @interface GRSectionHeaderFooterView : UIView
 
-- (instancetype)initWithFrame:(CGRect)frame mode:(GRSectionHeaderFooterMode)mode;
+- (instancetype)initWithFrame:(CGRect)frame mode:(GRSectionHeaderFooterMode)mode text:(NSString*)text;
 
 @end

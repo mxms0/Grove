@@ -81,13 +81,13 @@
 		return header;
 	} else {
 		return [[GRSectionHeaderFooterView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.bounds.size.width, [model heightForSectionHeader])
-														   mode:GRSectionHeaderMode];
+														   mode:GRSectionHeaderMode text:[model titleForSection:section]];
 	}
 }
 
 - (UIView*)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
 	return [[GRSectionHeaderFooterView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.bounds.size.width, 100)
-													   mode:GRSectionFooterMode];
+													   mode:GRSectionFooterMode text:[model titleForSection:section]];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
