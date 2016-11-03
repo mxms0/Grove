@@ -33,6 +33,10 @@
 	if ((self = [super init])) {
         self.view.backgroundColor = [UIColor whiteColor];
 		
+		[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+		
+		[self generateBackground];
+		
 		//Initialize Variables
         activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
         applicationIcon   = [[UIImageView alloc] init];
@@ -65,7 +69,8 @@
             if ([view isKindOfClass:[UITextField class]]) {
                 [(UITextField *)view setTextAlignment:NSTextAlignmentCenter];
                 [(UITextField *)view setDelegate:self];
-                [(UITextField *)view setBackgroundColor:GRColorFromRGB(0xD9D9D9)];
+                [(UITextField *)view setBackgroundColor:GRColorFromRGB(0x121212)];
+				[(UITextField *)view setTextColor:[UIColor whiteColor]];
             }
         }
         
@@ -80,11 +85,11 @@
         }];
         
         [applicationIcon mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.view).offset(15);
+            make.top.equalTo(self.view).offset(50);
             make.centerX.equalTo(self.view);
         }];
         [stackView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(applicationIcon.mas_bottom).offset(10);
+            make.top.equalTo(applicationIcon.mas_bottom).offset(80);
             make.right.equalTo(self.view).offset(-30);
             make.left.equalTo(self.view).offset(30);
             make.height.equalTo(@(180));
@@ -98,6 +103,69 @@
 }
 
 #pragma mark - Actions
+
+- (NSArray *)randomizeArray:(NSArray *)ary {
+	
+	NSMutableArray *input = [ary mutableCopy];
+	
+	NSMutableArray *output = [[NSMutableArray alloc] init];
+	
+	while ([input count] != 0) {
+		NSUInteger random = arc4random_uniform((uint32_t)[input count]);
+		
+		[output addObject:input[random]];
+		
+		[input removeObjectAtIndex:random];
+	}
+	
+	return output;
+	
+}
+
+- (void)generateBackground {
+	// might pick some constant colors for this. random colors *sometimes* suck
+	
+	NSArray *keyBuffer = @[ @"code", @"open source", @"hacking", @"buffer overflow",
+							@"perl", @"objective-c", @"c++", @"swift",
+							@"python", @"ruby", @"xcode", @"node.js",
+							@"llvm", @"frameworks", @"collaborate"
+							];
+	
+	NSArray *keyWords = [self randomizeArray:keyBuffer];
+	
+	NSUInteger keyCount = [keyWords count];
+	
+	NSMutableString *bgString = [@"" mutableCopy];
+	
+	for (int i = 0; i < 600; i++) {
+		[bgString appendFormat:@"%@ ", keyWords[i % keyCount]];
+	}
+	
+	NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:bgString];
+	[string addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Menlo-Regular" size:18] range:NSMakeRange(0, [bgString length])];
+	
+	int covered = 0;
+	
+	for (int i = 0; i < 600; i++) {
+		NSString *str = keyWords[i % keyCount];
+		[string addAttribute:NSForegroundColorAttributeName value:GSRandomUIColor() range:NSMakeRange(covered, [str length])];
+		
+		
+		covered += [str length] + 1;
+	}
+	
+	UITextView *textBackground = [[UITextView alloc] initWithFrame:CGRectMake(-25, -20, self.view.frame.size.width + 40, self.view.frame.size.height + 40)];
+	
+	textBackground.attributedText = string;
+	
+	[self.view addSubview:textBackground];
+	
+	[self.view sendSubviewToBack:textBackground];
+	
+	[textBackground setBackgroundColor:[UIColor blackColor]];
+	[textBackground setUserInteractionEnabled:NO];
+	[textBackground setEditable:NO];
+}
 
 - (void)attemptLogin {
 	if (username.text && username.text.length > 0) {
