@@ -73,11 +73,11 @@
 	
 #else
 	
-	[[UITabBar appearance] setBarTintColor:[UIColor clearColor]];
-	[[UITabBar appearance] setBackgroundImage:[UIImage new]];
+	[[UITabBar appearance] setBarTintColor:[UIColor whiteColor]];
+    [[UITabBar appearance] setBackgroundColor:[UIColor whiteColor]];
 	
 	if ([[[GRSessionManager sharedInstance] users] count] == 0) {
-		
+        
 		GRLoginViewController *loginViewController = [[GRLoginViewController alloc] init];
 		
 		self.window.rootViewController = loginViewController;
