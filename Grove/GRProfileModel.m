@@ -85,11 +85,22 @@
 	});
 }
 
-- (GSRepository *)repositoryForIndex:(NSUInteger)index {
-	if (index <= [repositories count])
-		return [repositories objectAtIndex:index];
-	else
-		return nil;
+- (GSRepository *)repositoryForIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 2 && indexPath.row < repositories.count) {
+        return [repositories objectAtIndex:indexPath.row];
+    }
+    else {
+        return nil;
+    }
+}
+
+- (GSOrganization *)organizationForIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 1 && indexPath.row < organizations.count) {
+        return [organizations objectAtIndex:indexPath.row];
+    }
+    else {
+        return nil;
+    }
 }
 
 - (GRApplicationUser *)visibleUser {
@@ -97,7 +108,7 @@
 }
 
 - (NSInteger)numberOfSections {
-	return 3;
+	return 4;
 }
 
 - (NSInteger)numberOfRowsInSection:(NSInteger)section {
@@ -107,9 +118,12 @@
 			rowCount = 0;
 			break;
 		case 1:
-			//rowCount = [repositories count];
+			rowCount = [organizations count];
 			break;
-		case 2:
+        case 2:
+            rowCount = [repositories count];
+            break;;
+		case 3:
 			rowCount = 3;
 			break;
 		default:
@@ -125,12 +139,15 @@
         case 0:
             break;
         case 1:
-            ret = @"repositories";
+            ret = @"organizations";
             break;
         case 2:
-            ret = @"contributions";
+            ret = @"repositories";
             break;
         case 3:
+            ret = @"contributions";
+            break;
+        case 4:
             ret = @"activity";
             break;
         default:
@@ -160,10 +177,13 @@
 		case 0:
 			cellHeight = 44.0;
 			break;
-		case 1:
+        case 1:
+            cellHeight = 60.0;
+            break;
+		case 2:
 			cellHeight = 60.0;
 			break;
-		case 2:
+		case 3:
 			cellHeight = 22.0;
 			break;
 		default:

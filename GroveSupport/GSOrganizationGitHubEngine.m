@@ -17,7 +17,7 @@
     
     void (^basicHandler)(NSArray<NSDictionary *> *__nullable repos, NSError *__nullable error) = ^(NSArray<NSDictionary *>* __nullable organizations, NSError *__nullable error) {
         
-        NSLog(@"ORGS. %@", organizations);
+        //NSLog(@"ORGS. %@", organizations);
         
         GSInsuranceBegin(organizations, NSArray, error);
         

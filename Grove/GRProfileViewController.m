@@ -135,14 +135,21 @@
 	switch (indexPath.section) {
 		case 0:
 			break;
-		case 1: {
+        case 1: {
+            reuseIdentifier = @"organizationCell";
+            GSOrganization *organization = [model organizationForIndexPath:indexPath];
+            textContent = organization.login;
+            secondaryTextContent = organization.orgDescription;
+            break;
+        }
+		case 2: {
 			reuseIdentifier = @"repositoryCell";
-			GSRepository *repo = [model repositoryForIndex:indexPath.row];
+			GSRepository *repo = [model repositoryForIndexPath:indexPath];
 			textContent = repo.name;
             secondaryTextContent = repo.userDescription;
 			break;
 		}
-		case 2:
+		case 3:
 			break;
 		default:
 			break;
@@ -154,9 +161,8 @@
     
     //configure the cell
     cell.detailTextLabel.textColor = [UIColor grayColor];
-    
-	cell.textLabel.text = textContent;
-    cell.detailTextLabel.text = secondaryTextContent;
+    cell.textLabel.text            = textContent;
+    cell.detailTextLabel.text      = secondaryTextContent;
 	return cell;
 }
 
@@ -165,8 +171,8 @@
 	switch (indexPath.section) {
 		case 0:
 			break;
-		case 1: {
-			GSRepository *repository = [model repositoryForIndex:indexPath.row];
+		case 2: {
+			GSRepository *repository = [model repositoryForIndexPath:indexPath];
 			[self pushRepositoryViewControllerWithRepository:repository];
 			break;
 		}
