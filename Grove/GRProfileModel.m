@@ -14,6 +14,7 @@
 @implementation GRProfileModel {
 	__strong GRApplicationUser *visibleUser;
 	__block NSArray *repositories;
+    __block NSArray *organizations;
 	NSNumber *numberOfStarredRepositories;
 }
 
@@ -65,6 +66,16 @@
 		repositories = repos;
 		[self reloadDelegate];
 	}];
+    
+    [[GSGitHubEngine sharedInstance] organizationsForUser:visibleUser.user completionHandler:^(NSArray * _Nullable localOrganizations, NSError * _Nullable error) {
+        if (error) {
+            _GSAssert(NO, [error localizedDescription]);
+            return;
+        }
+        
+        organizations = localOrganizations;
+        [self reloadDelegate];
+    }];
 }
 
 - (void)reloadDelegate {
