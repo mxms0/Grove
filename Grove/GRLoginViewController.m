@@ -171,6 +171,7 @@
 	[textBackground setUserInteractionEnabled:NO];
 	[textBackground setEditable:NO];
 	[textBackground setTextAlignment:NSTextAlignmentJustified];
+	
 }
 
 - (void)attemptLogin {
