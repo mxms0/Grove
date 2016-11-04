@@ -66,7 +66,7 @@
 	
 	void (^basicHandler)(NSArray<NSDictionary *> *__nullable repos, NSError *__nullable error) = ^(NSArray<NSDictionary *>* __nullable repos, NSError *__nullable error) {
 		
-		NSLog(@"REPOS. %@", repos);
+		//NSLog(@"REPOS. %@", repos);
 		
 		GSInsuranceBegin(repos, NSArray, error);
 		

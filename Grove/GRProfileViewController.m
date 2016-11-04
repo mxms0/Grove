@@ -12,6 +12,7 @@
 #import "GRSessionManager.h"
 #import "GRRepositoryViewController.h"
 #import "GRSectionHeaderFooterView.h"
+#import "GREmptySectionHeaderFooterView.h"
 
 #import <GroveSupport/GSGitHubEngine.h>
 #import <GroveSupport/GroveSupport.h>
@@ -95,24 +96,32 @@
 		[header setProfileImage:[model profileImage]];
 		return header;
 	} else {
-		return [[GRSectionHeaderFooterView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.bounds.size.width, [model heightForSectionHeader])
-														   mode:GRSectionHeaderMode text:[model titleForSection:section]];
+        Class headerClass = [GRSectionHeaderFooterView class];
+        if ([model numberOfRowsInSection:section] == 0) {
+            headerClass = [GREmptySectionHeaderFooterView class];
+        }
+        return [[headerClass alloc] initWithFrame:CGRectMake(0, 0, self.tableView.bounds.size.width, [model heightForSectionHeader:section])
+                                             mode:GRSectionHeaderMode text:[model titleForSection:section]];
 	}
 }
 
 - (UIView*)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-	return [[GRSectionHeaderFooterView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.bounds.size.width, [model heightForSectionFooter])
-													   mode:GRSectionFooterMode text:@""];
+    Class footerClass = [GRSectionHeaderFooterView class];
+    if ([model numberOfRowsInSection:section] == 0) {
+        footerClass = [GREmptySectionHeaderFooterView class];
+    }
+    return [[footerClass alloc] initWithFrame:CGRectMake(0, 0, self.tableView.bounds.size.width, [model heightForSectionFooter:section])
+                                         mode:GRSectionFooterMode text:@""];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
 	if (section == 0)
 		return [model heightForProfileHeader];
-	return [model heightForSectionHeader];
+    return [model heightForSectionHeader:section];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-	return [model heightForSectionFooter];
+	return [model heightForSectionFooter:section];
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {

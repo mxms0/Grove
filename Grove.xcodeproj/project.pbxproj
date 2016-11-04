@@ -140,6 +140,7 @@
 		84A8D1001B8D311000B6B4FB /* GRIssueCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A8D0FF1B8D311000B6B4FB /* GRIssueCommentCell.m */; };
 		84A8D10A1B8D6F0C00B6B4FB /* GSIssue.h in Headers */ = {isa = PBXBuildFile; fileRef = 84A8D1081B8D6F0C00B6B4FB /* GSIssue.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84A8D10B1B8D6F0C00B6B4FB /* GSIssue.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A8D1091B8D6F0C00B6B4FB /* GSIssue.m */; };
+		84C989061DCC00AB006976B7 /* GREmptySectionHeaderFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C989051DCC00AB006976B7 /* GREmptySectionHeaderFooterView.m */; };
 		84DDA1D91D88A22000E87E26 /* UIStackView+GRExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DDA1D81D88A22000E87E26 /* UIStackView+GRExtension.m */; };
 		84DDA1DC1D88A2E300E87E26 /* UIView+GRExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DDA1DB1D88A2E300E87E26 /* UIView+GRExtension.m */; };
 		84F524EF1B83269E0077A06C /* GRStreamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F524EE1B83269E0077A06C /* GRStreamViewController.m */; };
@@ -195,7 +196,6 @@
 		381EF6501D88A684000828A8 /* GRBlurryImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRBlurryImageView.m; sourceTree = "<group>"; };
 		3857A6291DC0124F0045394F /* GSProjectGitHubEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSProjectGitHubEngine.h; sourceTree = "<group>"; };
 		3857A62A1DC0124F0045394F /* GSProjectGitHubEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSProjectGitHubEngine.m; sourceTree = "<group>"; };
-		3857A62E1DC014220045394F /* GSProject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = GSProject.m; path = GroveSupport/GSProject.m; sourceTree = "<group>"; };
 		3857A62F1DC032120045394F /* GRSectionHeaderFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRSectionHeaderFooterView.h; sourceTree = "<group>"; };
 		3857A6301DC032120045394F /* GRSectionHeaderFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRSectionHeaderFooterView.m; sourceTree = "<group>"; };
 		385AD4391DA44CEE001CB947 /* GSProjectGitHubEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSProjectGitHubEngine.h; sourceTree = "<group>"; };
@@ -400,6 +400,8 @@
 		84A8D0FF1B8D311000B6B4FB /* GRIssueCommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRIssueCommentCell.m; sourceTree = "<group>"; };
 		84A8D1081B8D6F0C00B6B4FB /* GSIssue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSIssue.h; sourceTree = "<group>"; };
 		84A8D1091B8D6F0C00B6B4FB /* GSIssue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSIssue.m; sourceTree = "<group>"; };
+		84C989041DCC00AB006976B7 /* GREmptySectionHeaderFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GREmptySectionHeaderFooterView.h; sourceTree = "<group>"; };
+		84C989051DCC00AB006976B7 /* GREmptySectionHeaderFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GREmptySectionHeaderFooterView.m; sourceTree = "<group>"; };
 		84DDA1D41D889DF900E87E26 /* Masonry.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = Masonry.framework; path = "/Users/Admin/Library/Developer/Xcode/DerivedData/Grove-fclckuoyljympzgddbgzriorsmdr/Build/Products/Debug-iphonesimulator/Masonry.framework"; sourceTree = "<absolute>"; };
 		84DDA1D71D88A22000E87E26 /* UIStackView+GRExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIStackView+GRExtension.h"; sourceTree = "<group>"; };
 		84DDA1D81D88A22000E87E26 /* UIStackView+GRExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIStackView+GRExtension.m"; sourceTree = "<group>"; };
@@ -578,6 +580,8 @@
 				50ED2ADC1B8B135200DFF146 /* GRProfileHeaderView.m */,
 				3857A62F1DC032120045394F /* GRSectionHeaderFooterView.h */,
 				3857A6301DC032120045394F /* GRSectionHeaderFooterView.m */,
+				84C989041DCC00AB006976B7 /* GREmptySectionHeaderFooterView.h */,
+				84C989051DCC00AB006976B7 /* GREmptySectionHeaderFooterView.m */,
 				507931EA1B8EE28C0080C894 /* GRProfileStatisticButton.h */,
 				507931EB1B8EE28C0080C894 /* GRProfileStatisticButton.m */,
 				506005B81BBB5474000F5AFF /* GRActiveUserProfileViewController.h */,
@@ -1301,6 +1305,7 @@
 				50FB177B1CC3235100A8E607 /* GRNotificationTitleView.m in Sources */,
 				505C58EC1C995C0500D5F37C /* GRIssuesConversationViewController.m in Sources */,
 				50F0819E1B82EE5400366161 /* GRNavigationController.m in Sources */,
+				84C989061DCC00AB006976B7 /* GREmptySectionHeaderFooterView.m in Sources */,
 				50F081A11B82EF0B00366161 /* GRNavigationBar.m in Sources */,
 				5071F0051C5971920095ACA0 /* GRRepositoryIssuesModel.m in Sources */,
 				50055A761C99269E0041765C /* GRStreamSubCellView.m in Sources */,

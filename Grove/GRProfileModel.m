@@ -96,7 +96,7 @@
 			rowCount = 0;
 			break;
 		case 1:
-			rowCount = [repositories count];
+			//rowCount = [repositories count];
 			break;
 		case 2:
 			rowCount = 3;
@@ -132,11 +132,14 @@
 	return 160.0f;
 }
 
-- (CGFloat)heightForSectionHeader {
+- (CGFloat)heightForSectionHeader:(NSInteger)section {
 	return 60.0f;
 }
 
-- (CGFloat)heightForSectionFooter {
+- (CGFloat)heightForSectionFooter:(NSInteger)section {
+    if ([self numberOfRowsInSection:section] == 0) {
+        return 0.0;
+    }
 	return 30.0f;
 }
 
