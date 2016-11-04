@@ -13,6 +13,7 @@
 @interface GRProfileModel : GRViewModel
 @property (nonatomic, strong, readonly) UIImage *profileImage;
 - (instancetype)initWithUser:(GRApplicationUser *)user;
+- (UIImage *)avatarForOrganization:(GSOrganization *)organization;
 - (NSInteger)numberOfSections;
 - (NSInteger)numberOfRowsInSection:(NSInteger)section;
 - (CGFloat)cellHeightForRowAtIndexPath:(NSIndexPath *)indexPath;

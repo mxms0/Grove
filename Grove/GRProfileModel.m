@@ -15,6 +15,7 @@
 	__strong GRApplicationUser *visibleUser;
 	__block NSArray *repositories;
     __block NSArray *organizations;
+    __block NSMutableDictionary *organizationAvatars;
 	NSNumber *numberOfStarredRepositories;
 }
 
@@ -22,6 +23,7 @@
 	if (!user) return nil;
 	if ((self = [super init])) {
 		visibleUser = user;
+        organizationAvatars = [NSMutableDictionary dictionary];
 		
 		[self requestNewData];
 	}
@@ -29,7 +31,6 @@
 }
 
 - (void)requestNewData {
-	
 	[[GSCacheManager sharedInstance] findImageAssetWithURL:[visibleUser.user avatarURL] loggedInUser:nil downloadIfNecessary:YES completionHandler:^(UIImage * __nullable image, NSError *__nullable error) {
 		if (image) {
 			GRApplicationUser *appUser = [[GRSessionManager sharedInstance] currentUser];
@@ -83,6 +84,19 @@
 	dispatch_async(dispatch_get_main_queue(), ^ {
 		[weakSelf.delegate reloadData];
 	});
+}
+
+- (UIImage *)avatarForOrganization:(GSOrganization *)organization {
+    if (organizationAvatars[organization.orgId]) {
+        return organizationAvatars[organization.orgId];
+    }
+    else {
+        [[GSCacheManager sharedInstance] findImageAssetWithURL:organization.avatarURL loggedInUser:visibleUser.user downloadIfNecessary:YES completionHandler:^(UIImage * _Nullable image, NSError * _Nullable error) {
+            organizationAvatars[organization.orgId] = image;
+            [self reloadDelegate];
+        }];
+    }
+    return nil;
 }
 
 - (GSRepository *)repositoryForIndexPath:(NSIndexPath *)indexPath {

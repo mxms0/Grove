@@ -132,20 +132,22 @@
 	NSString *reuseIdentifier = @"stupidCell"; // Hey, Max! Don't do this.
 	NSString *textContent = nil;
     NSString *secondaryTextContent = nil;
+    UIImage *image;
 	switch (indexPath.section) {
 		case 0:
 			break;
         case 1: {
-            reuseIdentifier = @"organizationCell";
             GSOrganization *organization = [model organizationForIndexPath:indexPath];
-            textContent = organization.login;
-            secondaryTextContent = organization.orgDescription;
+            image                        = [model avatarForOrganization:organization];
+            reuseIdentifier              = @"organizationCell";
+            textContent                  = organization.login;
+            secondaryTextContent         = organization.orgDescription;
             break;
         }
 		case 2: {
-			reuseIdentifier = @"repositoryCell";
-			GSRepository *repo = [model repositoryForIndexPath:indexPath];
-			textContent = repo.name;
+            reuseIdentifier      = @"repositoryCell";
+            GSRepository *repo   = [model repositoryForIndexPath:indexPath];
+            textContent          = repo.name;
             secondaryTextContent = repo.userDescription;
 			break;
 		}
@@ -163,6 +165,14 @@
     cell.detailTextLabel.textColor = [UIColor grayColor];
     cell.textLabel.text            = textContent;
     cell.detailTextLabel.text      = secondaryTextContent;
+    
+    if (image) {
+        [cell.imageView setImage:image];
+    }
+    else {
+        [cell.imageView setImage:nil];
+    }
+    
 	return cell;
 }
 
