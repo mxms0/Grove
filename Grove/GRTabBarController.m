@@ -68,6 +68,18 @@
     }];
 }
 
+-(void)updateFramesAnimated:(BOOL)animated {
+    if (animated) {
+        [UIView animateWithDuration:.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+            [self updateFrames];
+            [self.tabBar layoutIfNeeded];
+        } completion:nil];
+    }
+    else {
+        [self updateFrames];
+    }
+}
+
 #pragma mark - Setters
 
 - (void)setViewControllers:(NSArray *)viewControllers animated:(BOOL)animated {
@@ -94,11 +106,19 @@
 
 - (void)didPushViewController:(GRNavigationController *)navigationController {
     currentNavigationController = navigationController;
-    [self updateFrames];
+    [self updateFramesAnimated:YES];
 }
 
 - (void)didPopViewController:(GRNavigationController *)navigationController {
-    [self updateFrames];
+    [self updateFramesAnimated:YES];
 }
+
+#pragma mark - UITabBarController Delegate
+
+- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
+    currentNavigationController = (GRNavigationController *)viewController.navigationController;
+    [self updateFramesAnimated:YES];
+}
+
 
 @end
