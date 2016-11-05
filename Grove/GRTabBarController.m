@@ -116,7 +116,9 @@
 #pragma mark - UITabBarController Delegate
 
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
-    currentNavigationController = (GRNavigationController *)viewController.navigationController;
+    if ([viewController isKindOfClass:[GRNavigationController class]]) {
+        currentNavigationController = (GRNavigationController *)viewController;
+    }
     [self updateFramesAnimated:YES];
 }
 
