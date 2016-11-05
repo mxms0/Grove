@@ -11,6 +11,4 @@
 
 @interface GRNavigationController : UINavigationController
 @property (nonatomic) GRTabBarController *tabBarController;
-- (void)showBackButtonAnimated:(BOOL)anim;
-- (void)hideBackButtonAnimated:(BOOL)anim;
 @end

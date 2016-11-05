@@ -94,14 +94,10 @@
 
 - (void)didPushViewController:(GRNavigationController *)navigationController {
     currentNavigationController = navigationController;
-	[navigationController showBackButtonAnimated:YES];
     [self updateFrames];
 }
 
 - (void)didPopViewController:(GRNavigationController *)navigationController {
-    if (navigationController.viewControllers.count == 1) {
-		[navigationController hideBackButtonAnimated:YES];
-    }
     [self updateFrames];
 }
 
