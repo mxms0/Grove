@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 Milo. All rights reserved.
 //
 
+#import "GRModelTableViewController.h"
+
 #import "GRRepositoryViewController.h"
 #import "GRRepositoryHeaderView.h"
 #import "GRRepositoryFileBrowserView.h"
@@ -13,6 +15,9 @@
 #import "GRRepositoryIssuesView.h"
 #import "GRRepositoryPullRequestView.h"
 #import "GRRepositoryCommitsView.h"
+
+//Models
+#import "GRBranchesModel.h"
 
 #import <GroveSupport/GroveSupport.h>
 
@@ -28,6 +33,7 @@ static const CGFloat GRHeaderHeight = 36.0f;
 	GRRepositoryIssuesView *issuesView;
 	GRRepositoryGenericSectionView *currentSectionView;
 	GRRepositoryViewSelectorType currentViewType;
+    GRModelTableViewController *branchView;
 }
 
 - (instancetype)init {
@@ -96,7 +102,7 @@ static const CGFloat GRHeaderHeight = 36.0f;
 			viewToSwitch = [self _presentIssuesView];
 			break;
 		case GRRepositoryViewSelectorTypeCommitsView:
-			viewToSwitch = [self _presentCommitsView];
+			viewToSwitch = [self _presentBranchesView];
 			break;
 		case GRRepositoryViewSelectorTypePullRequestsView:
 			viewToSwitch = [self _presentPullRequestsView];
@@ -154,6 +160,18 @@ static const CGFloat GRHeaderHeight = 36.0f;
 	}
 	
 	return fileBrowser;
+}
+
+- (UIView *)_presentBranchesView {
+    if (!self.repository) {
+        return nil;
+    }
+    if (!branchView) {
+        GRBranchesModel *model = [[GRBranchesModel alloc] initWithRepository:self.repository];
+        branchView = [[GRModelTableViewController alloc] initWithModel:model];
+    }
+    
+    return branchView.view;
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {

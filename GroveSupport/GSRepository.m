@@ -86,6 +86,7 @@ static NSMutableDictionary *cachedRepos = nil;
 	GSURLAssign(dictionary, @"homepage", _browserHomepageURL);
 	GSURLAssign(dictionary, @"ssh_url", _sshURL);
 	GSURLAssign(dictionary, @"git_url", _gitURL);
+    GSURLAssign(dictionary, @"branches_url", _branchesAPIURL);
 	GSAssign(dictionary, @"language", _language);
 	GSAssign(dictionary, @"description", _userDescription);
 	GSAssign(dictionary, @"open_issues_count", _numberOfOpenIssues);
@@ -94,6 +95,11 @@ static NSMutableDictionary *cachedRepos = nil;
 	GSAssign(dictionary, @"size", _repositorySize);
 	GSAssign(dictionary, @"forks_count", _numberOfForks);
 	GSAssign(dictionary, @"default_branch", _defaultBranch);
+    
+    //TODO: Come up with a better way of handling this
+    if (dictionary[@"branches_url"]) {
+        _branchesAPIURL = [NSURL URLWithString:[dictionary[@"branches_url"] stringByReplacingOccurrencesOfString:@"{/branch}" withString:@""]];
+    }
 	
 	NSDictionary *permissions = nil;
 	GSAssign(dictionary, @"permissions", permissions);
