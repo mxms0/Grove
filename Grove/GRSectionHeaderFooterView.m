@@ -10,41 +10,39 @@
 
 @implementation GRSectionHeaderFooterView
 
-- (instancetype)initWithFrame:(CGRect)frame mode:(GRSectionHeaderFooterMode)_mode text:(NSString*)_text
-{
-	mode = _mode;
-	
-	label = [[UILabel alloc] init];
-	[label setText: [@"  " stringByAppendingString:_text]];
-	[label setBackgroundColor:[UIColor whiteColor]];
-	
-	self = [super initWithFrame:frame];
-	if (self) {
+- (instancetype)initWithFrame:(CGRect)frame mode:(GRSectionHeaderFooterMode)_mode text:(NSString *)_text {
+	if ((self = [super initWithFrame:frame])) {
+		
+		mode = _mode;
+		
+		label = [[UILabel alloc] init];
+		[label setText: [@"  " stringByAppendingString:_text]];
+		[label setBackgroundColor:[UIColor whiteColor]];
+		
 		[self addSubview:label];
 	}
+	
 	return self;
 }
 
--(void)setFrame:(CGRect)frame {
+- (void)setFrame:(CGRect)frame {
 	[super setFrame:frame];
 	[self setClipsToBounds:YES];
 	
 	CGFloat y = 0;
 	CGFloat ratio = .8;
 	
-	if(mode == GRSectionHeaderMode) {
-		y = self.bounds.size.height*(1.0-ratio);
+	if (mode == GRSectionModeHeader) {
+		y = self.bounds.size.height * (1.0 - ratio);
 	}
 	
 	[label setFrame:CGRectMake(0, y, self.bounds.size.width, self.bounds.size.height*ratio)];
 	
-	UIRectCorner rc = (mode == GRSectionHeaderMode ? UIRectCornerTopLeft | UIRectCornerTopRight : UIRectCornerBottomLeft | UIRectCornerBottomRight);
+	UIRectCorner rc = (mode == GRSectionModeHeader ? UIRectCornerTopLeft | UIRectCornerTopRight : UIRectCornerBottomLeft | UIRectCornerBottomRight);
 	
-	UIBezierPath* path = [UIBezierPath bezierPathWithRoundedRect:label.bounds
-											   byRoundingCorners:rc
-													 cornerRadii:CGSizeMake(10, 10)];
+	UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:label.bounds byRoundingCorners:rc cornerRadii:CGSizeMake(10, 10)];
 	
-	CAShapeLayer* sl = [[CAShapeLayer alloc] init];
+	CAShapeLayer *sl = [[CAShapeLayer alloc] init];
 	sl.frame = self.bounds;
 	sl.path = path.CGPath;
 	label.layer.mask = sl;

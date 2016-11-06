@@ -23,7 +23,6 @@
 - (NSInteger)numberOfRowsInSection:(NSInteger)section;
 - (CGFloat)cellHeightForRowAtIndexPath:(NSIndexPath *)indexPath;
 - (GRApplicationUser *)visibleUser;
-- (CGFloat)heightForProfileHeader;
 - (CGFloat)heightForSectionHeader:(NSInteger)section;
 - (CGFloat)heightForSectionFooter:(NSInteger)section;;
 - (GSRepository *)repositoryForIndexPath:(NSIndexPath *)indexPath;

@@ -167,10 +167,6 @@
     return ret.uppercaseString;
 }
 
-- (CGFloat)heightForProfileHeader {
-	return 160.0f;
-}
-
 - (CGFloat)heightForSectionHeader:(NSInteger)section {
 	return 60.0f;
 }
