@@ -59,14 +59,41 @@
 #pragma mark Repositories
 
 - (void)branchesForRepository:(GSRepository *)repo completionHandler:(void (^)(NSArray *, NSError *))handler {
-	GSAssert();
+    void (^basicHandler)(NSArray<NSDictionary *> *__nullable branches, NSError *__nullable error) = ^(NSArray<NSDictionary *>* __nullable branches, NSError *__nullable error) {
+        
+        NSLog(@"BRANCHES. %@", branches);
+        
+        GSInsuranceBegin(branches, NSArray, error);
+        
+        GSInsuranceError {
+            handler(nil, error);
+        }
+        
+        GSInsuranceBadData {
+            GSAssert();
+        }
+        
+        GSInsuranceGoodData {
+            NSMutableArray *array = [NSMutableArray array];
+            for (NSDictionary *dictionary in branches) {
+                [array addObject:dictionary[@"name"]];
+            }
+            handler(array, nil);
+        }
+        
+        GSInsuranceEnd();
+    };
+    
+    if (self.activeUser.token) {
+        [[GSNetworkManager sharedInstance] requestBranchesForRepository:repo token:self.activeUser.token completionHandler:basicHandler];
+    }
 }
 
 - (void)repositoriesForUser:(GSUser *)user completionHandler:(void (^)(NSArray<GSRepository *> *__nullable repos, NSError *__nullable error))handler {
 	
 	void (^basicHandler)(NSArray<NSDictionary *> *__nullable repos, NSError *__nullable error) = ^(NSArray<NSDictionary *>* __nullable repos, NSError *__nullable error) {
 		
-		NSLog(@"REPOS. %@", repos);
+		//NSLog(@"REPOS. %@", repos);
 		
 		GSInsuranceBegin(repos, NSArray, error);
 		

@@ -17,6 +17,28 @@
 #import "UIStackView+GRExtension.h"
 #import "UIView+GRExtension.h"
 
+//Protocols
+@protocol GRDataSourceDelegate <NSObject>
+- (void)reloadData;
+@end
+
+@protocol GRDataSource <NSObject>
+@property (nonatomic) id<GRDataSourceDelegate> delegate;
+- (NSInteger)numberOfSections;
+- (NSInteger)numberOfRowsInSection:(NSInteger)section;
+
+@optional
+- (NSString *)titleForSectionHeader:(NSInteger)section;
+- (NSString *)titleForSectionFooter:(NSInteger)section;
+- (NSString *)titleForIndexPath:(NSIndexPath *)indexPath;
+- (NSString *)descriptionForIndexPath:(NSIndexPath *)indexPath;
+- (UIImage *)imageForIndexPath:(NSIndexPath *)indexPath;
+- (NSObject *)modelObjectForIndexPath:(NSIndexPath *)indexPath;
+
+@end
+
+
+//Functions
 static inline UIColor *GRColorFromRGB(unsigned long long rgb) {
 	return [UIColor colorWithRed:((float)((rgb & 0xFF0000) >> 16))/255.0 green:((float)((rgb & 0xFF00) >> 8))/255.0 blue:((float)(rgb & 0xFF))/255.0 alpha:1.0];
 }

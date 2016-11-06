@@ -8,10 +8,7 @@
 
 #import "GRSectionHeaderFooterView.h"
 
-@implementation GRSectionHeaderFooterView {
-	GRSectionHeaderFooterMode mode;
-	UILabel* label;
-}
+@implementation GRSectionHeaderFooterView
 
 - (instancetype)initWithFrame:(CGRect)frame mode:(GRSectionHeaderFooterMode)_mode text:(NSString*)_text
 {

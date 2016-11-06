@@ -15,19 +15,37 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class GSURLRequest;
 @interface GSNetworkManager : NSObject
+
 + (instancetype)sharedInstance;
+
+
+#pragma mark - User
 - (void)requestOAuth2TokenWithUsername:(NSString *)username password:(NSString *)password twoFactorToken:(NSString *__nullable)twoFa handler:(void (^)(NSString *token, NSError *error))handler;
-- (void)requestEventsForUser:(NSString *)user token:(NSString *)token completionHandler:(void (^)(NSArray *__nullable events, NSError *__nullable error))handler;
 - (void)requestUserInformationForToken:(NSString *)token completionHandler:(void (^)(NSDictionary *__nullable response, NSError *__nullable error))handler;
 - (void)requestUserInformationForUsername:(NSString *)username token:(NSString *__nullable)token completionHandler:(void (^)(NSDictionary *__nullable response, NSError *__nullable error))handler;
-- (void)downloadResourceFromURL:(NSURL *)url token:(NSString *__nullable)token completionHandler:(void (^)(NSURL *__nullable filePath, NSError *__nullable error))handler;
 
 - (void)requestUserNotificationsWithToken:(NSString *)token completionHandler:(void (^)(NSArray *__nullable notifications, NSError *__nullable error))handler;
+
+#pragma mark - Branches
+- (void)requestBranchesForRepository:(GSRepository *)repository token:(NSString *)token completionHandler:(void (^)(NSArray<NSDictionary *> *__nullable branches, NSError *__nullable error))handler;
+
+#pragma mark - Events
+- (void)requestEventsForUser:(NSString *)user token:(NSString *)token completionHandler:(void (^)(NSArray *__nullable events, NSError *__nullable error))handler;
+
+#pragma mark - Organizations
+- (void)requestOrganizationsForUsername:(NSString *)username completionHandler:(void (^)(NSArray *__nullable orgs, NSError *__nullable error))handler;
+- (void)requestOrganizationsForCurrentUserWithToken:(NSString *)token completionHandler:(void (^)(NSArray *__nullable repos, NSError *__nullable error))handler;
+
+#pragma mark - Repositories
 - (void)requestRepositoriesForUsername:(NSString *)username completionHandler:(void (^)(NSArray *__nullable repos, NSError *__nullable error))handler;
 - (void)requestRepositoriesForCurrentUserWithToken:(NSString *)token completionHandler:(void (^)(NSArray *__nullable repos, NSError *__nullable error))handler;
-- (void)sendRequest:(GSURLRequest *)request completionHandler:(void (^)(GSSerializable *__nullable serializeable, NSError *__nullable error))handler;
 - (void)requestRepositoryContentsForRepositoryNamed:(NSString *)repoName repositoryOwner:(NSString *)username token:(NSString *)token path:(NSString *__nullable)path completionHandler:(void (^)(NSArray *__nullable items, NSError *__nullable error))handler;
 - (void)recursivelyRequestRepositoryTreeForRepositoryNamed:(NSString *)repoName repositoryOwner:(NSString *)owner treeOrBranch:(NSString *)treeOrBranch token:(NSString *)token completionHandler:(void (^)(NSDictionary *__nullable result, NSError *__nullable serror))handler;
+
+#pragma mark - Shared
+- (void)sendRequest:(GSURLRequest *)request completionHandler:(void (^)(GSSerializable *__nullable serializeable, NSError *__nullable error))handler;
+- (void)downloadResourceFromURL:(NSURL *)url token:(NSString *__nullable)token completionHandler:(void (^)(NSURL *__nullable filePath, NSError *__nullable error))handler;
+
 // not sure if i like exposing endpoints outside of the network manager. this is an idea for now.
 - (void)requestAPIEndpoint:(NSString *)endp token:(NSString *__nullable)token completionHandler:(void (^)(GSSerializable *__nullable s, NSError *__nullable error))handler;
 @end

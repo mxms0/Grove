@@ -45,7 +45,8 @@
 
 - (instancetype)init {
 	if ((self = [super init])) {
-        GRNotificationTitleView *headerView = [[GRNotificationTitleView alloc] initWithFrame:CGRectWithContentSize(headerView.intrinsicContentSize)];
+        GRNotificationTitleView *headerView = [[GRNotificationTitleView alloc] init];
+        [headerView setFrame:CGRectWithContentSize(headerView.intrinsicContentSize)];
         [self.tableView setTableHeaderView:headerView];
     }
     return self;
