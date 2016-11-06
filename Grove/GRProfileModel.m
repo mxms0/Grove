@@ -175,7 +175,7 @@
     if ([self numberOfRowsInSection:section] == 0) {
         return 0.0;
     }
-	return 30.0f;
+	return 15;
 }
 
 - (CGFloat)cellHeightForRowAtIndexPath:(NSIndexPath *)indexPath {

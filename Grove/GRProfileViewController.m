@@ -13,6 +13,8 @@
 #import "GRRepositoryViewController.h"
 #import "GRSectionHeaderFooterView.h"
 #import "GREmptySectionHeaderFooterView.h"
+#import "GRProfileRepositoryCell.h"
+#import "GRProfileOrganizationCell.h"
 
 #import <GroveSupport/GSGitHubEngine.h>
 #import <GroveSupport/GroveSupport.h>
@@ -39,12 +41,16 @@
 - (instancetype)initWithStyle:(UITableViewStyle)style {
 	if ((self = [super initWithStyle:UITableViewStyleGrouped])) {
 		self.tabBarItem = [[UITabBarItem alloc] initWithTitle:GRLocalizedString(@"Profile", nil, nil) image:[UIImage imageNamed:@"tb@2x"] tag:0];
+		self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
     return self;
 }
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
+	
+	[self.tableView registerClass:[GRProfileRepositoryCell class] forCellReuseIdentifier:@"GRProfileRepositoryCell"];
+	[self.tableView registerClass:[GRProfileOrganizationCell class] forCellReuseIdentifier:@"GRProfileOrganizationCell"];
 	
 	headerView = [[GRProfileHeaderView alloc] init];
 	[headerView setFrame:CGRectMake(0, 0, self.view.frame.size.width, GRProfileHeaderViewHeight)];	
@@ -132,51 +138,59 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)_tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-	
-	// Should just pick a different cell class here.
-	
-	NSString *reuseIdentifier = @"stupidCell"; // Hey, Max! Don't do this.
+	NSString *reuseIdentifier = nil;
 	NSString *textContent = nil;
     NSString *secondaryTextContent = nil;
 	UIImage *image = nil;
+	
+	Class cellClass = [UITableViewCell class];
+	
 	switch (indexPath.section) {
         case GRProfileModelSectionIndexOrganizations: {
+			cellClass = [GRProfileOrganizationCell class];
+			
+			reuseIdentifier = @"GRProfileOrganizationCell";
+			
             GSOrganization *organization = [model organizationForIndexPath:indexPath];
-            image                        = [model avatarForOrganization:organization];
-            reuseIdentifier              = @"organizationCell";
-            textContent                  = organization.login;
-            secondaryTextContent         = organization.orgDescription;
+			
+            image = [model avatarForOrganization:organization];
+            reuseIdentifier = @"organizationCell";
+            textContent = organization.login;
+            secondaryTextContent = organization.orgDescription;
+			
             break;
         }
+			
 		case GRProfileModelSectionIndexRepositories: {
-            reuseIdentifier      = @"repositoryCell";
-            GSRepository *repo   = [model repositoryForIndexPath:indexPath];
-            textContent          = repo.name;
+			cellClass = [GRProfileRepositoryCell class];
+			
+            reuseIdentifier = @"GRProfileRepositoryCell";
+			
+            GSRepository *repo = [model repositoryForIndexPath:indexPath];
+            textContent = repo.name;
             secondaryTextContent = repo.userDescription;
 			break;
 		}
+			
 		case GRProfileModelSectionIndexContributions:
 			break;
 		default:
 			break;
 	}
+	
 	UITableViewCell *cell = [_tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
 	
 	if (!cell) {
-		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseIdentifier];
+		
+		cell = [[cellClass alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseIdentifier];
 	}
     
     //configure the cell
     cell.detailTextLabel.textColor = [UIColor grayColor];
-    cell.textLabel.text            = textContent;
-    cell.detailTextLabel.text      = secondaryTextContent;
-    
-    if (image) {
-        [cell.imageView setImage:image];
-    }
-    else {
-        [cell.imageView setImage:nil];
-    }
+    cell.textLabel.text = textContent;
+    cell.detailTextLabel.text = secondaryTextContent;
+	
+	[cell.imageView setImage:image];
     
 	return cell;
 }

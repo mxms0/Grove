@@ -13,12 +13,11 @@ typedef NS_ENUM(NSInteger, GRSectionHeaderFooterMode) {
 	GRSectionModeFooter
 };
 
-@interface GRSectionHeaderFooterView : UIView  {
+@interface GRSectionHeaderFooterView : UIView {
 @protected
     GRSectionHeaderFooterMode mode;
     UILabel *label;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame mode:(GRSectionHeaderFooterMode)mode text:(NSString*)text;
-
+- (instancetype)initWithFrame:(CGRect)frame mode:(GRSectionHeaderFooterMode)mode text:(NSString *)text;
 @end

@@ -7,9 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GRDataSource.h"
 
 @interface GRModelTableViewController : UITableViewController <GRDataSourceDelegate>
-
-- (instancetype)initWithModel:(id<GRDataSource> )model;
-
+- (instancetype)initWithModel:(id<GRDataSource>)model;
 @end
