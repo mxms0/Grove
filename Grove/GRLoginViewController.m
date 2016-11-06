@@ -153,7 +153,7 @@
 	
 	for (int i = 0; i < 600; i++) {
 		NSString *str = keyWords[i % keyCount];
-		[string addAttribute:NSForegroundColorAttributeName value:wordColors[arc4random_uniform([wordColors count])] range:NSMakeRange(covered, [str length])];
+		[string addAttribute:NSForegroundColorAttributeName value:wordColors[arc4random_uniform((uint32_t)[wordColors count])] range:NSMakeRange(covered, [str length])];
 		
 		
 		covered += [str length] + 1;

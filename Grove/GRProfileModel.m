@@ -100,7 +100,7 @@
 }
 
 - (GSRepository *)repositoryForIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 2 && indexPath.row < repositories.count) {
+    if (indexPath.section == GRProfileModelSectionIndexRepositories && indexPath.row < repositories.count) {
         return [repositories objectAtIndex:indexPath.row];
     }
     else {
@@ -109,7 +109,9 @@
 }
 
 - (GSOrganization *)organizationForIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 1 && indexPath.row < organizations.count) {
+	// do we really need to check the section here?
+	
+    if (indexPath.section == GRProfileModelSectionIndexOrganizations && indexPath.row < organizations.count) {
         return [organizations objectAtIndex:indexPath.row];
     }
     else {
@@ -122,22 +124,19 @@
 }
 
 - (NSInteger)numberOfSections {
-	return 4;
+	return 3;
 }
 
 - (NSInteger)numberOfRowsInSection:(NSInteger)section {
 	NSInteger rowCount = 0;
 	switch (section) {
-		case 0:
-			rowCount = 0;
+		case GRProfileModelSectionIndexRepositories:
+			rowCount = [repositories count];
 			break;
-		case 1:
+		case GRProfileModelSectionIndexOrganizations:
 			rowCount = [organizations count];
-			break;
-        case 2:
-            rowCount = [repositories count];
             break;;
-		case 3:
+		case GRProfileModelSectionIndexContributions:
 			rowCount = 3;
 			break;
 		default:
@@ -148,25 +147,23 @@
 }
 
 - (NSString *)titleForSection:(NSInteger)section {
-    NSString *ret = @"UNDEF";
+	NSString *ret = nil;
     switch (section) {
-        case 0:
-            break;
-        case 1:
-            ret = @"organizations";
-            break;
-        case 2:
+        case GRProfileModelSectionIndexRepositories:
             ret = @"repositories";
             break;
-        case 3:
-            ret = @"contributions";
+		case GRProfileModelSectionIndexOrganizations:
+            ret = @"organizations";
             break;
-        case 4:
-            ret = @"activity";
+        case GRProfileModelSectionIndexContributions:
+            ret = @"contributions";
             break;
         default:
             break;
     }
+	
+	// assert(ret == nil)
+	
     return ret.uppercaseString;
 }
 
@@ -187,23 +184,22 @@
 
 - (CGFloat)cellHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
 	CGFloat cellHeight = 0;
+	
 	switch (indexPath.section) {
-		case 0:
-			cellHeight = 44.0;
-			break;
-        case 1:
-            cellHeight = 60.0;
-            break;
-		case 2:
+		case GRProfileModelSectionIndexRepositories:
 			cellHeight = 60.0;
 			break;
-		case 3:
-			cellHeight = 22.0;
+        case GRProfileModelSectionIndexOrganizations:
+            cellHeight = 60.0;
+            break;
+		case GRProfileModelSectionIndexContributions:
+			cellHeight = 44.0;
 			break;
 		default:
-			cellHeight = 400.0;
+			cellHeight = 10.0;
 			break;
 	}
+	
 	return cellHeight;
 }
 

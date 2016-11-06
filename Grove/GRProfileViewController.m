@@ -132,11 +132,9 @@
 	NSString *reuseIdentifier = @"stupidCell"; // Hey, Max! Don't do this.
 	NSString *textContent = nil;
     NSString *secondaryTextContent = nil;
-    UIImage *image;
+	UIImage *image = nil;
 	switch (indexPath.section) {
-		case 0:
-			break;
-        case 1: {
+        case GRProfileModelSectionIndexOrganizations: {
             GSOrganization *organization = [model organizationForIndexPath:indexPath];
             image                        = [model avatarForOrganization:organization];
             reuseIdentifier              = @"organizationCell";
@@ -144,14 +142,14 @@
             secondaryTextContent         = organization.orgDescription;
             break;
         }
-		case 2: {
+		case GRProfileModelSectionIndexRepositories: {
             reuseIdentifier      = @"repositoryCell";
             GSRepository *repo   = [model repositoryForIndexPath:indexPath];
             textContent          = repo.name;
             secondaryTextContent = repo.userDescription;
 			break;
 		}
-		case 3:
+		case GRProfileModelSectionIndexContributions:
 			break;
 		default:
 			break;
