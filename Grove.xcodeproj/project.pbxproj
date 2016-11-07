@@ -63,6 +63,8 @@
 		503F58F01DCFCBE200788D6D /* GRProfileRepositoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 503F58EF1DCFCBE200788D6D /* GRProfileRepositoryCell.m */; };
 		503F58F31DCFCC5100788D6D /* GRProfileOrganizationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 503F58F21DCFCC5100788D6D /* GRProfileOrganizationCell.m */; };
 		503F58F71DCFD2EC00788D6D /* GRProfileTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 503F58F61DCFD2EC00788D6D /* GRProfileTableViewCell.m */; };
+		503F58FA1DD0482A00788D6D /* GSSearchGitHubEngine.h in Headers */ = {isa = PBXBuildFile; fileRef = 503F58F81DD0482A00788D6D /* GSSearchGitHubEngine.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		503F58FB1DD0482A00788D6D /* GSSearchGitHubEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 503F58F91DD0482A00788D6D /* GSSearchGitHubEngine.m */; };
 		50504D9A1BA263D800B87C5F /* GRStreamCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 50504D991BA263D800B87C5F /* GRStreamCellModel.m */; };
 		505C58DB1C99587300D5F37C /* GRGenericConversationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 505C58DA1C99587300D5F37C /* GRGenericConversationViewController.m */; };
 		505C58DE1C99588600D5F37C /* GRGenericConversationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 505C58DD1C99588600D5F37C /* GRGenericConversationModel.m */; };
@@ -280,6 +282,8 @@
 		503F58F41DCFD1CB00788D6D /* GRDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GRDataSource.h; sourceTree = "<group>"; };
 		503F58F51DCFD2EC00788D6D /* GRProfileTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRProfileTableViewCell.h; sourceTree = "<group>"; };
 		503F58F61DCFD2EC00788D6D /* GRProfileTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRProfileTableViewCell.m; sourceTree = "<group>"; };
+		503F58F81DD0482A00788D6D /* GSSearchGitHubEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSSearchGitHubEngine.h; sourceTree = "<group>"; };
+		503F58F91DD0482A00788D6D /* GSSearchGitHubEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSSearchGitHubEngine.m; sourceTree = "<group>"; };
 		50504D981BA263D800B87C5F /* GRStreamCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRStreamCellModel.h; sourceTree = "<group>"; };
 		50504D991BA263D800B87C5F /* GRStreamCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRStreamCellModel.m; sourceTree = "<group>"; };
 		505C58D91C99587300D5F37C /* GRGenericConversationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRGenericConversationViewController.h; sourceTree = "<group>"; };
@@ -504,6 +508,8 @@
 				3857A62A1DC0124F0045394F /* GSProjectGitHubEngine.m */,
 				84C989071DCD1009006976B7 /* GSOrganizationGitHubEngine.h */,
 				84C989081DCD1009006976B7 /* GSOrganizationGitHubEngine.m */,
+				503F58F81DD0482A00788D6D /* GSSearchGitHubEngine.h */,
+				503F58F91DD0482A00788D6D /* GSSearchGitHubEngine.m */,
 			);
 			name = Public;
 			sourceTree = "<group>";
@@ -1036,6 +1042,7 @@
 				501C43A21C41ED4100288901 /* GSRepositoryTreeInternal.h in Headers */,
 				50E9F8701B832BF70007212E /* GSNetworkManagerHelpers.h in Headers */,
 				50AB97A91C373BA600FBD254 /* GroveSupportInternalStrings.h in Headers */,
+				503F58FA1DD0482A00788D6D /* GSSearchGitHubEngine.h in Headers */,
 				501C439E1C41E9A100288901 /* GSRepositoryTree.h in Headers */,
 				5097B5E21B8D2D9800A72721 /* GSUtilities.h in Headers */,
 				501BA7F31C3E029E005C5524 /* GSRepositoryEntryInternal.h in Headers */,
@@ -1322,6 +1329,7 @@
 				50E4B5B21B82FABA0029264A /* GSNetworkManager.m in Sources */,
 				3857A62C1DC0124F0045394F /* GSProjectGitHubEngine.m in Sources */,
 				5020E85A1DA44E350090D5E6 /* GSUserGitHubEngine.m in Sources */,
+				503F58FB1DD0482A00788D6D /* GSSearchGitHubEngine.m in Sources */,
 				84C9890A1DCD1009006976B7 /* GSOrganizationGitHubEngine.m in Sources */,
 				5097B5F21B8D95C100A72721 /* GSOrganization.m in Sources */,
 				501C042E1BAB78B400DC66C8 /* GSGist.m in Sources */,

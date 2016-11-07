@@ -40,7 +40,7 @@
 		
 		[self setBackgroundColor:[UIColor clearColor]];
 		[contentView setBackgroundColor:[UIColor whiteColor]];
-		[contentView.layer setCornerRadius:10];
+		[contentView.layer setCornerRadius:GRProfileTableCornerRadius];
         
         statisticsView      = [[UIStackView alloc] init];
         titlesView          = [[UIStackView alloc] init];
@@ -57,10 +57,10 @@
 		
 
 		[usernameLabel setFont:[UIFont systemFontOfSize:14]];
-		[usernameLabel setTextAlignment:NSTextAlignmentCenter];
+		[usernameLabel setTextAlignment:NSTextAlignmentLeft];
 		[nameLabel setFont:[UIFont boldSystemFontOfSize:16]];
-		[nameLabel setTextAlignment:NSTextAlignmentCenter];
-		[locationLabel setTextAlignment:NSTextAlignmentCenter];
+		[nameLabel setTextAlignment:NSTextAlignmentLeft];
+		[locationLabel setTextAlignment:NSTextAlignmentLeft];
 		[followersButton setSubText:@"Followers"];
 		[starredButton setSubText:@"Starred"];
 		[followingButton setSubText:@"Following"];

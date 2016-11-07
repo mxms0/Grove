@@ -14,7 +14,7 @@
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	
-		[[GRAppNotificationManager sharedInstance] postNotificationFromError:[NSError errorWithDomain:@"" code:44 userInfo:nil]];
+	self.view.backgroundColor = [UIColor lightGrayColor];
 }
 
 @end

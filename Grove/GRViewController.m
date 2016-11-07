@@ -7,16 +7,13 @@
 //
 
 #import "GRViewController.h"
-
-@interface GRViewController ()
-
-@end
+#import "GRAppNotificationManager.h"
 
 @implementation GRViewController 
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
-	self.view.backgroundColor = [UIColor colorWithWhite:.98 alpha:1];
+	self.view.backgroundColor = [UIColor blackColor];
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -28,20 +25,13 @@
 - (void)presentErrorAndDismissIfPossible:(NSError *)error {
 	// Will improve error handling here.
 	
-	__weak GRViewController *weakSelf = self;
+	NSLog(@"Local Error: [%@]", error);
 	
-	dispatch_async(dispatch_get_main_queue(), ^ {
-		
-		UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Error" message:[error localizedDescription] preferredStyle:UIAlertControllerStyleAlert];
+	[[GRAppNotificationManager sharedInstance] postNotificationFromError:[NSError errorWithDomain:@"" code:44 userInfo:nil]];
 	
-		UIAlertAction *dismiss = [UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-			if ([weakSelf isDismissable])
-				[weakSelf.navigationController popViewControllerAnimated:YES];
-		}];
-		[alertController addAction:dismiss];
-	
-		[self presentViewController:alertController animated:YES completion:nil];
-	});
+	if ([self isDismissable]) {
+		[self.navigationController popViewControllerAnimated:YES];
+	}
 }
 
 - (BOOL)isDismissable {

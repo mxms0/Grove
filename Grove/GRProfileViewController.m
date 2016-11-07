@@ -41,13 +41,14 @@
 - (instancetype)initWithStyle:(UITableViewStyle)style {
 	if ((self = [super initWithStyle:UITableViewStyleGrouped])) {
 		self.tabBarItem = [[UITabBarItem alloc] initWithTitle:GRLocalizedString(@"Profile", nil, nil) image:[UIImage imageNamed:@"tb@2x"] tag:0];
-		self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
     return self;
 }
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
+	
+	self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 	
 	[self.tableView registerClass:[GRProfileRepositoryCell class] forCellReuseIdentifier:@"GRProfileRepositoryCell"];
 	[self.tableView registerClass:[GRProfileOrganizationCell class] forCellReuseIdentifier:@"GRProfileOrganizationCell"];
@@ -189,6 +190,8 @@
     cell.detailTextLabel.textColor = [UIColor grayColor];
     cell.textLabel.text = textContent;
     cell.detailTextLabel.text = secondaryTextContent;
+	
+	cell.selectionStyle = UITableViewCellSelectionStyleNone;
 	
 	[cell.imageView setImage:image];
     
