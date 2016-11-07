@@ -65,6 +65,7 @@
 		503F58F71DCFD2EC00788D6D /* GRProfileTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 503F58F61DCFD2EC00788D6D /* GRProfileTableViewCell.m */; };
 		503F58FA1DD0482A00788D6D /* GSSearchGitHubEngine.h in Headers */ = {isa = PBXBuildFile; fileRef = 503F58F81DD0482A00788D6D /* GSSearchGitHubEngine.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		503F58FB1DD0482A00788D6D /* GSSearchGitHubEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 503F58F91DD0482A00788D6D /* GSSearchGitHubEngine.m */; };
+		503F58FF1DD1165000788D6D /* GRAppNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 503F58FE1DD1165000788D6D /* GRAppNotificationView.m */; };
 		50504D9A1BA263D800B87C5F /* GRStreamCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 50504D991BA263D800B87C5F /* GRStreamCellModel.m */; };
 		505C58DB1C99587300D5F37C /* GRGenericConversationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 505C58DA1C99587300D5F37C /* GRGenericConversationViewController.m */; };
 		505C58DE1C99588600D5F37C /* GRGenericConversationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 505C58DD1C99588600D5F37C /* GRGenericConversationModel.m */; };
@@ -284,6 +285,8 @@
 		503F58F61DCFD2EC00788D6D /* GRProfileTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRProfileTableViewCell.m; sourceTree = "<group>"; };
 		503F58F81DD0482A00788D6D /* GSSearchGitHubEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSSearchGitHubEngine.h; sourceTree = "<group>"; };
 		503F58F91DD0482A00788D6D /* GSSearchGitHubEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSSearchGitHubEngine.m; sourceTree = "<group>"; };
+		503F58FD1DD1165000788D6D /* GRAppNotificationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRAppNotificationView.h; sourceTree = "<group>"; };
+		503F58FE1DD1165000788D6D /* GRAppNotificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRAppNotificationView.m; sourceTree = "<group>"; };
 		50504D981BA263D800B87C5F /* GRStreamCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRStreamCellModel.h; sourceTree = "<group>"; };
 		50504D991BA263D800B87C5F /* GRStreamCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRStreamCellModel.m; sourceTree = "<group>"; };
 		505C58D91C99587300D5F37C /* GRGenericConversationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRGenericConversationViewController.h; sourceTree = "<group>"; };
@@ -554,6 +557,17 @@
 				501F870E1C868E63000C2C53 /* GRRepositoryCommitsModel.m */,
 			);
 			name = Commits;
+			sourceTree = "<group>";
+		};
+		503F58FC1DD1163000788D6D /* Application Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				503F58EB1DCF445100788D6D /* GRAppNotificationManager.h */,
+				503F58EC1DCF445100788D6D /* GRAppNotificationManager.m */,
+				503F58FD1DD1165000788D6D /* GRAppNotificationView.h */,
+				503F58FE1DD1165000788D6D /* GRAppNotificationView.m */,
+			);
+			name = "Application Notifications";
 			sourceTree = "<group>";
 		};
 		50458DA01C8979B300C148EB /* Issue (Old) */ = {
@@ -894,8 +908,7 @@
 		50F081841B82ED6500366161 /* Grove */ = {
 			isa = PBXGroup;
 			children = (
-				503F58EB1DCF445100788D6D /* GRAppNotificationManager.h */,
-				503F58EC1DCF445100788D6D /* GRAppNotificationManager.m */,
+				503F58FC1DD1163000788D6D /* Application Notifications */,
 				84B0378E1DCD768C0039BD77 /* Skeletons */,
 				50E4B5AA1B82F79A0029264A /* Grove.h */,
 				505C58D71C99585700D5F37C /* Conversation */,
@@ -1412,6 +1425,7 @@
 				84A8D0FD1B8D262900B6B4FB /* GREventIssueViewController.m in Sources */,
 				50E781F41C78DA7800143931 /* GRSmallCapsLabel.m in Sources */,
 				5070D5691C4A619D00E80AB1 /* GRRepositoryInfoModel.m in Sources */,
+				503F58FF1DD1165000788D6D /* GRAppNotificationView.m in Sources */,
 				507931E91B8EC4730080C894 /* UIImage+GRExtensions.m in Sources */,
 				381EF6511D88A684000828A8 /* GRBlurryImageView.m in Sources */,
 				50E781F01C78D14F00143931 /* GRLabel.m in Sources */,

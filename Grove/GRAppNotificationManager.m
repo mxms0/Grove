@@ -7,13 +7,14 @@
 //
 
 #import "GRAppNotificationManager.h"
+#import "GRAppNotificationView.h"
 
 #define GRAppNotificationDuration 2.0f
 
 @implementation GRAppNotificationManager {
 	NSMutableArray<NSError *> *notifications;
 	NSTimer *notificationTimer;
-	UIView *notificationView;
+	GRAppNotificationView *notificationView;
 }
 
 + (instancetype)sharedInstance {
@@ -60,11 +61,11 @@
 	UIWindow *window = [[UIApplication sharedApplication] keyWindow];
 	
 	if (!notificationView) {
-		notificationView = [[UIView alloc] init];
+		notificationView = [[GRAppNotificationView alloc] initWithHeadline:nil bodyText:nil notificationType:0];
 		[notificationView setBackgroundColor:[UIColor redColor]];
 	}
 	
-	[notificationView setFrame:CGRectMake(0, 0, window.frame.size.width, 64)];
+	[notificationView setFrame:CGRectMake(0, 0, window.frame.size.width, 84)];
 	
 	[window addSubview:notificationView];
 	[window bringSubviewToFront:notificationView];
@@ -73,19 +74,22 @@
 - (void)postNotificationFromError:(NSError *)error {
 	@synchronized(notifications) {
 		if (!notificationTimer && [notifications count] == 0) {
-			notificationTimer = [NSTimer scheduledTimerWithTimeInterval:GRAppNotificationDuration target:self selector:@selector(_notificationTimerFired:) userInfo:nil repeats:YES];
 			
-			// need to pick a runloop and stick with it. this is bad rn
-			NSLog(@"ffffffffff");
-			
-			[[NSRunLoop currentRunLoop] addTimer:notificationTimer forMode:NSRunLoopCommonModes];
-			
-			[self _presentNotificationNowWithError:error];
+			// i dont exactly like this, but its not awful.
+			dispatch_async(dispatch_get_main_queue(), ^ {
+				
+				notificationTimer = [NSTimer scheduledTimerWithTimeInterval:GRAppNotificationDuration target:self selector:@selector(_notificationTimerFired:) userInfo:nil repeats:YES];
+				[[NSRunLoop currentRunLoop] addTimer:notificationTimer forMode:NSRunLoopCommonModes];
+				
+				[self _presentNotificationNowWithError:error];
+			});
 		}
 		else {
 			[notifications addObject:error];
 		}
 	}
+	
+	NSLog(@"%@:%@", error, notifications);
 }
 
 @end
