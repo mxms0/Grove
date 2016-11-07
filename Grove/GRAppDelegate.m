@@ -16,6 +16,7 @@
 #import "GRNotificationViewController.h"
 #import "GRActiveUserProfileViewController.h"
 #import "GRSessionManager.h"
+#import "GRRepositoryViewController.h"
 
 @interface GRAppDelegate ()
 @property (nonatomic) GRTabBarController *tabBarController;
@@ -37,16 +38,18 @@
 	
 	UIViewController *viewController = nil;
 	
-#if GRDebugTarget == GRDebugTargetProfileView 
-	viewController = [[GRProfileViewController alloc] initWithUsername:@"Maximus-"];
-	
-#elif GRDebugTarget == GRDebugTargetRepositoryView
-	
-#elif GRDebugTarget == GRDebugTargetNotificationsView
-	
-#elif GRDebugTargetLoginView
-	
-#endif
+	if (GRDebugTarget == GRDebugTargetProfileView) {
+		viewController = [[GRProfileViewController alloc] initWithUsername:@"Maximus-"];
+	}
+	else if (GRDebugTarget == GRDebugTargetRepositoryView) {
+		viewController = [[GRRepositoryViewController alloc] initWithRepositoryName:@"Grove" owner:@"Maximus-"];
+	}
+	else if (GRDebugTarget == GRDebugTargetNotificationsView) {
+		viewController = [[GRNotificationViewController alloc] init];
+	}
+	else if (GRDebugTarget == GRDebugTargetLoginView) {
+		viewController = [[GRLoginViewController alloc] init];
+	}
 	
 	if (!viewController) {
 		NSLog(@"Debug target specified to invalid selection. No view.");
@@ -63,18 +66,18 @@
 	self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 	[self.window makeKeyAndVisible];
 	
-#if GRDebugTarget != 0
+#if GRStaticDebugTarget != 0
 	
 	[self initializeViewForDebug];
 	return;
 	
 #else
 	
-	[[UITabBar appearance] setBarTintColor:[UIColor clearColor]];
-	[[UITabBar appearance] setBackgroundImage:[UIImage new]];
+	[[UITabBar appearance] setBarTintColor:[UIColor whiteColor]];
+    [[UITabBar appearance] setBackgroundColor:[UIColor whiteColor]];
 	
 	if ([[[GRSessionManager sharedInstance] users] count] == 0) {
-		
+        
 		GRLoginViewController *loginViewController = [[GRLoginViewController alloc] init];
 		
 		self.window.rootViewController = loginViewController;

@@ -15,7 +15,7 @@
 	[super _configureWithDictionary:dictionary];
 	
 #if 1
-	NSLog(@"Event information %@", dictionary);
+	//NSLog(@"Event information %@", dictionary);
 #endif
 	
 	GSObjectAssign(dictionary, @"actor", _actor, GSActor);
