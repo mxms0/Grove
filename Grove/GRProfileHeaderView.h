@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+#define GRProfileHeaderViewHeight 160.0
+
 @class GRApplicationUser;
 @interface GRProfileHeaderView : UIView
 @property (nonatomic, weak, setter=setUser:) GRApplicationUser *user;

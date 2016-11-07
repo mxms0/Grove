@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)branchesForRepository:(GSRepository *)repo completionHandler:(void (^)(NSArray *, NSError *))handler;
 - (void)repositoryContentsForRepository:(GSRepository *)repo atPath:(NSString *__nullable)path recurse:(BOOL)recurse completionHandler:(nonnull void (^)(GSRepositoryTree *_Nullable, NSError *_Nullable))handler;
 - (void)readmeForRepository:(GSRepository *)repo completionHandler:(void (^)(NSString *__nullable contents, NSError *__nullable error))handler;
+- (void)renderedReadmeForRepository:(GSRepository *)repo completionHandler:(void (^)(NSString *__nullable, NSError *__nullable))handler;
 
 // Starring
 - (void)starRepository:(GSRepository *)repo completionHandler:(void (^)(BOOL success, NSError *__nullable error))handler;
