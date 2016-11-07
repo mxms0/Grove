@@ -61,7 +61,7 @@
 	UIWindow *window = [[UIApplication sharedApplication] keyWindow];
 	
 	if (!notificationView) {
-		notificationView = [[GRAppNotificationView alloc] initWithHeadline:nil bodyText:nil notificationType:0];
+		notificationView = [[GRAppNotificationView alloc] initWithHeadline:@"Error" bodyText:error.userInfo[NSLocalizedDescriptionKey] notificationType:0];
 		[notificationView setBackgroundColor:[UIColor redColor]];
 	}
 	

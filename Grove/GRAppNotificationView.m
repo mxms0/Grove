@@ -23,6 +23,7 @@
 		
 		bodyLabel = [[UILabel alloc] init];
 		[bodyLabel setText:body];
+		[bodyLabel setBackgroundColor:GSRandomUIColor()];
 		
 		icon = [[UIImageView alloc] init];
 		[icon setBackgroundColor:GSRandomUIColor()];
@@ -57,6 +58,7 @@
 	
 	[headerLabel setFrame:CGRectMake(utilizedLeftSpace + horizontalPadding, icon.frame.origin.y, self.frame.size.width - utilizedLeftSpace - 2 * horizontalPadding, 20)];
 	
+	[bodyLabel setFrame:CGRectMake(headerLabel.frame.origin.x, headerLabel.frame.origin.y + headerLabel.frame.size.height + verticalPadding, headerLabel.frame.size.width, self.frame.size.height - (headerLabel.frame.origin.y + headerLabel.frame.size.height + 2 * verticalPadding))];
 }
 
 @end
