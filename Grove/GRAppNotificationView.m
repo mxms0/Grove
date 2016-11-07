@@ -52,13 +52,15 @@
 	CGFloat utilizedLeftSpace = 0.0f;
 	CGFloat utilizedTopSpace = initialVerticalPadding;
 	
-	[icon setFrame:CGRectMake(horizontalPadding, verticalPadding / 2 + initialVerticalPadding, usableHeight - 1.5 * verticalPadding, usableHeight - 1.5 * verticalPadding)];
+	[icon setFrame:CGRectMake(horizontalPadding, verticalPadding / 2 + utilizedTopSpace, usableHeight - 1.5 * verticalPadding, usableHeight - 1.5 * verticalPadding)];
 	
 	utilizedLeftSpace = icon.frame.origin.x + icon.frame.size.width;
 	
 	[headerLabel setFrame:CGRectMake(utilizedLeftSpace + horizontalPadding, icon.frame.origin.y, self.frame.size.width - utilizedLeftSpace - 2 * horizontalPadding, 20)];
 	
-	[bodyLabel setFrame:CGRectMake(headerLabel.frame.origin.x, headerLabel.frame.origin.y + headerLabel.frame.size.height + verticalPadding, headerLabel.frame.size.width, self.frame.size.height - (headerLabel.frame.origin.y + headerLabel.frame.size.height + 2 * verticalPadding))];
+	utilizedTopSpace = headerLabel.frame.size.height + headerLabel.frame.origin.y;
+	
+	[bodyLabel setFrame:CGRectMake(headerLabel.frame.origin.x, utilizedTopSpace + verticalPadding, headerLabel.frame.size.width, self.frame.size.height - (utilizedTopSpace + 2 * verticalPadding))];
 }
 
 @end

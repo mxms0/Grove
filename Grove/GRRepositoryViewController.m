@@ -45,6 +45,7 @@ static const CGFloat GRHeaderHeight = 36.0f;
 		
 		viewSelector = [[GRRepositoryViewSelector alloc] init];
 		[viewSelector setDelegate:self];
+		[viewSelector setBackgroundColor:[UIColor whiteColor]];
 		
 		infoView = [[GRRepositoryInfoView alloc] init];
 		
