@@ -68,7 +68,6 @@
 		NSDictionary* baseData;
 		GSAssign(dictionary, @"base", baseData);
 		GSAssign(baseData, @"name", _base);
-		
 	}
 	return self;
 }
