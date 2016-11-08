@@ -13,6 +13,8 @@
 		3857A62C1DC0124F0045394F /* GSProjectGitHubEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 3857A62A1DC0124F0045394F /* GSProjectGitHubEngine.m */; };
 		3857A6311DC032120045394F /* GRSectionHeaderFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3857A6301DC032120045394F /* GRSectionHeaderFooterView.m */; };
 		385AD43B1DA44CEE001CB947 /* GSProjectGitHubEngine.h in Headers */ = {isa = PBXBuildFile; fileRef = 385AD4391DA44CEE001CB947 /* GSProjectGitHubEngine.h */; };
+		389180051DD15C97001E28C6 /* GSPullRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 389180031DD15C97001E28C6 /* GSPullRequest.h */; };
+		389180061DD15C97001E28C6 /* GSPullRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 389180041DD15C97001E28C6 /* GSPullRequest.m */; };
 		4AFF78719E87757B1D344FE8 /* libPods-GroveSupportTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D7EE4952FB635BE7F459140 /* libPods-GroveSupportTests.a */; };
 		500001591BB73411001564E7 /* GRNotificationHeaderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 500001581BB73411001564E7 /* GRNotificationHeaderTableViewCell.m */; };
 		5000015D1BB778A0001564E7 /* GRRepositoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5000015C1BB778A0001564E7 /* GRRepositoryViewController.m */; };
@@ -210,6 +212,8 @@
 		3857A62F1DC032120045394F /* GRSectionHeaderFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRSectionHeaderFooterView.h; sourceTree = "<group>"; };
 		3857A6301DC032120045394F /* GRSectionHeaderFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRSectionHeaderFooterView.m; sourceTree = "<group>"; };
 		385AD4391DA44CEE001CB947 /* GSProjectGitHubEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSProjectGitHubEngine.h; sourceTree = "<group>"; };
+		389180031DD15C97001E28C6 /* GSPullRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSPullRequest.h; sourceTree = "<group>"; };
+		389180041DD15C97001E28C6 /* GSPullRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSPullRequest.m; sourceTree = "<group>"; };
 		4D7EE4952FB635BE7F459140 /* libPods-GroveSupportTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GroveSupportTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		500001571BB73411001564E7 /* GRNotificationHeaderTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRNotificationHeaderTableViewCell.h; sourceTree = "<group>"; };
 		500001581BB73411001564E7 /* GRNotificationHeaderTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRNotificationHeaderTableViewCell.m; sourceTree = "<group>"; };
@@ -823,6 +827,8 @@
 				501C439D1C41E9A100288901 /* GSRepositoryTree.m */,
 				84714AE01DA44B2C00EB507A /* GSProject.h */,
 				84714AE11DA44B2C00EB507A /* GSProject.m */,
+				389180031DD15C97001E28C6 /* GSPullRequest.h */,
+				389180041DD15C97001E28C6 /* GSPullRequest.m */,
 			);
 			name = "Data Structures";
 			sourceTree = "<group>";
@@ -1047,6 +1053,7 @@
 				3857A62B1DC0124F0045394F /* GSProjectGitHubEngine.h in Headers */,
 				50E4B5AD1B82F8E50029264A /* GSGitHubEngine.h in Headers */,
 				5097B5EC1B8D91C200A72721 /* GSComment.h in Headers */,
+				389180051DD15C97001E28C6 /* GSPullRequest.h in Headers */,
 				5020E8591DA44E350090D5E6 /* GSUserGitHubEngine.h in Headers */,
 				501BA7F01C3DFBC0005C5524 /* GSRepositoryEntry.h in Headers */,
 				84714AE21DA44B2C00EB507A /* GSProject.h in Headers */,
@@ -1362,6 +1369,7 @@
 				5097B5DD1B8D29F400A72721 /* GSCacheManager.m in Sources */,
 				84A8D10B1B8D6F0C00B6B4FB /* GSIssue.m in Sources */,
 				50133F0F1B84495C004B5BB8 /* GSObject.m in Sources */,
+				389180061DD15C97001E28C6 /* GSPullRequest.m in Sources */,
 				50E4B5AE1B82F8E50029264A /* GSGitHubEngine.m in Sources */,
 				501C439F1C41E9A100288901 /* GSRepositoryTree.m in Sources */,
 			);
