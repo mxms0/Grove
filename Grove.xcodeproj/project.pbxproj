@@ -132,6 +132,7 @@
 		50FB177B1CC3235100A8E607 /* GRNotificationTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 506063221C7AE6B200E1674A /* GRNotificationTitleView.m */; };
 		84309A7D1B854A21008EB771 /* GRLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84309A7C1B854A21008EB771 /* GRLoginViewController.m */; };
 		8453E3F71DD517A3003628AF /* GRModelTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8453E3F61DD517A3003628AF /* GRModelTableView.m */; };
+		8453E3FA1DD5214E003628AF /* GRBranchesTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8453E3F91DD5214E003628AF /* GRBranchesTableView.m */; };
 		84714AE21DA44B2C00EB507A /* GSProject.h in Headers */ = {isa = PBXBuildFile; fileRef = 84714AE01DA44B2C00EB507A /* GSProject.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84714AE31DA44B2C00EB507A /* GSProject.m in Sources */ = {isa = PBXBuildFile; fileRef = 84714AE11DA44B2C00EB507A /* GSProject.m */; };
 		849872FE1B85A42100D1C6FD /* NSAttributedString+GRExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 849872FD1B85A42100D1C6FD /* NSAttributedString+GRExtensions.m */; };
@@ -392,6 +393,8 @@
 		84309A7C1B854A21008EB771 /* GRLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRLoginViewController.m; sourceTree = "<group>"; };
 		8453E3F51DD517A3003628AF /* GRModelTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRModelTableView.h; sourceTree = "<group>"; };
 		8453E3F61DD517A3003628AF /* GRModelTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRModelTableView.m; sourceTree = "<group>"; };
+		8453E3F81DD5214E003628AF /* GRBranchesTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRBranchesTableView.h; sourceTree = "<group>"; };
+		8453E3F91DD5214E003628AF /* GRBranchesTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRBranchesTableView.m; sourceTree = "<group>"; };
 		84714ADF1DA4494F00EB507A /* GroveSupportNetworkKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GroveSupportNetworkKeys.h; sourceTree = "<group>"; };
 		84714AE01DA44B2C00EB507A /* GSProject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSProject.h; sourceTree = "<group>"; };
 		84714AE11DA44B2C00EB507A /* GSProject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSProject.m; sourceTree = "<group>"; };
@@ -935,6 +938,8 @@
 			children = (
 				84B0378B1DCD56A10039BD77 /* GRBranchesModel.h */,
 				84B0378C1DCD56A10039BD77 /* GRBranchesModel.m */,
+				8453E3F81DD5214E003628AF /* GRBranchesTableView.h */,
+				8453E3F91DD5214E003628AF /* GRBranchesTableView.m */,
 			);
 			name = Branches;
 			sourceTree = "<group>";
@@ -1344,6 +1349,7 @@
 				50FB177B1CC3235100A8E607 /* GRNotificationTitleView.m in Sources */,
 				505C58EC1C995C0500D5F37C /* GRIssuesConversationViewController.m in Sources */,
 				50F0819E1B82EE5400366161 /* GRNavigationController.m in Sources */,
+				8453E3FA1DD5214E003628AF /* GRBranchesTableView.m in Sources */,
 				84C989061DCC00AB006976B7 /* GREmptySectionHeaderFooterView.m in Sources */,
 				50F081A11B82EF0B00366161 /* GRNavigationBar.m in Sources */,
 				5071F0051C5971920095ACA0 /* GRRepositoryIssuesModel.m in Sources */,

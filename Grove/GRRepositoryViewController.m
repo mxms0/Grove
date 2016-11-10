@@ -16,6 +16,7 @@
 #import "GRRepositoryIssuesView.h"
 #import "GRRepositoryPullRequestView.h"
 #import "GRRepositoryCommitsView.h"
+#import "GRBranchesTableView.h"
 
 //Models
 #import "GRBranchesModel.h"
@@ -169,7 +170,8 @@ static const CGFloat GRHeaderHeight = 36.0f;
     }
     if (!branchView) {
         GRBranchesModel *model = [[GRBranchesModel alloc] initWithRepository:self.repository];
-        branchView = [[GRModelTableView alloc] initWithModel:model];
+        branchView             = [[GRBranchesTableView alloc] initWithModel:model
+                                                       navigationController:self.navigationController];
     }
     
     return branchView;

@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface GRModelTableView : UIView
+@interface GRModelTableView : UIView <GRDataSourceDelegate, UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, readonly) UITableView *tableView;
+@property (nonatomic, readonly) id<GRDataSource> model;
 
 - (instancetype)initWithModel:(id<GRDataSource> )model;
 

@@ -10,7 +10,7 @@
 
 static NSString *_Nonnull cellIdentifier = @"identifier";
 
-@interface GRModelTableView () <GRDataSourceDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface GRModelTableView ()
 @property (nonatomic) UITableView *tableView;
 @property (nonatomic) id<GRDataSource> model;
 @end
@@ -69,6 +69,5 @@ static NSString *_Nonnull cellIdentifier = @"identifier";
     
     return cell;
 }
-
 
 @end
