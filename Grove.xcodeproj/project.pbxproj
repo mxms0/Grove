@@ -131,6 +131,7 @@
 		50FB177A1CC3233B00A8E607 /* GRStreamTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 50FB17791CC3233B00A8E607 /* GRStreamTitleView.m */; };
 		50FB177B1CC3235100A8E607 /* GRNotificationTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 506063221C7AE6B200E1674A /* GRNotificationTitleView.m */; };
 		84309A7D1B854A21008EB771 /* GRLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84309A7C1B854A21008EB771 /* GRLoginViewController.m */; };
+		8453E3F71DD517A3003628AF /* GRModelTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8453E3F61DD517A3003628AF /* GRModelTableView.m */; };
 		84714AE21DA44B2C00EB507A /* GSProject.h in Headers */ = {isa = PBXBuildFile; fileRef = 84714AE01DA44B2C00EB507A /* GSProject.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84714AE31DA44B2C00EB507A /* GSProject.m in Sources */ = {isa = PBXBuildFile; fileRef = 84714AE11DA44B2C00EB507A /* GSProject.m */; };
 		849872FE1B85A42100D1C6FD /* NSAttributedString+GRExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 849872FD1B85A42100D1C6FD /* NSAttributedString+GRExtensions.m */; };
@@ -389,6 +390,8 @@
 		50FB17791CC3233B00A8E607 /* GRStreamTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRStreamTitleView.m; sourceTree = "<group>"; };
 		84309A7B1B854A21008EB771 /* GRLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRLoginViewController.h; sourceTree = "<group>"; };
 		84309A7C1B854A21008EB771 /* GRLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRLoginViewController.m; sourceTree = "<group>"; };
+		8453E3F51DD517A3003628AF /* GRModelTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRModelTableView.h; sourceTree = "<group>"; };
+		8453E3F61DD517A3003628AF /* GRModelTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRModelTableView.m; sourceTree = "<group>"; };
 		84714ADF1DA4494F00EB507A /* GroveSupportNetworkKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GroveSupportNetworkKeys.h; sourceTree = "<group>"; };
 		84714AE01DA44B2C00EB507A /* GSProject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSProject.h; sourceTree = "<group>"; };
 		84714AE11DA44B2C00EB507A /* GSProject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSProject.m; sourceTree = "<group>"; };
@@ -658,9 +661,10 @@
 		506063201C7ADF9A00E1674A /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				84F524EB1B8325D80077A06C /* Controllers */,
+				8453E3F41DD5176C003628AF /* Views */,
 				501558B31B8553D70002254D /* GRApplicationUser.h */,
 				501558B41B8553D70002254D /* GRApplicationUser.m */,
-				84F524EB1B8325D80077A06C /* Controllers */,
 				50F0819C1B82EE5400366161 /* GRNavigationController.h */,
 				50F0819D1B82EE5400366161 /* GRNavigationController.m */,
 				501558AD1B8553020002254D /* GRSessionManager.h */,
@@ -869,7 +873,6 @@
 		50F081841B82ED6500366161 /* Grove */ = {
 			isa = PBXGroup;
 			children = (
-				84B0378E1DCD768C0039BD77 /* Skeletons */,
 				50E4B5AA1B82F79A0029264A /* Grove.h */,
 				505C58D71C99585700D5F37C /* Conversation */,
 				506063201C7ADF9A00E1674A /* Application */,
@@ -899,6 +902,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		8453E3F41DD5176C003628AF /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				8453E3F51DD517A3003628AF /* GRModelTableView.h */,
+				8453E3F61DD517A3003628AF /* GRModelTableView.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		849872F81B85A3CB00D1C6FD /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -925,13 +937,6 @@
 				84B0378C1DCD56A10039BD77 /* GRBranchesModel.m */,
 			);
 			name = Branches;
-			sourceTree = "<group>";
-		};
-		84B0378E1DCD768C0039BD77 /* Skeletons */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Skeletons;
 			sourceTree = "<group>";
 		};
 		84DDA1BC1D88979200E87E26 /* Frameworks */ = {
@@ -1364,6 +1369,7 @@
 				50504D9A1BA263D800B87C5F /* GRStreamCellModel.m in Sources */,
 				5060631A1C7ADEF300E1674A /* GRNotificationHeaderLabel.m in Sources */,
 				84F524F51B8326E40077A06C /* GRProfileViewController.m in Sources */,
+				8453E3F71DD517A3003628AF /* GRModelTableView.m in Sources */,
 				5031C18B1DB6C35200C7EF36 /* GRMarkdownView.m in Sources */,
 				500001591BB73411001564E7 /* GRNotificationHeaderTableViewCell.m in Sources */,
 				84DDA1D91D88A22000E87E26 /* UIStackView+GRExtension.m in Sources */,
