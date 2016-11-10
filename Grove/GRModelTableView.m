@@ -10,7 +10,7 @@
 
 static NSString *_Nonnull cellIdentifier = @"identifier";
 
-@interface GRModelTableView () <UITableViewDelegate, UITableViewDataSource>
+@interface GRModelTableView () <GRDataSourceDelegate, UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic) UITableView *tableView;
 @property (nonatomic) id<GRDataSource> model;
 @end
@@ -23,6 +23,7 @@ static NSString *_Nonnull cellIdentifier = @"identifier";
         self.tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         self.model     = model;
         
+        [self.model setDelegate:self];
         [self.tableView setDelegate:self];
         [self.tableView setDataSource:self];
         [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:cellIdentifier];
@@ -38,7 +39,6 @@ static NSString *_Nonnull cellIdentifier = @"identifier";
 #pragma mark - GRDataSourceDelegate
 
 - (void)reloadData {
-    
     [self.tableView reloadData];
 }
 

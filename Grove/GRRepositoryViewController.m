@@ -7,6 +7,7 @@
 //
 
 #import "GRModelTableViewController.h"
+#import "GRModelTableView.h"
 
 #import "GRRepositoryViewController.h"
 #import "GRRepositoryHeaderView.h"
@@ -33,7 +34,7 @@ static const CGFloat GRHeaderHeight = 36.0f;
 	GRRepositoryIssuesView *issuesView;
 	GRRepositoryGenericSectionView *currentSectionView;
 	GRRepositoryViewSelectorType currentViewType;
-    GRModelTableViewController *branchView;
+    GRModelTableView *branchView;
 }
 
 - (instancetype)init {
@@ -168,10 +169,10 @@ static const CGFloat GRHeaderHeight = 36.0f;
     }
     if (!branchView) {
         GRBranchesModel *model = [[GRBranchesModel alloc] initWithRepository:self.repository];
-        branchView = [[GRModelTableViewController alloc] initWithModel:model];
+        branchView = [[GRModelTableView alloc] initWithModel:model];
     }
     
-    return branchView.view;
+    return branchView;
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
