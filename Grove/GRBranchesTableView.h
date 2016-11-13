@@ -7,12 +7,10 @@
 //
 
 #import "GRModelTableView.h"
+#import "GRRepositoryViewSelector.h"
 
 @interface GRBranchesTableView : GRModelTableView
 
-@property (nonatomic, readonly) UINavigationController *navigationController;
-
-- (instancetype)initWithModel:(id<GRDataSource>)model
-         navigationController:(UINavigationController *)navigationController;
+@property (nonatomic) id<GRRepositoryViewSelectorDelegate> delegate;
 
 @end

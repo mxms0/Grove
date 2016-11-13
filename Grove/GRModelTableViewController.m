@@ -10,16 +10,18 @@
 
 static NSString *_Nonnull cellIdentifier = @"identifier";
 
-@implementation GRModelTableViewController {
-    id <GRDataSource> model;
-}
+@interface GRModelTableViewController ()
+@property (nonatomic) id<GRDataSource> model;
+@end
+
+@implementation GRModelTableViewController
 
 - (instancetype)initWithModel:(id<GRDataSource>)localModel {
     self = [super initWithStyle:UITableViewStylePlain];
     if (self) {
-        model = localModel;
+        self.model = localModel;
         
-        model.delegate = self;
+        self.model.delegate = self;
         
         [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:cellIdentifier];
     }
@@ -36,25 +38,25 @@ static NSString *_Nonnull cellIdentifier = @"identifier";
 #pragma mark - TableView DataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return [model numberOfSections];
+    return [self.model numberOfSections];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [model numberOfRowsInSection:section];
+    return [self.model numberOfRowsInSection:section];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
     
-    if ([model respondsToSelector:@selector(titleForIndexPath:)]) {
-        cell.textLabel.text = [model titleForIndexPath:indexPath];
+    if ([self.model respondsToSelector:@selector(titleForIndexPath:)]) {
+        cell.textLabel.text = [self.model titleForIndexPath:indexPath];
     }
-    if ([model respondsToSelector:@selector(descriptionForIndexPath:)]) {
-        cell.detailTextLabel.text = [model descriptionForIndexPath:indexPath];
+    if ([self.model respondsToSelector:@selector(descriptionForIndexPath:)]) {
+        cell.detailTextLabel.text = [self.model descriptionForIndexPath:indexPath];
     }
-    if ([model respondsToSelector:@selector(imageForIndexPath:)]) {
-        if ([model imageForIndexPath:indexPath]) {
-            cell.imageView.image = [model imageForIndexPath:indexPath];
+    if ([self.model respondsToSelector:@selector(imageForIndexPath:)]) {
+        if ([self.model imageForIndexPath:indexPath]) {
+            cell.imageView.image = [self.model imageForIndexPath:indexPath];
         }
     }
     

@@ -10,6 +10,8 @@
 
 @interface GRModelTableViewController : UITableViewController <GRDataSourceDelegate>
 
+@property (nonatomic, readonly) id<GRDataSource> model;
+
 - (instancetype)initWithModel:(id<GRDataSource> )model;
 
 @end

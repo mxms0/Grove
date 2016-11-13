@@ -6,11 +6,13 @@
 //  Copyright (c) 2015 Milo. All rights reserved.
 //
 
+#import "GRRepositoryViewController.h"
+#import "GRRepositoryViewController_alt.h"
+
 #import "GRProfileViewController.h"
 #import "GRProfileModel.h"
 #import "GRProfileHeaderView.h"
 #import "GRSessionManager.h"
-#import "GRRepositoryViewController.h"
 #import "GRSectionHeaderFooterView.h"
 #import "GREmptySectionHeaderFooterView.h"
 
@@ -192,9 +194,11 @@
 }
 
 - (void)pushRepositoryViewControllerWithRepository:(GSRepository *)repo {
-	GRRepositoryViewController *repoViewController = [[GRRepositoryViewController alloc] init];
-	[repoViewController setRepository:repo];
-	[self.navigationController pushViewController:repoViewController animated:YES];
+	//GRRepositoryViewController_alt *repoViewController = [[GRRepositoryViewController_alt alloc] init];
+    //[self.navigationController pushViewController:repoViewController animated:YES];
+    //[repoViewController setRepository:repo];
+    GRRepositoryViewController *repoViewController = [[GRRepositoryViewController alloc] initWithRepository:repo];
+    [self.navigationController presentViewController:repoViewController animated:YES completion:nil];
 }
 
 @end

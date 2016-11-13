@@ -9,7 +9,7 @@
 #import "GRStreamViewControllerProxy.h"
 
 #import "GREventIssueViewController.h"
-#import "GRRepositoryViewController.h"
+#import "GRRepositoryViewController_alt.h"
 
 @implementation GRStreamViewControllerProxy
 
@@ -23,9 +23,9 @@
             break;
         }
         case GSEventTypeCreate: {
-			self = (GRStreamViewControllerProxy *)[[GRRepositoryViewController alloc] init];
+			self = (GRStreamViewControllerProxy *)[[GRRepositoryViewController_alt alloc] init];
 			GSRepository *repository = [event repository];
-			[(GRRepositoryViewController *)self setRepository:repository];
+			[(GRRepositoryViewController_alt *)self setRepository:repository];
 			
 			switch ([event refType]) {
 				// push to specific location in here..
@@ -56,9 +56,9 @@
             break;
         }
         case GSEventTypeFork: {
-			self = (GRStreamViewControllerProxy *)[[GRRepositoryViewController alloc] init];
+			self = (GRStreamViewControllerProxy *)[[GRRepositoryViewController_alt alloc] init];
 			GSRepository *repository = [event forkee];
-			[(GRRepositoryViewController *)self setRepository:repository];
+			[(GRRepositoryViewController_alt *)self setRepository:repository];
 			
             break;
         }
@@ -83,9 +83,9 @@
             break;
         }
         case GSEventTypeMember: {
-			self = (GRStreamViewControllerProxy *)[[GRRepositoryViewController alloc] init];
+			self = (GRStreamViewControllerProxy *)[[GRRepositoryViewController_alt alloc] init];
 			GSRepository *repository = [event repository];
-			[(GRRepositoryViewController *)self setRepository:repository];
+			[(GRRepositoryViewController_alt *)self setRepository:repository];
             break;
         }
         case GSEventTypeMembership: {
@@ -97,9 +97,9 @@
             break;
         }
         case GSEventTypePublic: {
-			self = (GRStreamViewControllerProxy *)[[GRRepositoryViewController alloc] init];
+			self = (GRStreamViewControllerProxy *)[[GRRepositoryViewController_alt alloc] init];
 			GSRepository *repository = [event repository];
-			[(GRRepositoryViewController *)self setRepository:repository];
+			[(GRRepositoryViewController_alt *)self setRepository:repository];
             break;
         }
         case GSEventTypePullRequest: {
@@ -111,9 +111,9 @@
             break;
         }
         case GSEventTypePush: {
-			self = (GRStreamViewControllerProxy *)[[GRRepositoryViewController alloc] init];
+			self = (GRStreamViewControllerProxy *)[[GRRepositoryViewController_alt alloc] init];
 			GSRepository *repository = [event repository];
-			[(GRRepositoryViewController *)self setRepository:repository];
+			[(GRRepositoryViewController_alt *)self setRepository:repository];
 			// Consider then from here, telling the repository to jump to specified branch.
 			// Also: maybe this should jump to the commit instead.
             break;
@@ -134,9 +134,9 @@
             break;
         }
         case GSEventTypeStar: {
-			self = (GRStreamViewControllerProxy *)[[GRRepositoryViewController alloc] init];
+			self = (GRStreamViewControllerProxy *)[[GRRepositoryViewController_alt alloc] init];
 			GSRepository *repository = [event repository];
-			[(GRRepositoryViewController *)self setRepository:repository];
+			[(GRRepositoryViewController_alt *)self setRepository:repository];
 			
 			// contributing to murder
             break;

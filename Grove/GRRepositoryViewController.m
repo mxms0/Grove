@@ -2,215 +2,90 @@
 //  GRRepositoryViewController.m
 //  Grove
 //
-//  Created by Max Shavrick on 9/26/15.
-//  Copyright (c) 2015 Milo. All rights reserved.
+//  Created by Rocco Del Priore on 11/12/16.
+//  Copyright © 2016 Milo. All rights reserved.
 //
 
-#import "GRModelTableViewController.h"
-#import "GRModelTableView.h"
+#import <Masonry/Masonry.h>
+#import <GroveSupport/GroveSupport.h>
 
 #import "GRRepositoryViewController.h"
-#import "GRRepositoryHeaderView.h"
-#import "GRRepositoryFileBrowserView.h"
-#import "GRRepositoryInfoView.h"
-#import "GRRepositoryIssuesView.h"
-#import "GRRepositoryPullRequestView.h"
-#import "GRRepositoryCommitsView.h"
-#import "GRBranchesTableView.h"
+#import "GRRepositoryNavigationBar.h"
+#import "GRRepositoryNavigationController.h"
+#import "GRTabBarController.h"
+
+//View Controllers
+#import "GRRespositoryInformationViewController.h"
+#import "GRRepositoryCodeBranchesTableViewController.h"
+#import "GRRepositoryCommitBranchesTableViewController.h"
+#import "GRRepositoryIssuesViewController.h"
+#import "GRRepositoryPullRequestViewController.h"
 
 //Models
 #import "GRBranchesModel.h"
 
-#import <GroveSupport/GroveSupport.h>
+@interface GRRepositoryViewController ()
+@property (nonatomic) GRTabBarController *tabBarController;
+@end
 
-static const CGFloat GRHeaderHeight = 36.0f;
-
-@implementation GRRepositoryViewController {
-	GRRepositoryHeaderView *header;
-	GRRepositoryViewSelector *viewSelector;
-	GRRepositoryFileBrowserView *fileBrowser;
-	GRRepositoryInfoView *infoView;
-	GRRepositoryCommitsView *commitsView;
-	GRRepositoryPullRequestView *pullRequestView;
-	GRRepositoryIssuesView *issuesView;
-	GRRepositoryGenericSectionView *currentSectionView;
-	GRRepositoryViewSelectorType currentViewType;
-    GRModelTableView *branchView;
-}
-
-- (instancetype)init {
-	if ((self = [super init])) {
-		header = [[GRRepositoryHeaderView alloc] init];
-		[header setBackgroundColor:GSRandomUIColor()];
-		
-		self.edgesForExtendedLayout = UIRectEdgeNone;
-		
-		viewSelector = [[GRRepositoryViewSelector alloc] init];
-		[viewSelector setDelegate:self];
-		
-		infoView = [[GRRepositoryInfoView alloc] init];
-		
-		currentSectionView = infoView;
-	}
-	return self;
-}
+@implementation GRRepositoryViewController
 
 - (instancetype)initWithRepositoryName:(NSString *)name owner:(NSString *)owner {
-	if ((self = [self init])) {
-		NSLog(@"%s NOT IMPLEMENTED.", __PRETTY_FUNCTION__);
-	}
-	
-	return self;
+    self = [self init];
+    if (self) {
+        
+    }
+    return self;
+}
+
+- (instancetype)initWithRepository:(GSRepository *)repository {
+    self = [super init];
+    if (self) {
+        self.tabBarController = [[GRTabBarController alloc] init];
+        
+        GRBranchesModel *branchModel = [[GRBranchesModel alloc] initWithRepository:repository];
+        
+        GRRespositoryInformationViewController *infomationViewController     = [[GRRespositoryInformationViewController alloc] init];
+        GRRepositoryCodeBranchesTableViewController *codeViewController      = [[GRRepositoryCodeBranchesTableViewController alloc] initWithModel:branchModel];
+        GRRepositoryCommitBranchesTableViewController *commitsViewController = [[GRRepositoryCommitBranchesTableViewController alloc] initWithModel:branchModel];
+        GRRepositoryIssuesViewController *issuesViewController               = [[GRRepositoryIssuesViewController alloc] init];
+        GRRepositoryPullRequestViewController *pullRequestViewController     = [[GRRepositoryPullRequestViewController alloc] init];
+        
+        NSMutableArray *navigationControllers = [NSMutableArray array];
+        UIBarButtonItem *close = [[UIBarButtonItem alloc] initWithTitle:@"Close" style:UIBarButtonItemStyleDone target:self action:@selector(dismiss)];
+        for (GRViewController *viewController in @[infomationViewController, codeViewController, commitsViewController, issuesViewController, pullRequestViewController]) {
+            GRRepositoryNavigationController *navigationController = [[GRRepositoryNavigationController alloc] initWithRootViewController:viewController];
+            UITabBarItem *item                                     = [[UITabBarItem alloc] initWithTitle:GRLocalizedString(viewController.title, nil, nil) image:[UIImage imageNamed:@"tb@2x"] tag:0];
+            
+            [navigationController setTabBarController:self.tabBarController];
+            [navigationController setPath:@[repository.owner.username, repository.name]];
+            
+            viewController.navigationItem.leftBarButtonItem = close;
+            viewController.navigationItem.hidesBackButton   = YES;
+            viewController.view.backgroundColor             = GSRandomUIColor();
+            viewController.tabBarItem                       = item;
+            
+            [navigationControllers addObject:navigationController];
+        }
+        
+        self.tabBarController.viewControllers = navigationControllers;
+        
+        [self.view addSubview:self.tabBarController.view];
+        [self.tabBarController.view mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.equalTo(self.view);
+        }];
+        
+        [self setRepository:repository];
+    }
+    return self;
 }
 
 - (void)setRepository:(GSRepository *)newRepository {
-	[_repository removeObserver:self forKeyPath:GSUpdatedDateKey];
-	
-	_repository = newRepository;
-	[_repository addObserver:self forKeyPath:GSUpdatedDateKey options:0 context:NULL];
-	[_repository updateWithCompletionHandler:^(NSError * _Nullable error) {
-		if (error) {
-			[self presentErrorAndDismissIfPossible:error];
-		}
-	}];
-	
-	[infoView setRepository:newRepository];
-	[fileBrowser setRepository:newRepository];
-	[header setRepositoryName:_repository.name];
-	[header setRepositoryOwner:_repository.owner.username];
+    _repository = newRepository;
 }
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-	// only case right now should be to dismiss, so let's just dismiss... .-.
-	[self.navigationController popViewControllerAnimated:YES];
-}
-
-- (void)viewSelector:(GRRepositoryViewSelector *)selector didChangeToViewType:(GRRepositoryViewSelectorType)viewType {
-	if (currentViewType == viewType) return;
-	currentViewType = viewType;
-	
-	[currentSectionView removeFromSuperview];
-	
-	GRRepositoryGenericSectionView *viewToSwitch = nil;
-	
-	switch (viewType) {
-		case GRRepositoryViewSelectorTypeCodeView:
-			viewToSwitch = [self _presentCodeView];
-			break;
-		case GRRepositoryViewSelectorTypeInfoView:
-			viewToSwitch = [self _presentInfoView];
-			break;
-		case GRRepositoryViewSelectorTypeIssuesView:
-			viewToSwitch = [self _presentIssuesView];
-			break;
-		case GRRepositoryViewSelectorTypeCommitsView:
-			viewToSwitch = [self _presentBranchesView];
-			break;
-		case GRRepositoryViewSelectorTypePullRequestsView:
-			viewToSwitch = [self _presentPullRequestsView];
-			break;
-		default:
-			break;
-	}
-	
-	currentSectionView = viewToSwitch;
-	
-	[self.view addSubview:currentSectionView];
-	
-	[self properLayoutSubviews];
-}
-
-- (GRRepositoryGenericSectionView *)_presentIssuesView {
-	if (!issuesView) {
-		issuesView = [[GRRepositoryIssuesView alloc] init];
-		[issuesView setRepository:_repository];
-	}
-	
-	return issuesView;
-}
-
-- (GRRepositoryGenericSectionView *)_presentCommitsView {
-	if (!commitsView) {
-		commitsView = [[GRRepositoryCommitsView alloc] init];
-		[commitsView setRepository:_repository];
-	}
-	return commitsView;
-}
-
-- (GRRepositoryGenericSectionView *)_presentPullRequestsView {
-	if (!pullRequestView) {
-		pullRequestView = [[GRRepositoryPullRequestView alloc] init];
-		[pullRequestView setRepository:_repository];
-	}
-
-	return pullRequestView;
-}
-
-- (GRRepositoryGenericSectionView *)_presentInfoView {
-	if (!infoView) {
-		infoView = [[GRRepositoryInfoView alloc] init];
-		[infoView setRepository:_repository];
-	}
-	
-	return infoView;
-}
-
-- (GRRepositoryGenericSectionView *)_presentCodeView {
-	if (!fileBrowser) {
-		fileBrowser = [[GRRepositoryFileBrowserView alloc] init];
-		[fileBrowser setRepository:_repository];
-	}
-	
-	return fileBrowser;
-}
-
-- (UIView *)_presentBranchesView {
-    if (!self.repository) {
-        return nil;
-    }
-    if (!branchView) {
-        GRBranchesModel *model = [[GRBranchesModel alloc] initWithRepository:self.repository];
-        branchView             = [[GRBranchesTableView alloc] initWithModel:model
-                                                       navigationController:self.navigationController];
-    }
-    
-    return branchView;
-}
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
-	NSLog(@"Repository has new data %@:%@:%@", object, keyPath, change);
-}
-
-- (void)viewDidLoad {
-	[super viewDidLoad];
-	
-	for (UIView *v in @[header, currentSectionView, viewSelector]) {
-		[self.view addSubview:v];
-	}
-}
-
-- (void)properLayoutSubviews {
-	
-	CGFloat verticalOffsetUsed = GRStatusBarHeight();
-	
-	[header setFrame:CGRectMake(0, verticalOffsetUsed, self.view.frame.size.width, GRHeaderHeight)];
-	
-	verticalOffsetUsed += header.frame.size.height;
-	
-	[viewSelector setFrame:CGRectMake(0, verticalOffsetUsed, self.view.frame.size.width, 44.0f)];
-	
-	verticalOffsetUsed += viewSelector.frame.size.height;
-	
-	[currentSectionView setFrame:CGRectMake(0, verticalOffsetUsed, self.view.frame.size.width, self.view.frame.size.height - verticalOffsetUsed)];
-}
-
-- (void)viewWillLayoutSubviews {
-	[super viewWillLayoutSubviews];
-	[self properLayoutSubviews];
-}
-
-- (void)dealloc {
-	[self setRepository:nil];
+- (void)dismiss {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end
