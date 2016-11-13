@@ -6,20 +6,10 @@
 //  Copyright (c) 2015 Milo. All rights reserved.
 //
 
-#import "GRModelTableViewController.h"
-#import "GRModelTableView.h"
-
 #import "GRRepositoryViewController_alt.h"
 #import "GRRepositoryHeaderView.h"
 #import "GRRepositoryFileBrowserView.h"
 #import "GRRepositoryInfoView.h"
-#import "GRRepositoryIssuesView.h"
-#import "GRRepositoryPullRequestView.h"
-#import "GRRepositoryCommitsView.h"
-#import "GRBranchesTableView.h"
-
-//Models
-#import "GRBranchesModel.h"
 
 #import <GroveSupport/GroveSupport.h>
 
@@ -30,12 +20,8 @@ static const CGFloat GRHeaderHeight = 36.0f;
 	GRRepositoryViewSelector *viewSelector;
 	GRRepositoryFileBrowserView *fileBrowser;
 	GRRepositoryInfoView *infoView;
-	GRRepositoryCommitsView *commitsView;
-	GRRepositoryPullRequestView *pullRequestView;
-	GRRepositoryIssuesView *issuesView;
 	GRRepositoryGenericSectionView *currentSectionView;
 	GRRepositoryViewSelectorType currentViewType;
-    GRBranchesTableView *branchView;
 }
 
 - (instancetype)init {
@@ -85,13 +71,6 @@ static const CGFloat GRHeaderHeight = 36.0f;
 	[self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void)pushView:(UIView *)view {
-    [currentSectionView removeFromSuperview];
-    currentSectionView = view;
-    [self.view addSubview:currentSectionView];
-    [self properLayoutSubviews];
-}
-
 - (void)viewSelector:(GRRepositoryViewSelector *)selector didChangeToViewType:(GRRepositoryViewSelectorType)viewType {
 	if (currentViewType == viewType) return;
 	currentViewType = viewType;
@@ -128,29 +107,15 @@ static const CGFloat GRHeaderHeight = 36.0f;
 }
 
 - (GRRepositoryGenericSectionView *)_presentIssuesView {
-	if (!issuesView) {
-		issuesView = [[GRRepositoryIssuesView alloc] init];
-		[issuesView setRepository:_repository];
-	}
-	
-	return issuesView;
+	return [[GRRepositoryGenericSectionView alloc] init];
 }
 
 - (GRRepositoryGenericSectionView *)_presentCommitsView {
-	if (!commitsView) {
-		commitsView = [[GRRepositoryCommitsView alloc] init];
-		[commitsView setRepository:_repository];
-	}
-	return commitsView;
+	return [[GRRepositoryGenericSectionView alloc] init];
 }
 
 - (GRRepositoryGenericSectionView *)_presentPullRequestsView {
-	if (!pullRequestView) {
-		pullRequestView = [[GRRepositoryPullRequestView alloc] init];
-		[pullRequestView setRepository:_repository];
-	}
-
-	return pullRequestView;
+	return [[GRRepositoryGenericSectionView alloc] init];
 }
 
 - (GRRepositoryGenericSectionView *)_presentInfoView {
@@ -171,17 +136,8 @@ static const CGFloat GRHeaderHeight = 36.0f;
 	return fileBrowser;
 }
 
-- (UIView *)_presentBranchesView {
-    if (!self.repository) {
-        return nil;
-    }
-    if (!branchView) {
-        GRBranchesModel *model = [[GRBranchesModel alloc] initWithRepository:self.repository];
-        branchView             = [[GRBranchesTableView alloc] initWithModel:model];
-        branchView.delegate    = self;
-    }
-    
-    return branchView;
+- (GRRepositoryGenericSectionView *)_presentBranchesView {
+    return [[GRRepositoryGenericSectionView alloc] init];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {

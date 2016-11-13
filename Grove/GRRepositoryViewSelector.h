@@ -19,7 +19,6 @@ typedef NS_ENUM(NSInteger, GRRepositoryViewSelectorType) {
 @class GRRepositoryViewSelector;
 @protocol GRRepositoryViewSelectorDelegate <NSObject>
 - (void)viewSelector:(GRRepositoryViewSelector *)selector didChangeToViewType:(GRRepositoryViewSelectorType)viewType;
-- (void)pushView:(UIView *)view;
 @end
 
 @interface GRRepositoryViewSelector : UIView

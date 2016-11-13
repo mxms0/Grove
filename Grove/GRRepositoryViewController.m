@@ -10,7 +10,6 @@
 #import <GroveSupport/GroveSupport.h>
 
 #import "GRRepositoryViewController.h"
-#import "GRRepositoryNavigationBar.h"
 #import "GRRepositoryNavigationController.h"
 #import "GRTabBarController.h"
 
