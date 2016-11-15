@@ -228,6 +228,11 @@
 				error = retError;
 				break;
 			}
+            case 451: {
+                // this page isn't available for legal reasons. :x
+                error = [NSError errorWithDomain:GSErrorDomain code:451 userInfo:@{NSLocalizedDescriptionKey : @"This page is unavailable legal reasons."}];
+                break;
+            }
 			case 503: {
 				NSDictionary *userInfo = @{
 										   NSLocalizedDescriptionKey: @"Service Unavailable",
@@ -236,11 +241,12 @@
 				error = retError;
 				break;
 			}
-			default:
+            default: {
 				NSLog(@"HTTP Code %ld", (long)[httpResponse statusCode]);
 				GSAssert();
 				error = responseError;
 				break;
+            }
 		}
 		
 		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^ {
