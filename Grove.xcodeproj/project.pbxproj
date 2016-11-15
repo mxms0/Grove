@@ -106,6 +106,7 @@
 		50AB97A91C373BA600FBD254 /* GroveSupportInternalStrings.h in Headers */ = {isa = PBXBuildFile; fileRef = 50AB97A81C373BA600FBD254 /* GroveSupportInternalStrings.h */; };
 		50C766AF1C649AE400DB63B3 /* GRRepositoryInfoViewHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 50C766AE1C649AE400DB63B3 /* GRRepositoryInfoViewHeaderView.m */; };
 		50D0DB181DDAB44300DBD027 /* GRProfileContributionsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 50D0DB171DDAB44300DBD027 /* GRProfileContributionsCell.m */; };
+		50D0DB1C1DDAC0D400DBD027 /* GRProfileTableViewCellContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 50D0DB1B1DDAC0D400DBD027 /* GRProfileTableViewCellContentView.m */; };
 		50D7EBCE1D8127EE00252CC2 /* GRStreamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 50D7EBCD1D8127EE00252CC2 /* GRStreamModel.m */; };
 		50D910201CADBC8B00BABC9A /* GRMessageFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 50D9101F1CADBC8B00BABC9A /* GRMessageFormat.m */; };
 		50E4B58F1B82F6D60029264A /* GroveSupport.h in Headers */ = {isa = PBXBuildFile; fileRef = 50E4B58E1B82F6D60029264A /* GroveSupport.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -362,6 +363,8 @@
 		50C766AE1C649AE400DB63B3 /* GRRepositoryInfoViewHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRRepositoryInfoViewHeaderView.m; sourceTree = "<group>"; };
 		50D0DB161DDAB44300DBD027 /* GRProfileContributionsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRProfileContributionsCell.h; sourceTree = "<group>"; };
 		50D0DB171DDAB44300DBD027 /* GRProfileContributionsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRProfileContributionsCell.m; sourceTree = "<group>"; };
+		50D0DB1A1DDAC0D400DBD027 /* GRProfileTableViewCellContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRProfileTableViewCellContentView.h; sourceTree = "<group>"; };
+		50D0DB1B1DDAC0D400DBD027 /* GRProfileTableViewCellContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRProfileTableViewCellContentView.m; sourceTree = "<group>"; };
 		50D7EBCC1D8127EE00252CC2 /* GRStreamModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRStreamModel.h; sourceTree = "<group>"; };
 		50D7EBCD1D8127EE00252CC2 /* GRStreamModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRStreamModel.m; sourceTree = "<group>"; };
 		50D9101F1CADBC8B00BABC9A /* GRMessageFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRMessageFormat.m; sourceTree = "<group>"; };
@@ -845,6 +848,8 @@
 				503F58F21DCFCC5100788D6D /* GRProfileOrganizationCell.m */,
 				503F58EE1DCFCBE200788D6D /* GRProfileRepositoryCell.h */,
 				503F58EF1DCFCBE200788D6D /* GRProfileRepositoryCell.m */,
+				50D0DB1A1DDAC0D400DBD027 /* GRProfileTableViewCellContentView.h */,
+				50D0DB1B1DDAC0D400DBD027 /* GRProfileTableViewCellContentView.m */,
 				503F58F51DCFD2EC00788D6D /* GRProfileTableViewCell.h */,
 				503F58F61DCFD2EC00788D6D /* GRProfileTableViewCell.m */,
 				50D0DB161DDAB44300DBD027 /* GRProfileContributionsCell.h */,
@@ -1465,6 +1470,7 @@
 				3857A6311DC032120045394F /* GRSectionHeaderFooterView.m in Sources */,
 				503C595E1BAD17EE003CB50E /* GRSyntaxHighlightedTextView.m in Sources */,
 				50E9DF261CC73D9700EDDE0F /* GRTabBarLayer.m in Sources */,
+				50D0DB1C1DDAC0D400DBD027 /* GRProfileTableViewCellContentView.m in Sources */,
 				501F87071C86751F000C2C53 /* GRSelectableLabel.m in Sources */,
 				84309A7D1B854A21008EB771 /* GRLoginViewController.m in Sources */,
 				84A8D0FA1B8D239600B6B4FB /* GRStreamViewControllerProxy.m in Sources */,

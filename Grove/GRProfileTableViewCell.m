@@ -7,13 +7,33 @@
 //
 
 #import "GRProfileTableViewCell.h"
+#import "GRProfileTableViewCellContentView.h"
 
-@implementation GRProfileTableViewCell
+@implementation GRProfileTableViewCell {
+    GRProfileTableViewCellContentView *contentView;
+}
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
 	if ((self = [super initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseIdentifier])) {
+        contentView = [[GRProfileTableViewCellContentView alloc] init];
+        
+        [self.contentView addSubview:contentView];
+        
+        UILabel *textLabel = self.textLabel;
+        UILabel *detailLabel = self.detailTextLabel;
+        UIImageView *imageView = self.imageView;
+        
+        [textLabel removeFromSuperview];
+        [detailLabel removeFromSuperview];
+        [imageView removeFromSuperview];
+        
+        [contentView addSubview:textLabel];
+        [contentView addSubview:detailLabel];
+        [contentView addSubview:imageView];
+        
 		[self setBackgroundColor:[UIColor clearColor]];
-		[self.contentView setBackgroundColor:[UIColor whiteColor]];
+		[contentView setBackgroundColor:[UIColor whiteColor]];
+        
 	}
 	return self;
 }
@@ -33,11 +53,8 @@
 	[super layoutSubviews];
 	
 	[self.contentView setFrame:CGRectMake(GRProfileTableHorizontalPadding, 0, self.contentView.frame.size.width - 2 * GRProfileTableHorizontalPadding, self.contentView.frame.size.height)];
-}
-
-- (void)drawRect:(CGRect)rect {
-    [super drawRect:rect];
     
+    [contentView setFrame:self.contentView.bounds];
 }
 
 @end
