@@ -168,7 +168,7 @@
 }
 
 - (CGFloat)heightForSectionHeader:(NSInteger)section {
-	return 40.0f;
+	return 50.0f;
 }
 
 - (CGFloat)heightForSectionFooter:(NSInteger)section {

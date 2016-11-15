@@ -15,6 +15,7 @@
 #import "GREmptySectionHeaderFooterView.h"
 #import "GRProfileRepositoryCell.h"
 #import "GRProfileOrganizationCell.h"
+#import "GRProfileContributionsCell.h"
 
 #import <GroveSupport/GSGitHubEngine.h>
 #import <GroveSupport/GroveSupport.h>
@@ -47,12 +48,15 @@
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
+    
+    self.view.backgroundColor = [UIColor blackColor];
 	
 	self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 	
 	[self.tableView registerClass:[GRProfileRepositoryCell class] forCellReuseIdentifier:@"GRProfileRepositoryCell"];
 	[self.tableView registerClass:[GRProfileOrganizationCell class] forCellReuseIdentifier:@"GRProfileOrganizationCell"];
-	
+    [self.tableView registerClass:[GRProfileContributionsCell class] forCellReuseIdentifier:@"GRProfileContributionsCell"];
+    
 	headerView = [[GRProfileHeaderView alloc] init];
 	[headerView setFrame:CGRectMake(0, 0, self.view.frame.size.width, GRProfileHeaderViewHeight)];	
 	
@@ -174,6 +178,10 @@
 		}
 			
 		case GRProfileModelSectionIndexContributions:
+            cellClass = [GRProfileContributionsCell class];
+            
+            reuseIdentifier = @"GRProfileContributionsCell";
+            
 			break;
 		default:
 			break;
@@ -182,11 +190,10 @@
 	UITableViewCell *cell = [_tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
 	
 	if (!cell) {
-		
 		cell = [[cellClass alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseIdentifier];
 	}
     
-    //configure the cell
+    // configure the cell
     cell.detailTextLabel.textColor = [UIColor grayColor];
     cell.textLabel.text = textContent;
     cell.detailTextLabel.text = secondaryTextContent;
