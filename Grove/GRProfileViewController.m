@@ -116,6 +116,7 @@
 	if ([model numberOfRowsInSection:section] == 0) {
 		headerClass = [GREmptySectionHeaderFooterView class];
 	}
+	
 	return [[headerClass alloc] initWithFrame:CGRectMake(0, 0, self.tableView.bounds.size.width, [model heightForSectionHeader:section]) mode:GRSectionModeHeader text:[model titleForSection:section]];
 }
 

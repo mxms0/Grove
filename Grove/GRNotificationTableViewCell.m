@@ -7,6 +7,7 @@
 //
 
 #import "GRNotificationTableViewCell.h"
+#import <GroveSupport/GSNotification.h>
 
 @implementation GRNotificationTableViewCell
 
@@ -17,6 +18,10 @@
 		self.selectionStyle = UITableViewCellSelectionStyleNone;
 	}
 	return self;
+}
+
+- (void)setNotification:(GSNotification *)notif {
+	self.textLabel.text = [notif title];
 }
 
 - (void)setFrame:(CGRect)frame {

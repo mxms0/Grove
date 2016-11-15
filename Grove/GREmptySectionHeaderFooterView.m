@@ -10,7 +10,7 @@
 
 @implementation GREmptySectionHeaderFooterView
 
-- (instancetype)initWithFrame:(CGRect)frame mode:(GRSectionHeaderFooterMode)_mode text:(NSString*)_text {
+- (instancetype)initWithFrame:(CGRect)frame mode:(GRSectionHeaderFooterMode)_mode text:(NSString *)_text {
     if (_mode == GRSectionModeHeader) {
         _text = [@"No " stringByAppendingString:_text.capitalizedString];
     }

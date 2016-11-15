@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class GSNotification;
 @interface GRNotificationTableViewCell : UITableViewCell {
 	CAShapeLayer *boundingLayer;
 	CGRect adjustedFrame;
 }
-- (void)setText:(NSString *)text;
+- (void)setNotification:(GSNotification *)notif;
 @end
