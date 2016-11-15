@@ -27,6 +27,7 @@
 	if ((self = [super initWithStyle:UITableViewStyleGrouped])) {
 		
 		self.tabBarItem = [[UITabBarItem alloc] initWithTitle:GRLocalizedString(@"Notifications", nil, nil) image:[UIImage imageNamed:@"tb@2x"] tag:0];
+		
 	}
 	return self;
 }
@@ -42,6 +43,8 @@
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
+	
+	self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 	
 	model = [[GRNotificationModel alloc] init];
 	[model setDelegate:self];

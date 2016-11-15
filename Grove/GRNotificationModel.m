@@ -84,7 +84,7 @@
 }
 
 - (NSString *)titleForSection:(NSInteger)section {
-	return @"";
+	return [[notifications allKeys] objectAtIndex:section];
 }
 
 @end

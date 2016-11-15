@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GRGroupedTableViewCell.h"
 
-@interface GRProfileTableViewCell : UITableViewCell
+@interface GRProfileTableViewCell : GRGroupedTableViewCell
 @end

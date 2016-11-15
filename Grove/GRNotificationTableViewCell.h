@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GRGroupedTableViewCell.h"
 
 @class GSNotification;
-@interface GRNotificationTableViewCell : UITableViewCell {
+@interface GRNotificationTableViewCell : GRGroupedTableViewCell {
 	CAShapeLayer *boundingLayer;
 	CGRect adjustedFrame;
 }

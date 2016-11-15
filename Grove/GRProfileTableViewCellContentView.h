@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GRGroupedTableViewCellContentView.h"
 
-@interface GRProfileTableViewCellContentView : UIView
+@interface GRProfileTableViewCellContentView : GRGroupedTableViewCellContentView
 
 @end
