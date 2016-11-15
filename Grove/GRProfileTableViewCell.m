@@ -34,4 +34,10 @@
 	
 	[self.contentView setFrame:CGRectMake(GRProfileTableHorizontalPadding, 0, self.contentView.frame.size.width - 2 * GRProfileTableHorizontalPadding, self.contentView.frame.size.height)];
 }
+
+- (void)drawRect:(CGRect)rect {
+    [super drawRect:rect];
+    
+}
+
 @end

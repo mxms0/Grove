@@ -59,12 +59,10 @@ const CGFloat GRSectionViewIndentationWidth = 10.0f;
     const CGFloat contentViewHeight = 35.0f;
     const CGFloat yDelta = self.frame.size.height - contentViewHeight;
 
-	
 	[contentView setFrame:CGRectMake(GRProfileTableHorizontalPadding, yDelta, self.frame.size.width - 2 * GRProfileTableHorizontalPadding, contentViewHeight)];
 	
 	[self setClipsToBounds:YES];
 	
-
 	[label setFrame:CGRectMake(GRSectionViewIndentationWidth, 0, contentView.frame.size.width - 2 * GRSectionViewIndentationWidth, contentViewHeight)];
 	
 	UIRectCorner rc = (mode == GRSectionModeHeader ? (UIRectCornerTopLeft | UIRectCornerTopRight) : (UIRectCornerBottomLeft | UIRectCornerBottomRight));
@@ -74,7 +72,6 @@ const CGFloat GRSectionViewIndentationWidth = 10.0f;
 	roundingMask.frame = contentView.bounds;
 	roundingMask.path = path.CGPath;
 	contentView.layer.mask = roundingMask;
-    NSLog(@"fds %f", contentView.frame.size.height);
 }
 
 @end

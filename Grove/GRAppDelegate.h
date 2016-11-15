@@ -14,7 +14,7 @@
 #define GRDebugTargetNotificationsView 3
 #define GRDebugTargetLoginView 4
 
-#define GRStaticDebugTarget GRDebugTargetProfileView
+#define GRStaticDebugTarget GRDebugTargetNotificationsView
 
 static int GRDebugTarget = GRStaticDebugTarget;
 
