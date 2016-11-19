@@ -1,5 +1,5 @@
 //
-//  GRRepositoryPullRequestModel.h
+//  GRRepositoryPullRequestsModel.h
 //  Grove
 //
 //  Created by Max Shavrick on 1/27/16.
@@ -8,6 +8,6 @@
 
 #import "GRRepositoryGenericSectionModel.h"
 
-@interface GRRepositoryPullRequestModel : GRRepositoryGenericSectionModel
+@interface GRRepositoryPullRequestsModel : GRRepositoryGenericSectionModel
 
 @end
