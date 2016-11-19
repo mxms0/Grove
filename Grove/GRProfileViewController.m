@@ -12,22 +12,40 @@
 #import "GRSessionManager.h"
 #import "GRRepositoryViewController.h"
 #import "GRSectionHeaderFooterView.h"
+#import "GREmptySectionHeaderFooterView.h"
 
 #import <GroveSupport/GSGitHubEngine.h>
 #import <GroveSupport/GroveSupport.h>
 
 @implementation GRProfileViewController {
 	GRProfileModel *model;
-	UITableView *tableView;
+}
+
+- (instancetype)initWithUsername:(NSString *)username {
+	if ((self = [super initWithStyle:UITableViewStyleGrouped])) {
+		
+		__weak id weakSelf = self;
+		[[GSGitHubEngine sharedInstance] userForUsername:username completionHandler:^(GSUser * _Nullable user, NSError * _Nullable error) {
+			dispatch_async(dispatch_get_main_queue(), ^ {
+				[weakSelf setUser:user];
+				[weakSelf reloadData];
+			});
+		}];
+	}
+	return self;
 }
 
 - (instancetype)initWithStyle:(UITableViewStyle)style {
 	if ((self = [super initWithStyle:UITableViewStyleGrouped])) {
 		self.tabBarItem = [[UITabBarItem alloc] initWithTitle:GRLocalizedString(@"Profile", nil, nil) image:[UIImage imageNamed:@"tb@2x"] tag:0];
-		
-//		self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
     return self;
+}
+
+- (void)viewDidLoad {
+	[super viewDidLoad];
+	
+	[self reloadData];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
@@ -51,8 +69,8 @@
 }
 
 - (void)reloadData {
-	[tableView reloadData];
-	[(GRProfileHeaderView *)[tableView headerViewForSection:0] setUser:[model visibleUser]];
+	[self.tableView reloadData];
+	[(GRProfileHeaderView *)[self.tableView headerViewForSection:0] setUser:[model visibleUser]];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)_tableView {
@@ -78,24 +96,32 @@
 		[header setProfileImage:[model profileImage]];
 		return header;
 	} else {
-		return [[GRSectionHeaderFooterView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.bounds.size.width, [model heightForSectionHeader])
-														   mode:GRSectionHeaderMode text:[model titleForSection:section]];
+        Class headerClass = [GRSectionHeaderFooterView class];
+        if ([model numberOfRowsInSection:section] == 0) {
+            headerClass = [GREmptySectionHeaderFooterView class];
+        }
+        return [[headerClass alloc] initWithFrame:CGRectMake(0, 0, self.tableView.bounds.size.width, [model heightForSectionHeader:section])
+                                             mode:GRSectionHeaderMode text:[model titleForSection:section]];
 	}
 }
 
 - (UIView*)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-	return [[GRSectionHeaderFooterView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.bounds.size.width, [model heightForSectionFooter])
-													   mode:GRSectionFooterMode text:@""];
+    Class footerClass = [GRSectionHeaderFooterView class];
+    if ([model numberOfRowsInSection:section] == 0) {
+        footerClass = [GREmptySectionHeaderFooterView class];
+    }
+    return [[footerClass alloc] initWithFrame:CGRectMake(0, 0, self.tableView.bounds.size.width, [model heightForSectionFooter:section])
+                                         mode:GRSectionFooterMode text:@""];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
 	if (section == 0)
 		return [model heightForProfileHeader];
-	return [model heightForSectionHeader];
+    return [model heightForSectionHeader:section];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-	return [model heightForSectionFooter];
+	return [model heightForSectionFooter:section];
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
@@ -106,17 +132,26 @@
 	NSString *reuseIdentifier = @"stupidCell"; // Hey, Max! Don't do this.
 	NSString *textContent = nil;
     NSString *secondaryTextContent = nil;
+    UIImage *image;
 	switch (indexPath.section) {
 		case 0:
 			break;
-		case 1: {
-			reuseIdentifier = @"repositoryCell";
-			GSRepository *repo = [model repositoryForIndex:indexPath.row];
-			textContent = repo.name;
+        case 1: {
+            GSOrganization *organization = [model organizationForIndexPath:indexPath];
+            image                        = [model avatarForOrganization:organization];
+            reuseIdentifier              = @"organizationCell";
+            textContent                  = organization.login;
+            secondaryTextContent         = organization.orgDescription;
+            break;
+        }
+		case 2: {
+            reuseIdentifier      = @"repositoryCell";
+            GSRepository *repo   = [model repositoryForIndexPath:indexPath];
+            textContent          = repo.name;
             secondaryTextContent = repo.userDescription;
 			break;
 		}
-		case 2:
+		case 3:
 			break;
 		default:
 			break;
@@ -128,9 +163,16 @@
     
     //configure the cell
     cell.detailTextLabel.textColor = [UIColor grayColor];
+    cell.textLabel.text            = textContent;
+    cell.detailTextLabel.text      = secondaryTextContent;
     
-	cell.textLabel.text = textContent;
-    cell.detailTextLabel.text = secondaryTextContent;
+    if (image) {
+        [cell.imageView setImage:image];
+    }
+    else {
+        [cell.imageView setImage:nil];
+    }
+    
 	return cell;
 }
 
@@ -139,8 +181,8 @@
 	switch (indexPath.section) {
 		case 0:
 			break;
-		case 1: {
-			GSRepository *repository = [model repositoryForIndex:indexPath.row];
+		case 2: {
+			GSRepository *repository = [model repositoryForIndexPath:indexPath];
 			[self pushRepositoryViewControllerWithRepository:repository];
 			break;
 		}

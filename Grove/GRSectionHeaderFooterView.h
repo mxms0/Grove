@@ -13,7 +13,10 @@ typedef enum : NSUInteger {
 	GRSectionFooterMode
 } GRSectionHeaderFooterMode;
 
-@interface GRSectionHeaderFooterView : UIView
+@interface GRSectionHeaderFooterView : UIView  {
+    GRSectionHeaderFooterMode mode;
+    UILabel* label;
+}
 
 - (instancetype)initWithFrame:(CGRect)frame mode:(GRSectionHeaderFooterMode)mode text:(NSString*)text;
 

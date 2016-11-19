@@ -14,6 +14,8 @@
 @implementation GRProfileModel {
 	__strong GRApplicationUser *visibleUser;
 	__block NSArray *repositories;
+    __block NSArray *organizations;
+    __block NSMutableDictionary *organizationAvatars;
 	NSNumber *numberOfStarredRepositories;
 }
 
@@ -21,6 +23,7 @@
 	if (!user) return nil;
 	if ((self = [super init])) {
 		visibleUser = user;
+        organizationAvatars = [NSMutableDictionary dictionary];
 		
 		[self requestNewData];
 	}
@@ -28,7 +31,6 @@
 }
 
 - (void)requestNewData {
-	
 	[[GSCacheManager sharedInstance] findImageAssetWithURL:[visibleUser.user avatarURL] loggedInUser:nil downloadIfNecessary:YES completionHandler:^(UIImage * __nullable image, NSError *__nullable error) {
 		if (image) {
 			GRApplicationUser *appUser = [[GRSessionManager sharedInstance] currentUser];
@@ -65,6 +67,16 @@
 		repositories = repos;
 		[self reloadDelegate];
 	}];
+    
+    [[GSGitHubEngine sharedInstance] organizationsForUser:visibleUser.user completionHandler:^(NSArray * _Nullable localOrganizations, NSError * _Nullable error) {
+        if (error) {
+            _GSAssert(NO, [error localizedDescription]);
+            return;
+        }
+        
+        organizations = localOrganizations;
+        [self reloadDelegate];
+    }];
 }
 
 - (void)reloadDelegate {
@@ -74,11 +86,35 @@
 	});
 }
 
-- (GSRepository *)repositoryForIndex:(NSUInteger)index {
-	if (index <= [repositories count])
-		return [repositories objectAtIndex:index];
-	else
-		return nil;
+- (UIImage *)avatarForOrganization:(GSOrganization *)organization {
+    if (organizationAvatars[organization.orgId]) {
+        return organizationAvatars[organization.orgId];
+    }
+    else {
+        [[GSCacheManager sharedInstance] findImageAssetWithURL:organization.avatarURL loggedInUser:visibleUser.user downloadIfNecessary:YES completionHandler:^(UIImage * _Nullable image, NSError * _Nullable error) {
+            organizationAvatars[organization.orgId] = image;
+            [self reloadDelegate];
+        }];
+    }
+    return nil;
+}
+
+- (GSRepository *)repositoryForIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 2 && indexPath.row < repositories.count) {
+        return [repositories objectAtIndex:indexPath.row];
+    }
+    else {
+        return nil;
+    }
+}
+
+- (GSOrganization *)organizationForIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 1 && indexPath.row < organizations.count) {
+        return [organizations objectAtIndex:indexPath.row];
+    }
+    else {
+        return nil;
+    }
 }
 
 - (GRApplicationUser *)visibleUser {
@@ -86,7 +122,7 @@
 }
 
 - (NSInteger)numberOfSections {
-	return 3;
+	return 4;
 }
 
 - (NSInteger)numberOfRowsInSection:(NSInteger)section {
@@ -96,9 +132,12 @@
 			rowCount = 0;
 			break;
 		case 1:
-			rowCount = [repositories count];
+			rowCount = [organizations count];
 			break;
-		case 2:
+        case 2:
+            rowCount = [repositories count];
+            break;;
+		case 3:
 			rowCount = 3;
 			break;
 		default:
@@ -114,12 +153,15 @@
         case 0:
             break;
         case 1:
-            ret = @"repositories";
+            ret = @"organizations";
             break;
         case 2:
-            ret = @"contributions";
+            ret = @"repositories";
             break;
         case 3:
+            ret = @"contributions";
+            break;
+        case 4:
             ret = @"activity";
             break;
         default:
@@ -132,11 +174,14 @@
 	return 160.0f;
 }
 
-- (CGFloat)heightForSectionHeader {
+- (CGFloat)heightForSectionHeader:(NSInteger)section {
 	return 60.0f;
 }
 
-- (CGFloat)heightForSectionFooter {
+- (CGFloat)heightForSectionFooter:(NSInteger)section {
+    if ([self numberOfRowsInSection:section] == 0) {
+        return 0.0;
+    }
 	return 30.0f;
 }
 
@@ -146,10 +191,13 @@
 		case 0:
 			cellHeight = 44.0;
 			break;
-		case 1:
+        case 1:
+            cellHeight = 60.0;
+            break;
+		case 2:
 			cellHeight = 60.0;
 			break;
-		case 2:
+		case 3:
 			cellHeight = 22.0;
 			break;
 		default:

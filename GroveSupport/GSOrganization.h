@@ -11,6 +11,7 @@
 
 @interface GSOrganization : GSActor
 @property (nonatomic, readonly, strong) NSString *login;
+@property (nonatomic, readonly, strong) NSString *avatar;
 @property (nonatomic, readonly, strong) NSNumber *orgId;
 @property (nonatomic, readonly, strong) NSString *orgDescription;
 

@@ -313,6 +313,50 @@
 	}];
 }
 
+- (void)requestOrganizationsForUsername:(NSString *)username completionHandler:(void (^)(NSArray *__nullable orgs, NSError *__nullable error))handler {
+    NSURL *requestURL = GSAPIURLComplex(GSAPIEndpointUsers, username, GSAPIEndpointOrganizations, nil);
+    GSURLRequest *request = [[GSURLRequest alloc] initWithURL:requestURL];
+    
+    [self sendDataRequest:request completionHandler:^(GSSerializable *response, NSError *error) {
+        if (error) {
+            handler(nil, error);
+        }
+        else {
+            handler((NSArray *)response, nil);
+        }
+    }];
+}
+
+- (void)requestOrganizationsForCurrentUserWithToken:(NSString *)token completionHandler:(void (^)(NSArray *__nullable orgs, NSError *__nullable error))handler {
+    NSURL *requestURL = GSAPIURLComplex(GSAPIEndpointUser, GSAPIEndpointOrganizations, nil);
+    
+    GSURLRequest *request = [[GSURLRequest alloc] initWithURL:requestURL];
+    [request setAuthToken:token];
+    
+    [self sendDataRequest:request completionHandler:^(GSSerializable *response, NSError *error) {
+        if (error) {
+            handler(nil, error);
+        }
+        else {
+            handler((NSArray *)response, nil);
+        }
+    }];
+}
+
+- (void)requestBranchesForRepository:(GSRepository *)repository token:(NSString *)token completionHandler:(void (^)(NSArray<NSDictionary *> *__nullable branches, NSError *__nullable error))handler {
+    GSURLRequest *request = [[GSURLRequest alloc] initWithURL:repository.branchesAPIURL];
+    [request setAuthToken:token];
+    
+    [self sendDataRequest:request completionHandler:^(GSSerializable *response, NSError *error) {
+        if (error) {
+            handler(nil, error);
+        }
+        else {
+            handler((NSArray *)response, nil);
+        }
+    }];
+}
+
 - (void)requestRepositoriesForCurrentUserWithToken:(NSString *)token completionHandler:(void (^)(NSArray *__nullable repos, NSError *__nullable error))handler {
 	NSURL *requestURL = GSAPIURLComplex(GSAPIEndpointUser, GSAPIEndpointRepos, nil);
 

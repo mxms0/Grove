@@ -16,6 +16,7 @@
 #import "GRNotificationViewController.h"
 #import "GRActiveUserProfileViewController.h"
 #import "GRSessionManager.h"
+#import "GRRepositoryViewController.h"
 
 @interface GRAppDelegate ()
 @property (nonatomic) GRTabBarController *tabBarController;
@@ -26,26 +27,68 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 	// Override point for customization after application launch.
 	[[GRSessionManager sharedInstance] unpack];
+
+	[self initializeApplicationInterface];
+	
+	return YES;
+}
+
+- (void)initializeViewForDebug {
+	GRNavigationController *navigation = [[GRNavigationController alloc] init];
+	
+	UIViewController *viewController = nil;
+	
+	if (GRDebugTarget == GRDebugTargetProfileView) {
+		viewController = [[GRProfileViewController alloc] initWithUsername:@"Maximus-"];
+	}
+	else if (GRDebugTarget == GRDebugTargetRepositoryView) {
+		viewController = [[GRRepositoryViewController alloc] initWithRepositoryName:@"Grove" owner:@"Maximus-"];
+	}
+	else if (GRDebugTarget == GRDebugTargetNotificationsView) {
+		viewController = [[GRNotificationViewController alloc] init];
+	}
+	else if (GRDebugTarget == GRDebugTargetLoginView) {
+		viewController = [[GRLoginViewController alloc] init];
+	}
+	
+	if (!viewController) {
+		NSLog(@"Debug target specified to invalid selection. No view.");
+		return;
+	}
+	
+	navigation.viewControllers = @[viewController];
+	
+	self.window.rootViewController = navigation;
+}
+
+- (void)initializeApplicationInterface {
 	
 	self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 	[self.window makeKeyAndVisible];
 	
-	[[UITabBar appearance] setBarTintColor:[UIColor clearColor]];
-	[[UITabBar appearance] setBackgroundImage:[UIImage new]];
+#if GRStaticDebugTarget != 0
+	
+	[self initializeViewForDebug];
+	return;
+	
+#else
+	
+	[[UITabBar appearance] setBarTintColor:[UIColor whiteColor]];
+    [[UITabBar appearance] setBackgroundColor:[UIColor whiteColor]];
 	
 	if ([[[GRSessionManager sharedInstance] users] count] == 0) {
-		
+        
 		GRLoginViewController *loginViewController = [[GRLoginViewController alloc] init];
 		
 		self.window.rootViewController = loginViewController;
-
-        [[UITabBar appearance] setBarTintColor:[UIColor whiteColor]];
-        [[UITabBar appearance] setBackgroundImage:[UIImage new]];
-        [[UITabBar appearance] setShadowImage:[UIImage new]];
-    
+		
+		[[UITabBar appearance] setBarTintColor:[UIColor whiteColor]];
+		[[UITabBar appearance] setBackgroundImage:[UIImage new]];
+		[[UITabBar appearance] setShadowImage:[UIImage new]];
+		
 	}
 	else {
-
+		
 		[self presentTabBar];
 	}
 	
@@ -55,7 +98,7 @@
 	// data present? - [ present login view controller
 	//				   [ load data
 	
-	return YES;
+#endif
 }
 
 - (void)presentLogin {

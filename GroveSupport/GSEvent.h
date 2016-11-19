@@ -5,6 +5,8 @@
 //  Created by Max Shavrick on 8/18/15.
 //  Copyright (c) 2015 Milo. All rights reserved.
 //
+//	Events are designated by those things you see on your feed
+//	Notifications are analogous to alerts. You see them when you click the alert icon on github.com
 
 #import <Foundation/Foundation.h>
 

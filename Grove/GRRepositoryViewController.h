@@ -12,4 +12,5 @@
 @class GSRepository;
 @interface GRRepositoryViewController : GRViewController <GRRepositoryViewSelectorDelegate, UIAlertViewDelegate>
 @property (nonatomic, weak) GSRepository *repository;
+- (instancetype)initWithRepositoryName:(NSString *)name owner:(NSString *)owner;
 @end

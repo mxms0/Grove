@@ -108,6 +108,7 @@
 
 - (void)setUser:(GRApplicationUser *)user {
 	_user = user;
+	if (!user) return;
 	[usernameLabel setText:[@"@" stringByAppendingString:[user.user username]]];
 	[nameLabel setText:[user.user fullName]];
 	[locationLabel setText:[user.user location]];
