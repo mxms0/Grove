@@ -19,7 +19,11 @@
 }
 
 - (void)update {
-	
+	if(self.delegate && [self.delegate respondsToSelector:@selector(reloadView)]) {
+		dispatch_async(dispatch_get_main_queue(), ^{
+			[self.delegate reloadView];
+		});
+	}
 }
 
 - (NSString *)sectionLabelForSection:(NSUInteger)section {

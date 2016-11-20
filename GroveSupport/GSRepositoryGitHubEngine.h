@@ -26,6 +26,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)unstarRepository:(GSRepository *)repo completionHandler:(void (^)(BOOL success, NSError *__nullable error))handler;
 - (void)repositoriesStarredByUser:(GSUser *)user completionHandler:(void (^)(NSArray *__nullable repos, NSError *__nullable error))handler;
 
+// Pull Requests
+- (void)pullRequestsForRepository:(GSRepository*)repo completionHandler:(void (^)(NSArray* _Nullable pullRequests, NSError* _Nullable error))handler;
+- (void)pullRequestForRepository:(GSRepository*)repo withNumber:(NSNumber*)number completionHandler:(void (^)(GSPullRequest* _Nullable pullRequest, NSError* _Nullable error))handler;
+
 @end
 
 NS_ASSUME_NONNULL_END
