@@ -27,12 +27,12 @@
 
 - (void)setRepository:(GSRepository *)repo {
 	if (!repo) {
-		model = nil;
+		_model = nil;
 		return;
 	}
-	model = [[[self designatedModelClass] alloc] initWithRepository:repo];
-	[model setDelegate:self];
-	[model update];
+	_model = [[[self designatedModelClass] alloc] initWithRepository:repo];
+	[_model setDelegate:self];
+	[_model update];
 }
 
 - (void)reloadView {

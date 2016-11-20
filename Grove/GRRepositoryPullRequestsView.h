@@ -1,5 +1,5 @@
 //
-//  GRRepositoryPullRequestView.h
+//  GRRepositoryPullRequestsView.h
 //  Grove
 //
 //  Created by Max Shavrick on 1/27/16.
@@ -9,6 +9,5 @@
 #import <UIKit/UIKit.h>
 #import "GRRepositoryGenericSectionView.h"
 
-@interface GRRepositoryPullRequestView : GRRepositoryGenericSectionView
-
+@interface GRRepositoryPullRequestsView : GRRepositoryGenericSectionView <UITableViewDataSource, UITableViewDelegate>
 @end
