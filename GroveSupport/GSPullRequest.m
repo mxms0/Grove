@@ -45,6 +45,7 @@
 		GSAssign(dictionary, @"locked", _locked);
 		
 		GSObjectAssign(dictionary, @"assignee", _assignee, GSUser);
+		GSObjectAssign(dictionary, @"user", _user, GSUser);
 		GSObjectAssign(dictionary, @"repo", _repo, GSRepository);
 		
 		NSDictionary* milestoneData;

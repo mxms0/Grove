@@ -20,7 +20,9 @@
     _tableView = [[UITableView alloc] initWithFrame:self.frame style:UITableViewStyleGrouped];
     [_tableView setDataSource:self];
     [_tableView setDelegate:self];
-    
+	_tableView.estimatedRowHeight = 80;
+	_tableView.rowHeight = -1;
+	
     [self addSubview:_tableView];
     
     [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -46,10 +48,6 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [_model numberOfRowsInSection:section];
-}
-
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 100;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

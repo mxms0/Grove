@@ -24,6 +24,7 @@
 @property (nonatomic, readonly) NSString* head;
 @property (nonatomic, readonly) GSRepository* repo;
 @property (nonatomic, readonly) NSString* base;
+@property (nonatomic, readonly) GSUser* user;
 
 -(instancetype)initWithDictionary:(NSDictionary *)dictionary;
 
