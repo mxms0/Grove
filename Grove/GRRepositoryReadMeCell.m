@@ -17,10 +17,9 @@
 	if ((self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])) {
 		
 		activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+		[activityIndicator setHidesWhenStopped:true];
 		[activityIndicator startAnimating];
 		
-		
-		self.textLabel.text = @"README";
 		self.textLabel.font = [UIFont boldSystemFontOfSize:14];
 		
 		readmeLabel = [[UILabel alloc] init];
@@ -38,9 +37,15 @@
 }
 
 - (void)setReadMeString:(NSString *)readMeString {
-	[activityIndicator removeFromSuperview];
+	[activityIndicator stopAnimating];
+	if(!readMeString || [readMeString isEqualToString:@""]) {
+		self.textLabel.text = nil;
+	} else {
+		self.textLabel.text = @"README";
+	}
+	
 	readmeLabel.text = readMeString;
-	// ... post 
+	// ... post
 }
 
 - (void)layoutSubviews {

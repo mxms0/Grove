@@ -128,9 +128,7 @@
 
 - (void)setReadMeCell:(GRRepositoryReadMeCell *)readMeCell_ {
 	_readMeCell = readMeCell_;
-	if (readMeString) {
-		[_readMeCell setReadMeString:readMeString];
-	}
+	[_readMeCell setReadMeString:readMeString];
 }
 
 - (NSUInteger)numberOfSections {

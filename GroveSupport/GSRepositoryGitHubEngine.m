@@ -212,7 +212,7 @@
 	}];
 }
 
-#pragma mark 1` Requests
+#pragma mark Requests
 
 - (void)pullRequestsForRepository:(GSRepository*)repo completionHandler:(void (^)(NSArray* _Nullable pullRequests, NSError* _Nullable error))handler {
 	
