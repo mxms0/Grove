@@ -13,6 +13,6 @@
 @class GSUser;
 @interface GRProfileViewController : GRTableViewController <UITableViewDataSource, UITableViewDelegate, GRViewModelDelegate>
 @property (nonatomic, weak, setter=setUser:) GSUser *user;
-- (instancetype)initWithUsername:(NSString *)usernanme;
+- (instancetype)initWithUsername:(NSString *)username;
 // need method to load based on just username as a string. Would probably be useful. 
 @end

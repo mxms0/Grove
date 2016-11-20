@@ -25,11 +25,11 @@
 	GRProfileHeaderView *headerView;
 }
 
-- (instancetype)initWithUsername:(NSString *)usernanme {
+- (instancetype)initWithUsername:(NSString *)username {
 	if ((self = [super initWithStyle:UITableViewStyleGrouped])) {
 		
 		__weak id weakSelf = self;
-		[[GSGitHubEngine sharedInstance] userForUsername:usernanme completionHandler:^(GSUser * _Nullable user, NSError * _Nullable error) {
+		[[GSGitHubEngine sharedInstance] userForUsername:username completionHandler:^(GSUser * _Nullable user, NSError * _Nullable error) {
 			dispatch_async(dispatch_get_main_queue(), ^ {
 				[weakSelf setUser:user];
 				[weakSelf reloadData];
