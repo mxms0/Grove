@@ -17,8 +17,8 @@
 #import <GroveSupport/GroveSupport.h>
 
 @implementation GRProfileHeaderView {
+	UIView *contentView;
 	UIImageView *profileImageView;
-	GRBlurryImageView *backgroundImageView;
     
     UIStackView *statisticsView;
     UIStackView *titlesView;
@@ -34,13 +34,17 @@
 
 - (instancetype)init {
 	if ((self = [super init])) {
-		[self setBackgroundColor:[UIColor whiteColor]];
-		[self.layer setCornerRadius:10];
+		contentView = [[UIView alloc] init];
+		
+		[self addSubview:contentView];
+		
+		[self setBackgroundColor:[UIColor clearColor]];
+		[contentView setBackgroundColor:[UIColor whiteColor]];
+		[contentView.layer setCornerRadius:GRProfileTableCornerRadius];
         
         statisticsView      = [[UIStackView alloc] init];
         titlesView          = [[UIStackView alloc] init];
         profileImageView    = [[UIImageView alloc] init];
-        backgroundImageView = [[GRBlurryImageView alloc] init];
         usernameLabel       = [[UILabel alloc] init];
         nameLabel           = [[UILabel alloc] init];
         locationLabel       = [[UILabel alloc] init];
@@ -51,14 +55,12 @@
 		[profileImageView setBackgroundColor:[UIColor whiteColor]];
 		[self addSubview:profileImageView];
 		
-		backgroundImageView = [[GRBlurryImageView alloc] init];
-		backgroundImageView.blurRadius = 5.f;
-		[backgroundImageView setBackgroundColor:[UIColor whiteColor]];
+
 		[usernameLabel setFont:[UIFont systemFontOfSize:14]];
-		[usernameLabel setTextAlignment:NSTextAlignmentCenter];
+		[usernameLabel setTextAlignment:NSTextAlignmentLeft];
 		[nameLabel setFont:[UIFont boldSystemFontOfSize:16]];
-		[nameLabel setTextAlignment:NSTextAlignmentCenter];
-		[locationLabel setTextAlignment:NSTextAlignmentCenter];
+		[nameLabel setTextAlignment:NSTextAlignmentLeft];
+		[locationLabel setTextAlignment:NSTextAlignmentLeft];
 		[followersButton setSubText:@"Followers"];
 		[starredButton setSubText:@"Starred"];
 		[followingButton setSubText:@"Following"];
@@ -76,10 +78,10 @@
         
         [titlesView addArrangedSubviews:@[nameLabel, usernameLabel, locationLabel]];
         [statisticsView addArrangedSubviews:@[followersButton, starredButton, followingButton]];
-        [self addSubviews:@[backgroundImageView, profileImageView, titlesView, statisticsView]];
+        [contentView addSubviews:@[profileImageView, titlesView, statisticsView]];
         
         [profileImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self).offset(4*GRGenericVerticalPadding);
+            make.left.equalTo(contentView).offset(4*GRGenericVerticalPadding);
             make.height.width.equalTo(@(64));
 			make.centerY.equalTo(titlesView);
         }];
@@ -88,12 +90,12 @@
             make.height.equalTo(@(65));
             make.left.equalTo(profileImageView.mas_right).offset(GRGenericHorizontalPadding);
             make.bottom.equalTo(statisticsView.mas_top).offset(-GRGenericVerticalPadding);
-            make.right.equalTo(self).offset(-GRGenericHorizontalPadding);
+            make.right.equalTo(contentView).offset(-GRGenericHorizontalPadding);
         }];
 		
         [statisticsView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.bottom.equalTo(self).offset(-GRGenericVerticalPadding);
-            make.centerX.equalTo(self);
+            make.bottom.equalTo(contentView).offset(-GRGenericVerticalPadding);
+            make.centerX.equalTo(contentView);
             make.height.equalTo(@(50));
             make.width.equalTo(@(300));
         }];
@@ -103,6 +105,8 @@
 
 - (void)layoutSubviews {
 	[super layoutSubviews];
+	[contentView setFrame:CGRectMake(GRProfileTableHorizontalPadding, 0, self.frame.size.width - 2 * GRProfileTableHorizontalPadding, self.frame.size.height)];
+	
 	[self setUser:self.user];
 }
 
@@ -121,7 +125,6 @@
 - (void)setProfileImage:(UIImage *)profileImage {
 	_profileImage = profileImage;
 	[profileImageView setImage:profileImage];
-	[backgroundImageView setImage:profileImage];
 }
 
 @end

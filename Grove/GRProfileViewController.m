@@ -13,12 +13,15 @@
 #import "GRRepositoryViewController.h"
 #import "GRSectionHeaderFooterView.h"
 #import "GREmptySectionHeaderFooterView.h"
+#import "GRProfileRepositoryCell.h"
+#import "GRProfileOrganizationCell.h"
 
 #import <GroveSupport/GSGitHubEngine.h>
 #import <GroveSupport/GroveSupport.h>
 
 @implementation GRProfileViewController {
 	GRProfileModel *model;
+	GRProfileHeaderView *headerView;
 }
 
 - (instancetype)initWithUsername:(NSString *)username {
@@ -45,6 +48,16 @@
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	
+	self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+	
+	[self.tableView registerClass:[GRProfileRepositoryCell class] forCellReuseIdentifier:@"GRProfileRepositoryCell"];
+	[self.tableView registerClass:[GRProfileOrganizationCell class] forCellReuseIdentifier:@"GRProfileOrganizationCell"];
+	
+	headerView = [[GRProfileHeaderView alloc] init];
+	[headerView setFrame:CGRectMake(0, 0, self.view.frame.size.width, GRProfileHeaderViewHeight)];	
+	
+	[self.tableView setTableHeaderView:headerView];
+	
 	[self reloadData];
 }
 
@@ -53,7 +66,6 @@
 }
 
 - (void)setUser:(GSUser *)newUser {
-	NSLog(@"what is this %@", newUser);
 	if (self.user) {
 		[self.user removeObserver:self forKeyPath:GSUpdatedDateKey];
 	}
@@ -66,11 +78,16 @@
 	
 	model = [[GRProfileModel alloc] initWithUser:formalUser];
 	[model setDelegate:self];
+	
+	[headerView setUser:[model visibleUser]];
+	[headerView setProfileImage:[model profileImage]];
 }
 
 - (void)reloadData {
 	[self.tableView reloadData];
-	[(GRProfileHeaderView *)[self.tableView headerViewForSection:0] setUser:[model visibleUser]];
+	
+	[headerView setUser:[model visibleUser]];
+	[headerView setProfileImage:[model profileImage]];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)_tableView {
@@ -90,33 +107,26 @@
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-	if (section == 0) {
-		GRProfileHeaderView *header = [[GRProfileHeaderView alloc] init];
-		[header setUser:[model visibleUser]];
-		[header setProfileImage:[model profileImage]];
-		return header;
-	} else {
-        Class headerClass = [GRSectionHeaderFooterView class];
-        if ([model numberOfRowsInSection:section] == 0) {
-            headerClass = [GREmptySectionHeaderFooterView class];
-        }
-        return [[headerClass alloc] initWithFrame:CGRectMake(0, 0, self.tableView.bounds.size.width, [model heightForSectionHeader:section])
-                                             mode:GRSectionHeaderMode text:[model titleForSection:section]];
+
+	Class headerClass = [GRSectionHeaderFooterView class];
+	if ([model numberOfRowsInSection:section] == 0) {
+		headerClass = [GREmptySectionHeaderFooterView class];
 	}
+	return [[headerClass alloc] initWithFrame:CGRectMake(0, 0, self.tableView.bounds.size.width, [model heightForSectionHeader:section]) mode:GRSectionModeHeader text:[model titleForSection:section]];
 }
 
-- (UIView*)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-    Class footerClass = [GRSectionHeaderFooterView class];
-    if ([model numberOfRowsInSection:section] == 0) {
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+	
+	Class footerClass = [GRSectionHeaderFooterView class];
+	
+	if ([model numberOfRowsInSection:section] == 0) {
         footerClass = [GREmptySectionHeaderFooterView class];
     }
-    return [[footerClass alloc] initWithFrame:CGRectMake(0, 0, self.tableView.bounds.size.width, [model heightForSectionFooter:section])
-                                         mode:GRSectionFooterMode text:@""];
+	
+    return [[footerClass alloc] initWithFrame:CGRectMake(0, 0, self.tableView.bounds.size.width, [model heightForSectionFooter:section]) mode:GRSectionModeFooter text:@""];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-	if (section == 0)
-		return [model heightForProfileHeader];
     return [model heightForSectionHeader:section];
 }
 
@@ -129,66 +139,79 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)_tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-	NSString *reuseIdentifier = @"stupidCell"; // Hey, Max! Don't do this.
+	NSString *reuseIdentifier = nil;
 	NSString *textContent = nil;
     NSString *secondaryTextContent = nil;
-    UIImage *image;
+	UIImage *image = nil;
+	
+	Class cellClass = [UITableViewCell class];
+	
 	switch (indexPath.section) {
-		case 0:
-			break;
-        case 1: {
+        case GRProfileModelSectionIndexOrganizations: {
+			cellClass = [GRProfileOrganizationCell class];
+			
+			reuseIdentifier = @"GRProfileOrganizationCell";
+			
             GSOrganization *organization = [model organizationForIndexPath:indexPath];
-            image                        = [model avatarForOrganization:organization];
-            reuseIdentifier              = @"organizationCell";
-            textContent                  = organization.login;
-            secondaryTextContent         = organization.orgDescription;
+			
+            image = [model avatarForOrganization:organization];
+            reuseIdentifier = @"organizationCell";
+            textContent = organization.login;
+            secondaryTextContent = organization.orgDescription;
+			
             break;
         }
-		case 2: {
-            reuseIdentifier      = @"repositoryCell";
-            GSRepository *repo   = [model repositoryForIndexPath:indexPath];
-            textContent          = repo.name;
+			
+		case GRProfileModelSectionIndexRepositories: {
+			cellClass = [GRProfileRepositoryCell class];
+			
+            reuseIdentifier = @"GRProfileRepositoryCell";
+			
+            GSRepository *repo = [model repositoryForIndexPath:indexPath];
+            textContent = repo.name;
             secondaryTextContent = repo.userDescription;
 			break;
 		}
-		case 3:
+			
+		case GRProfileModelSectionIndexContributions:
 			break;
 		default:
 			break;
 	}
+	
 	UITableViewCell *cell = [_tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
+	
 	if (!cell) {
-		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseIdentifier];
+		
+		cell = [[cellClass alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseIdentifier];
 	}
     
     //configure the cell
     cell.detailTextLabel.textColor = [UIColor grayColor];
-    cell.textLabel.text            = textContent;
-    cell.detailTextLabel.text      = secondaryTextContent;
-    
-    if (image) {
-        [cell.imageView setImage:image];
-    }
-    else {
-        [cell.imageView setImage:nil];
-    }
+    cell.textLabel.text = textContent;
+    cell.detailTextLabel.text = secondaryTextContent;
+	
+	cell.selectionStyle = UITableViewCellSelectionStyleNone;
+	
+	[cell.imageView setImage:image];
     
 	return cell;
 }
 
 - (void)tableView:(UITableView *)_tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	[_tableView deselectRowAtIndexPath:indexPath animated:YES];
 	switch (indexPath.section) {
-		case 0:
-			break;
-		case 2: {
+		case GRProfileModelSectionIndexRepositories: {
 			GSRepository *repository = [model repositoryForIndexPath:indexPath];
 			[self pushRepositoryViewControllerWithRepository:repository];
 			break;
 		}
+		case GRProfileModelSectionIndexOrganizations:
+			break;
 		default:
 			break;
 	}
+	
+	[_tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (void)pushRepositoryViewControllerWithRepository:(GSRepository *)repo {

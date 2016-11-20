@@ -30,7 +30,7 @@
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
 	if ((self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])) {
-        [self setBackgroundColor:[UIColor clearColor]];
+        [self setBackgroundColor:[UIColor whiteColor]];
         
         imageView     = [[UIImageView alloc] initWithFrame:CGRectZero];
         titleLabel    = [[GRLabel alloc] initWithFrame:CGRectZero];

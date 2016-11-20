@@ -9,36 +9,14 @@
 #ifndef Grove_Grove_h
 #define Grove_Grove_h
 
-//Frameworks
-#import <UIKit/UIKit.h>
+// Frameworks
 #import <Masonry/Masonry.h>
 
-//Extensions
+// Extensions
 #import "UIStackView+GRExtension.h"
 #import "UIView+GRExtension.h"
 
-//Protocols
-@protocol GRDataSourceDelegate <NSObject>
-- (void)reloadData;
-@end
-
-@protocol GRDataSource <NSObject>
-@property (nonatomic) id<GRDataSourceDelegate> delegate;
-- (NSInteger)numberOfSections;
-- (NSInteger)numberOfRowsInSection:(NSInteger)section;
-
-@optional
-- (NSString *)titleForSectionHeader:(NSInteger)section;
-- (NSString *)titleForSectionFooter:(NSInteger)section;
-- (NSString *)titleForIndexPath:(NSIndexPath *)indexPath;
-- (NSString *)descriptionForIndexPath:(NSIndexPath *)indexPath;
-- (UIImage *)imageForIndexPath:(NSIndexPath *)indexPath;
-- (NSObject *)modelObjectForIndexPath:(NSIndexPath *)indexPath;
-
-@end
-
-
-//Functions
+// Functions
 static inline UIColor *GRColorFromRGB(unsigned long long rgb) {
 	return [UIColor colorWithRed:((float)((rgb & 0xFF0000) >> 16))/255.0 green:((float)((rgb & 0xFF00) >> 8))/255.0 blue:((float)(rgb & 0xFF))/255.0 alpha:1.0];
 }
@@ -107,6 +85,9 @@ static inline NSString *GRRelativeDateStringFromDate(NSDate *date) {
 	
 	return dateString;
 }
+
+static const CGFloat GRProfileTableHorizontalPadding = 12.0f;
+static const CGFloat GRProfileTableCornerRadius = 6.0f;
 
 static const CGFloat GRGenericHorizontalPadding = 10.0f;
 static const CGFloat GRGenericVerticalPadding = 10.0f;
