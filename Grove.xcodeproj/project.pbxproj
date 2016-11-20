@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C991F9F1DE120AD002F3140 /* GRRepositoryPullRequestTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C991F9E1DE120AD002F3140 /* GRRepositoryPullRequestTableViewCell.m */; };
 		16835F390081F498D3ACBD48 /* libPods-GroveSupport.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F44BB57537B7BDBE1D254C53 /* libPods-GroveSupport.a */; };
 		381EF6511D88A684000828A8 /* GRBlurryImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 381EF6501D88A684000828A8 /* GRBlurryImageView.m */; };
 		3857A62B1DC0124F0045394F /* GSProjectGitHubEngine.h in Headers */ = {isa = PBXBuildFile; fileRef = 3857A6291DC0124F0045394F /* GSProjectGitHubEngine.h */; };
@@ -195,6 +196,8 @@
 /* Begin PBXFileReference section */
 		05E83E4AD71F579DC5456E51 /* Pods-GroveSupportTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GroveSupportTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GroveSupportTests/Pods-GroveSupportTests.debug.xcconfig"; sourceTree = "<group>"; };
 		06D4E5EBED800F508AAEF336 /* Pods-GroveSupportTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GroveSupportTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-GroveSupportTests/Pods-GroveSupportTests.release.xcconfig"; sourceTree = "<group>"; };
+		0C991F9D1DE120AD002F3140 /* GRRepositoryPullRequestTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRRepositoryPullRequestTableViewCell.h; sourceTree = "<group>"; };
+		0C991F9E1DE120AD002F3140 /* GRRepositoryPullRequestTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRRepositoryPullRequestTableViewCell.m; sourceTree = "<group>"; };
 		10874AF9C580393C2C932E2C /* Pods-GroveSupport.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GroveSupport.release.xcconfig"; path = "Pods/Target Support Files/Pods-GroveSupport/Pods-GroveSupport.release.xcconfig"; sourceTree = "<group>"; };
 		381EF64F1D88A684000828A8 /* GRBlurryImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRBlurryImageView.h; sourceTree = "<group>"; };
 		381EF6501D88A684000828A8 /* GRBlurryImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRBlurryImageView.m; sourceTree = "<group>"; };
@@ -719,6 +722,8 @@
 				5071EFFB1C5971570095ACA0 /* GRRepositoryPullRequestsView.m */,
 				5071EFFD1C5971690095ACA0 /* GRRepositoryPullRequestsModel.h */,
 				5071EFFE1C5971690095ACA0 /* GRRepositoryPullRequestsModel.m */,
+				0C991F9D1DE120AD002F3140 /* GRRepositoryPullRequestTableViewCell.h */,
+				0C991F9E1DE120AD002F3140 /* GRRepositoryPullRequestTableViewCell.m */,
 			);
 			name = "Pull Requests";
 			sourceTree = "<group>";
@@ -1339,6 +1344,7 @@
 				50FB177B1CC3235100A8E607 /* GRNotificationTitleView.m in Sources */,
 				505C58EC1C995C0500D5F37C /* GRIssuesConversationViewController.m in Sources */,
 				50F0819E1B82EE5400366161 /* GRNavigationController.m in Sources */,
+				0C991F9F1DE120AD002F3140 /* GRRepositoryPullRequestTableViewCell.m in Sources */,
 				84C989061DCC00AB006976B7 /* GREmptySectionHeaderFooterView.m in Sources */,
 				50F081A11B82EF0B00366161 /* GRNavigationBar.m in Sources */,
 				5071F0051C5971920095ACA0 /* GRRepositoryIssuesModel.m in Sources */,

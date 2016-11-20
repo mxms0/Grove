@@ -9,6 +9,5 @@
 #import <UIKit/UIKit.h>
 #import "GRRepositoryGenericSectionView.h"
 
-@interface GRRepositoryPullRequestsView : GRRepositoryGenericSectionView
-
+@interface GRRepositoryPullRequestsView : GRRepositoryGenericSectionView <UITableViewDataSource, UITableViewDelegate>
 @end
