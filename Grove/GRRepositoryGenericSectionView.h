@@ -10,12 +10,11 @@
 
 #import "GRRepositoryGenericSectionModel.h"
 
-@class GSRepository;
 @interface GRRepositoryGenericSectionView : UIView <GRRepositoryGenericSectionModelDelegate> {
 @protected
-	GRRepositoryGenericSectionModel *model;
+    GRRepositoryGenericSectionModel *_model;
 }
-@property (nonatomic, strong, nullable, setter=setRepository:) GSRepository *repository;
 - (nonnull Class)designatedModelClass;
 - (void)commonInit;
+- (void)setRepository:(nullable GSRepository *)repo;
 @end

@@ -7,7 +7,10 @@
 //
 
 #import "GRRepositoryGenericSectionModel.h"
+#import "GSPullRequest.h"
 
 @interface GRRepositoryPullRequestsModel : GRRepositoryGenericSectionModel
+
+-(GSPullRequest*)pullRequestForRow:(NSInteger)row;
 
 @end

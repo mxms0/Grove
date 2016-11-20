@@ -10,4 +10,16 @@
 
 @implementation GRRepositoryPullRequestsModel
 
+-(NSUInteger)numberOfRowsInSection:(NSUInteger)section {
+    return self.repository.pullRequests.count;
+}
+
+-(NSUInteger)numberOfSections {
+    return 1;
+}
+
+-(GSPullRequest*)pullRequestForRow:(NSInteger)row {
+    return self.repository.pullRequests[row];
+}
+
 @end

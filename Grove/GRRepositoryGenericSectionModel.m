@@ -13,7 +13,7 @@
 - (instancetype)initWithRepository:(GSRepository *)repo {
 	if (!repo) return nil;
 	if ((self = [super init])) {
-		
+        self.repository = repo;
 	}
 	return self;
 }

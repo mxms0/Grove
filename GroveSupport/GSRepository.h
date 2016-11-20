@@ -44,5 +44,6 @@ typedef NS_OPTIONS(NSInteger, GSRepositoryPermissions) {
 @property (nonatomic, readonly, strong) NSNumber *repositorySize;
 @property (nonatomic, readonly, strong) NSDate *lastPushDate;
 @property (nonatomic, readonly, assign, getter=isFull) BOOL full;
+@property (nonatomic, readonly, strong) NSArray* pullRequests;
 
 @end

@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GSPullRequest.h" 
 
 @interface GRRepositoryPullRequestTableViewCell : UITableViewCell
+
+-(void)configureWithPullRequest:(GSPullRequest*)pullRequest;
 
 @end

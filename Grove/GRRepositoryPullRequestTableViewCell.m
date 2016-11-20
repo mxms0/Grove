@@ -7,7 +7,6 @@
 //
 
 #import "GRRepositoryPullRequestTableViewCell.h"
-#import "GroveSupport.h"
 
 @interface GRRepositoryPullRequestTableViewCell ()
 @property (nonatomic, strong, nonnull) UIView* mergedStatusView;
@@ -57,7 +56,19 @@
 }
 
 -(void)configureWithPullRequest:(GSPullRequest*)pullRequest {
+    if(pullRequest.isOpen) {
+        _mergedStatusView.backgroundColor = [UIColor greenColor];
+    } else {
+        _mergedStatusView.backgroundColor = [UIColor redColor];
+    }
     
+    _titleLabel.text = pullRequest.title;
+    
+    // Calculate days since creation
+    NSCalendar* cal = [NSCalendar currentCalendar];
+    NSInteger days = [cal component:NSCalendarUnitDay fromDate:pullRequest.createdAt];
+    
+    _subtitleLabel.text = [NSString stringWithFormat:@"%@ opened %ld days ago by %@", pullRequest.number, (long)days, pullRequest.assignee];
 }
 
 @end
