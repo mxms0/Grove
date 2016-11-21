@@ -343,6 +343,21 @@
     }];
 }
 
+- (void)requestCommitsForRepository:(GSRepository *)repository branch:(NSString *)branch token:(NSString *)token completionHandler:(void (^)(NSArray<NSDictionary *> *__nullable branches, NSError *__nullable error))handler {
+    GSURLRequest *request = [[GSURLRequest alloc] initWithURL:[repository.commitsAPIURL URLByAppendingPathComponent:branch]];
+   
+    NSLog(@"Commits URL :%@", [repository.commitsAPIURL URLByAppendingPathComponent:branch]);
+    
+    [self sendDataRequest:request completionHandler:^(GSSerializable *response, NSError *error) {
+        if (error) {
+            handler(nil, error);
+        }
+        else {
+            handler((NSArray *)response, nil);
+        }
+    }];
+}
+
 - (void)requestBranchesForRepository:(GSRepository *)repository token:(NSString *)token completionHandler:(void (^)(NSArray<NSDictionary *> *__nullable branches, NSError *__nullable error))handler {
     GSURLRequest *request = [[GSURLRequest alloc] initWithURL:repository.branchesAPIURL];
     [request setAuthToken:token];

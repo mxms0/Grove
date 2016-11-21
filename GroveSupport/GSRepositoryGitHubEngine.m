@@ -58,10 +58,38 @@
 
 #pragma mark Repositories
 
+- (void)commitsForRepository:(GSRepository *)repo branch:(NSString *)branch completionHandler:(void (^)(NSArray *, NSError *))handler {
+    void (^basicHandler)(NSArray<NSDictionary *> *__nullable commits, NSError *__nullable error) = ^(NSArray<NSDictionary *>* __nullable commits, NSError *__nullable error) {
+        
+        //NSLog(@"Commits. %@", commits);
+        
+        GSInsuranceBegin(commits, NSArray, error);
+        
+        GSInsuranceError {
+            handler(nil, error);
+        }
+        
+        GSInsuranceBadData {
+            NSLog(@"BAD data?");
+            GSAssert();
+        }
+        
+        GSInsuranceGoodData {
+            handler(commits, error);
+        }
+        
+        GSInsuranceEnd();
+    };
+    
+    if (self.activeUser.token) {
+        [[GSNetworkManager sharedInstance] requestCommitsForRepository:repo branch:branch token:self.activeUser.token completionHandler:basicHandler];
+    }
+}
+
 - (void)branchesForRepository:(GSRepository *)repo completionHandler:(void (^)(NSArray *, NSError *))handler {
     void (^basicHandler)(NSArray<NSDictionary *> *__nullable branches, NSError *__nullable error) = ^(NSArray<NSDictionary *>* __nullable branches, NSError *__nullable error) {
         
-        NSLog(@"BRANCHES. %@", branches);
+        //NSLog(@"BRANCHES. %@", branches);
         
         GSInsuranceBegin(branches, NSArray, error);
         

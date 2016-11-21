@@ -7,6 +7,7 @@
 //
 
 #import "GRRepositoryCommitBranchesTableViewController.h"
+#import "GRRepositoryNavigationController.h"
 
 @implementation GRRepositoryCommitBranchesTableViewController
 
@@ -28,6 +29,19 @@
 
 - (void)commonInit {
     self.title = @"Commits";
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if ([self.model respondsToSelector:@selector(modelObjectForIndexPath:)]) {
+        [self.model modelObjectForIndexPath:indexPath];
+        
+        UIViewController *viewController = [[UIViewController alloc] init];
+        viewController.view.backgroundColor = GSRandomUIColor();
+        
+        [(GRRepositoryNavigationController *)self.navigationController pushViewController:viewController
+                                                                            withComponent:[self.model titleForIndexPath:indexPath]
+                                                                                 animated:YES];
+    }
 }
 
 @end

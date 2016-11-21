@@ -8,6 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-@interface GRCommitsModel : NSObject
+@class GSRepository;
+@interface GRCommitsModel : NSObject <GRDataSource>
+
+@property (nonatomic, readonly) GSRepository *repository;
+@property (nonatomic, readonly) NSString *branch;
+
+- (instancetype)initWithRepository:(GSRepository *)repository branch:(NSString *)branch;
 
 @end

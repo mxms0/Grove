@@ -10,5 +10,6 @@
 
 @class GSRepository;
 @interface GRBranchesModel : NSObject <GRDataSource>
+@property (nonatomic, readonly) GSRepository *repository;
 - (instancetype)initWithRepository:(GSRepository *)repository;
 @end
