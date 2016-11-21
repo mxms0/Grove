@@ -29,6 +29,7 @@
 	NSArray *sectionsAvailable;
 	NSString *readMeString;
 	__weak GRRepositoryReadMeCell *_readMeCell;
+	BOOL loadingReadMe;
 }
 @dynamic delegate;
 
@@ -45,7 +46,9 @@
 			}];
 		}
 		
+		loadingReadMe = true;
 		[[GSGitHubEngine sharedInstance] readmeForRepository:repo completionHandler:^(NSString * _Nullable contents, NSError * _Nullable error) {
+			loadingReadMe = false;
 			if (error) {
 				switch (error.code) {
 					case 404:
@@ -54,6 +57,7 @@
 						NSLog(@"May need to try again. For readme");
 						break;
 				}
+				[self receivedReadMeString:nil];
 			}
 			else {
 				[self receivedReadMeString:contents];
@@ -128,8 +132,9 @@
 
 - (void)setReadMeCell:(GRRepositoryReadMeCell *)readMeCell_ {
 	_readMeCell = readMeCell_;
-	if (readMeString) {
-		[_readMeCell setReadMeString:readMeString];
+	if(!loadingReadMe) {
+		NSString* rms = readMeString ? readMeString : @"There is no readme";
+		[_readMeCell setReadMeString:rms];
 	}
 }
 

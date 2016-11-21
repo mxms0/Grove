@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "GRViewModel.h"
 
+@class GSNotification;
 @interface GRNotificationModel : GRViewModel
-
+- (CGFloat)heightForSectionHeader:(NSInteger)section;
+- (CGFloat)heightForSectionFooter:(NSInteger)section;
+- (GSNotification *)notificationAtIndexPath:(NSIndexPath *)path;
 @end

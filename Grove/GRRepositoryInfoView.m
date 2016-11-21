@@ -8,6 +8,7 @@
 
 #import "GRRepositoryInfoView.h"
 #import "GRRepositoryInfoViewHeaderView.h"
+#import "GRRepositoryInfoModel.h"
 #import "GRRepositoryReadMeCell.h"
 
 static NSString *const GRRepositoryInfoReadMeCellIdentifier = @"readMeCell";
@@ -15,9 +16,9 @@ static NSString *const GRRepositoryInfoRegularCellIdentifier = @"infoCell";
 
 @implementation GRRepositoryInfoView {
 	UITableView *tableView;
-	GRRepositoryInfoModel *model;
 	BOOL hasDescription;
 	CGFloat readMeCellHeight;
+	UILabel* emptyLabel;
 }
 
 - (void)commonInit {
@@ -30,6 +31,10 @@ static NSString *const GRRepositoryInfoRegularCellIdentifier = @"infoCell";
 	[tableView setDelegate:self];
 	[tableView setDataSource:self];
 	[self addSubview:tableView];
+}
+
+-(Class)designatedModelClass {
+	return [GRRepositoryInfoModel class];
 }
 
 - (void)layoutSubviews {
@@ -47,27 +52,21 @@ static NSString *const GRRepositoryInfoRegularCellIdentifier = @"infoCell";
 }
 
 - (void)setRepository:(GSRepository *)repository {
-	if (!repository) {
-		model = nil;
-	}
-	else {
-		model = [[GRRepositoryInfoModel alloc] initWithRepository:repository];
-	}
-	[model setDelegate:self];
-	hasDescription = !!([model repositoryDescription]);
+	[super setRepository:repository];
+	hasDescription = !!([(GRRepositoryInfoModel*)_model repositoryDescription]);
 }
 
 - (void)reloadView {
-	hasDescription = !!([model repositoryDescription]);
+	hasDescription = !!([(GRRepositoryInfoModel*)_model repositoryDescription]);
 	[tableView reloadData];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	return [(GRRepositoryInfoModel *)model numberOfRowsInSection:section];
+	return [(GRRepositoryInfoModel *)_model numberOfRowsInSection:section];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-	return [(GRRepositoryInfoModel *)model numberOfSections];
+	return [(GRRepositoryInfoModel *)_model numberOfSections];
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -76,7 +75,7 @@ static NSString *const GRRepositoryInfoRegularCellIdentifier = @"infoCell";
 	UIView *base = [[UIView alloc] init];
 	
 	UILabel *label = [[UILabel alloc] init];
-	[label setText:[model repositoryDescription]];
+	[label setText:[(GRRepositoryInfoModel*)_model repositoryDescription]];
 	
 	[label setFrame:CGRectMake(GRGenericHorizontalPadding, GRGenericVerticalPadding, self.frame.size.width - 2 * GRGenericHorizontalPadding, 45 - 2 * GRGenericVerticalPadding)];
 	
@@ -106,6 +105,8 @@ static NSString *const GRRepositoryInfoRegularCellIdentifier = @"infoCell";
 	if (isReadMeCell) {
 		reuseIdentifier = GRRepositoryInfoReadMeCellIdentifier;
 	}
+	
+	GRRepositoryInfoModel* model = (GRRepositoryInfoModel*)_model;
 	
 	UITableViewCell *cell = [_tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
 	

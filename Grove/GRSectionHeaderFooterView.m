@@ -7,47 +7,71 @@
 //
 
 #import "GRSectionHeaderFooterView.h"
+#import <CoreText/CoreText.h>
 
-@implementation GRSectionHeaderFooterView
+@implementation GRSectionHeaderFooterView {
+	UIView *contentView;
+	CAShapeLayer *roundingMask;
+}
 
-- (instancetype)initWithFrame:(CGRect)frame mode:(GRSectionHeaderFooterMode)_mode text:(NSString*)_text
-{
-	mode = _mode;
-	
-	label = [[UILabel alloc] init];
-	[label setText: [@"  " stringByAppendingString:_text]];
-	[label setBackgroundColor:[UIColor whiteColor]];
-	
-	self = [super initWithFrame:frame];
-	if (self) {
-		[self addSubview:label];
+const CGFloat GRSectionViewIndentationWidth = 10.0f;
+
+- (instancetype)initWithFrame:(CGRect)frame mode:(GRSectionHeaderFooterMode)_mode text:(NSString *)_text {
+	if ((self = [super initWithFrame:frame])) {
+		
+		contentView = [[UIView alloc] init];
+		[self addSubview:contentView];
+		
+		[self setBackgroundColor:[UIColor clearColor]];
+		[contentView setBackgroundColor:[UIColor whiteColor]];
+		
+		mode = _mode;
+		
+		label = [[UILabel alloc] init];
+		[label setText:_text];
+		[label setBackgroundColor:[UIColor whiteColor]];
+		[label setFont:[UIFont fontWithName:@"Avenir Next" size:14]];
+		
+//		NSArray *fontFeatureSettings = @[ @{ UIFontFeatureTypeIdentifierKey: @(kLowerCaseType),
+//											 UIFontFeatureSelectorIdentifierKey : @(kLowerCaseSmallCapsSelector) } ];
+//		
+//		NSLog(@"%@", [UIFont familyNames]);
+//		NSDictionary *fontAttributes = @{ UIFontDescriptorFeatureSettingsAttribute: fontFeatureSettings ,
+//										  UIFontDescriptorNameAttribute: @"Avenir Next" } ;
+//		
+//		UIFontDescriptor *fontDescriptor = [[UIFontDescriptor alloc] initWithFontAttributes: fontAttributes ];
+//		fontDescriptor = [fontDescriptor fontDescriptorByAddingAttributes:@{UIFontDescriptorTraitsAttribute : @{UIFontWeightTrait: @(UIFontWeightMedium)} }];
+//		
+//		[label setFont:[UIFont fontWithDescriptor:fontDescriptor size:14]];
+		
+		[contentView addSubview:label];
+		
+		roundingMask = [[CAShapeLayer alloc] init];
+		
 	}
+	
 	return self;
 }
 
--(void)setFrame:(CGRect)frame {
+- (void)setFrame:(CGRect)frame {
 	[super setFrame:frame];
+	
+    const CGFloat contentViewHeight = 35.0f;
+    const CGFloat yDelta = self.frame.size.height - contentViewHeight;
+
+	[contentView setFrame:CGRectMake(GRProfileTableHorizontalPadding, yDelta, self.frame.size.width - 2 * GRProfileTableHorizontalPadding, contentViewHeight)];
+	
 	[self setClipsToBounds:YES];
 	
-	CGFloat y = 0;
-	CGFloat ratio = .8;
+	[label setFrame:CGRectMake(GRSectionViewIndentationWidth, 0, contentView.frame.size.width - 2 * GRSectionViewIndentationWidth, contentViewHeight)];
 	
-	if(mode == GRSectionHeaderMode) {
-		y = self.bounds.size.height*(1.0-ratio);
-	}
+	UIRectCorner rc = (mode == GRSectionModeHeader ? (UIRectCornerTopLeft | UIRectCornerTopRight) : (UIRectCornerBottomLeft | UIRectCornerBottomRight));
 	
-	[label setFrame:CGRectMake(0, y, self.bounds.size.width, self.bounds.size.height*ratio)];
-	
-	UIRectCorner rc = (mode == GRSectionHeaderMode ? UIRectCornerTopLeft | UIRectCornerTopRight : UIRectCornerBottomLeft | UIRectCornerBottomRight);
-	
-	UIBezierPath* path = [UIBezierPath bezierPathWithRoundedRect:label.bounds
-											   byRoundingCorners:rc
-													 cornerRadii:CGSizeMake(10, 10)];
-	
-	CAShapeLayer* sl = [[CAShapeLayer alloc] init];
-	sl.frame = self.bounds;
-	sl.path = path.CGPath;
-	label.layer.mask = sl;
+	UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:contentView.bounds byRoundingCorners:rc cornerRadii:CGSizeMake(GRProfileTableCornerRadius, GRProfileTableCornerRadius)];
+
+	roundingMask.frame = contentView.bounds;
+	roundingMask.path = path.CGPath;
+	contentView.layer.mask = roundingMask;
 }
 
 @end

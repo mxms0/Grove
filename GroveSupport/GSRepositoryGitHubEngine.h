@@ -19,11 +19,16 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)branchesForRepository:(GSRepository *)repo completionHandler:(void (^)(NSArray *, NSError *))handler;
 - (void)repositoryContentsForRepository:(GSRepository *)repo atPath:(NSString *__nullable)path recurse:(BOOL)recurse completionHandler:(nonnull void (^)(GSRepositoryTree *_Nullable, NSError *_Nullable))handler;
 - (void)readmeForRepository:(GSRepository *)repo completionHandler:(void (^)(NSString *__nullable contents, NSError *__nullable error))handler;
+- (void)renderedReadmeForRepository:(GSRepository *)repo completionHandler:(void (^)(NSString *__nullable, NSError *__nullable))handler;
 
 // Starring
 - (void)starRepository:(GSRepository *)repo completionHandler:(void (^)(BOOL success, NSError *__nullable error))handler;
 - (void)unstarRepository:(GSRepository *)repo completionHandler:(void (^)(BOOL success, NSError *__nullable error))handler;
 - (void)repositoriesStarredByUser:(GSUser *)user completionHandler:(void (^)(NSArray *__nullable repos, NSError *__nullable error))handler;
+
+// Pull Requests
+- (void)pullRequestsForRepository:(GSRepository*)repo completionHandler:(void (^)(NSArray* _Nullable pullRequests, NSError* _Nullable error))handler;
+- (void)pullRequestForRepository:(GSRepository*)repo withNumber:(NSNumber*)number completionHandler:(void (^)(GSPullRequest* _Nullable pullRequest, NSError* _Nullable error))handler;
 
 @end
 

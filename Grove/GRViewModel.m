@@ -18,27 +18,30 @@
 	return self;
 }
 
+- (void)requestNewData {
+	GSAssert();
+}
+
 - (void)prepareForTeardown {
-	
+	GSAssert();
 }
 
 - (void)populateCachedData {
 	
 }
 
-- (void)requestNewData {
-	
-}
-
 - (NSInteger)numberOfRowsInSection:(NSInteger)section {
+	GSAssert();
 	return 0;
 }
 
 - (NSInteger)numberOfSections {
+	GSAssert();
 	return 0;
 }
 
 - (NSString *)titleForSection:(NSInteger)section {
+	GSAssert();
 	return nil;
 }
 

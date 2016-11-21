@@ -7,7 +7,14 @@
 //
 
 #import "GRTableViewController.h"
+#import "GRAppNotificationManager.h"
 
 @implementation GRTableViewController 
+
+- (void)viewDidLoad {
+	[super viewDidLoad];
+	
+	self.view.backgroundColor = [UIColor lightGrayColor];
+}
 
 @end

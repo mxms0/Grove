@@ -29,7 +29,7 @@ static const CGFloat GRRepositoryHeaderViewStandardFontSize = 16.0f;
 }
 
 - (instancetype)init {
-	if ((self = [super init])) {
+	if ((self = [super init])) {		
 		usernameLabel = [self _standardSelectableLabel];
 		repositoryNameLabel = [self _standardSelectableLabel];
 		slashCharacterLabel = [self _standardSelectableLabel];

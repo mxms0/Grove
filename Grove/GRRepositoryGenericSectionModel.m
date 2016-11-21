@@ -13,13 +13,17 @@
 - (instancetype)initWithRepository:(GSRepository *)repo {
 	if (!repo) return nil;
 	if ((self = [super init])) {
-		
+        self.repository = repo;
 	}
 	return self;
 }
 
 - (void)update {
-	
+	if(self.delegate && [self.delegate respondsToSelector:@selector(reloadView)]) {
+		dispatch_async(dispatch_get_main_queue(), ^{
+			[self.delegate reloadView];
+		});
+	}
 }
 
 - (NSString *)sectionLabelForSection:(NSUInteger)section {

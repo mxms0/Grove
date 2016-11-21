@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class GSUser, GSEvent, GSRepository, GSGist, GSNotification, GSRepositoryEntry, GSRepositoryTree;
+@class GSUser, GSEvent, GSRepository, GSGist, GSNotification, GSRepositoryEntry, GSRepositoryTree, GSPullRequest;
 
 NS_ASSUME_NONNULL_BEGIN
 

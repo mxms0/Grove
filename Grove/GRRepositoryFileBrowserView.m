@@ -36,11 +36,11 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	return [(GRRepositoryFileBrowserModel *)model numberOfItemsInCurrentDirectory];
+	return [(GRRepositoryFileBrowserModel *)_model numberOfItemsInCurrentDirectory];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-	return [(GRRepositoryFileBrowserModel *)model numberOfSections];
+	return [(GRRepositoryFileBrowserModel *)_model numberOfSections];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -53,7 +53,7 @@
 		cell = [[GRRepositoryFileBrowserEntryCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"c"];
 	}
 	
-	GSRepositoryEntry *entry = [(GRRepositoryFileBrowserModel *)model repositoryEntryForIndex:indexPath.row];
+	GSRepositoryEntry *entry = [(GRRepositoryFileBrowserModel *)_model repositoryEntryForIndex:indexPath.row];
 	
 	[cell configureWithEntry:entry];
 	
@@ -62,7 +62,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
-	[(GRRepositoryFileBrowserModel *)model pushItemFromIndexPath:indexPath];
+	[(GRRepositoryFileBrowserModel *)_model pushItemFromIndexPath:indexPath];
 }
 
 - (Class)designatedModelClass {
@@ -71,9 +71,9 @@
 
 - (void)setRepository:(GSRepository *)repo {
 	[super setRepository:repo];
-
-	[pathBar setDelegate:(GRRepositoryFileBrowserModel *)model];
-	[(GRRepositoryFileBrowserModel *)model setPathBar:pathBar];
+    
+	[pathBar setDelegate:(GRRepositoryFileBrowserModel *)_model];
+	[(GRRepositoryFileBrowserModel *)_model setPathBar:pathBar];
 }
 
 - (void)presentLoadingIndicator {

@@ -14,7 +14,7 @@
 #import "GRRepositoryFileBrowserView.h"
 #import "GRRepositoryInfoView.h"
 #import "GRRepositoryIssuesView.h"
-#import "GRRepositoryPullRequestView.h"
+#import "GRRepositoryPullRequestsView.h"
 #import "GRRepositoryCommitsView.h"
 #import "GRBranchesTableView.h"
 
@@ -31,7 +31,7 @@ static const CGFloat GRHeaderHeight = 36.0f;
 	GRRepositoryFileBrowserView *fileBrowser;
 	GRRepositoryInfoView *infoView;
 	GRRepositoryCommitsView *commitsView;
-	GRRepositoryPullRequestView *pullRequestView;
+	GRRepositoryPullRequestsView *pullRequestView;
 	GRRepositoryIssuesView *issuesView;
 	GRRepositoryGenericSectionView *currentSectionView;
 	GRRepositoryViewSelectorType currentViewType;
@@ -47,6 +47,7 @@ static const CGFloat GRHeaderHeight = 36.0f;
 		
 		viewSelector = [[GRRepositoryViewSelector alloc] init];
 		[viewSelector setDelegate:self];
+		[viewSelector setBackgroundColor:[UIColor whiteColor]];
 		
 		infoView = [[GRRepositoryInfoView alloc] init];
 		
@@ -139,7 +140,7 @@ static const CGFloat GRHeaderHeight = 36.0f;
 
 - (GRRepositoryGenericSectionView *)_presentPullRequestsView {
 	if (!pullRequestView) {
-		pullRequestView = [[GRRepositoryPullRequestView alloc] init];
+		pullRequestView = [[GRRepositoryPullRequestsView alloc] init];
 		[pullRequestView setRepository:_repository];
 	}
 

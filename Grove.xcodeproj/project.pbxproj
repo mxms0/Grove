@@ -7,12 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C991F9F1DE120AD002F3140 /* GRRepositoryPullRequestTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C991F9E1DE120AD002F3140 /* GRRepositoryPullRequestTableViewCell.m */; };
 		16835F390081F498D3ACBD48 /* libPods-GroveSupport.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F44BB57537B7BDBE1D254C53 /* libPods-GroveSupport.a */; };
 		381EF6511D88A684000828A8 /* GRBlurryImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 381EF6501D88A684000828A8 /* GRBlurryImageView.m */; };
 		3857A62B1DC0124F0045394F /* GSProjectGitHubEngine.h in Headers */ = {isa = PBXBuildFile; fileRef = 3857A6291DC0124F0045394F /* GSProjectGitHubEngine.h */; };
 		3857A62C1DC0124F0045394F /* GSProjectGitHubEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 3857A62A1DC0124F0045394F /* GSProjectGitHubEngine.m */; };
 		3857A6311DC032120045394F /* GRSectionHeaderFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3857A6301DC032120045394F /* GRSectionHeaderFooterView.m */; };
 		385AD43B1DA44CEE001CB947 /* GSProjectGitHubEngine.h in Headers */ = {isa = PBXBuildFile; fileRef = 385AD4391DA44CEE001CB947 /* GSProjectGitHubEngine.h */; };
+		389180051DD15C97001E28C6 /* GSPullRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 389180031DD15C97001E28C6 /* GSPullRequest.h */; };
+		389180061DD15C97001E28C6 /* GSPullRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 389180041DD15C97001E28C6 /* GSPullRequest.m */; };
 		4AFF78719E87757B1D344FE8 /* libPods-GroveSupportTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D7EE4952FB635BE7F459140 /* libPods-GroveSupportTests.a */; };
 		500001591BB73411001564E7 /* GRNotificationHeaderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 500001581BB73411001564E7 /* GRNotificationHeaderTableViewCell.m */; };
 		5000015D1BB778A0001564E7 /* GRRepositoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5000015C1BB778A0001564E7 /* GRRepositoryViewController.m */; };
@@ -59,6 +62,13 @@
 		5020E8621DA458970090D5E6 /* GSGistGitHubEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 5020E8601DA458970090D5E6 /* GSGistGitHubEngine.m */; };
 		5031C18B1DB6C35200C7EF36 /* GRMarkdownView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5031C18A1DB6C35200C7EF36 /* GRMarkdownView.m */; };
 		503C595E1BAD17EE003CB50E /* GRSyntaxHighlightedTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 503C595D1BAD17EE003CB50E /* GRSyntaxHighlightedTextView.m */; };
+		503F58ED1DCF445100788D6D /* GRAppNotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 503F58EC1DCF445100788D6D /* GRAppNotificationManager.m */; };
+		503F58F01DCFCBE200788D6D /* GRProfileRepositoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 503F58EF1DCFCBE200788D6D /* GRProfileRepositoryCell.m */; };
+		503F58F31DCFCC5100788D6D /* GRProfileOrganizationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 503F58F21DCFCC5100788D6D /* GRProfileOrganizationCell.m */; };
+		503F58F71DCFD2EC00788D6D /* GRProfileTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 503F58F61DCFD2EC00788D6D /* GRProfileTableViewCell.m */; };
+		503F58FA1DD0482A00788D6D /* GSSearchGitHubEngine.h in Headers */ = {isa = PBXBuildFile; fileRef = 503F58F81DD0482A00788D6D /* GSSearchGitHubEngine.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		503F58FB1DD0482A00788D6D /* GSSearchGitHubEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 503F58F91DD0482A00788D6D /* GSSearchGitHubEngine.m */; };
+		503F58FF1DD1165000788D6D /* GRAppNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 503F58FE1DD1165000788D6D /* GRAppNotificationView.m */; };
 		50504D9A1BA263D800B87C5F /* GRStreamCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 50504D991BA263D800B87C5F /* GRStreamCellModel.m */; };
 		505C58DB1C99587300D5F37C /* GRGenericConversationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 505C58DA1C99587300D5F37C /* GRGenericConversationViewController.m */; };
 		505C58DE1C99588600D5F37C /* GRGenericConversationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 505C58DD1C99588600D5F37C /* GRGenericConversationModel.m */; };
@@ -77,8 +87,8 @@
 		5070D56D1C4A648600E80AB1 /* GRRepositoryGenericSectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5070D56C1C4A648600E80AB1 /* GRRepositoryGenericSectionModel.m */; };
 		5070D5701C4A649300E80AB1 /* GRRepositoryGenericSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5070D56F1C4A649300E80AB1 /* GRRepositoryGenericSectionView.m */; };
 		5070ECB61C2BC2F90021093F /* GRRepositoryHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5070ECB51C2BC2F90021093F /* GRRepositoryHeaderView.m */; };
-		5071EFFC1C5971570095ACA0 /* GRRepositoryPullRequestView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5071EFFB1C5971570095ACA0 /* GRRepositoryPullRequestView.m */; };
-		5071EFFF1C5971690095ACA0 /* GRRepositoryPullRequestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5071EFFE1C5971690095ACA0 /* GRRepositoryPullRequestModel.m */; };
+		5071EFFC1C5971570095ACA0 /* GRRepositoryPullRequestsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5071EFFB1C5971570095ACA0 /* GRRepositoryPullRequestsView.m */; };
+		5071EFFF1C5971690095ACA0 /* GRRepositoryPullRequestsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5071EFFE1C5971690095ACA0 /* GRRepositoryPullRequestsModel.m */; };
 		5071F0021C5971860095ACA0 /* GRRepositoryIssuesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5071F0011C5971860095ACA0 /* GRRepositoryIssuesView.m */; };
 		5071F0051C5971920095ACA0 /* GRRepositoryIssuesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5071F0041C5971920095ACA0 /* GRRepositoryIssuesModel.m */; };
 		507931E91B8EC4730080C894 /* UIImage+GRExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 507931E81B8EC4730080C894 /* UIImage+GRExtensions.m */; };
@@ -97,7 +107,11 @@
 		5097B5F21B8D95C100A72721 /* GSOrganization.m in Sources */ = {isa = PBXBuildFile; fileRef = 5097B5F01B8D95C100A72721 /* GSOrganization.m */; };
 		50AB97A71C373B3100FBD254 /* GroveSupportStrings.h in Headers */ = {isa = PBXBuildFile; fileRef = 50AB97A61C373B3100FBD254 /* GroveSupportStrings.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		50AB97A91C373BA600FBD254 /* GroveSupportInternalStrings.h in Headers */ = {isa = PBXBuildFile; fileRef = 50AB97A81C373BA600FBD254 /* GroveSupportInternalStrings.h */; };
+		50BD6C8D1DDBC079005FD3ED /* GRGroupedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 50BD6C8C1DDBC079005FD3ED /* GRGroupedTableViewCell.m */; };
+		50BD6C901DDBC0F3005FD3ED /* GRGroupedTableViewCellContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 50BD6C8F1DDBC0F3005FD3ED /* GRGroupedTableViewCellContentView.m */; };
 		50C766AF1C649AE400DB63B3 /* GRRepositoryInfoViewHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 50C766AE1C649AE400DB63B3 /* GRRepositoryInfoViewHeaderView.m */; };
+		50D0DB181DDAB44300DBD027 /* GRProfileContributionsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 50D0DB171DDAB44300DBD027 /* GRProfileContributionsCell.m */; };
+		50D0DB1C1DDAC0D400DBD027 /* GRProfileTableViewCellContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 50D0DB1B1DDAC0D400DBD027 /* GRProfileTableViewCellContentView.m */; };
 		50D7EBCE1D8127EE00252CC2 /* GRStreamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 50D7EBCD1D8127EE00252CC2 /* GRStreamModel.m */; };
 		50D910201CADBC8B00BABC9A /* GRMessageFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 50D9101F1CADBC8B00BABC9A /* GRMessageFormat.m */; };
 		50E4B58F1B82F6D60029264A /* GroveSupport.h in Headers */ = {isa = PBXBuildFile; fileRef = 50E4B58E1B82F6D60029264A /* GroveSupport.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -197,6 +211,8 @@
 /* Begin PBXFileReference section */
 		05E83E4AD71F579DC5456E51 /* Pods-GroveSupportTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GroveSupportTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GroveSupportTests/Pods-GroveSupportTests.debug.xcconfig"; sourceTree = "<group>"; };
 		06D4E5EBED800F508AAEF336 /* Pods-GroveSupportTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GroveSupportTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-GroveSupportTests/Pods-GroveSupportTests.release.xcconfig"; sourceTree = "<group>"; };
+		0C991F9D1DE120AD002F3140 /* GRRepositoryPullRequestTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRRepositoryPullRequestTableViewCell.h; sourceTree = "<group>"; };
+		0C991F9E1DE120AD002F3140 /* GRRepositoryPullRequestTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRRepositoryPullRequestTableViewCell.m; sourceTree = "<group>"; };
 		10874AF9C580393C2C932E2C /* Pods-GroveSupport.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GroveSupport.release.xcconfig"; path = "Pods/Target Support Files/Pods-GroveSupport/Pods-GroveSupport.release.xcconfig"; sourceTree = "<group>"; };
 		381EF64F1D88A684000828A8 /* GRBlurryImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRBlurryImageView.h; sourceTree = "<group>"; };
 		381EF6501D88A684000828A8 /* GRBlurryImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRBlurryImageView.m; sourceTree = "<group>"; };
@@ -205,6 +221,8 @@
 		3857A62F1DC032120045394F /* GRSectionHeaderFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRSectionHeaderFooterView.h; sourceTree = "<group>"; };
 		3857A6301DC032120045394F /* GRSectionHeaderFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRSectionHeaderFooterView.m; sourceTree = "<group>"; };
 		385AD4391DA44CEE001CB947 /* GSProjectGitHubEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSProjectGitHubEngine.h; sourceTree = "<group>"; };
+		389180031DD15C97001E28C6 /* GSPullRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSPullRequest.h; sourceTree = "<group>"; };
+		389180041DD15C97001E28C6 /* GSPullRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSPullRequest.m; sourceTree = "<group>"; };
 		4D7EE4952FB635BE7F459140 /* libPods-GroveSupportTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GroveSupportTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		500001571BB73411001564E7 /* GRNotificationHeaderTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRNotificationHeaderTableViewCell.h; sourceTree = "<group>"; };
 		500001581BB73411001564E7 /* GRNotificationHeaderTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRNotificationHeaderTableViewCell.m; sourceTree = "<group>"; };
@@ -269,6 +287,19 @@
 		5031C18A1DB6C35200C7EF36 /* GRMarkdownView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRMarkdownView.m; sourceTree = "<group>"; };
 		503C595C1BAD17EE003CB50E /* GRSyntaxHighlightedTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRSyntaxHighlightedTextView.h; sourceTree = "<group>"; };
 		503C595D1BAD17EE003CB50E /* GRSyntaxHighlightedTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRSyntaxHighlightedTextView.m; sourceTree = "<group>"; };
+		503F58EB1DCF445100788D6D /* GRAppNotificationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRAppNotificationManager.h; sourceTree = "<group>"; };
+		503F58EC1DCF445100788D6D /* GRAppNotificationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRAppNotificationManager.m; sourceTree = "<group>"; };
+		503F58EE1DCFCBE200788D6D /* GRProfileRepositoryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRProfileRepositoryCell.h; sourceTree = "<group>"; };
+		503F58EF1DCFCBE200788D6D /* GRProfileRepositoryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRProfileRepositoryCell.m; sourceTree = "<group>"; };
+		503F58F11DCFCC5100788D6D /* GRProfileOrganizationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRProfileOrganizationCell.h; sourceTree = "<group>"; };
+		503F58F21DCFCC5100788D6D /* GRProfileOrganizationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRProfileOrganizationCell.m; sourceTree = "<group>"; };
+		503F58F41DCFD1CB00788D6D /* GRDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GRDataSource.h; sourceTree = "<group>"; };
+		503F58F51DCFD2EC00788D6D /* GRProfileTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRProfileTableViewCell.h; sourceTree = "<group>"; };
+		503F58F61DCFD2EC00788D6D /* GRProfileTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRProfileTableViewCell.m; sourceTree = "<group>"; };
+		503F58F81DD0482A00788D6D /* GSSearchGitHubEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSSearchGitHubEngine.h; sourceTree = "<group>"; };
+		503F58F91DD0482A00788D6D /* GSSearchGitHubEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSSearchGitHubEngine.m; sourceTree = "<group>"; };
+		503F58FD1DD1165000788D6D /* GRAppNotificationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRAppNotificationView.h; sourceTree = "<group>"; };
+		503F58FE1DD1165000788D6D /* GRAppNotificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRAppNotificationView.m; sourceTree = "<group>"; };
 		50504D981BA263D800B87C5F /* GRStreamCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRStreamCellModel.h; sourceTree = "<group>"; };
 		50504D991BA263D800B87C5F /* GRStreamCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRStreamCellModel.m; sourceTree = "<group>"; };
 		505C58D91C99587300D5F37C /* GRGenericConversationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRGenericConversationViewController.h; sourceTree = "<group>"; };
@@ -306,10 +337,10 @@
 		5070D56F1C4A649300E80AB1 /* GRRepositoryGenericSectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRRepositoryGenericSectionView.m; sourceTree = "<group>"; };
 		5070ECB41C2BC2F90021093F /* GRRepositoryHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRRepositoryHeaderView.h; sourceTree = "<group>"; };
 		5070ECB51C2BC2F90021093F /* GRRepositoryHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRRepositoryHeaderView.m; sourceTree = "<group>"; };
-		5071EFFA1C5971570095ACA0 /* GRRepositoryPullRequestView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRRepositoryPullRequestView.h; sourceTree = "<group>"; };
-		5071EFFB1C5971570095ACA0 /* GRRepositoryPullRequestView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRRepositoryPullRequestView.m; sourceTree = "<group>"; };
-		5071EFFD1C5971690095ACA0 /* GRRepositoryPullRequestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRRepositoryPullRequestModel.h; sourceTree = "<group>"; };
-		5071EFFE1C5971690095ACA0 /* GRRepositoryPullRequestModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRRepositoryPullRequestModel.m; sourceTree = "<group>"; };
+		5071EFFA1C5971570095ACA0 /* GRRepositoryPullRequestsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRRepositoryPullRequestsView.h; sourceTree = "<group>"; };
+		5071EFFB1C5971570095ACA0 /* GRRepositoryPullRequestsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRRepositoryPullRequestsView.m; sourceTree = "<group>"; };
+		5071EFFD1C5971690095ACA0 /* GRRepositoryPullRequestsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRRepositoryPullRequestsModel.h; sourceTree = "<group>"; };
+		5071EFFE1C5971690095ACA0 /* GRRepositoryPullRequestsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRRepositoryPullRequestsModel.m; sourceTree = "<group>"; };
 		5071F0001C5971860095ACA0 /* GRRepositoryIssuesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRRepositoryIssuesView.h; sourceTree = "<group>"; };
 		5071F0011C5971860095ACA0 /* GRRepositoryIssuesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRRepositoryIssuesView.m; sourceTree = "<group>"; };
 		5071F0031C5971920095ACA0 /* GRRepositoryIssuesModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRRepositoryIssuesModel.h; sourceTree = "<group>"; };
@@ -339,8 +370,16 @@
 		5097B5F01B8D95C100A72721 /* GSOrganization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSOrganization.m; sourceTree = "<group>"; };
 		50AB97A61C373B3100FBD254 /* GroveSupportStrings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroveSupportStrings.h; sourceTree = "<group>"; };
 		50AB97A81C373BA600FBD254 /* GroveSupportInternalStrings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroveSupportInternalStrings.h; sourceTree = "<group>"; };
+		50BD6C8B1DDBC079005FD3ED /* GRGroupedTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRGroupedTableViewCell.h; sourceTree = "<group>"; };
+		50BD6C8C1DDBC079005FD3ED /* GRGroupedTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRGroupedTableViewCell.m; sourceTree = "<group>"; };
+		50BD6C8E1DDBC0F3005FD3ED /* GRGroupedTableViewCellContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRGroupedTableViewCellContentView.h; sourceTree = "<group>"; };
+		50BD6C8F1DDBC0F3005FD3ED /* GRGroupedTableViewCellContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRGroupedTableViewCellContentView.m; sourceTree = "<group>"; };
 		50C766AD1C649AE400DB63B3 /* GRRepositoryInfoViewHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRRepositoryInfoViewHeaderView.h; sourceTree = "<group>"; };
 		50C766AE1C649AE400DB63B3 /* GRRepositoryInfoViewHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRRepositoryInfoViewHeaderView.m; sourceTree = "<group>"; };
+		50D0DB161DDAB44300DBD027 /* GRProfileContributionsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRProfileContributionsCell.h; sourceTree = "<group>"; };
+		50D0DB171DDAB44300DBD027 /* GRProfileContributionsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRProfileContributionsCell.m; sourceTree = "<group>"; };
+		50D0DB1A1DDAC0D400DBD027 /* GRProfileTableViewCellContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRProfileTableViewCellContentView.h; sourceTree = "<group>"; };
+		50D0DB1B1DDAC0D400DBD027 /* GRProfileTableViewCellContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRProfileTableViewCellContentView.m; sourceTree = "<group>"; };
 		50D7EBCC1D8127EE00252CC2 /* GRStreamModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRStreamModel.h; sourceTree = "<group>"; };
 		50D7EBCD1D8127EE00252CC2 /* GRStreamModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRStreamModel.m; sourceTree = "<group>"; };
 		50D9101F1CADBC8B00BABC9A /* GRMessageFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRMessageFormat.m; sourceTree = "<group>"; };
@@ -497,6 +536,8 @@
 				3857A62A1DC0124F0045394F /* GSProjectGitHubEngine.m */,
 				84C989071DCD1009006976B7 /* GSOrganizationGitHubEngine.h */,
 				84C989081DCD1009006976B7 /* GSOrganizationGitHubEngine.m */,
+				503F58F81DD0482A00788D6D /* GSSearchGitHubEngine.h */,
+				503F58F91DD0482A00788D6D /* GSSearchGitHubEngine.m */,
 			);
 			name = Public;
 			sourceTree = "<group>";
@@ -541,6 +582,17 @@
 				501F870E1C868E63000C2C53 /* GRRepositoryCommitsModel.m */,
 			);
 			name = Commits;
+			sourceTree = "<group>";
+		};
+		503F58FC1DD1163000788D6D /* Application Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				503F58EB1DCF445100788D6D /* GRAppNotificationManager.h */,
+				503F58EC1DCF445100788D6D /* GRAppNotificationManager.m */,
+				503F58FD1DD1165000788D6D /* GRAppNotificationView.h */,
+				503F58FE1DD1165000788D6D /* GRAppNotificationView.m */,
+			);
+			name = "Application Notifications";
 			sourceTree = "<group>";
 		};
 		50458DA01C8979B300C148EB /* Issue (Old) */ = {
@@ -593,6 +645,11 @@
 		5060631C1C7ADF1B00E1674A /* Profile View */ = {
 			isa = PBXGroup;
 			children = (
+				50D0DB191DDAB44700DBD027 /* Table View Cells */,
+				506005B81BBB5474000F5AFF /* GRActiveUserProfileViewController.h */,
+				506005B91BBB5474000F5AFF /* GRActiveUserProfileViewController.m */,
+				84F524F31B8326E40077A06C /* GRProfileViewController.h */,
+				84F524F41B8326E40077A06C /* GRProfileViewController.m */,
 				50ED2AD71B8B106F00DFF146 /* GRProfileModel.h */,
 				50ED2AD81B8B106F00DFF146 /* GRProfileModel.m */,
 				50ED2ADB1B8B135200DFF146 /* GRProfileHeaderView.h */,
@@ -603,10 +660,6 @@
 				84C989051DCC00AB006976B7 /* GREmptySectionHeaderFooterView.m */,
 				507931EA1B8EE28C0080C894 /* GRProfileStatisticButton.h */,
 				507931EB1B8EE28C0080C894 /* GRProfileStatisticButton.m */,
-				506005B81BBB5474000F5AFF /* GRActiveUserProfileViewController.h */,
-				506005B91BBB5474000F5AFF /* GRActiveUserProfileViewController.m */,
-				84F524F31B8326E40077A06C /* GRProfileViewController.h */,
-				84F524F41B8326E40077A06C /* GRProfileViewController.m */,
 			);
 			name = "Profile View";
 			sourceTree = "<group>";
@@ -722,10 +775,12 @@
 		5071EFF71C596B510095ACA0 /* Pull Requests */ = {
 			isa = PBXGroup;
 			children = (
-				5071EFFA1C5971570095ACA0 /* GRRepositoryPullRequestView.h */,
-				5071EFFB1C5971570095ACA0 /* GRRepositoryPullRequestView.m */,
-				5071EFFD1C5971690095ACA0 /* GRRepositoryPullRequestModel.h */,
-				5071EFFE1C5971690095ACA0 /* GRRepositoryPullRequestModel.m */,
+				5071EFFA1C5971570095ACA0 /* GRRepositoryPullRequestsView.h */,
+				5071EFFB1C5971570095ACA0 /* GRRepositoryPullRequestsView.m */,
+				5071EFFD1C5971690095ACA0 /* GRRepositoryPullRequestsModel.h */,
+				5071EFFE1C5971690095ACA0 /* GRRepositoryPullRequestsModel.m */,
+				0C991F9D1DE120AD002F3140 /* GRRepositoryPullRequestTableViewCell.h */,
+				0C991F9E1DE120AD002F3140 /* GRRepositoryPullRequestTableViewCell.m */,
 			);
 			name = "Pull Requests";
 			sourceTree = "<group>";
@@ -791,6 +846,8 @@
 				501C439D1C41E9A100288901 /* GSRepositoryTree.m */,
 				84714AE01DA44B2C00EB507A /* GSProject.h */,
 				84714AE11DA44B2C00EB507A /* GSProject.m */,
+				389180031DD15C97001E28C6 /* GSPullRequest.h */,
+				389180041DD15C97001E28C6 /* GSPullRequest.m */,
 			);
 			name = "Data Structures";
 			sourceTree = "<group>";
@@ -806,6 +863,23 @@
 				50E4B5B81B8306040029264A /* NSString+GSUtilities.m */,
 			);
 			name = Utilities;
+			sourceTree = "<group>";
+		};
+		50D0DB191DDAB44700DBD027 /* Table View Cells */ = {
+			isa = PBXGroup;
+			children = (
+				503F58F11DCFCC5100788D6D /* GRProfileOrganizationCell.h */,
+				503F58F21DCFCC5100788D6D /* GRProfileOrganizationCell.m */,
+				503F58EE1DCFCBE200788D6D /* GRProfileRepositoryCell.h */,
+				503F58EF1DCFCBE200788D6D /* GRProfileRepositoryCell.m */,
+				50D0DB1A1DDAC0D400DBD027 /* GRProfileTableViewCellContentView.h */,
+				50D0DB1B1DDAC0D400DBD027 /* GRProfileTableViewCellContentView.m */,
+				503F58F51DCFD2EC00788D6D /* GRProfileTableViewCell.h */,
+				503F58F61DCFD2EC00788D6D /* GRProfileTableViewCell.m */,
+				50D0DB161DDAB44300DBD027 /* GRProfileContributionsCell.h */,
+				50D0DB171DDAB44300DBD027 /* GRProfileContributionsCell.m */,
+			);
+			name = "Table View Cells";
 			sourceTree = "<group>";
 		};
 		50E4B58B1B82F6D60029264A /* GroveSupport */ = {
@@ -876,6 +950,8 @@
 		50F081841B82ED6500366161 /* Grove */ = {
 			isa = PBXGroup;
 			children = (
+				503F58FC1DD1163000788D6D /* Application Notifications */,
+				84B0378E1DCD768C0039BD77 /* Skeletons */,
 				50E4B5AA1B82F79A0029264A /* Grove.h */,
 				505C58D71C99585700D5F37C /* Conversation */,
 				506063201C7ADF9A00E1674A /* Application */,
@@ -944,6 +1020,24 @@
 			name = Branches;
 			sourceTree = "<group>";
 		};
+		84B0378E1DCD768C0039BD77 /* Skeletons */ = {
+			isa = PBXGroup;
+			children = (
+				503F58F41DCFD1CB00788D6D /* GRDataSource.h */,
+				84B0378F1DCD76EB0039BD77 /* GRModelTableViewController.h */,
+				84B037901DCD76EB0039BD77 /* GRModelTableViewController.m */,
+				5070D55F1C4A04BD00E80AB1 /* GRTableViewController.h */,
+				5070D5601C4A04BD00E80AB1 /* GRTableViewController.m */,
+				50F0818B1B82ED6500366161 /* GRViewController.h */,
+				50F0818C1B82ED6500366161 /* GRViewController.m */,
+				50BD6C8B1DDBC079005FD3ED /* GRGroupedTableViewCell.h */,
+				50BD6C8C1DDBC079005FD3ED /* GRGroupedTableViewCell.m */,
+				50BD6C8E1DDBC0F3005FD3ED /* GRGroupedTableViewCellContentView.h */,
+				50BD6C8F1DDBC0F3005FD3ED /* GRGroupedTableViewCellContentView.m */,
+			);
+			name = Skeletons;
+			sourceTree = "<group>";
+		};
 		84DDA1BC1D88979200E87E26 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -960,14 +1054,8 @@
 			children = (
 				5097B5CF1B8C0BC600A72721 /* GRViewModel.h */,
 				5097B5D01B8C0BC600A72721 /* GRViewModel.m */,
-				50F0818B1B82ED6500366161 /* GRViewController.h */,
-				50F0818C1B82ED6500366161 /* GRViewController.m */,
-				5070D55F1C4A04BD00E80AB1 /* GRTableViewController.h */,
-				5070D5601C4A04BD00E80AB1 /* GRTableViewController.m */,
 				849FF2191B8AD3710077DE06 /* GRTabBarController.h */,
 				849FF21A1B8AD3710077DE06 /* GRTabBarController.m */,
-				84B0378F1DCD76EB0039BD77 /* GRModelTableViewController.h */,
-				84B037901DCD76EB0039BD77 /* GRModelTableViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -1016,6 +1104,7 @@
 				3857A62B1DC0124F0045394F /* GSProjectGitHubEngine.h in Headers */,
 				50E4B5AD1B82F8E50029264A /* GSGitHubEngine.h in Headers */,
 				5097B5EC1B8D91C200A72721 /* GSComment.h in Headers */,
+				389180051DD15C97001E28C6 /* GSPullRequest.h in Headers */,
 				5020E8591DA44E350090D5E6 /* GSUserGitHubEngine.h in Headers */,
 				501BA7F01C3DFBC0005C5524 /* GSRepositoryEntry.h in Headers */,
 				84714AE21DA44B2C00EB507A /* GSProject.h in Headers */,
@@ -1024,6 +1113,7 @@
 				501C43A21C41ED4100288901 /* GSRepositoryTreeInternal.h in Headers */,
 				50E9F8701B832BF70007212E /* GSNetworkManagerHelpers.h in Headers */,
 				50AB97A91C373BA600FBD254 /* GroveSupportInternalStrings.h in Headers */,
+				503F58FA1DD0482A00788D6D /* GSSearchGitHubEngine.h in Headers */,
 				501C439E1C41E9A100288901 /* GSRepositoryTree.h in Headers */,
 				5097B5E21B8D2D9800A72721 /* GSUtilities.h in Headers */,
 				501BA7F31C3E029E005C5524 /* GSRepositoryEntryInternal.h in Headers */,
@@ -1310,6 +1400,7 @@
 				50E4B5B21B82FABA0029264A /* GSNetworkManager.m in Sources */,
 				3857A62C1DC0124F0045394F /* GSProjectGitHubEngine.m in Sources */,
 				5020E85A1DA44E350090D5E6 /* GSUserGitHubEngine.m in Sources */,
+				503F58FB1DD0482A00788D6D /* GSSearchGitHubEngine.m in Sources */,
 				84C9890A1DCD1009006976B7 /* GSOrganizationGitHubEngine.m in Sources */,
 				5097B5F21B8D95C100A72721 /* GSOrganization.m in Sources */,
 				501C042E1BAB78B400DC66C8 /* GSGist.m in Sources */,
@@ -1329,6 +1420,7 @@
 				5097B5DD1B8D29F400A72721 /* GSCacheManager.m in Sources */,
 				84A8D10B1B8D6F0C00B6B4FB /* GSIssue.m in Sources */,
 				50133F0F1B84495C004B5BB8 /* GSObject.m in Sources */,
+				389180061DD15C97001E28C6 /* GSPullRequest.m in Sources */,
 				50E4B5AE1B82F8E50029264A /* GSGitHubEngine.m in Sources */,
 				501C439F1C41E9A100288901 /* GSRepositoryTree.m in Sources */,
 			);
@@ -1350,6 +1442,7 @@
 				505C58EC1C995C0500D5F37C /* GRIssuesConversationViewController.m in Sources */,
 				50F0819E1B82EE5400366161 /* GRNavigationController.m in Sources */,
 				8453E3FA1DD5214E003628AF /* GRBranchesTableView.m in Sources */,
+				0C991F9F1DE120AD002F3140 /* GRRepositoryPullRequestTableViewCell.m in Sources */,
 				84C989061DCC00AB006976B7 /* GREmptySectionHeaderFooterView.m in Sources */,
 				50F081A11B82EF0B00366161 /* GRNavigationBar.m in Sources */,
 				5071F0051C5971920095ACA0 /* GRRepositoryIssuesModel.m in Sources */,
@@ -1366,8 +1459,9 @@
 				501BA7ED1C3D1AA6005C5524 /* GRRepositoryPathBar.m in Sources */,
 				50FB177A1CC3233B00A8E607 /* GRStreamTitleView.m in Sources */,
 				501558AF1B8553020002254D /* GRSessionManager.m in Sources */,
-				5071EFFF1C5971690095ACA0 /* GRRepositoryPullRequestModel.m in Sources */,
+				5071EFFF1C5971690095ACA0 /* GRRepositoryPullRequestsModel.m in Sources */,
 				50D7EBCE1D8127EE00252CC2 /* GRStreamModel.m in Sources */,
+				503F58F31DCFCC5100788D6D /* GRProfileOrganizationCell.m in Sources */,
 				501F870C1C868E51000C2C53 /* GRRepositoryCommitsView.m in Sources */,
 				84B037911DCD76EB0039BD77 /* GRModelTableViewController.m in Sources */,
 				506005BA1BBB5474000F5AFF /* GRActiveUserProfileViewController.m in Sources */,
@@ -1377,7 +1471,9 @@
 				84F524F51B8326E40077A06C /* GRProfileViewController.m in Sources */,
 				8453E3F71DD517A3003628AF /* GRModelTableView.m in Sources */,
 				5031C18B1DB6C35200C7EF36 /* GRMarkdownView.m in Sources */,
+				50D0DB181DDAB44300DBD027 /* GRProfileContributionsCell.m in Sources */,
 				500001591BB73411001564E7 /* GRNotificationHeaderTableViewCell.m in Sources */,
+				503F58F01DCFCBE200788D6D /* GRProfileRepositoryCell.m in Sources */,
 				84DDA1D91D88A22000E87E26 /* UIStackView+GRExtension.m in Sources */,
 				5070D55B1C495C7A00E80AB1 /* GRRepositoryViewSelector.m in Sources */,
 				501BA7F61C3E7378005C5524 /* GRRepositoryFileBrowserEntryCell.m in Sources */,
@@ -1386,28 +1482,33 @@
 				505C58DE1C99588600D5F37C /* GRGenericConversationModel.m in Sources */,
 				84F524FA1B832A7E0077A06C /* GRStreamEventCell.m in Sources */,
 				5070ECB61C2BC2F90021093F /* GRRepositoryHeaderView.m in Sources */,
+				503F58F71DCFD2EC00788D6D /* GRProfileTableViewCell.m in Sources */,
 				501F870F1C868E63000C2C53 /* GRRepositoryCommitsModel.m in Sources */,
 				84DDA1DC1D88A2E300E87E26 /* UIView+GRExtension.m in Sources */,
 				84A8D0FD1B8D262900B6B4FB /* GREventIssueViewController.m in Sources */,
 				50E781F41C78DA7800143931 /* GRSmallCapsLabel.m in Sources */,
 				5070D5691C4A619D00E80AB1 /* GRRepositoryInfoModel.m in Sources */,
+				503F58FF1DD1165000788D6D /* GRAppNotificationView.m in Sources */,
 				507931E91B8EC4730080C894 /* UIImage+GRExtensions.m in Sources */,
 				381EF6511D88A684000828A8 /* GRBlurryImageView.m in Sources */,
 				50E781F01C78D14F00143931 /* GRLabel.m in Sources */,
 				5071F0021C5971860095ACA0 /* GRRepositoryIssuesView.m in Sources */,
 				5000015D1BB778A0001564E7 /* GRRepositoryViewController.m in Sources */,
 				84B0378D1DCD56A10039BD77 /* GRBranchesModel.m in Sources */,
+				503F58ED1DCF445100788D6D /* GRAppNotificationManager.m in Sources */,
 				50F081871B82ED6500366161 /* main.m in Sources */,
 				50C766AF1C649AE400DB63B3 /* GRRepositoryInfoViewHeaderView.m in Sources */,
 				505C58DB1C99587300D5F37C /* GRGenericConversationViewController.m in Sources */,
 				501558B51B8553D70002254D /* GRApplicationUser.m in Sources */,
 				5070D5701C4A649300E80AB1 /* GRRepositoryGenericSectionView.m in Sources */,
+				50BD6C901DDBC0F3005FD3ED /* GRGroupedTableViewCellContentView.m in Sources */,
 				505C58E51C995ABA00D5F37C /* GRCommitCommentConversationModel.m in Sources */,
+				50BD6C8D1DDBC079005FD3ED /* GRGroupedTableViewCell.m in Sources */,
 				506E1E2E1CA73BD6008EAE7B /* GRRepositoryReadMeCell.m in Sources */,
 				50ED2ADD1B8B135200DFF146 /* GRProfileHeaderView.m in Sources */,
 				5009A34C1BB6751600DE19DF /* GRNotificationTableViewCell.m in Sources */,
 				84F524EF1B83269E0077A06C /* GRStreamViewController.m in Sources */,
-				5071EFFC1C5971570095ACA0 /* GRRepositoryPullRequestView.m in Sources */,
+				5071EFFC1C5971570095ACA0 /* GRRepositoryPullRequestsView.m in Sources */,
 				507931EC1B8EE28C0080C894 /* GRProfileStatisticButton.m in Sources */,
 				5097B5D11B8C0BC600A72721 /* GRViewModel.m in Sources */,
 				5070D5611C4A04BD00E80AB1 /* GRTableViewController.m in Sources */,
@@ -1415,6 +1516,7 @@
 				3857A6311DC032120045394F /* GRSectionHeaderFooterView.m in Sources */,
 				503C595E1BAD17EE003CB50E /* GRSyntaxHighlightedTextView.m in Sources */,
 				50E9DF261CC73D9700EDDE0F /* GRTabBarLayer.m in Sources */,
+				50D0DB1C1DDAC0D400DBD027 /* GRProfileTableViewCellContentView.m in Sources */,
 				501F87071C86751F000C2C53 /* GRSelectableLabel.m in Sources */,
 				84309A7D1B854A21008EB771 /* GRLoginViewController.m in Sources */,
 				84A8D0FA1B8D239600B6B4FB /* GRStreamViewControllerProxy.m in Sources */,
