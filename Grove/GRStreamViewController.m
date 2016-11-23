@@ -27,7 +27,7 @@ static const CGFloat GRStreamViewAvatarSize = 38.0f;
 - (instancetype)init {
 	if ((self = [super init])) {
 		
-        self.tabBarItem               = [[UITabBarItem alloc] initWithTitle:GRLocalizedString(@"Stream", nil, nil) image:[UIImage imageNamed:@"tb@2x"] tag:0];
+        self.tabBarItem               = [[UITabBarItem alloc] initWithTitle:GRLocalizedString(@"Home", nil, nil) image:[UIImage imageNamed:@"tb@2x"] tag:0];
         self.tableView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
 		[self.tableView registerClass:[GRStreamEventCell class] forCellReuseIdentifier:reuseIdentifier];
 		

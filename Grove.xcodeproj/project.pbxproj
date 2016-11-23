@@ -654,8 +654,6 @@
 				50ED2AD81B8B106F00DFF146 /* GRProfileModel.m */,
 				50ED2ADB1B8B135200DFF146 /* GRProfileHeaderView.h */,
 				50ED2ADC1B8B135200DFF146 /* GRProfileHeaderView.m */,
-				3857A62F1DC032120045394F /* GRSectionHeaderFooterView.h */,
-				3857A6301DC032120045394F /* GRSectionHeaderFooterView.m */,
 				84C989041DCC00AB006976B7 /* GREmptySectionHeaderFooterView.h */,
 				84C989051DCC00AB006976B7 /* GREmptySectionHeaderFooterView.m */,
 				507931EA1B8EE28C0080C894 /* GRProfileStatisticButton.h */,
@@ -1023,6 +1021,8 @@
 		84B0378E1DCD768C0039BD77 /* Skeletons */ = {
 			isa = PBXGroup;
 			children = (
+				3857A62F1DC032120045394F /* GRSectionHeaderFooterView.h */,
+				3857A6301DC032120045394F /* GRSectionHeaderFooterView.m */,
 				503F58F41DCFD1CB00788D6D /* GRDataSource.h */,
 				84B0378F1DCD76EB0039BD77 /* GRModelTableViewController.h */,
 				84B037901DCD76EB0039BD77 /* GRModelTableViewController.m */,

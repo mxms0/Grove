@@ -44,6 +44,8 @@
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	
+	self.view.backgroundColor = [UIColor blackColor];
+	
 	self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 	
 	model = [[GRNotificationModel alloc] init];
@@ -94,6 +96,10 @@
 	return [model numberOfRowsInSection:section];
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+	return [model heightForRowAtIndexPath:indexPath];
+}
+
 - (UITableViewCell *)tableView:(UITableView *)_tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *reuseIdentifier       = @"notificationCell";
     static NSString *headerReuseIdentifier = @"notificationHeaderCell";
@@ -110,6 +116,8 @@
 	if (!cell) cell = [[cellClass alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:activeIdentifier];
 	
 
+	[cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+	
 	GSNotification *notification = [model notificationAtIndexPath:indexPath];
         
 	[cell setNotification:notification];

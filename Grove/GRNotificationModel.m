@@ -76,6 +76,10 @@
 	return 50.0f;
 }
 
+- (CGFloat)heightForRowAtIndexPath:(NSIndexPath *)path {
+	return 64.0f;
+}
+
 - (CGFloat)heightForSectionFooter:(NSInteger)section {
 	if ([self numberOfRowsInSection:section] == 0) {
 		return 0.0;

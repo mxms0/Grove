@@ -31,6 +31,7 @@ const CGFloat GRSectionViewIndentationWidth = 10.0f;
 		[label setText:_text];
 		[label setBackgroundColor:[UIColor whiteColor]];
 		[label setFont:[UIFont fontWithName:@"Avenir Next" size:14]];
+		[label setTextColor:[UIColor grayColor]];
 		
 //		NSArray *fontFeatureSettings = @[ @{ UIFontFeatureTypeIdentifierKey: @(kLowerCaseType),
 //											 UIFontFeatureSelectorIdentifierKey : @(kLowerCaseSmallCapsSelector) } ];
@@ -63,7 +64,7 @@ const CGFloat GRSectionViewIndentationWidth = 10.0f;
 	
 	[self setClipsToBounds:YES];
 	
-	[label setFrame:CGRectMake(GRSectionViewIndentationWidth, 0, contentView.frame.size.width - 2 * GRSectionViewIndentationWidth, contentViewHeight)];
+	[label setFrame:CGRectMake(GRSectionViewIndentationWidth + 10, 10, contentView.frame.size.width - 2 * GRSectionViewIndentationWidth, contentViewHeight)];
 	
 	UIRectCorner rc = (mode == GRSectionModeHeader ? (UIRectCornerTopLeft | UIRectCornerTopRight) : (UIRectCornerBottomLeft | UIRectCornerBottomRight));
 	

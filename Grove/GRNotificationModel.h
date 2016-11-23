@@ -14,4 +14,5 @@
 - (CGFloat)heightForSectionHeader:(NSInteger)section;
 - (CGFloat)heightForSectionFooter:(NSInteger)section;
 - (GSNotification *)notificationAtIndexPath:(NSIndexPath *)path;
+- (CGFloat)heightForRowAtIndexPath:(NSIndexPath *)path;
 @end

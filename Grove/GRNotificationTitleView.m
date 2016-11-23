@@ -19,7 +19,7 @@
         
 		label = [[GRSmallCapsLabel alloc] init];
 		[label setText:GRLocalizedString(@"notifications", nil, nil)];
-        
+		
 		[self addSubview:label];
         [label mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self).offset(10);

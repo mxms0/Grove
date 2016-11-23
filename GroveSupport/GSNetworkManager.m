@@ -442,7 +442,12 @@
 }
 
 - (void)requestUserNotificationsWithToken:(NSString *__nonnull)token completionHandler:(void (^__nonnull)(NSArray *__nullable notifications, NSError *__nullable error))handler {
-	GSURLRequest *request = [[GSURLRequest alloc] initWithURL:GSAPIURLForEndpoint(GSAPIEndpointNotifications)];
+	NSURL *requestURL = GSAPIURLForEndpoint(GSAPIEndpointNotifications);
+	
+	NSURLComponents *components = [[NSURLComponents alloc] initWithURL:requestURL resolvingAgainstBaseURL:NO];
+	[components setQuery:@"all=1"];
+	
+	GSURLRequest *request = [[GSURLRequest alloc] initWithURL:[components URL]];
 	
 	[request setAuthToken:token];
 	
