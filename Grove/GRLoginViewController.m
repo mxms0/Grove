@@ -109,6 +109,41 @@
 	[super viewDidLoad];
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardPresented:) name:UIKeyboardDidShowNotification object:nil];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDismissed:) name:UIKeyboardDidHideNotification object:nil];
+}
+
+- (void)keyboardDismissed:(NSNotification *)notif {
+	NSDictionary *notificationInfo = notif.userInfo;
+	NSValue *kbLocation = notificationInfo[UIKeyboardFrameEndUserInfoKey];
+	
+	CGRect kbFrame = [kbLocation CGRectValue];
+	CGRect keyboardFrame = [self.view convertRect:kbFrame fromView:nil];
+	
+	// TODO: Move input fields and login button up!
+	
+	[stackView mas_updateConstraints:^(MASConstraintMaker *make) {
+		make.top.equalTo(self.view).offset(250);
+		make.right.equalTo(self.view).offset(-30);
+		make.left.equalTo(self.view).offset(30);
+		make.height.equalTo(@(180));
+	}];
+	
+	[login mas_updateConstraints:^(MASConstraintMaker *make) {
+		make.left.right.bottom.equalTo(self.view);
+		make.height.equalTo(@(50));
+	}];
+	
+	
+	
+	// this blows. how to force animation?
+	// do i have to set frame and then update constraints? -max
+	
+	[UIView animateWithDuration:0.25 animations:^{
+		[self.view layoutIfNeeded];
+	} completion:^(BOOL finished) {
+		
+	}];
 }
 
 - (void)keyboardPresented:(NSNotification *)notif {
@@ -120,7 +155,7 @@
 	
 	// TODO: Move input fields and login button up!
 	
-	[stackView mas_makeConstraints:^(MASConstraintMaker *make) {
+	[stackView mas_updateConstraints:^(MASConstraintMaker *make) {
 		//            make.top.equalTo(applicationIcon.mas_bottom).offset(80);
 		make.top.equalTo(self.view).offset(100);
 		make.right.equalTo(self.view).offset(-30);
@@ -128,7 +163,7 @@
 		make.height.equalTo(@(180));
 	}];
 	
-	[login mas_makeConstraints:^(MASConstraintMaker *make) {
+	[login mas_updateConstraints:^(MASConstraintMaker *make) {
 		make.left.right.equalTo(self.view);
 		make.bottom.equalTo(self.view).offset(-1 * keyboardFrame.size.height);
 		make.height.equalTo(@(50));
@@ -144,8 +179,6 @@
 	} completion:^(BOOL finished) {
 		
 	}];
-	
-	NSLog(@"keyboardFrame: %@", NSStringFromCGRect(keyboardFrame));
 }
 
 #pragma mark - Actions
