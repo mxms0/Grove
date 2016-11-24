@@ -12,13 +12,14 @@
 #import "GRStreamEventCell.h"
 #import "GRStreamModel.h"
 #import "GRStreamTitleView.h"
+#import "GRPullToRefreshView.h"
 
-static NSString *const reuseIdentifier      = @"reuseIdentifier";
+static NSString *const GRStreamEventCellReuseidentifier = @"GRStreamEventCell";
 static const CGFloat GRStreamViewAvatarSize = 38.0f;
 
 @implementation GRStreamViewController {
     GRStreamModel *model;
-	UIRefreshControl *refreshControl;
+	GRPullToRefreshView *refreshMechanism;
 	BOOL attemptingRefresh;
 }
 
@@ -27,14 +28,11 @@ static const CGFloat GRStreamViewAvatarSize = 38.0f;
 - (instancetype)init {
 	if ((self = [super init])) {
 		
-        self.tabBarItem               = [[UITabBarItem alloc] initWithTitle:GRLocalizedString(@"Home", nil, nil) image:[UIImage imageNamed:@"tb@2x"] tag:0];
+        self.tabBarItem = [[UITabBarItem alloc] initWithTitle:GRLocalizedString(@"Home", nil, nil) image:[UIImage imageNamed:@"tb@2x"] tag:0];
         self.tableView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
-		[self.tableView registerClass:[GRStreamEventCell class] forCellReuseIdentifier:reuseIdentifier];
+		[self.tableView registerClass:[GRStreamEventCell class] forCellReuseIdentifier:GRStreamEventCellReuseidentifier];
 		
-		refreshControl = [[UIRefreshControl alloc] init];
-		[refreshControl addTarget:self action:@selector(refreshTableView:) forControlEvents:UIControlEventValueChanged];
-		
-		[self setRefreshControl:refreshControl];
+		refreshMechanism = [[GRPullToRefreshView alloc] initWithTableView:self.tableView];
 		
 		GR_RELOAD_VIEW_REGISTER(self, @selector(_reloadNotification));
 		
@@ -61,11 +59,9 @@ static const CGFloat GRStreamViewAvatarSize = 38.0f;
 	[super viewWillAppear:animated];
 	
 	if (!attemptingRefresh) {
-		[refreshControl endRefreshing];
+		
 	}
 	else {
-		[refreshControl endRefreshing];
-		[refreshControl beginRefreshing];
 		[self.tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
 		// UIRefreshControl is actually broken.
 	}
@@ -99,10 +95,10 @@ static const CGFloat GRStreamViewAvatarSize = 38.0f;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)aTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    GRStreamEventCell *cell = [aTableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
+    GRStreamEventCell *cell = [aTableView dequeueReusableCellWithIdentifier:GRStreamEventCellReuseidentifier forIndexPath:indexPath];
 	
     if (!cell) {
-        cell = [[GRStreamEventCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
+        cell = [[GRStreamEventCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:GRStreamEventCellReuseidentifier];
 		// Cell is never actually null... ?_?
 	}
 	
@@ -138,7 +134,6 @@ static const CGFloat GRStreamViewAvatarSize = 38.0f;
 	// perhaps make GSGitHubEngine function only on one thread
 	dispatch_async(dispatch_get_main_queue(), ^ {
 		attemptingRefresh = NO;
-		[refreshControl endRefreshing];
 		[self.tableView reloadData];
 	});
 }

@@ -95,6 +95,7 @@
 		507931EC1B8EE28C0080C894 /* GRProfileStatisticButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 507931EB1B8EE28C0080C894 /* GRProfileStatisticButton.m */; };
 		50803EFE1C06AE2B00D3A284 /* GSGitHubEngineInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = 50803EFD1C06AE2B00D3A284 /* GSGitHubEngineInternal.h */; };
 		5084207C1BA893C700BD9630 /* Grove.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5084207E1BA893C700BD9630 /* Grove.strings */; };
+		508838601DE7671700D75AC9 /* GRPullToRefreshView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5088385F1DE7671700D75AC9 /* GRPullToRefreshView.m */; };
 		5097B5CD1B8C0BBB00A72721 /* GRNotificationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5097B5CC1B8C0BBB00A72721 /* GRNotificationModel.m */; };
 		5097B5D11B8C0BC600A72721 /* GRViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5097B5D01B8C0BC600A72721 /* GRViewModel.m */; };
 		5097B5DC1B8D29F400A72721 /* GSCacheManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 5097B5DA1B8D29F400A72721 /* GSCacheManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -353,6 +354,8 @@
 		50803EFD1C06AE2B00D3A284 /* GSGitHubEngineInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSGitHubEngineInternal.h; sourceTree = "<group>"; };
 		5084207D1BA893C700BD9630 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Grove.strings; sourceTree = "<group>"; };
 		5084207F1BA893CE00BD9630 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Grove.strings; sourceTree = "<group>"; };
+		5088385E1DE7671700D75AC9 /* GRPullToRefreshView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRPullToRefreshView.h; sourceTree = "<group>"; };
+		5088385F1DE7671700D75AC9 /* GRPullToRefreshView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRPullToRefreshView.m; sourceTree = "<group>"; };
 		5097B5CB1B8C0BBB00A72721 /* GRNotificationModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRNotificationModel.h; sourceTree = "<group>"; };
 		5097B5CC1B8C0BBB00A72721 /* GRNotificationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRNotificationModel.m; sourceTree = "<group>"; };
 		5097B5CF1B8C0BC600A72721 /* GRViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRViewModel.h; sourceTree = "<group>"; };
@@ -948,6 +951,8 @@
 		50F081841B82ED6500366161 /* Grove */ = {
 			isa = PBXGroup;
 			children = (
+				5088385E1DE7671700D75AC9 /* GRPullToRefreshView.h */,
+				5088385F1DE7671700D75AC9 /* GRPullToRefreshView.m */,
 				503F58FC1DD1163000788D6D /* Application Notifications */,
 				84B0378E1DCD768C0039BD77 /* Skeletons */,
 				50E4B5AA1B82F79A0029264A /* Grove.h */,
@@ -1467,6 +1472,7 @@
 				506005BA1BBB5474000F5AFF /* GRActiveUserProfileViewController.m in Sources */,
 				505C58E91C995BEC00D5F37C /* GRIssuesConversationModel.m in Sources */,
 				50504D9A1BA263D800B87C5F /* GRStreamCellModel.m in Sources */,
+				508838601DE7671700D75AC9 /* GRPullToRefreshView.m in Sources */,
 				5060631A1C7ADEF300E1674A /* GRNotificationHeaderLabel.m in Sources */,
 				84F524F51B8326E40077A06C /* GRProfileViewController.m in Sources */,
 				8453E3F71DD517A3003628AF /* GRModelTableView.m in Sources */,

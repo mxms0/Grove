@@ -114,13 +114,6 @@
 }
 
 - (void)keyboardDismissed:(NSNotification *)notif {
-	NSDictionary *notificationInfo = notif.userInfo;
-	NSValue *kbLocation = notificationInfo[UIKeyboardFrameEndUserInfoKey];
-	
-	CGRect kbFrame = [kbLocation CGRectValue];
-	CGRect keyboardFrame = [self.view convertRect:kbFrame fromView:nil];
-	
-	// TODO: Move input fields and login button up!
 	
 	[stackView mas_updateConstraints:^(MASConstraintMaker *make) {
 		make.top.equalTo(self.view).offset(250);
