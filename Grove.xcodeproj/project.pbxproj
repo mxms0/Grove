@@ -96,6 +96,8 @@
 		50803EFE1C06AE2B00D3A284 /* GSGitHubEngineInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = 50803EFD1C06AE2B00D3A284 /* GSGitHubEngineInternal.h */; };
 		5084207C1BA893C700BD9630 /* Grove.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5084207E1BA893C700BD9630 /* Grove.strings */; };
 		508838601DE7671700D75AC9 /* GRPullToRefreshView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5088385F1DE7671700D75AC9 /* GRPullToRefreshView.m */; };
+		5088386C1DE96B1200D75AC9 /* GSOfflineNetworkManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 5088386A1DE96B1200D75AC9 /* GSOfflineNetworkManager.h */; };
+		5088386D1DE96B1200D75AC9 /* GSOfflineNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5088386B1DE96B1200D75AC9 /* GSOfflineNetworkManager.m */; };
 		5097B5CD1B8C0BBB00A72721 /* GRNotificationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5097B5CC1B8C0BBB00A72721 /* GRNotificationModel.m */; };
 		5097B5D11B8C0BC600A72721 /* GRViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5097B5D01B8C0BC600A72721 /* GRViewModel.m */; };
 		5097B5DC1B8D29F400A72721 /* GSCacheManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 5097B5DA1B8D29F400A72721 /* GSCacheManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -356,6 +358,8 @@
 		5084207F1BA893CE00BD9630 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Grove.strings; sourceTree = "<group>"; };
 		5088385E1DE7671700D75AC9 /* GRPullToRefreshView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRPullToRefreshView.h; sourceTree = "<group>"; };
 		5088385F1DE7671700D75AC9 /* GRPullToRefreshView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRPullToRefreshView.m; sourceTree = "<group>"; };
+		5088386A1DE96B1200D75AC9 /* GSOfflineNetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSOfflineNetworkManager.h; sourceTree = "<group>"; };
+		5088386B1DE96B1200D75AC9 /* GSOfflineNetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSOfflineNetworkManager.m; sourceTree = "<group>"; };
 		5097B5CB1B8C0BBB00A72721 /* GRNotificationModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRNotificationModel.h; sourceTree = "<group>"; };
 		5097B5CC1B8C0BBB00A72721 /* GRNotificationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRNotificationModel.m; sourceTree = "<group>"; };
 		5097B5CF1B8C0BC600A72721 /* GRViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRViewModel.h; sourceTree = "<group>"; };
@@ -552,6 +556,8 @@
 				50E9F86F1B832BF70007212E /* GSNetworkManagerHelpers.m */,
 				50E4B5AF1B82FABA0029264A /* GSNetworkManager.h */,
 				50E4B5B01B82FABA0029264A /* GSNetworkManager.m */,
+				5088386A1DE96B1200D75AC9 /* GSOfflineNetworkManager.h */,
+				5088386B1DE96B1200D75AC9 /* GSOfflineNetworkManager.m */,
 			);
 			name = Private;
 			sourceTree = "<group>";
@@ -1093,6 +1099,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5088386C1DE96B1200D75AC9 /* GSOfflineNetworkManager.h in Headers */,
 				501C042F1BAB78B400DC66C8 /* GSGistInternal.h in Headers */,
 				5020E85D1DA452870090D5E6 /* GSRepositoryGitHubEngine.h in Headers */,
 				50133F0A1B841496004B5BB8 /* GSRepository.h in Headers */,
@@ -1404,6 +1411,7 @@
 				50E9F8711B832BF70007212E /* GSNetworkManagerHelpers.m in Sources */,
 				50E4B5B21B82FABA0029264A /* GSNetworkManager.m in Sources */,
 				3857A62C1DC0124F0045394F /* GSProjectGitHubEngine.m in Sources */,
+				5088386D1DE96B1200D75AC9 /* GSOfflineNetworkManager.m in Sources */,
 				5020E85A1DA44E350090D5E6 /* GSUserGitHubEngine.m in Sources */,
 				503F58FB1DD0482A00788D6D /* GSSearchGitHubEngine.m in Sources */,
 				84C9890A1DCD1009006976B7 /* GSOrganizationGitHubEngine.m in Sources */,

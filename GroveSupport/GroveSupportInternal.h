@@ -33,6 +33,9 @@
 #define API_TRUST_LEVEL_LENIENT 1
 #define API_TRUST_LEVEL_AVERAGE 3
 #define API_TRUST_LEVEL_STRICT 5
+
+#define GSWorkOffline 0
+
 /*
  0 – Not at all
  1 – Trust certain data, like repo names

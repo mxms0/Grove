@@ -11,7 +11,7 @@
 #import "GSUser.h"
 #import "GroveSupportInternal.h"
 #import "GSURLRequest.h"
-#include <libkern/OSAtomic.h>
+#import "GSOfflineNetworkManager.h"
 
 @interface GSNetworkManager ()
 @property (nonatomic, assign) NSInteger _requestCount;
@@ -39,7 +39,11 @@
 	static id _instance = nil;
 	static dispatch_once_t token;
 	dispatch_once(&token, ^ {
-		_instance = [[self alloc] init];
+#if GSWorkOffline
+		_instance = [[GSOfflineNetworkManager alloc] init];
+#else
+		_instance = [[self alloc] init];	
+#endif
 	});
 	
 	return _instance;
