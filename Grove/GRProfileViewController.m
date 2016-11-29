@@ -66,7 +66,7 @@
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
-	NSLog(@"user has new data %@:%@:%@", object, keyPath, change);
+//	NSLog(@"user has new data %@:%@:%@", object, keyPath, change);
 }
 
 - (void)setUser:(GSUser *)newUser {

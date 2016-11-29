@@ -24,7 +24,6 @@
 		CGPoint newOfft = [[change valueForKey:NSKeyValueChangeNewKey] CGPointValue];
 		[self scrollView:object offsetChanged:newOfft ];
 	}
-	NSLog(@"packet %@:%@", change, object);
 //	else if ([keyPath isEqualToString:@"dragging"]) {
 //		NSLog(@"packet: %@", change);
 //	}
@@ -36,8 +35,6 @@
 	if (absOfft < -80) {
 		// mark it as over the threshold to refresh upon release
 	}
-	
-	NSLog(@"offt: %f", absOfft);
 }
 
 - (void)drawRect:(CGRect)rect {

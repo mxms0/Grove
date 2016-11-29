@@ -142,6 +142,7 @@
 #if 0
 		NSLog(@"code %ld", (long)[(NSHTTPURLResponse *)response statusCode]);
 		NSLog(@"Request:%@ Response: %@ [%@]", request, response, data);
+		NSLog(@"Headers: %@", [(NSHTTPURLResponse *)response allHeaderFields]);
 #endif
 		NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response; // put safety checks here. albeit unlikely
 		GSSerializable *result = nil;
@@ -446,16 +447,18 @@
 }
 
 - (void)requestUserNotificationsWithToken:(NSString *__nonnull)token completionHandler:(void (^__nonnull)(NSArray *__nullable notifications, NSError *__nullable error))handler {
+
 	NSURL *requestURL = GSAPIURLForEndpoint(GSAPIEndpointNotifications);
 	
 	NSURLComponents *components = [[NSURLComponents alloc] initWithURL:requestURL resolvingAgainstBaseURL:NO];
-	[components setQuery:@"all=1"];
+	[components setQuery:@"all=true"];
 	
 	GSURLRequest *request = [[GSURLRequest alloc] initWithURL:[components URL]];
 	
 	[request setAuthToken:token];
 	
 	[self sendDataRequest:request completionHandler:^(GSSerializable *response, NSError *error) {
+		
 		if ([response isKindOfClass:[NSArray class]]) {
 			handler((NSArray *)response, error);
 		}
