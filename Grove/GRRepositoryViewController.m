@@ -15,8 +15,7 @@
 
 //View Controllers
 #import "GRRespositoryInformationViewController.h"
-#import "GRRepositoryCodeBranchesTableViewController.h"
-#import "GRRepositoryCommitBranchesTableViewController.h"
+#import "GRRepositoryBranchesTableViewController.h"
 #import "GRRepositoryIssuesViewController.h"
 #import "GRRepositoryPullRequestViewController.h"
 
@@ -44,15 +43,14 @@
         
         GRBranchesModel *branchModel = [[GRBranchesModel alloc] initWithRepository:repository];
         
-        GRRespositoryInformationViewController *infomationViewController     = [[GRRespositoryInformationViewController alloc] init];
-        GRRepositoryCodeBranchesTableViewController *codeViewController      = [[GRRepositoryCodeBranchesTableViewController alloc] initWithModel:branchModel];
-        GRRepositoryCommitBranchesTableViewController *commitsViewController = [[GRRepositoryCommitBranchesTableViewController alloc] initWithModel:branchModel];
-        GRRepositoryIssuesViewController *issuesViewController               = [[GRRepositoryIssuesViewController alloc] init];
-        GRRepositoryPullRequestViewController *pullRequestViewController     = [[GRRepositoryPullRequestViewController alloc] init];
+        GRRespositoryInformationViewController *infomationViewController = [[GRRespositoryInformationViewController alloc] init];
+        GRRepositoryBranchesTableViewController *branchesViewController  = [[GRRepositoryBranchesTableViewController alloc] initWithModel:branchModel];
+        GRRepositoryIssuesViewController *issuesViewController           = [[GRRepositoryIssuesViewController alloc] init];
+        GRRepositoryPullRequestViewController *pullRequestViewController = [[GRRepositoryPullRequestViewController alloc] init];
         
         NSMutableArray *navigationControllers = [NSMutableArray array];
         UIBarButtonItem *close = [[UIBarButtonItem alloc] initWithTitle:@"Close" style:UIBarButtonItemStyleDone target:self action:@selector(dismiss)];
-        for (GRViewController *viewController in @[infomationViewController, codeViewController, commitsViewController, issuesViewController, pullRequestViewController]) {
+        for (GRViewController *viewController in @[infomationViewController, branchesViewController, issuesViewController, pullRequestViewController]) {
             GRRepositoryNavigationController *navigationController = [[GRRepositoryNavigationController alloc] initWithRootViewController:viewController];
             UITabBarItem *item                                     = [[UITabBarItem alloc] initWithTitle:GRLocalizedString(viewController.title, nil, nil) image:[UIImage imageNamed:@"tb@2x"] tag:0];
             
