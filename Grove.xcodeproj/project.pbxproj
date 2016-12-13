@@ -144,6 +144,8 @@
 		84B0378D1DCD56A10039BD77 /* GRBranchesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B0378C1DCD56A10039BD77 /* GRBranchesModel.m */; };
 		84B037911DCD76EB0039BD77 /* GRModelTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B037901DCD76EB0039BD77 /* GRModelTableViewController.m */; };
 		84C27E701DF273EE00C17516 /* GRRepositoryBranchesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C27E6F1DF273EE00C17516 /* GRRepositoryBranchesTableViewController.m */; };
+		84C27E731DF28D2E00C17516 /* GRIssuesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C27E721DF28D2E00C17516 /* GRIssuesModel.m */; };
+		84C27E761DF2ADE200C17516 /* GRRepositoryNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C27E751DF2ADE200C17516 /* GRRepositoryNavigationBar.m */; };
 		84C989061DCC00AB006976B7 /* GREmptySectionHeaderFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C989051DCC00AB006976B7 /* GREmptySectionHeaderFooterView.m */; };
 		84C989091DCD1009006976B7 /* GSOrganizationGitHubEngine.h in Headers */ = {isa = PBXBuildFile; fileRef = 84C989071DCD1009006976B7 /* GSOrganizationGitHubEngine.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84C9890A1DCD1009006976B7 /* GSOrganizationGitHubEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C989081DCD1009006976B7 /* GSOrganizationGitHubEngine.m */; };
@@ -414,6 +416,10 @@
 		84B037901DCD76EB0039BD77 /* GRModelTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRModelTableViewController.m; sourceTree = "<group>"; };
 		84C27E6E1DF273EE00C17516 /* GRRepositoryBranchesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRRepositoryBranchesTableViewController.h; sourceTree = "<group>"; };
 		84C27E6F1DF273EE00C17516 /* GRRepositoryBranchesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRRepositoryBranchesTableViewController.m; sourceTree = "<group>"; };
+		84C27E711DF28D2E00C17516 /* GRIssuesModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRIssuesModel.h; sourceTree = "<group>"; };
+		84C27E721DF28D2E00C17516 /* GRIssuesModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRIssuesModel.m; sourceTree = "<group>"; };
+		84C27E741DF2ADE200C17516 /* GRRepositoryNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRRepositoryNavigationBar.h; sourceTree = "<group>"; };
+		84C27E751DF2ADE200C17516 /* GRRepositoryNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRRepositoryNavigationBar.m; sourceTree = "<group>"; };
 		84C989041DCC00AB006976B7 /* GREmptySectionHeaderFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GREmptySectionHeaderFooterView.h; sourceTree = "<group>"; };
 		84C989051DCC00AB006976B7 /* GREmptySectionHeaderFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GREmptySectionHeaderFooterView.m; sourceTree = "<group>"; };
 		84C989071DCD1009006976B7 /* GSOrganizationGitHubEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSOrganizationGitHubEngine.h; sourceTree = "<group>"; };
@@ -872,6 +878,8 @@
 		84490A5F1DD8464900E03CFC /* Rocco's Repository */ = {
 			isa = PBXGroup;
 			children = (
+				84C27E741DF2ADE200C17516 /* GRRepositoryNavigationBar.h */,
+				84C27E751DF2ADE200C17516 /* GRRepositoryNavigationBar.m */,
 				84490A601DD8468E00E03CFC /* GRRepositoryViewController.h */,
 				84490A611DD8468E00E03CFC /* GRRepositoryViewController.m */,
 				84490A781DD90BDE00E03CFC /* GRRepositoryNavigationController.h */,
@@ -904,6 +912,8 @@
 				84B0378C1DCD56A10039BD77 /* GRBranchesModel.m */,
 				84490A7B1DD923F400E03CFC /* GRCommitsModel.h */,
 				84490A7C1DD923F400E03CFC /* GRCommitsModel.m */,
+				84C27E711DF28D2E00C17516 /* GRIssuesModel.h */,
+				84C27E721DF28D2E00C17516 /* GRIssuesModel.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -1356,6 +1366,7 @@
 				501BA7ED1C3D1AA6005C5524 /* GRRepositoryPathBar.m in Sources */,
 				50FB177A1CC3233B00A8E607 /* GRStreamTitleView.m in Sources */,
 				501558AF1B8553020002254D /* GRSessionManager.m in Sources */,
+				84C27E761DF2ADE200C17516 /* GRRepositoryNavigationBar.m in Sources */,
 				50D7EBCE1D8127EE00252CC2 /* GRStreamModel.m in Sources */,
 				84B037911DCD76EB0039BD77 /* GRModelTableViewController.m in Sources */,
 				506005BA1BBB5474000F5AFF /* GRActiveUserProfileViewController.m in Sources */,
@@ -1370,6 +1381,7 @@
 				84DDA1D91D88A22000E87E26 /* UIStackView+GRExtension.m in Sources */,
 				5070D55B1C495C7A00E80AB1 /* GRRepositoryViewSelector.m in Sources */,
 				501BA7F61C3E7378005C5524 /* GRRepositoryFileBrowserEntryCell.m in Sources */,
+				84C27E731DF28D2E00C17516 /* GRIssuesModel.m in Sources */,
 				501BA7E61C3D0B16005C5524 /* GRRepositoryFileBrowserModel.m in Sources */,
 				849872FE1B85A42100D1C6FD /* NSAttributedString+GRExtensions.m in Sources */,
 				84490A7A1DD90BDE00E03CFC /* GRRepositoryNavigationController.m in Sources */,

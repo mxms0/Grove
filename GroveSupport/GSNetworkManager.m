@@ -372,6 +372,20 @@
     }];
 }
 
+- (void)requestIssuesForRepository:(GSRepository *)repository token:(NSString *)token completionHandler:(void (^)(NSArray<NSDictionary *> *__nullable issues, NSError *__nullable error))handler {
+    GSURLRequest *request = [[GSURLRequest alloc] initWithURL:repository.issuesAPIURL];
+    [request setAuthToken:token];
+    
+    [self sendDataRequest:request completionHandler:^(GSSerializable *response, NSError *error) {
+        if (error) {
+            handler(nil, error);
+        }
+        else {
+            handler((NSArray *)response, nil);
+        }
+    }];
+}
+
 - (void)requestRepositoriesForCurrentUserWithToken:(NSString *)token completionHandler:(void (^)(NSArray *__nullable repos, NSError *__nullable error))handler {
 	NSURL *requestURL = GSAPIURLComplex(GSAPIEndpointUser, GSAPIEndpointRepos, nil);
 

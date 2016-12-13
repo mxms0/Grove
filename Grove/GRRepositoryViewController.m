@@ -11,6 +11,7 @@
 
 #import "GRRepositoryViewController.h"
 #import "GRRepositoryNavigationController.h"
+#import "GRRepositoryNavigationBar.h"
 #import "GRTabBarController.h"
 
 //View Controllers
@@ -21,6 +22,7 @@
 
 //Models
 #import "GRBranchesModel.h"
+#import "GRIssuesModel.h"
 
 @interface GRRepositoryViewController ()
 @property (nonatomic) GRTabBarController *tabBarController;
@@ -42,6 +44,7 @@
         self.tabBarController = [[GRTabBarController alloc] init];
         
         GRBranchesModel *branchModel = [[GRBranchesModel alloc] initWithRepository:repository];
+        GRIssuesModel *issuesModel   = [[GRIssuesModel alloc] initWithRepository:repository];
         
         GRRespositoryInformationViewController *infomationViewController = [[GRRespositoryInformationViewController alloc] init];
         GRRepositoryBranchesTableViewController *branchesViewController  = [[GRRepositoryBranchesTableViewController alloc] initWithModel:branchModel];
@@ -51,15 +54,16 @@
         NSMutableArray *navigationControllers = [NSMutableArray array];
         UIBarButtonItem *close = [[UIBarButtonItem alloc] initWithTitle:@"Close" style:UIBarButtonItemStyleDone target:self action:@selector(dismiss)];
         for (GRViewController *viewController in @[infomationViewController, branchesViewController, issuesViewController, pullRequestViewController]) {
-            GRRepositoryNavigationController *navigationController = [[GRRepositoryNavigationController alloc] initWithRootViewController:viewController];
+            GRRepositoryNavigationController *navigationController = [[GRRepositoryNavigationController alloc] initWithNavigationBarClass:[GRRepositoryNavigationBar class] toolbarClass:[UIToolbar class]];
             UITabBarItem *item                                     = [[UITabBarItem alloc] initWithTitle:GRLocalizedString(viewController.title, nil, nil) image:[UIImage imageNamed:@"tb@2x"] tag:0];
             
+            [navigationController setViewControllers:@[viewController]];
             [navigationController setTabBarController:self.tabBarController];
             [navigationController setPath:@[repository.owner.username, repository.name]];
             
             viewController.navigationItem.leftBarButtonItem = close;
             viewController.navigationItem.hidesBackButton   = YES;
-            viewController.view.backgroundColor             = GSRandomUIColor();
+            //viewController.view.backgroundColor             = GSRandomUIColor();
             viewController.tabBarItem                       = item;
             
             [navigationControllers addObject:navigationController];

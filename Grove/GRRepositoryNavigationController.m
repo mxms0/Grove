@@ -13,6 +13,16 @@
     NSMutableArray *path;
 }
 
+- (instancetype)initWithNavigationBarClass:(Class)navigationBarClass toolbarClass:(Class)toolbarClass {
+    self = [super initWithNavigationBarClass:navigationBarClass toolbarClass:toolbarClass];
+    if (self) {
+        initialPathLength = 0;
+        path = [NSMutableArray array];
+        self.navigationBarHidden = FALSE;
+    }
+    return self;
+}
+
 - (instancetype)initWithRootViewController:(UIViewController *)rootViewController {
     self = [super initWithRootViewController:rootViewController];
     if (self) {
