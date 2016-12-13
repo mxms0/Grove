@@ -8,6 +8,10 @@
 
 #import "GRRepositoryBranchesTableViewController.h"
 
+#import "GRRepositoryNavigationController.h"
+#import "GRRepositoryProjectViewController.h"
+#import "GRBranchesModel.h"
+
 @implementation GRRepositoryBranchesTableViewController
 
 - (instancetype)init {
@@ -28,6 +32,15 @@
 
 - (void)commonInit {
     self.title = @"Project";
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *component                               = [self.model titleForIndexPath:indexPath];
+    GSRepository *repository                          = [(GRBranchesModel *)self.model repository];
+    GRRepositoryProjectViewController *viewController = [[GRRepositoryProjectViewController alloc] initWithRepository:repository];
+    
+    [(GRRepositoryNavigationController *)self.navigationController pushViewController:viewController withComponent:component animated:YES];
+    
 }
 
 @end

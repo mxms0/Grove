@@ -10,6 +10,8 @@
 
 @interface GRRepositoryNavigationController : GRNavigationController
 
+- (NSString *)path;
+
 - (void)setPath:(NSArray *)array;
 
 - (void)pushViewController:(UIViewController *)viewController withComponent:(NSString *)component animated:(BOOL)animated;

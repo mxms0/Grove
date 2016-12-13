@@ -34,6 +34,7 @@
 - (NSString *)descriptionForIndexPath:(NSIndexPath *)indexPath;
 - (UIImage *)imageForIndexPath:(NSIndexPath *)indexPath;
 - (NSObject *)modelObjectForIndexPath:(NSIndexPath *)indexPath;
+- (NSInteger)typeForIndexPath:(NSIndexPath *)type;
 
 @end
 

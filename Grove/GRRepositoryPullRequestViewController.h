@@ -6,8 +6,8 @@
 //  Copyright © 2016 Milo. All rights reserved.
 //
 
-#import "GRViewController.h"
+#import "GRModelViewController.h"
 
-@interface GRRepositoryPullRequestViewController : GRViewController
+@interface GRRepositoryPullRequestViewController : GRModelViewController
 
 @end

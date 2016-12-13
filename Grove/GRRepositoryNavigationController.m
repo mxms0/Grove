@@ -57,6 +57,24 @@
     [self popToRootViewControllerAnimated:NO];
 }
 
+#pragma mark - Accessors
+
+- (NSString *)path {
+    NSString *string = @"";
+    for (NSString *component in path) {
+        if ([path indexOfObject:component] == 0) {
+            continue;
+        }
+        if (string.length == 0) {
+            string = component;
+        }
+        else {
+            string = [string stringByAppendingString:[NSString stringWithFormat:@"/%@", component]];
+        }
+    }
+    return string;
+}
+
 #pragma mark - Actions
 
 - (void)pushViewController:(UIViewController *)viewController withComponent:(NSString *)component animated:(BOOL)animated {

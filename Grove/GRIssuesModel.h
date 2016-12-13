@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface GRIssuesModel : NSObject
+@interface GRIssuesModel : NSObject <GRDataSource>
 
 - (instancetype)initWithRepository:(GSRepository *)repository;
 

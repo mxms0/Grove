@@ -23,6 +23,7 @@
 //Models
 #import "GRBranchesModel.h"
 #import "GRIssuesModel.h"
+#import "GRPullRequestsModel.h"
 
 @interface GRRepositoryViewController ()
 @property (nonatomic) GRTabBarController *tabBarController;
@@ -43,13 +44,14 @@
     if (self) {
         self.tabBarController = [[GRTabBarController alloc] init];
         
-        GRBranchesModel *branchModel = [[GRBranchesModel alloc] initWithRepository:repository];
-        GRIssuesModel *issuesModel   = [[GRIssuesModel alloc] initWithRepository:repository];
+        GRBranchesModel *branchModel          = [[GRBranchesModel alloc] initWithRepository:repository];
+        GRIssuesModel *issuesModel            = [[GRIssuesModel alloc] initWithRepository:repository];
+        GRPullRequestsModel *pullRequestModel = [[GRPullRequestsModel alloc] init];
         
         GRRespositoryInformationViewController *infomationViewController = [[GRRespositoryInformationViewController alloc] init];
         GRRepositoryBranchesTableViewController *branchesViewController  = [[GRRepositoryBranchesTableViewController alloc] initWithModel:branchModel];
-        GRRepositoryIssuesViewController *issuesViewController           = [[GRRepositoryIssuesViewController alloc] init];
-        GRRepositoryPullRequestViewController *pullRequestViewController = [[GRRepositoryPullRequestViewController alloc] init];
+        GRRepositoryIssuesViewController *issuesViewController           = [[GRRepositoryIssuesViewController alloc] initWithModel:issuesModel];
+        GRRepositoryPullRequestViewController *pullRequestViewController = [[GRRepositoryPullRequestViewController alloc] initWithModel:pullRequestModel];
         
         NSMutableArray *navigationControllers = [NSMutableArray array];
         UIBarButtonItem *close = [[UIBarButtonItem alloc] initWithTitle:@"Close" style:UIBarButtonItemStyleDone target:self action:@selector(dismiss)];

@@ -35,7 +35,7 @@
 
 - (void)reloadData {
     [[GSGitHubEngine sharedInstance] issuesForRepository:self.repository completionHandler:^(NSArray * _Nonnull issues, NSError * _Nonnull error) {
-        NSLog(@"Issues: %@", issues);
+        //NSLog(@"Issues: %@", issues);
     }];
 }
 
