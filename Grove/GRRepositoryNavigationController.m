@@ -11,6 +11,7 @@
 @implementation GRRepositoryNavigationController {
     NSInteger initialPathLength;
     NSMutableArray *path;
+    NSMutableDictionary *navigationBarStateMap;
 }
 
 - (instancetype)initWithNavigationBarClass:(Class)navigationBarClass toolbarClass:(Class)toolbarClass {
@@ -18,6 +19,7 @@
     if (self) {
         initialPathLength = 0;
         path = [NSMutableArray array];
+        navigationBarStateMap = [NSMutableDictionary dictionary];
         self.navigationBarHidden = FALSE;
     }
     return self;
@@ -28,6 +30,7 @@
     if (self) {
         initialPathLength = 0;
         path = [NSMutableArray array];
+        navigationBarStateMap = [NSMutableDictionary dictionary];
         self.navigationBarHidden = FALSE;
     }
     return self;
@@ -85,10 +88,22 @@
     viewController.navigationItem.hidesBackButton   = YES;
     
     [super pushViewController:viewController animated:YES];
+    
+    navigationBarStateMap[@(self.viewControllers.count)] = @(GRRepositoryNavigationBarStateExpanded);
+}
+
+- (void)pushProjectViewController:(UIViewController *)viewController withComponent:(NSString *)component animated:(BOOL)animated {
+    [(GRRepositoryNavigationBar *)self.navigationBar setState:GRRepositoryNavigationBarStateExpanded animated:animated];
+    [self pushViewController:viewController withComponent:component animated:animated];
+    navigationBarStateMap[@(self.viewControllers.count)] = @(GRRepositoryNavigationBarStateExpanded);
 }
 
 - (UIViewController *)popViewControllerAnimated:(BOOL)animated {
     UIViewController *viewController = [super popViewControllerAnimated:animated];
+
+    GRRepositoryNavigationBarState state = [navigationBarStateMap[@(self.viewControllers.count)] integerValue];
+    [navigationBarStateMap removeObjectForKey:@(self.viewControllers.count+1)];
+    [(GRRepositoryNavigationBar *)self.navigationBar setState:state animated:animated];
     
     if (path.count > initialPathLength) {
         [path removeLastObject];

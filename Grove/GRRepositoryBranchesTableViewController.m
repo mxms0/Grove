@@ -39,8 +39,7 @@
     GSRepository *repository                          = [(GRBranchesModel *)self.model repository];
     GRRepositoryProjectViewController *viewController = [[GRRepositoryProjectViewController alloc] initWithRepository:repository];
     
-    [(GRRepositoryNavigationController *)self.navigationController pushViewController:viewController withComponent:component animated:YES];
-    
+    [(GRRepositoryNavigationController *)self.navigationController pushProjectViewController:viewController withComponent:component animated:YES];
 }
 
 @end

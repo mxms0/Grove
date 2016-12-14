@@ -1,15 +1,15 @@
 PODS:
   - Masonry (1.0.1)
-  - Reveal-iOS-SDK (1.6.2)
+  - Reveal-SDK (2)
 
 DEPENDENCIES:
   - Masonry
-  - Reveal-iOS-SDK
+  - Reveal-SDK
 
 SPEC CHECKSUMS:
   Masonry: a1a931a0d08870ed8ae415a2ea5ea68ebcac77df
-  Reveal-iOS-SDK: e2250b3c155bcfac53ae223ddc1f76d08f206c33
+  Reveal-SDK: 4d36a47c7091843eee525b72219e005b90bbac0b
 
-PODFILE CHECKSUM: 37d8e024f8e052560eafb8655948c55f484c58a9
+PODFILE CHECKSUM: 3e26d6da4ced1755a457e4bc373c79d8c532cd18
 
 COCOAPODS: 1.0.1

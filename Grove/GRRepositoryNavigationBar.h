@@ -9,6 +9,15 @@
 #import <UIKit/UIKit.h>
 #import "GRNavigationBar.h"
 
+extern const CGFloat GRRepositoryNavigationBarExpansionHeight;
+
+typedef NS_ENUM(NSInteger, GRRepositoryNavigationBarState) {
+    GRRepositoryNavigationBarStateCollapsed,
+    GRRepositoryNavigationBarStateExpanded
+};
+
 @interface GRRepositoryNavigationBar : GRNavigationBar
+
+- (void)setState:(GRRepositoryNavigationBarState)state animated:(BOOL)animated;
 
 @end

@@ -6,7 +6,7 @@ target 'Grove' do
   # use_frameworks!
 
   # Pods for Grove
-  pod 'Reveal-iOS-SDK', :configurations => ['Debug']
+  pod 'Reveal-SDK', :configurations => ['Debug']
   pod "Masonry"
 
 end

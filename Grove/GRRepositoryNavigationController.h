@@ -7,6 +7,7 @@
 //
 
 #import "GRNavigationController.h"
+#import "GRRepositoryNavigationBar.h"
 
 @interface GRRepositoryNavigationController : GRNavigationController
 
@@ -15,5 +16,7 @@
 - (void)setPath:(NSArray *)array;
 
 - (void)pushViewController:(UIViewController *)viewController withComponent:(NSString *)component animated:(BOOL)animated;
+
+- (void)pushProjectViewController:(UIViewController *)viewController withComponent:(NSString *)component animated:(BOOL)animated;
 
 @end

@@ -30,7 +30,8 @@
         [self.view addSubview:self.codeViewController.view];
         [self addChildViewController:self.codeViewController];
         [self.codeViewController.view mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.edges.equalTo(self.view);
+            make.left.right.bottom.equalTo(self.view);
+            make.top.equalTo(self.view).offset(GRRepositoryNavigationBarExpansionHeight);
         }];
         
         [codeModel reloadDataAtPath:[(GRRepositoryNavigationController *)self.navigationController path]];
