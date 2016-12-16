@@ -11,8 +11,6 @@
 
 @interface GRRepositoryNavigationController : GRNavigationController
 
-@property (nonatomic) GRNavigationController *parentNavigationController;
-
 - (NSString *)path;
 
 - (void)setPath:(NSArray *)array;

@@ -11,5 +11,5 @@
 
 @interface GRNavigationController : UINavigationController
 @property (nonatomic) GRTabBarController *tabBarController;
-- (UIViewController *)popToNavigationCotroller:(GRNavigationController *)navigationController;
+@property (nonatomic) GRNavigationController *parentNavigationController;
 @end

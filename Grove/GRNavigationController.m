@@ -42,13 +42,14 @@
 
 - (UIViewController *)popViewControllerAnimated:(BOOL)animated {
     UIViewController *viewController = [super popViewControllerAnimated:animated];
-    [self.tabBarController didPopViewController:self];
-    return viewController;
-}
-
-- (UIViewController *)popToNavigationCotroller:(GRNavigationController *)navigationController {
-    UIViewController *viewController = [super popViewControllerAnimated:YES];
-    [self.tabBarController didPopViewController:navigationController];
+    
+    if (self.parentNavigationController && self.viewControllers.count == 1) {
+        [self.tabBarController didPopViewController:self.parentNavigationController];
+    }
+    else {
+        [self.tabBarController didPopViewController:self];
+    }
+    
     return viewController;
 }
 

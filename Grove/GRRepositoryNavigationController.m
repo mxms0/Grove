@@ -101,13 +101,7 @@
 }
 
 - (UIViewController *)popViewControllerAnimated:(BOOL)animated {
-    UIViewController *viewController;
-    if (self.parentNavigationController && self.viewControllers.count == 2) {
-        viewController = [super popToNavigationCotroller:self.parentNavigationController];
-    }
-    else {
-        viewController = [super popViewControllerAnimated:animated];
-    }
+    UIViewController *viewController = [super popViewControllerAnimated:animated];
 
     GRRepositoryNavigationBarState state = [navigationBarStateMap[@(self.viewControllers.count)] integerValue];
     [navigationBarStateMap removeObjectForKey:@(self.viewControllers.count+1)];

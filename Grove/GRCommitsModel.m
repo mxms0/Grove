@@ -29,14 +29,14 @@
         
         commits = [NSArray array];
         
-        [self reloadData];
+        //[self reloadData];
     }
     return self;
 }
 
 - (void)reloadData {
     [[GSGitHubEngine sharedInstance] commitsForRepository:self.repository branch:self.branch completionHandler:^(NSArray * _Nonnull commits, NSError * _Nonnull error) {
-        //NSLog(@"Tits Up m9: %@", commits);
+        
     }];
 }
 
