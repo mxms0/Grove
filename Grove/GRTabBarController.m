@@ -114,6 +114,11 @@
     [self updateFramesAnimated:YES];
 }
 
+- (void)setNavigationController:(GRNavigationController *)navigationController {
+    currentNavigationController = navigationController;
+    [self updateFramesAnimated:YES];
+}
+
 #pragma mark - UITabBarController Delegate
 
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {

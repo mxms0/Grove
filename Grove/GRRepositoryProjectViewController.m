@@ -57,12 +57,39 @@
     return self;
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    UISegmentedControl *segmentedControl = [(GRRepositoryNavigationBar *)self.navigationController.navigationBar segmentedControl];
+    [segmentedControl addTarget:self action:@selector(navigationBarSegmentedControlAction:) forControlEvents:UIControlEventValueChanged];
+    if (segmentedControl.selectedSegmentIndex < 0) {
+        [segmentedControl insertSegmentWithTitle:@"Code" atIndex:0 animated:NO];
+        [segmentedControl insertSegmentWithTitle:@"Commits" atIndex:1 animated:NO];
+        [segmentedControl setSelectedSegmentIndex:0];
+    }
     
     for (GRRepositoryNavigationController *navigationController in navigationControllers) {
         [navigationController setParentNavigationController:(GRRepositoryNavigationController *)self.navigationController];
         [navigationController setTabBarController:(GRTabBarController *)self.navigationController.tabBarController];
+    }
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    UISegmentedControl *segmentedControl = [(GRRepositoryNavigationBar *)self.navigationController.navigationBar segmentedControl];
+    [self navigationBarSegmentedControlAction:segmentedControl];
+}
+
+- (void)navigationBarSegmentedControlAction:(UISegmentedControl *)control {
+    UINavigationController *navigationController = navigationControllers[control.selectedSegmentIndex];
+    [self.view bringSubviewToFront:navigationController.view];
+    
+    if (navigationController.viewControllers.count > 1) {
+        [(GRTabBarController *)self.navigationController.tabBarController setNavigationController:navigationController];
+    }
+    else {
+        [(GRTabBarController *)self.navigationController.tabBarController setNavigationController:self.navigationController];
     }
 }
 

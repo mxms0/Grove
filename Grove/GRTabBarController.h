@@ -10,6 +10,7 @@
 
 @interface GRTabBarController : UITabBarController <UITabBarControllerDelegate>
 
+- (void)setNavigationController:(UINavigationController *)navigationController;
 - (void)didPushViewController:(UINavigationController *)navigationController;
 - (void)didPopViewController:(UINavigationController *)navigationController;
 

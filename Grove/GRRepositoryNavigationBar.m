@@ -35,9 +35,6 @@ const CGFloat GRRepositoryNavigationBarExpansionHeight = 36.0;
         UIFont *font                     = [UIFont fontWithDescriptor:fontDescriptor size:GRSmallCapsLabelFontSize];
         NSMutableParagraphStyle *style   = [[NSMutableParagraphStyle alloc] init];
         
-        [self.segmentedControl insertSegmentWithTitle:@"Code" atIndex:0 animated:NO];
-        [self.segmentedControl insertSegmentWithTitle:@"Commits" atIndex:1 animated:NO];
-        [self.segmentedControl setSelectedSegmentIndex:0];
         [self.segmentedControl setAlpha:0];
         [self.segmentedControl setTintColor:[UIColor blackColor]];
         [style setAlignment:NSTextAlignmentCenter];
