@@ -134,6 +134,7 @@
 		8453E3F71DD517A3003628AF /* GRModelTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8453E3F61DD517A3003628AF /* GRModelTableView.m */; };
 		84714AE21DA44B2C00EB507A /* GSProject.h in Headers */ = {isa = PBXBuildFile; fileRef = 84714AE01DA44B2C00EB507A /* GSProject.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84714AE31DA44B2C00EB507A /* GSProject.m in Sources */ = {isa = PBXBuildFile; fileRef = 84714AE11DA44B2C00EB507A /* GSProject.m */; };
+		84715B8C1E03729C00B78A22 /* GRRepositoryCommitsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84715B8B1E03729C00B78A22 /* GRRepositoryCommitsTableViewController.m */; };
 		849872FE1B85A42100D1C6FD /* NSAttributedString+GRExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 849872FD1B85A42100D1C6FD /* NSAttributedString+GRExtensions.m */; };
 		849E54B21E00846000A72227 /* GRCodeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 849E54B11E00846000A72227 /* GRCodeModel.m */; };
 		849E54B51E0084A300A72227 /* GRPullRequestsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 849E54B41E0084A300A72227 /* GRPullRequestsModel.m */; };
@@ -403,6 +404,8 @@
 		84714ADF1DA4494F00EB507A /* GroveSupportNetworkKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GroveSupportNetworkKeys.h; sourceTree = "<group>"; };
 		84714AE01DA44B2C00EB507A /* GSProject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSProject.h; sourceTree = "<group>"; };
 		84714AE11DA44B2C00EB507A /* GSProject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSProject.m; sourceTree = "<group>"; };
+		84715B8A1E03729C00B78A22 /* GRRepositoryCommitsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRRepositoryCommitsTableViewController.h; sourceTree = "<group>"; };
+		84715B8B1E03729C00B78A22 /* GRRepositoryCommitsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRRepositoryCommitsTableViewController.m; sourceTree = "<group>"; };
 		849872FC1B85A42100D1C6FD /* NSAttributedString+GRExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributedString+GRExtensions.h"; sourceTree = "<group>"; };
 		849872FD1B85A42100D1C6FD /* NSAttributedString+GRExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+GRExtensions.m"; sourceTree = "<group>"; };
 		849E54B01E00846000A72227 /* GRCodeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRCodeModel.h; sourceTree = "<group>"; };
@@ -916,6 +919,8 @@
 				849E54BA1E008D0A00A72227 /* GRRepositoryProjectViewController.m */,
 				849E54BC1E008D4700A72227 /* GRRepositoryCodeTableViewController.h */,
 				849E54BD1E008D4700A72227 /* GRRepositoryCodeTableViewController.m */,
+				84715B8A1E03729C00B78A22 /* GRRepositoryCommitsTableViewController.h */,
+				84715B8B1E03729C00B78A22 /* GRRepositoryCommitsTableViewController.m */,
 				84490A6C1DD84A8300E03CFC /* GRRepositoryIssuesViewController.h */,
 				84490A6D1DD84A8300E03CFC /* GRRepositoryIssuesViewController.m */,
 				84490A6F1DD84A9300E03CFC /* GRRepositoryPullRequestViewController.h */,
@@ -1412,6 +1417,7 @@
 				501BA7E61C3D0B16005C5524 /* GRRepositoryFileBrowserModel.m in Sources */,
 				849872FE1B85A42100D1C6FD /* NSAttributedString+GRExtensions.m in Sources */,
 				84490A7A1DD90BDE00E03CFC /* GRRepositoryNavigationController.m in Sources */,
+				84715B8C1E03729C00B78A22 /* GRRepositoryCommitsTableViewController.m in Sources */,
 				505C58DE1C99588600D5F37C /* GRGenericConversationModel.m in Sources */,
 				84F524FA1B832A7E0077A06C /* GRStreamEventCell.m in Sources */,
 				5070ECB61C2BC2F90021093F /* GRRepositoryHeaderView.m in Sources */,

@@ -93,17 +93,28 @@
 }
 
 - (void)pushProjectViewController:(UIViewController *)viewController withComponent:(NSString *)component animated:(BOOL)animated {
-    [(GRRepositoryNavigationBar *)self.navigationBar setState:GRRepositoryNavigationBarStateExpanded animated:animated];
+    if ([self.navigationBar isKindOfClass:[GRRepositoryNavigationBar class]]) {
+        [(GRRepositoryNavigationBar *)self.navigationBar setState:GRRepositoryNavigationBarStateExpanded animated:animated];
+    }
     [self pushViewController:viewController withComponent:component animated:animated];
     navigationBarStateMap[@(self.viewControllers.count)] = @(GRRepositoryNavigationBarStateExpanded);
 }
 
 - (UIViewController *)popViewControllerAnimated:(BOOL)animated {
-    UIViewController *viewController = [super popViewControllerAnimated:animated];
+    UIViewController *viewController;
+    if (self.parentNavigationController && self.viewControllers.count == 2) {
+        viewController = [super popToNavigationCotroller:self.parentNavigationController];
+    }
+    else {
+        viewController = [super popViewControllerAnimated:animated];
+    }
 
     GRRepositoryNavigationBarState state = [navigationBarStateMap[@(self.viewControllers.count)] integerValue];
     [navigationBarStateMap removeObjectForKey:@(self.viewControllers.count+1)];
-    [(GRRepositoryNavigationBar *)self.navigationBar setState:state animated:animated];
+    
+    if ([self.navigationBar isKindOfClass:[GRRepositoryNavigationBar class]]) {
+        [(GRRepositoryNavigationBar *)self.navigationBar setState:state animated:animated];
+    }
     
     if (path.count > initialPathLength) {
         [path removeLastObject];

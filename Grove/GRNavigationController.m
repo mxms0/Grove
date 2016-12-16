@@ -46,4 +46,10 @@
     return viewController;
 }
 
+- (UIViewController *)popToNavigationCotroller:(GRNavigationController *)navigationController {
+    UIViewController *viewController = [super popViewControllerAnimated:YES];
+    [self.tabBarController didPopViewController:navigationController];
+    return viewController;
+}
+
 @end

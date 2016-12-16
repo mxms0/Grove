@@ -11,6 +11,6 @@
 @class GSRepository;
 @interface GRRepositoryProjectViewController : GRViewController
 
-- (instancetype)initWithRepository:(GSRepository *)repository;
+- (instancetype)initWithRepository:(GSRepository *)repository branch:(NSString *)branch;
 
 @end

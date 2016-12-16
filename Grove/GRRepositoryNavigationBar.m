@@ -10,39 +10,37 @@
 
 #import "GRRepositoryNavigationBar.h"
 
-static const CGFloat GRSmallCapsLabelFontSize = 12.0;
+static const CGFloat GRSmallCapsLabelFontSize          = 12.0;
 const CGFloat GRRepositoryNavigationBarExpansionHeight = 36.0;
+
+@interface GRRepositoryNavigationBar ()
+@property (nonatomic) UISegmentedControl *segmentedControl;
+@end
 
 @implementation GRRepositoryNavigationBar {
     GRRepositoryNavigationBarState state;
     UIImageView *customBackgroundView;
-    UISegmentedControl *control;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        customBackgroundView = [[UIImageView alloc] initWithFrame:CGRectZero];
-        control = [[UISegmentedControl alloc] initWithFrame:CGRectZero];
-        state = GRRepositoryNavigationBarStateCollapsed;
+        self.segmentedControl = [[UISegmentedControl alloc] initWithFrame:CGRectZero];
+        customBackgroundView  = [[UIImageView alloc] initWithFrame:CGRectZero];
+        state                 = GRRepositoryNavigationBarStateCollapsed;
         
-        [control insertSegmentWithTitle:@"Code" atIndex:0 animated:NO];
-        [control insertSegmentWithTitle:@"Commits" atIndex:1 animated:NO];
-        [control setSelectedSegmentIndex:0];
-        [control setAlpha:0];
-        [control setTintColor:[UIColor blackColor]];
-        
-        NSArray *fontFeatureSettings = @[@{UIFontFeatureTypeIdentifierKey:@(kSmallCapsSelector), UIFontFeatureSelectorIdentifierKey:@(kSmallCapsSelector)}];
-        
-        NSDictionary *fontAttributes = @{UIFontDescriptorFeatureSettingsAttribute:fontFeatureSettings, UIFontDescriptorNameAttribute:@"Helvetica-Bold"};
-        
+        NSArray *fontFeatureSettings     = @[@{UIFontFeatureTypeIdentifierKey:@(kSmallCapsSelector), UIFontFeatureSelectorIdentifierKey:@(kSmallCapsSelector)}];
+        NSDictionary *fontAttributes     = @{UIFontDescriptorFeatureSettingsAttribute:fontFeatureSettings, UIFontDescriptorNameAttribute:@"Helvetica-Bold"};
         UIFontDescriptor *fontDescriptor = [[UIFontDescriptor alloc] initWithFontAttributes:fontAttributes];
+        UIFont *font                     = [UIFont fontWithDescriptor:fontDescriptor size:GRSmallCapsLabelFontSize];
+        NSMutableParagraphStyle *style   = [[NSMutableParagraphStyle alloc] init];
         
-        UIFont *font = [UIFont fontWithDescriptor:fontDescriptor size:GRSmallCapsLabelFontSize];
-        
-        NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
-        style.alignment = NSTextAlignmentCenter;
-        
+        [self.segmentedControl insertSegmentWithTitle:@"Code" atIndex:0 animated:NO];
+        [self.segmentedControl insertSegmentWithTitle:@"Commits" atIndex:1 animated:NO];
+        [self.segmentedControl setSelectedSegmentIndex:0];
+        [self.segmentedControl setAlpha:0];
+        [self.segmentedControl setTintColor:[UIColor blackColor]];
+        [style setAlignment:NSTextAlignmentCenter];
         [[UIColor blackColor] set];
         
         NSDictionary *dictionary = @{NSKernAttributeName: @(1.5), NSParagraphStyleAttributeName: style, NSFontAttributeName: font, NSForegroundColorAttributeName: [UIColor blackColor]};
@@ -60,25 +58,29 @@ const CGFloat GRRepositoryNavigationBarExpansionHeight = 36.0;
 - (void)layoutSubviews {
     [super layoutSubviews];
     
+    //Insert Segmented Control, and ensure it is interactable
     if (self.superview) {
-        if (![self.superview.subviews containsObject:control]) {
-            [self.superview addSubview:control];
-            [control mas_makeConstraints:^(MASConstraintMaker *make) {
+        if (![self.superview.subviews containsObject:self.segmentedControl]) {
+            [self.superview addSubview:self.segmentedControl];
+            [self.segmentedControl mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.centerX.equalTo(self);
                 make.height.equalTo(@24);
                 make.width.equalTo(@250);
                 make.top.equalTo(self.mas_bottom).offset(6);
             }];
         }
-        [self.superview bringSubviewToFront:control];
+        [self.superview bringSubviewToFront:self.segmentedControl];
     }
     
+    //Ensure background view is in the background
     [self sendSubviewToBack:customBackgroundView];
     
+    //Hide Control if Needed
     if (state == GRRepositoryNavigationBarStateCollapsed) {
-        [control setAlpha:0];
+        [self.segmentedControl setAlpha:0];
     }
     
+    //Set custom background view properties based on actual background view
     for (UIView *subview in self.subviews) {
         if ([subview isKindOfClass:NSClassFromString(@"_UINavigationBarBackground")] ) {
             [subview setHidden:YES];
@@ -107,23 +109,25 @@ const CGFloat GRRepositoryNavigationBarExpansionHeight = 36.0;
 }
 
 - (void)setState:(GRRepositoryNavigationBarState)newState animated:(BOOL)animated {
+    //Ensure we have a change
     if (state != newState) {
-        float alpha = 0;
-        if (newState == GRRepositoryNavigationBarStateCollapsed) {
-            CGRect frame = customBackgroundView.frame;
+        state        = newState;
+        float alpha  = 0;
+        CGRect frame = customBackgroundView.frame;
+        
+        //Set Variables based on state
+        if (state == GRRepositoryNavigationBarStateCollapsed) {
             frame.size.height = frame.size.height-GRRepositoryNavigationBarExpansionHeight;
-            [customBackgroundView setFrame:frame];
         }
         else {
-            CGRect frame = customBackgroundView.frame;
             frame.size.height = frame.size.height+GRRepositoryNavigationBarExpansionHeight;
-            [customBackgroundView setFrame:frame];
             alpha = 1;
         }
-        state = newState;
         
+        //Perform animation
+        [customBackgroundView setFrame:frame];
         [UIView animateWithDuration:.15 animations:^{
-            [control setAlpha:alpha];
+            [self.segmentedControl setAlpha:alpha];
         }];
     }
 }

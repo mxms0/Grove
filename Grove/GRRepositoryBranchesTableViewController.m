@@ -37,7 +37,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *component                               = [self.model titleForIndexPath:indexPath];
     GSRepository *repository                          = [(GRBranchesModel *)self.model repository];
-    GRRepositoryProjectViewController *viewController = [[GRRepositoryProjectViewController alloc] initWithRepository:repository];
+    GRRepositoryProjectViewController *viewController = [[GRRepositoryProjectViewController alloc] initWithRepository:repository branch:component];
     
     [(GRRepositoryNavigationController *)self.navigationController pushProjectViewController:viewController withComponent:component animated:YES];
 }

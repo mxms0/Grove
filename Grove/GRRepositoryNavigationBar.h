@@ -18,6 +18,8 @@ typedef NS_ENUM(NSInteger, GRRepositoryNavigationBarState) {
 
 @interface GRRepositoryNavigationBar : GRNavigationBar
 
+@property (nonatomic, readonly) UISegmentedControl *segmentedControl;
+
 - (void)setState:(GRRepositoryNavigationBarState)state animated:(BOOL)animated;
 
 @end

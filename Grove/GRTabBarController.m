@@ -110,6 +110,7 @@
 }
 
 - (void)didPopViewController:(GRNavigationController *)navigationController {
+    currentNavigationController = navigationController;
     [self updateFramesAnimated:YES];
 }
 

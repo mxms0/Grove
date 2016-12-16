@@ -11,25 +11,43 @@
 #import "GRRepositoryProjectViewController.h"
 
 #import "GRRepositoryCodeTableViewController.h"
+#import "GRRepositoryCommitsTableViewController.h"
 
 #import "GRCodeModel.h"
+#import "GRCommitsModel.h"
 
 @interface GRRepositoryProjectViewController ()
 @property (nonatomic) GRRepositoryCodeTableViewController *codeViewController;
+@property (nonatomic) GRRepositoryCommitsTableViewController *commitsViewController;
 @end
 
-@implementation GRRepositoryProjectViewController
+@implementation GRRepositoryProjectViewController {
+    NSMutableArray *navigationControllers;
+}
 
-- (instancetype)initWithRepository:(GSRepository *)repository {
+- (instancetype)initWithRepository:(GSRepository *)repository branch:(NSString *)branch {
     self = [super init];
     if (self) {
-        GRCodeModel *codeModel = [[GRCodeModel alloc] initWithRepository:repository];
+        GRCodeModel *codeModel       = [[GRCodeModel alloc] initWithRepository:repository];
+        GRCommitsModel *commitsModel = [[GRCommitsModel alloc] initWithRepository:repository branch:branch];
         
-        self.codeViewController = [[GRRepositoryCodeTableViewController alloc] initWithModel:codeModel];
+        self.codeViewController    = [[GRRepositoryCodeTableViewController alloc] initWithModel:codeModel];
+        self.commitsViewController = [[GRRepositoryCommitsTableViewController alloc] initWithModel:commitsModel];
         
-        [self.view addSubview:self.codeViewController.view];
-        [self addChildViewController:self.codeViewController];
-        [self.codeViewController.view mas_makeConstraints:^(MASConstraintMaker *make) {
+        GRRepositoryNavigationController *codeNavigationController    = [[GRRepositoryNavigationController alloc] initWithRootViewController:self.codeViewController];
+        GRRepositoryNavigationController *commitsNavigationController = [[GRRepositoryNavigationController alloc] initWithRootViewController:self.commitsViewController];
+        
+        navigationControllers = [NSMutableArray arrayWithArray:@[codeNavigationController, commitsNavigationController]];
+        for (UINavigationController *navigationController in navigationControllers) {
+            [navigationController setNavigationBarHidden:YES];
+        }
+        
+        [self.view addSubviews:@[commitsNavigationController.view, codeNavigationController.view]];
+        [codeNavigationController.view mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.bottom.equalTo(self.view);
+            make.top.equalTo(self.view).offset(GRRepositoryNavigationBarExpansionHeight);
+        }];
+        [commitsNavigationController.view mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.bottom.equalTo(self.view);
             make.top.equalTo(self.view).offset(GRRepositoryNavigationBarExpansionHeight);
         }];
@@ -37,6 +55,15 @@
         [codeModel reloadDataAtPath:[(GRRepositoryNavigationController *)self.navigationController path]];
     }
     return self;
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    for (GRRepositoryNavigationController *navigationController in navigationControllers) {
+        [navigationController setParentNavigationController:(GRRepositoryNavigationController *)self.navigationController];
+        [navigationController setTabBarController:(GRTabBarController *)self.navigationController.tabBarController];
+    }
 }
 
 @end

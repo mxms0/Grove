@@ -9,6 +9,7 @@
 #import <Masonry/Masonry.h>
 #import <GroveSupport/GroveSupport.h>
 
+//Navigation
 #import "GRRepositoryViewController.h"
 #import "GRRepositoryNavigationController.h"
 #import "GRRepositoryNavigationBar.h"
@@ -65,7 +66,6 @@
             
             viewController.navigationItem.leftBarButtonItem = close;
             viewController.navigationItem.hidesBackButton   = YES;
-            //viewController.view.backgroundColor             = GSRandomUIColor();
             viewController.tabBarItem                       = item;
             
             [navigationControllers addObject:navigationController];
