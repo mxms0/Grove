@@ -14,7 +14,10 @@
 @property (nonatomic) GSRepository *repository;
 @end
 
-@implementation GRIssuesModel
+@implementation GRIssuesModel {
+    NSArray<GSIssue *> *issues;
+}
+@synthesize delegate;
 
 - (instancetype)initWithRepository:(GSRepository *)repository {
     self = [super init];
@@ -25,18 +28,24 @@
     return self;
 }
 
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-        
-    }
-    return self;
+- (void)reloadData {
+    [[GSGitHubEngine sharedInstance] issuesForRepository:self.repository completionHandler:^(NSArray * _Nonnull localIssues, NSError * _Nonnull error) {
+        issues = localIssues;
+        [self.delegate reloadData];
+    }];
 }
 
-- (void)reloadData {
-    [[GSGitHubEngine sharedInstance] issuesForRepository:self.repository completionHandler:^(NSArray * _Nonnull issues, NSError * _Nonnull error) {
-        //NSLog(@"Issues: %@", issues);
-    }];
+- (NSInteger)numberOfSections {
+    return 1;
+}
+
+- (NSInteger)numberOfRowsInSection:(NSInteger)section {
+    return issues.count;
+}
+
+- (NSString *)titleForIndexPath:(NSIndexPath *)indexPath {
+    GSIssue *issue = issues[indexPath.row];
+    return issue.title;
 }
 
 @end

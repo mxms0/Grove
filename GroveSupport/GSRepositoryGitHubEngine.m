@@ -131,7 +131,6 @@
         }
         
         GSInsuranceGoodData {
-            NSLog(@"Issues: %@", issues);
             NSMutableArray *serializedIssues = [[NSMutableArray alloc] init];
             for (NSDictionary *dict in issues) {
                 GSIssue *issue = [[GSIssue alloc] initWithDictionary:dict];

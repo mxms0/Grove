@@ -8,6 +8,7 @@
 
 #import "GRRepositoryNavigationController.h"
 
+//TODO: Refactor this entire fucking class
 @implementation GRRepositoryNavigationController {
     NSInteger initialPathLength;
     NSMutableArray *path;

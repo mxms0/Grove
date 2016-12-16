@@ -63,8 +63,8 @@ static NSString *const GSRepositoryTreeRootItemPath = @"/";
 		}
 	}
 	
-	NSLog(@"initial %@", dictionary);
-	NSLog(@"final %@", treeMap);
+//	NSLog(@"initial %@", dictionary);
+//	NSLog(@"final %@", treeMap);
 }
 
 - (NSArray *)rootEntries {

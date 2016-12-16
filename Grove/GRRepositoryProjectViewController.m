@@ -6,13 +6,17 @@
 //  Copyright © 2016 Milo. All rights reserved.
 //
 
+//Navigation
 #import "GRRepositoryNavigationController.h"
 
+//Header
 #import "GRRepositoryProjectViewController.h"
 
+//View Controllers
 #import "GRRepositoryCodeTableViewController.h"
 #import "GRRepositoryCommitsTableViewController.h"
 
+//Models
 #import "GRCodeModel.h"
 #import "GRCommitsModel.h"
 
