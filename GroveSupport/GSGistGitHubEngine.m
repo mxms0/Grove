@@ -12,7 +12,7 @@
 
 @implementation GSGitHubEngine (GSGistGitHubEngine)
 
-- (void)gistsForUser:(GSUser *)user completionHandler:(void (^)(NSArray *__nullable gists, NSError *__nullable))handler {
+- (void)gistsForUser:(GSUser *)user completionHandler:(void (^)(NSArray<GSGist *> *__nullable gists, NSError *__nullable))handler {
 	if (user.token) {
 		
 	}

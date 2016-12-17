@@ -10,6 +10,7 @@
 #import "GSNetworkManager.h"
 #import "GroveSupportInternal.h"
 #import "GSURLRequest.h"
+#import "GSPullRequest.h"
 
 @implementation GSGitHubEngine (GSRepositoryGitHubEngine)
 
@@ -266,6 +267,68 @@
 		}
 		
 		GSInsuranceEnd();
+	}];
+}
+
+#pragma mark Requests
+
+- (void)pullRequestsForRepository:(GSRepository*)repo completionHandler:(void (^)(NSArray* _Nullable pullRequests, NSError* _Nullable error))handler {
+	
+	NSURL* destination = GSAPIURLComplex(GSAPIEndpointRepos, repo.owner.username, repo.name, @"pulls", nil);
+	
+	GSURLRequest* request = [[GSURLRequest alloc] initWithURL:destination];
+	[request setAuthToken:self.activeUser.token];
+	
+	[[GSNetworkManager sharedInstance] sendRequest:request completionHandler:^(GSSerializable * _Nullable serializeable, NSError * _Nullable error) {
+		
+		GSInsuranceBegin(serializeable, NSArray, error);
+		
+		GSInsuranceError {
+			handler(nil, error);
+		}
+		
+		GSInsuranceBadData {
+			GSAssert();
+		}
+		
+		GSInsuranceGoodData {
+			NSMutableArray* pulls = [[NSMutableArray alloc] init];
+			for(NSDictionary* prDict in (NSArray*)serializeable) {
+				GSPullRequest* pr = [[GSPullRequest alloc] initWithDictionary:prDict];
+				[pulls addObject:pr];
+			}
+			handler([pulls copy], error);
+		}
+		
+		GSInsuranceEnd()
+	}];
+}
+
+- (void)pullRequestForRepository:(GSRepository*)repo withNumber:(NSNumber*)number completionHandler:(void (^)(GSPullRequest* _Nullable pullRequest, NSError* _Nullable error))handler {
+	
+	NSURL* destination = GSAPIURLComplex(GSAPIEndpointRepos, repo.owner.username, repo.name, @"pulls", number, nil);
+	
+	GSURLRequest* request = [[GSURLRequest alloc] initWithURL:destination];
+	[request setAuthToken:self.activeUser.token];
+	
+	[[GSNetworkManager sharedInstance] sendRequest:request completionHandler:^(GSSerializable * _Nullable serializeable, NSError * _Nullable error) {
+		
+		GSInsuranceBegin(serializeable, NSDictionary, error);
+		
+		GSInsuranceError {
+			handler(nil, error);
+		}
+		
+		GSInsuranceBadData {
+			GSAssert();
+		}
+		
+		GSInsuranceGoodData {
+			GSPullRequest* pr = [[GSPullRequest alloc] initWithDictionary:(NSDictionary*)serializeable];
+			handler(pr, error);
+		}
+		
+		GSInsuranceEnd()
 	}];
 }
 

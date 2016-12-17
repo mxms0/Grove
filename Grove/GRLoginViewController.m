@@ -33,6 +33,10 @@
 	if ((self = [super init])) {
         self.view.backgroundColor = [UIColor whiteColor];
 		
+		[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+		
+		[self generateBackground];
+		
 		//Initialize Variables
         activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
         applicationIcon   = [[UIImageView alloc] init];
@@ -47,7 +51,7 @@
         [applicationIcon setImage:[UIImage imageNamed:@"applicationIconLarge"]];
         [stackView setDistribution:UIStackViewDistributionFillEqually];
         [stackView setAxis:UILayoutConstraintAxisVertical];
-        [stackView setSpacing:10];
+        [stackView setSpacing:15];
         [username setPlaceholder:@"Username"];
         [password setPlaceholder:@"Password"];
         [password setSecureTextEntry:YES];
@@ -65,26 +69,28 @@
             if ([view isKindOfClass:[UITextField class]]) {
                 [(UITextField *)view setTextAlignment:NSTextAlignmentCenter];
                 [(UITextField *)view setDelegate:self];
-                [(UITextField *)view setBackgroundColor:GRColorFromRGB(0xD9D9D9)];
+                [(UITextField *)view setBackgroundColor:GRColorFromRGB(0xF2F2F2)];
+				[(UITextField *)view setTextColor:GRColorFromRGB(0x4F4F4F)];
             }
         }
         
         //Add Subviews
         [tfa_placeholder addSubview:tfa];
         [stackView addArrangedSubviews:@[username, password, tfa_placeholder]];
-        [self.view addSubviews:@[applicationIcon, stackView, login, activityIndicator]];
+        [self.view addSubviews:@[stackView, login, activityIndicator]];
         
         //Add Constraints
         [tfa mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.equalTo(tfa_placeholder);
         }];
         
-        [applicationIcon mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.view).offset(15);
-            make.centerX.equalTo(self.view);
-        }];
+//        [applicationIcon mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.top.equalTo(self.view).offset(50);
+//            make.centerX.equalTo(self.view);
+//        }];
         [stackView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(applicationIcon.mas_bottom).offset(10);
+//            make.top.equalTo(applicationIcon.mas_bottom).offset(80);
+			make.top.equalTo(self.view).offset(250);
             make.right.equalTo(self.view).offset(-30);
             make.left.equalTo(self.view).offset(30);
             make.height.equalTo(@(180));
@@ -98,6 +104,75 @@
 }
 
 #pragma mark - Actions
+
+- (NSArray *)randomizeArray:(NSArray *)ary {
+	
+	NSMutableArray *input = [ary mutableCopy];
+	
+	NSMutableArray *output = [[NSMutableArray alloc] init];
+	
+	while ([input count] != 0) {
+		NSUInteger random = arc4random_uniform((uint32_t)[input count]);
+		
+		[output addObject:input[random]];
+		
+		[input removeObjectAtIndex:random];
+	}
+	
+	return output;
+	
+}
+
+- (void)generateBackground {
+	// might pick some constant colors for this. random colors *sometimes* suck
+	
+	NSArray<UIColor *> *colorBuffer = @[GRColorFromRGB(0x82C058), GRColorFromRGB(0xB21888), GRColorFromRGB(0xDB2C38), GRColorFromRGB(0x41B744), GRColorFromRGB(0xFFFFFF), GRColorFromRGB(0x786CC4), GRColorFromRGB(0xC77C49), GRColorFromRGB(0x00A0BE), GRColorFromRGB(0x56747D) ];
+	
+	NSArray *wordColors = [self randomizeArray:colorBuffer];
+	
+	NSArray *keyBuffer = @[ @"code", @"open source", @"hacking", @"buffer overflow",
+							@"perl", @"objective-c", @"c++", @"swift",
+							@"python", @"ruby", @"xcode", @"node.js",
+							@"llvm", @"frameworks", @"collaborate"
+							];
+	
+	NSArray *keyWords = [self randomizeArray:keyBuffer];
+	
+	NSUInteger keyCount = [keyWords count];
+	
+	NSMutableString *bgString = [@"" mutableCopy];
+	
+	for (int i = 0; i < 600; i++) {
+		[bgString appendFormat:@"%@ ", keyWords[i % keyCount]];
+	}
+	
+	NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:bgString];
+	[string addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Menlo-Regular" size:18] range:NSMakeRange(0, [bgString length])];
+	
+	int covered = 0;
+	
+	for (int i = 0; i < 600; i++) {
+		NSString *str = keyWords[i % keyCount];
+		[string addAttribute:NSForegroundColorAttributeName value:wordColors[arc4random_uniform((uint32_t)[wordColors count])] range:NSMakeRange(covered, [str length])];
+		
+		
+		covered += [str length] + 1;
+	}
+	
+	UITextView *textBackground = [[UITextView alloc] initWithFrame:CGRectMake(-25, -20, self.view.frame.size.width + 40, self.view.frame.size.height + 40)];
+	
+	textBackground.attributedText = string;
+	
+	[self.view addSubview:textBackground];
+	
+	[self.view sendSubviewToBack:textBackground];
+	
+	[textBackground setBackgroundColor:GRColorFromRGB(0x1F2029)];
+	[textBackground setUserInteractionEnabled:NO];
+	[textBackground setEditable:NO];
+	[textBackground setTextAlignment:NSTextAlignmentJustified];
+	
+}
 
 - (void)attemptLogin {
 	if (username.text && username.text.length > 0) {

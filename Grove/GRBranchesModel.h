@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "GRDataSource.h"
 
 @class GSRepository;
 @interface GRBranchesModel : NSObject <GRDataSource>

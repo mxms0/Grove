@@ -8,7 +8,8 @@
 
 #import "GRTableViewController.h"
 #import "GRSyntaxHighlightedTextView.h"
+#import "GRViewModel.h"
 
-@interface GRNotificationViewController : GRTableViewController 
+@interface GRNotificationViewController : GRTableViewController <GRViewModelDelegate>
 
 @end
