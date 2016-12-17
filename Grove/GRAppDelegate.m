@@ -42,7 +42,7 @@
 		viewController = [[GRProfileViewController alloc] initWithUsername:@"Maximus-"];
 	}
 	else if (GRDebugTarget == GRDebugTargetRepositoryView) {
-		viewController = [[GRRepositoryViewController alloc] initWithRepositoryName:@"Grove" owner:@"Maximus-"];
+		viewController = [[GRRepositoryViewController alloc] init];
 	}
 	else if (GRDebugTarget == GRDebugTargetNotificationsView) {
 		viewController = [[GRNotificationViewController alloc] init];

@@ -59,10 +59,37 @@
 
 #pragma mark Repositories
 
+- (void)commitsForRepository:(GSRepository *)repo branch:(NSString *)branch completionHandler:(void (^)(NSArray *, NSError *))handler {
+    void (^basicHandler)(NSArray<NSDictionary *> *__nullable commits, NSError *__nullable error) = ^(NSArray<NSDictionary *>* __nullable commits, NSError *__nullable error) {
+        
+        //NSLog(@"Commits. %@", commits);
+        
+        GSInsuranceBegin(commits, NSArray, error);
+        
+        GSInsuranceError {
+            handler(nil, error);
+        }
+        
+        GSInsuranceBadData {
+            NSLog(@"BAD data?");
+            GSAssert();
+        }
+        
+        GSInsuranceGoodData {
+            handler(commits, error);
+        }
+        
+        GSInsuranceEnd();
+    };
+    
+    if (self.activeUser.token) {
+        [[GSNetworkManager sharedInstance] requestCommitsForRepository:repo branch:branch token:self.activeUser.token completionHandler:basicHandler];
+    }
+}
+
 - (void)branchesForRepository:(GSRepository *)repo completionHandler:(void (^)(NSArray *, NSError *))handler {
     void (^basicHandler)(NSArray<NSDictionary *> *__nullable branches, NSError *__nullable error) = ^(NSArray<NSDictionary *>* __nullable branches, NSError *__nullable error) {
-        
-        NSLog(@"BRANCHES. %@", branches);
+        //NSLog(@"BRANCHES. %@", branches);
         
         GSInsuranceBegin(branches, NSArray, error);
         
@@ -87,6 +114,37 @@
     
     if (self.activeUser.token) {
         [[GSNetworkManager sharedInstance] requestBranchesForRepository:repo token:self.activeUser.token completionHandler:basicHandler];
+    }
+}
+
+- (void)issuesForRepository:(GSRepository *)repo completionHandler:(void (^)(NSArray *issues, NSError *error))handler {
+    void (^basicHandler)(NSArray<NSDictionary *> *__nullable repo, NSError *__nullable error) = ^(NSArray<NSDictionary *>* __nullable issues, NSError *__nullable error) {
+        //NSLog(@"BRANCHES. %@", branches);
+        
+        GSInsuranceBegin(issues, NSArray, error);
+        
+        GSInsuranceError {
+            handler(nil, error);
+        }
+        
+        GSInsuranceBadData {
+            GSAssert();
+        }
+        
+        GSInsuranceGoodData {
+            NSMutableArray *serializedIssues = [[NSMutableArray alloc] init];
+            for (NSDictionary *dict in issues) {
+                GSIssue *issue = [[GSIssue alloc] initWithDictionary:dict];
+                [serializedIssues addObject:issue];
+            }
+            handler(serializedIssues, nil);
+        }
+        
+        GSInsuranceEnd();
+    };
+    
+    if (self.activeUser.token) {
+        [[GSNetworkManager sharedInstance] requestIssuesForRepository:repo token:self.activeUser.token completionHandler:basicHandler];
     }
 }
 

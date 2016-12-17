@@ -6,9 +6,12 @@
 //  Copyright © 2016 Milo. All rights reserved.
 //
 
-#import "GRTableViewController.h"
-#import "GRDataSource.h"
+#import <UIKit/UIKit.h>
 
-@interface GRModelTableViewController : GRTableViewController <GRDataSourceDelegate>
-- (instancetype)initWithModel:(id<GRDataSource>)model;
+@interface GRModelTableViewController : UITableViewController <GRDataSourceDelegate>
+
+@property (nonatomic, readonly) id<GRDataSource> model;
+
+- (instancetype)initWithModel:(id<GRDataSource> )model;
+
 @end

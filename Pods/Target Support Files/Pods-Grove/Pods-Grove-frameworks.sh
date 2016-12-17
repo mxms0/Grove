@@ -82,3 +82,7 @@ strip_invalid_archs() {
   fi
 }
 
+
+if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "${PODS_ROOT}/Reveal-SDK/RevealServer-2/iOS/RevealServer.framework"
+fi

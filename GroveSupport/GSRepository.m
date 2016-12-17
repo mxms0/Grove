@@ -100,6 +100,12 @@ static NSMutableDictionary *cachedRepos = nil;
     if (dictionary[@"branches_url"]) {
         _branchesAPIURL = [NSURL URLWithString:[dictionary[@"branches_url"] stringByReplacingOccurrencesOfString:@"{/branch}" withString:@""]];
     }
+    if (dictionary[@"commits_url"]) {
+        _commitsAPIURL = [NSURL URLWithString:[dictionary[@"commits_url"] stringByReplacingOccurrencesOfString:@"{/sha}" withString:@""]];
+    }
+    if (dictionary[@"issues_url"]) {
+        _issuesAPIURL = [NSURL URLWithString:[dictionary[@"issues_url"] stringByReplacingOccurrencesOfString:@"{/number}" withString:@""]];
+    }
 	
 	NSDictionary *permissions = nil;
 	GSAssign(dictionary, @"permissions", permissions);

@@ -26,8 +26,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)requestUserNotificationsWithToken:(NSString *)token completionHandler:(void (^)(NSArray *__nullable notifications, NSError *__nullable error))handler;
 
+#pragma mark - Commits
+- (void)requestCommitsForRepository:(GSRepository *)repository branch:(NSString *)branch token:(NSString *)token completionHandler:(void (^)(NSArray<NSDictionary *> *__nullable branches, NSError *__nullable error))handler;
+
 #pragma mark - Branches
 - (void)requestBranchesForRepository:(GSRepository *)repository token:(NSString *)token completionHandler:(void (^)(NSArray<NSDictionary *> *__nullable branches, NSError *__nullable error))handler;
+
+#pragma mark - Issues
+- (void)requestIssuesForRepository:(GSRepository *)repository token:(NSString *)token completionHandler:(void (^)(NSArray<NSDictionary *> *__nullable issues, NSError *__nullable error))handler;
 
 #pragma mark - Events
 - (void)requestEventsForUser:(NSString *)user token:(NSString *)token completionHandler:(void (^)(NSArray *__nullable events, NSError *__nullable error))handler;

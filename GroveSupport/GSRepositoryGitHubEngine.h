@@ -16,7 +16,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)repositoriesForUsername:(NSString *)username completionHandler:(void (^)(NSArray *__nullable repos, NSError *__nullable error))handler;
 - (void)collaboratorsForRepository:(GSRepository *)repo completionHandler:(void (^)(NSArray *__nullable collabs, NSError *__nullable error))error;
 - (void)collaboratorsForRepositoryNamed:(NSString *)repoName owner:(NSString *)owner completionHandler:(void (^)(NSArray *__nullable collabs, NSError *__nullable error))error;
-- (void)branchesForRepository:(GSRepository *)repo completionHandler:(void (^)(NSArray *, NSError *))handler;
+- (void)branchesForRepository:(GSRepository *)repo completionHandler:(void (^)(NSArray *branches, NSError *error))handler;
+- (void)issuesForRepository:(GSRepository *)repo completionHandler:(void (^)(NSArray *issues, NSError *error))handler;
+- (void)commitsForRepository:(GSRepository *)repo branch:(NSString *)branch completionHandler:(void (^)(NSArray *, NSError *))handler;
 - (void)repositoryContentsForRepository:(GSRepository *)repo atPath:(NSString *__nullable)path recurse:(BOOL)recurse completionHandler:(nonnull void (^)(GSRepositoryTree *_Nullable, NSError *_Nullable))handler;
 - (void)readmeForRepository:(GSRepository *)repo completionHandler:(void (^)(NSString *__nullable contents, NSError *__nullable error))handler;
 - (void)renderedReadmeForRepository:(GSRepository *)repo completionHandler:(void (^)(NSString *__nullable, NSError *__nullable))handler;

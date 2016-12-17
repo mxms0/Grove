@@ -10,6 +10,7 @@
 #import "GRSessionManager.h"
 
 #import "GRBranchesModel.h"
+#import "GRCommitsModel.h"
 
 @interface GRBranchesModel ()
 @property (nonatomic) GSRepository *repository;
@@ -49,6 +50,11 @@
 
 - (NSString *)titleForIndexPath:(NSIndexPath *)indexPath {
     return branches[indexPath.row];
+}
+
+- (NSObject *)modelObjectForIndexPath:(NSIndexPath *)indexPath {
+    GRCommitsModel *model = [[GRCommitsModel alloc] initWithRepository:self.repository branch:[self titleForIndexPath:indexPath]];
+    return model;
 }
 
 @end
