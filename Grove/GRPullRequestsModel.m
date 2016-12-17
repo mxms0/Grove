@@ -15,7 +15,7 @@
 @end
 
 @implementation GRPullRequestsModel {
-    NSArray *pullRequests;
+    NSArray <GSPullRequest *> *pullRequests;
 }
 @synthesize delegate;
 
@@ -29,12 +29,10 @@
 }
 
 - (void)reloadData {
-    [[GSGitHubEngine sharedInstance] issuesForRepository:self.repository completionHandler:^(NSArray * _Nonnull localIssues, NSError * _Nonnull error) {
-        pullRequests = localIssues;
+    [[GSGitHubEngine sharedInstance] pullRequestsForRepository:self.repository completionHandler:^(NSArray * _Nullable localPullRequests, NSError * _Nullable error) {
+        pullRequests = localPullRequests;
         [self.delegate reloadData];
     }];
-    
-    //[[GSGitHubEngine sharedInstance]
 }
 
 - (NSInteger)numberOfSections {
@@ -42,12 +40,12 @@
 }
 
 - (NSInteger)numberOfRowsInSection:(NSInteger)section {
-    return 0;
+    return pullRequests.count;
 }
 
-//- (NSString *)titleForIndexPath:(NSIndexPath *)indexPath {
-//    GSIssue *issue = issues[indexPath.row];
-//    return issue.title;
-//}
+- (NSString *)titleForIndexPath:(NSIndexPath *)indexPath {
+    GSPullRequest *pullRequest = pullRequests[indexPath.row];
+    return pullRequest.title;
+}
 
 @end

@@ -11,7 +11,7 @@
 		3857A62B1DC0124F0045394F /* GSProjectGitHubEngine.h in Headers */ = {isa = PBXBuildFile; fileRef = 3857A6291DC0124F0045394F /* GSProjectGitHubEngine.h */; };
 		3857A62C1DC0124F0045394F /* GSProjectGitHubEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 3857A62A1DC0124F0045394F /* GSProjectGitHubEngine.m */; };
 		385AD43B1DA44CEE001CB947 /* GSProjectGitHubEngine.h in Headers */ = {isa = PBXBuildFile; fileRef = 385AD4391DA44CEE001CB947 /* GSProjectGitHubEngine.h */; };
-		389180051DD15C97001E28C6 /* GSPullRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 389180031DD15C97001E28C6 /* GSPullRequest.h */; };
+		389180051DD15C97001E28C6 /* GSPullRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 389180031DD15C97001E28C6 /* GSPullRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		389180061DD15C97001E28C6 /* GSPullRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 389180041DD15C97001E28C6 /* GSPullRequest.m */; };
 		4AFF78719E87757B1D344FE8 /* libPods-GroveSupportTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D7EE4952FB635BE7F459140 /* libPods-GroveSupportTests.a */; };
 		50019B321B9A21DC004EDC8A /* GSURLRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 50019B301B9A21DC004EDC8A /* GSURLRequest.h */; };
