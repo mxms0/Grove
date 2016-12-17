@@ -10,4 +10,6 @@
 
 @interface GRPullRequestsModel : NSObject <GRDataSource>
 
+- (instancetype)initWithRepository:(GSRepository *)repository;
+
 @end

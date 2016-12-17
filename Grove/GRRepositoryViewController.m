@@ -47,7 +47,7 @@
         
         GRBranchesModel *branchModel          = [[GRBranchesModel alloc] initWithRepository:repository];
         GRIssuesModel *issuesModel            = [[GRIssuesModel alloc] initWithRepository:repository];
-        GRPullRequestsModel *pullRequestModel = [[GRPullRequestsModel alloc] init];
+        GRPullRequestsModel *pullRequestModel = [[GRPullRequestsModel alloc] initWithRepository:repository];
         
         GRRespositoryInformationViewController *infomationViewController = [[GRRespositoryInformationViewController alloc] init];
         GRRepositoryBranchesTableViewController *branchesViewController  = [[GRRepositoryBranchesTableViewController alloc] initWithModel:branchModel];
