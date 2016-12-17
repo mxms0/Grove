@@ -17,6 +17,7 @@
 @implementation GRPullRequestsModel {
     NSArray *pullRequests;
 }
+@synthesize delegate;
 
 - (instancetype)initWithRepository:(GSRepository *)repository {
     self = [super init];

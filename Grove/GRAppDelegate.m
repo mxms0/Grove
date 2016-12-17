@@ -16,7 +16,7 @@
 #import "GRNotificationViewController.h"
 #import "GRActiveUserProfileViewController.h"
 #import "GRSessionManager.h"
-#import "GRRepositoryViewController_alt.h"
+#import "GRRepositoryViewController.h"
 
 @interface GRAppDelegate ()
 @property (nonatomic) GRTabBarController *tabBarController;
@@ -42,7 +42,7 @@
 		viewController = [[GRProfileViewController alloc] initWithUsername:@"Maximus-"];
 	}
 	else if (GRDebugTarget == GRDebugTargetRepositoryView) {
-		viewController = [[GRRepositoryViewController_alt alloc] initWithRepositoryName:@"Grove" owner:@"Maximus-"];
+		viewController = [[GRRepositoryViewController alloc] init];
 	}
 	else if (GRDebugTarget == GRDebugTargetNotificationsView) {
 		viewController = [[GRNotificationViewController alloc] init];

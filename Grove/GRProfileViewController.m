@@ -7,8 +7,6 @@
 //
 
 #import "GRRepositoryViewController.h"
-#import "GRRepositoryViewController_alt.h"
-
 #import "GRProfileViewController.h"
 #import "GRProfileModel.h"
 #import "GRProfileHeaderView.h"

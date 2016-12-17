@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Milo. All rights reserved.
 //
 
+#import "GRRepositoryViewController.h"
 #import "GRStreamViewController.h"
 #import "GRStreamViewControllerProxy.h"
 #import "GRStreamCellModel.h"
@@ -128,7 +129,13 @@ static const CGFloat GRStreamViewAvatarSize = 38.0f;
 - (void)tableView:(UITableView *)aTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     GRStreamViewControllerProxy *viewController = [[GRStreamViewControllerProxy alloc] initWithEvent:[model eventCellModelForIndexPath:indexPath].event];
     [aTableView deselectRowAtIndexPath:indexPath animated:YES];
-    [self.navigationController pushViewController:viewController animated:YES];
+    
+    if ([viewController isKindOfClass:[GRRepositoryViewController class]]) {
+        [self.navigationController presentViewController:viewController animated:YES completion:nil];
+    }
+    else {
+        [self.navigationController pushViewController:viewController animated:YES];
+    }
 }
 
 #pragma mark - GRStreamModel Delegate
