@@ -6,9 +6,9 @@
 //  Copyright © 2016 Milo. All rights reserved.
 //
 
-#import "GRRepositoryIssuesViewController.h"
+#import "GRRepositoryIssuesTableViewController.h"
 
-@implementation GRRepositoryIssuesViewController
+@implementation GRRepositoryIssuesTableViewController
 
 - (instancetype)init {
     self = [super init];

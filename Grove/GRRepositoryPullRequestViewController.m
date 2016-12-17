@@ -13,9 +13,22 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.title = @"PR";
+        [self commonInit];
     }
     return self;
 }
+
+- (instancetype)initWithModel:(id<GRDataSource>)model {
+    self = [super initWithModel:model];
+    if (self) {
+        [self commonInit];
+    }
+    return self;
+}
+
+- (void)commonInit {
+    self.title = @"PR";
+}
+
 
 @end

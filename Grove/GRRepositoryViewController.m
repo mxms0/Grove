@@ -18,7 +18,7 @@
 //View Controllers
 #import "GRRespositoryInformationViewController.h"
 #import "GRRepositoryBranchesTableViewController.h"
-#import "GRRepositoryIssuesViewController.h"
+#import "GRRepositoryIssuesTableViewController.h"
 #import "GRRepositoryPullRequestViewController.h"
 
 //Models
@@ -51,7 +51,7 @@
         
         GRRespositoryInformationViewController *infomationViewController = [[GRRespositoryInformationViewController alloc] init];
         GRRepositoryBranchesTableViewController *branchesViewController  = [[GRRepositoryBranchesTableViewController alloc] initWithModel:branchModel];
-        GRRepositoryIssuesViewController *issuesViewController           = [[GRRepositoryIssuesViewController alloc] initWithModel:issuesModel];
+        GRRepositoryIssuesTableViewController *issuesViewController      = [[GRRepositoryIssuesTableViewController alloc] initWithModel:issuesModel];
         GRRepositoryPullRequestViewController *pullRequestViewController = [[GRRepositoryPullRequestViewController alloc] initWithModel:pullRequestModel];
         
         NSMutableArray *navigationControllers = [NSMutableArray array];

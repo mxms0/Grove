@@ -127,7 +127,7 @@
 		84309A7D1B854A21008EB771 /* GRLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84309A7C1B854A21008EB771 /* GRLoginViewController.m */; };
 		84490A621DD8468E00E03CFC /* GRRepositoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84490A611DD8468E00E03CFC /* GRRepositoryViewController.m */; };
 		84490A651DD849C500E03CFC /* GRRespositoryInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84490A641DD849C500E03CFC /* GRRespositoryInformationViewController.m */; };
-		84490A6E1DD84A8300E03CFC /* GRRepositoryIssuesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84490A6D1DD84A8300E03CFC /* GRRepositoryIssuesViewController.m */; };
+		84490A6E1DD84A8300E03CFC /* GRRepositoryIssuesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84490A6D1DD84A8300E03CFC /* GRRepositoryIssuesTableViewController.m */; };
 		84490A711DD84A9300E03CFC /* GRRepositoryPullRequestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84490A701DD84A9300E03CFC /* GRRepositoryPullRequestViewController.m */; };
 		84490A7A1DD90BDE00E03CFC /* GRRepositoryNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84490A791DD90BDE00E03CFC /* GRRepositoryNavigationController.m */; };
 		84490A7D1DD923F400E03CFC /* GRCommitsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84490A7C1DD923F400E03CFC /* GRCommitsModel.m */; };
@@ -391,8 +391,8 @@
 		84490A611DD8468E00E03CFC /* GRRepositoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRRepositoryViewController.m; sourceTree = "<group>"; };
 		84490A631DD849C500E03CFC /* GRRespositoryInformationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRRespositoryInformationViewController.h; sourceTree = "<group>"; };
 		84490A641DD849C500E03CFC /* GRRespositoryInformationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRRespositoryInformationViewController.m; sourceTree = "<group>"; };
-		84490A6C1DD84A8300E03CFC /* GRRepositoryIssuesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRRepositoryIssuesViewController.h; sourceTree = "<group>"; };
-		84490A6D1DD84A8300E03CFC /* GRRepositoryIssuesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRRepositoryIssuesViewController.m; sourceTree = "<group>"; };
+		84490A6C1DD84A8300E03CFC /* GRRepositoryIssuesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRRepositoryIssuesTableViewController.h; sourceTree = "<group>"; };
+		84490A6D1DD84A8300E03CFC /* GRRepositoryIssuesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRRepositoryIssuesTableViewController.m; sourceTree = "<group>"; };
 		84490A6F1DD84A9300E03CFC /* GRRepositoryPullRequestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRRepositoryPullRequestViewController.h; sourceTree = "<group>"; };
 		84490A701DD84A9300E03CFC /* GRRepositoryPullRequestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRRepositoryPullRequestViewController.m; sourceTree = "<group>"; };
 		84490A781DD90BDE00E03CFC /* GRRepositoryNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRRepositoryNavigationController.h; sourceTree = "<group>"; };
@@ -921,8 +921,8 @@
 				849E54BD1E008D4700A72227 /* GRRepositoryCodeTableViewController.m */,
 				84715B8A1E03729C00B78A22 /* GRRepositoryCommitsTableViewController.h */,
 				84715B8B1E03729C00B78A22 /* GRRepositoryCommitsTableViewController.m */,
-				84490A6C1DD84A8300E03CFC /* GRRepositoryIssuesViewController.h */,
-				84490A6D1DD84A8300E03CFC /* GRRepositoryIssuesViewController.m */,
+				84490A6C1DD84A8300E03CFC /* GRRepositoryIssuesTableViewController.h */,
+				84490A6D1DD84A8300E03CFC /* GRRepositoryIssuesTableViewController.m */,
 				84490A6F1DD84A9300E03CFC /* GRRepositoryPullRequestViewController.h */,
 				84490A701DD84A9300E03CFC /* GRRepositoryPullRequestViewController.m */,
 			);
@@ -1449,7 +1449,7 @@
 				84490A711DD84A9300E03CFC /* GRRepositoryPullRequestViewController.m in Sources */,
 				5097B5D11B8C0BC600A72721 /* GRViewModel.m in Sources */,
 				5070D5611C4A04BD00E80AB1 /* GRTableViewController.m in Sources */,
-				84490A6E1DD84A8300E03CFC /* GRRepositoryIssuesViewController.m in Sources */,
+				84490A6E1DD84A8300E03CFC /* GRRepositoryIssuesTableViewController.m in Sources */,
 				50E9DF231CC73C4C00EDDE0F /* UITabBar+GRExtension.m in Sources */,
 				3857A6311DC032120045394F /* GRSectionHeaderFooterView.m in Sources */,
 				503C595E1BAD17EE003CB50E /* GRSyntaxHighlightedTextView.m in Sources */,

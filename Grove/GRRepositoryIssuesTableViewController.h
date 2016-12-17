@@ -8,6 +8,6 @@
 
 #import "GRModelTableViewController.h"
 
-@interface GRRepositoryIssuesViewController : GRModelTableViewController
+@interface GRRepositoryIssuesTableViewController : GRModelTableViewController
 
 @end
